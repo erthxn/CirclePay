@@ -7,8 +7,8 @@ export default function Home() {
         <div className="text-[5.2rem] sm:text-[7.5rem] font-black tracking-tighter leading-none text-[var(--accent)] select-none">
           CIRCLE
         </div>
-        <p className="absolute inset-0 flex items-center justify-center text-[11px] sm:text-xs font-medium tracking-wide text-[var(--text-muted)] pointer-events-none">
-          Analyze → Rank → Prompt
+        <p className="absolute inset-0 flex items-center justify-center text-sm sm:text-base font-semibold tracking-wider text-white/90 pointer-events-none drop-shadow-sm">
+          PAY
         </p>
       </div>
 
@@ -19,8 +19,8 @@ export default function Home() {
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none sm:w-auto">
         <Link
           href="/circle"
-          className="neu-btn px-7 py-3.5 text-sm font-medium text-white bg-[var(--accent)] shadow-[0_6px_16px_rgba(13,92,255,0.35)]"
-          style={{ boxShadow: '0 8px 20px rgba(13,92,255,0.35)' }}
+          className="px-7 py-3.5 text-sm font-medium text-white rounded-full"
+          style={{ background: 'var(--accent)', boxShadow: '0 8px 20px rgba(13,92,255,0.35)' }}
         >
           Check your X circle
         </Link>
