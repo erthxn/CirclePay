@@ -27,7 +27,7 @@ export default function CirclePage() {
 
   function run() {
     const top = MOCK.slice(0, count);
-    const totalScore = top.reduce((s, m) => s + m.score, 0);
+    const totalScore = top.reduce((s, m) => s + m.score, 0) || 1;
     const weighted = top.map((m) => ({
       ...m,
       amount: Number(((m.score / totalScore) * pool).toFixed(2)),
@@ -49,28 +49,28 @@ export default function CirclePage() {
   }
 
   return (
-    <div className="max-w-md mx-auto px-5 py-8">
-      <h1 className="text-2xl font-bold mb-1">Check your X circle</h1>
-      <p className="text-sm text-zinc-500 mb-6">Last 7 days · ranked by engagement</p>
+    <div className="max-w-md mx-auto px-5 py-6">
+      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
+      <p className="text-sm text-[var(--text-muted)] mb-6">Last 7 days · ranked by engagement</p>
 
       <div className="space-y-4">
         <div>
-          <label className="text-xs text-zinc-500 block mb-1">X handle</label>
+          <label className="text-xs text-[var(--text-muted)] block mb-1.5">X handle</label>
           <input
             value={handle}
             onChange={(e) => setHandle(e.target.value.replace('@', ''))}
             placeholder="erthxn"
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0D5CFF]"
+            className="neu-input w-full px-4 py-3.5 text-sm"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 block mb-1">Circle size</label>
+            <label className="text-xs text-[var(--text-muted)] block mb-1.5">Circle size</label>
             <select
               value={count}
               onChange={(e) => setCount(Number(e.target.value))}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm outline-none"
+              className="neu-input w-full px-4 py-3.5 text-sm appearance-none"
             >
               {[5, 10, 20, 50].map((n) => (
                 <option key={n} value={n}>{n}</option>
@@ -78,19 +78,20 @@ export default function CirclePage() {
             </select>
           </div>
           <div>
-            <label className="text-xs text-zinc-500 block mb-1">Reward pool ($)</label>
+            <label className="text-xs text-[var(--text-muted)] block mb-1.5">Reward pool ($)</label>
             <input
               type="number"
               value={pool}
               onChange={(e) => setPool(Number(e.target.value) || 0)}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0D5CFF]"
+              className="neu-input w-full px-4 py-3.5 text-sm"
             />
           </div>
         </div>
 
         <button
           onClick={run}
-          className="w-full bg-[#0D5CFF] text-white text-sm font-medium py-3 rounded-xl"
+          className="w-full py-3.5 text-sm font-medium text-white rounded-full"
+          style={{ background: 'var(--accent)', boxShadow: '0 8px 20px rgba(13,92,255,0.3)' }}
         >
           Analyze & generate prompt
         </button>
@@ -98,18 +99,18 @@ export default function CirclePage() {
 
       {members.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-sm font-medium mb-3">Ranked circle</h2>
-          <div className="space-y-2">
+          <h2 className="text-sm font-semibold mb-3 text-[var(--text)]">Ranked circle</h2>
+          <div className="space-y-3">
             {members.map((m, i) => (
-              <div key={m.handle} className="flex items-center justify-between bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm">
-                <div>
-                  <span className="text-zinc-500 mr-2">{i + 1}</span>
+              <div key={m.handle} className="neu-raised flex items-center justify-between px-4 py-3.5 text-sm">
+                <div className="text-[var(--text)]">
+                  <span className="text-[var(--text-muted)] mr-2">{i + 1}</span>
                   @{m.handle}
-                  <span className="ml-2 text-xs text-zinc-500">{m.type}</span>
+                  <span className="ml-2 text-xs text-[var(--text-muted)]">{m.type}</span>
                 </div>
                 <div className="text-right">
-                  <div className="text-[#0D5CFF]">${m.amount.toFixed(2)}</div>
-                  <div className="text-xs text-zinc-500">Score {m.score}</div>
+                  <div className="font-medium text-[var(--accent)]">${m.amount.toFixed(2)}</div>
+                  <div className="text-xs text-[var(--text-muted)]">Score {m.score}</div>
                 </div>
               </div>
             ))}
@@ -117,20 +118,20 @@ export default function CirclePage() {
 
           <div className="mt-6">
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-sm font-medium">PayBox prompt</h2>
-              <button onClick={copy} className="text-xs text-[#0D5CFF]">
+              <h2 className="text-sm font-semibold text-[var(--text)]">PayBox prompt</h2>
+              <button onClick={copy} className="text-xs font-medium text-[var(--accent)]">
                 {copied ? 'Copied' : 'Copy'}
               </button>
             </div>
-            <pre className="text-xs text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-xl p-4 whitespace-pre-wrap">
+            <pre className="neu-pressed text-xs text-[var(--text)] p-4 whitespace-pre-wrap">
               {prompt}
             </pre>
           </div>
         </div>
       )}
 
-      <p className="mt-8 text-xs text-zinc-600 text-center">
-        Demo data until X API is connected. Real ranking coming next.
+      <p className="mt-8 text-xs text-[var(--text-muted)] text-center">
+        Demo data until X API is connected.
       </p>
     </div>
   );

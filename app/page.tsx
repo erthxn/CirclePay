@@ -2,27 +2,31 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-5 text-center">
-      <div className="relative mb-4">
-        <div className="text-[5.5rem] sm:text-[8rem] font-black tracking-tighter leading-none text-[#0D5CFF] select-none">
+    <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-5 text-center">
+      <div className="relative mb-6">
+        <div className="text-[5.2rem] sm:text-[7.5rem] font-black tracking-tighter leading-none text-[var(--accent)] select-none">
           CIRCLE
         </div>
+        <p className="absolute inset-0 flex items-center justify-center text-[11px] sm:text-xs font-medium tracking-wide text-[var(--text-muted)] pointer-events-none">
+          Analyze → Rank → Prompt
+        </p>
       </div>
 
-      <p className="text-lg sm:text-xl text-zinc-300 mb-10 max-w-xs">
+      <p className="text-lg sm:text-xl font-medium text-[var(--text)] mb-10 max-w-xs">
         Reward your X Circle
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs sm:max-w-none sm:w-auto">
+      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none sm:w-auto">
         <Link
           href="/circle"
-          className="bg-[#0D5CFF] hover:bg-[#0B4FE0] text-white text-sm font-medium px-6 py-3 rounded-full transition text-center"
+          className="neu-btn px-7 py-3.5 text-sm font-medium text-white bg-[var(--accent)] shadow-[0_6px_16px_rgba(13,92,255,0.35)]"
+          style={{ boxShadow: '0 8px 20px rgba(13,92,255,0.35)' }}
         >
           Check your X circle
         </Link>
         <Link
           href="/how-it-works"
-          className="border border-zinc-700 hover:border-zinc-500 text-zinc-300 text-sm font-medium px-6 py-3 rounded-full transition text-center"
+          className="neu-btn px-7 py-3.5 text-sm font-medium text-[var(--text)]"
         >
           How it works
         </Link>

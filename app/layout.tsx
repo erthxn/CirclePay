@@ -16,18 +16,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white min-h-screen antialiased">
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
+      <body className="min-h-screen antialiased">
+        <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-5 py-4 neu-raised rounded-none border-b border-transparent">
           <div className="flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="font-semibold text-sm tracking-tight">
-              Circle<span className="text-[#0D5CFF]">Pay</span>
+            <Logo className="h-7 w-7" />
+            <span className="font-semibold text-sm tracking-tight text-[var(--text)]">
+              Circle<span className="text-[var(--accent)]">Pay</span>
             </span>
           </div>
           <Menu />
         </nav>
 
-        <main className="pt-16">{children}</main>
+        <main className="pt-20 pb-12">{children}</main>
       </body>
     </html>
   );

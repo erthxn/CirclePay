@@ -2,15 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+:root {
+  --bg: #e8eaed;
+  --bg-light: #ffffff;
+  --bg-dark: #c5c8ce;
+  --text: #1a1d24;
+  --text-muted: #5c6370;
+  --accent: #0D5CFF;
+  --accent-hover: #0B4FE0;
+  --radius: 20px;
+  --shadow-raised: 8px 8px 16px var(--bg-dark), -8px -8px 16px var(--bg-light);
+  --shadow-pressed: inset 6px 6px 12px var(--bg-dark), inset -6px -6px 12px var(--bg-light);
+}
+
+html, body {
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
-  background: #000;
+  background: var(--bg);
+  color: var(--text);
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.neu-raised {
+  background: var(--bg);
+  box-shadow: var(--shadow-raised);
+  border-radius: var(--radius);
+}
+
+.neu-pressed {
+  background: var(--bg);
+  box-shadow: var(--shadow-pressed);
+  border-radius: var(--radius);
+}
+
+.neu-btn {
+  background: var(--bg);
+  box-shadow: var(--shadow-raised);
+  border-radius: 9999px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.neu-btn:active {
+  box-shadow: var(--shadow-pressed);
+  transform: translateY(1px);
+}
+
+.neu-input {
+  background: var(--bg);
+  box-shadow: var(--shadow-pressed);
+  border: none;
+  border-radius: 16px;
+  outline: none;
+  color: var(--text);
+}
+
+.neu-input:focus {
+  box-shadow: inset 4px 4px 8px var(--bg-dark), inset -4px -4px 8px var(--bg-light), 0 0 0 2px var(--accent);
 }
 
 button, a {
