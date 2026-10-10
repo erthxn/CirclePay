@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --logo: #0d5cff;
-}
-
 html,
 body {
   -webkit-tap-highlight-color: transparent;
@@ -17,6 +13,6 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-button {
+button, a {
   -webkit-tap-highlight-color: transparent;
 }

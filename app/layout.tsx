@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Logo from '@/components/Logo';
+import Menu from '@/components/Menu';
 
 export const metadata: Metadata = {
   title: 'CirclePay',
@@ -23,14 +24,7 @@ export default function RootLayout({
               Circle<span className="text-[#0D5CFF]">Pay</span>
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-6 text-xs text-zinc-400">
-            <span>Overview</span>
-            <span>How it works</span>
-            <span>Rewards</span>
-          </div>
-          <div className="flex items-center gap-3 text-xs text-zinc-400">
-            <span>↗</span>
-          </div>
+          <Menu />
         </nav>
 
         <main className="pt-16">{children}</main>
