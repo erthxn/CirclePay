@@ -16,13 +16,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white min-h-screen antialiased">
-        <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-zinc-800 bg-black/90 px-4 py-3 backdrop-blur">
-          <Logo className="h-8 w-8 shrink-0" />
-          <span className="text-lg font-semibold tracking-tight">
-            Circle<span className="text-[#0D5CFF]">Pay</span>
-          </span>
-        </header>
-        <main className="px-4 pb-10">{children}</main>
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <Logo className="h-6 w-6" />
+            <span className="font-semibold text-sm tracking-tight">
+              Circle<span className="text-[#0D5CFF]">Pay</span>
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-6 text-xs text-zinc-400">
+            <span>Overview</span>
+            <span>How it works</span>
+            <span>Rewards</span>
+          </div>
+          <div className="flex items-center gap-3 text-xs text-zinc-400">
+            <span>↗</span>
+          </div>
+        </nav>
+
+        <main className="pt-16">{children}</main>
       </body>
     </html>
   );
