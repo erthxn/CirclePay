@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+const ADMIN_PASSWORD = 'oluwaseun07';
+
 export default function AdminPage() {
   const [list, setList] = useState<string[]>([]);
   const [input, setInput] = useState('');
@@ -11,39 +13,33 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_ok') === '1') setAuthed(true);
+    const saved = localStorage.getItem('circlepay_admin_list');
+    if (saved) setList(JSON.parse(saved));
   }, []);
 
-  async function login() {
-    const res = await fetch('/api/admin/grant', {
-      method: 'GET',
-      headers: { 'x-admin-password': pass },
-    });
-    if (res.ok) {
+  function login() {
+    if (pass === ADMIN_PASSWORD) {
       sessionStorage.setItem('admin_ok', '1');
-      sessionStorage.setItem('admin_pass', pass);
       setAuthed(true);
-      const data = await res.json();
-      setList(data.users || []);
+      setError('');
     } else {
       setError('Wrong password');
     }
   }
 
-  async function add() {
+  function add() {
     const h = input.trim().replace('@', '').toLowerCase();
-    if (!h) return;
-    const res = await fetch('/api/admin/grant', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-admin-password': sessionStorage.getItem('admin_pass') || '',
-      },
-      body: JSON.stringify({ username: h }),
-    });
-    if (res.ok) {
-      setList((prev) => [...prev, h]);
-      setInput('');
-    }
+    if (!h || list.includes(h)) return;
+    const next = [...list, h];
+    setList(next);
+    localStorage.setItem('circlepay_admin_list', JSON.stringify(next));
+    setInput('');
+  }
+
+  function remove(h: string) {
+    const next = list.filter((x) => x !== h);
+    setList(next);
+    localStorage.setItem('circlepay_admin_list', JSON.stringify(next));
   }
 
   if (!authed) {
@@ -56,6 +52,7 @@ export default function AdminPage() {
           onChange={(e) => setPass(e.target.value)}
           placeholder="Password"
           className="neu-input w-full px-4 py-3 text-sm mb-3"
+          onKeyDown={(e) => e.key === 'Enter' && login()}
         />
         {error && <p className="text-xs text-red-600 mb-2">{error}</p>}
         <button onClick={login} className="w-full py-3 text-sm text-white rounded-full" style={{ background: 'var(--accent)' }}>
@@ -75,9 +72,10 @@ export default function AdminPage() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="username"
           className="neu-input flex-1 px-4 py-3 text-sm"
+          onKeyDown={(e) => e.key === 'Enter' && add()}
         />
         <button onClick={add} className="px-4 py-3 text-sm text-white rounded-full" style={{ background: 'var(--accent)' }}>
-          Grant
+          Add
         </button>
       </div>
 
@@ -85,14 +83,11 @@ export default function AdminPage() {
         {list.map((h) => (
           <div key={h} className="neu-raised flex items-center justify-between px-4 py-3 text-sm">
             <span>@{h}</span>
+            <button onClick={() => remove(h)} className="text-xs text-red-500">Remove</button>
           </div>
         ))}
-        {list.length === 0 && <p className="text-xs text-[var(--text-muted)]">No users granted yet.</p>}
+        {list.length === 0 && <p className="text-xs text-[var(--text-muted)]">No users yet.</p>}
       </div>
-
-      <p className="mt-8 text-xs text-[var(--text-muted)]">
-        Password is read from the PASSWORD env var on Vercel.
-      </p>
     </div>
   );
 }
