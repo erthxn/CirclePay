@@ -12,13 +12,17 @@ export default function CirclePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(10);
-  const [hasAccess, setHasAccess] = useState(false);
+  const [user, setUser] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    const access = localStorage.getItem('circlepay_access');
-    setHasAccess(access === '1');
-    setChecked(true);
+    fetch('/api/auth/me')
+      .then((r) => r.json())
+      .then((d) => {
+        setUser(d.user);
+        setChecked(true);
+      })
+      .catch(() => setChecked(true));
   }, []);
 
   async function run() {
@@ -79,7 +83,7 @@ export default function CirclePage() {
 
   if (!checked) return null;
 
-  if (!hasAccess) {
+  if (!user) {
     return (
       <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-5 text-center">
         <div className="neu-raised p-8 max-w-sm">
@@ -91,17 +95,13 @@ export default function CirclePage() {
             </a>{' '}
             for early access.
           </p>
-          <button
-            onClick={() => {
-              // Placeholder connect — real OAuth next
-              localStorage.setItem('circlepay_access', '1');
-              setHasAccess(true);
-            }}
-            className="w-full py-3 text-sm font-medium text-white rounded-full"
+          <a
+            href="/api/auth/x"
+            className="inline-block w-full py-3 text-sm font-medium text-white rounded-full"
             style={{ background: 'var(--accent)' }}
           >
-            Connect X for early access
-          </button>
+            Connect X
+          </a>
         </div>
       </div>
     );
@@ -109,7 +109,10 @@ export default function CirclePage() {
 
   return (
     <div className="max-w-md mx-auto px-5 py-6">
-      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold text-[var(--text)]">Check your X circle</h1>
+        <span className="text-xs text-[var(--text-muted)]">@{user}</span>
+      </div>
       <p className="text-sm text-[var(--text-muted)] mb-6">Last 7 days · ranked by engagement</p>
 
       {!loading ? (
