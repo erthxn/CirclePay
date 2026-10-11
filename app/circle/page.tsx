@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/Logo';
 
@@ -12,18 +12,6 @@ export default function CirclePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(10);
-  const [user, setUser] = useState<string | null>(null);
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    fetch('/api/auth/me')
-      .then((r) => r.json())
-      .then((d) => {
-        setUser(d.user);
-        setChecked(true);
-      })
-      .catch(() => setChecked(true));
-  }, []);
 
   async function run() {
     const h = handle.trim().replace('@', '');
@@ -81,38 +69,9 @@ export default function CirclePage() {
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
-  if (!checked) return null;
-
-  if (!user) {
-    return (
-      <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-5 text-center">
-        <div className="neu-raised p-8 max-w-sm">
-          <h1 className="text-xl font-bold text-[var(--text)] mb-3">Currently in Beta</h1>
-          <p className="text-sm text-[var(--text-muted)] mb-6 leading-relaxed">
-            Live soon. Feel free to reach out to{' '}
-            <a href="https://x.com/erthxn" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] font-medium">
-              @erthxn
-            </a>{' '}
-            for early access.
-          </p>
-          <a
-            href="/api/auth/x"
-            className="inline-block w-full py-3 text-sm font-medium text-white rounded-full"
-            style={{ background: 'var(--accent)' }}
-          >
-            Connect X
-          </a>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-md mx-auto px-5 py-6">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold text-[var(--text)]">Check your X circle</h1>
-        <span className="text-xs text-[var(--text-muted)]">@{user}</span>
-      </div>
+      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
       <p className="text-sm text-[var(--text-muted)] mb-6">Last 7 days · ranked by engagement</p>
 
       {!loading ? (
@@ -121,7 +80,10 @@ export default function CirclePage() {
             <label className="text-xs text-[var(--text-muted)] block mb-1.5">X handle</label>
             <input
               value={handle}
-              onChange={(e) => setHandle(e.target.value.replace('@', ''))}
+              onChange={(e) => {
+                setHandle(e.target.value.replace('@', ''));
+                if (error) setError('');
+              }}
               placeholder="erthxn"
               className="neu-input w-full px-4 py-3.5 text-sm"
             />
