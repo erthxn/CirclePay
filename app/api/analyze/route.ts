@@ -38,6 +38,23 @@ async function tryX(handle: string) {
   return res.json();
 }
 
+async function fetchSelfPfp(handle: string): Promise<string | undefined> {
+  const bearer = process.env.BEARER_TOKEN;
+  if (!bearer) return undefined;
+
+  try {
+    const res = await fetch(
+      `https://api.twitter.com/2/users/by/username/${encodeURIComponent(handle)}?user.fields=profile_image_url`,
+      { headers: { Authorization: `Bearer ${bearer}` } }
+    );
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    return higherResPfp(data.data?.profile_image_url);
+  } catch {
+    return undefined;
+  }
+}
+
 function scoreInteractions(tweets: any[], selfHandle: string) {
   const map: Record<string, { score: number; count: number; pfp?: string }> = {};
 
@@ -85,12 +102,10 @@ export async function POST(req: NextRequest) {
 
     let tweets: any[] = [];
     let source = 'sorsa';
-    let centerPfp: string | undefined;
 
     try {
       const sorsa = await trySorsa(h);
       tweets = sorsa.tweets || [];
-      // Try to get self pfp from first tweet author if present, else leave undefined
     } catch {
       source = 'x';
       try {
@@ -107,6 +122,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const centerPfp = await fetchSelfPfp(h);
+
     const ranked = scoreInteractions(tweets, h).slice(0, Math.min(25, Number(count) || 5));
 
     if (!ranked.length) {
@@ -116,7 +133,6 @@ export async function POST(req: NextRequest) {
     const total = ranked.reduce((s, m) => s + m.score, 0) || 1;
     const poolNum = Number(pool);
 
-    // Distribute in cents to avoid $0
     let remainingCents = Math.round(poolNum * 100);
     const raw = ranked.map((m) => ({
       ...m,
@@ -125,7 +141,6 @@ export async function POST(req: NextRequest) {
     let used = raw.reduce((s, m) => s + m.cents, 0);
     let leftover = remainingCents - used;
 
-    // Give leftover to top ranked
     for (let i = 0; i < leftover; i++) {
       raw[i % raw.length].cents += 1;
     }
