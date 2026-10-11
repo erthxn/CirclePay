@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/Logo';
 
@@ -12,6 +12,14 @@ export default function CirclePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(10);
+  const [hasAccess, setHasAccess] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const access = localStorage.getItem('circlepay_access');
+    setHasAccess(access === '1');
+    setChecked(true);
+  }, []);
 
   async function run() {
     const h = handle.trim().replace('@', '');
@@ -43,7 +51,6 @@ export default function CirclePage() {
       });
       const data = await res.json();
 
-      // Ensure at least ~10s feel
       const remaining = 10000 - (Date.now() - start);
       if (remaining > 0) await new Promise((r) => setTimeout(r, remaining));
 
@@ -70,6 +77,36 @@ export default function CirclePage() {
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
+  if (!checked) return null;
+
+  if (!hasAccess) {
+    return (
+      <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-5 text-center">
+        <div className="neu-raised p-8 max-w-sm">
+          <h1 className="text-xl font-bold text-[var(--text)] mb-3">Currently in Beta</h1>
+          <p className="text-sm text-[var(--text-muted)] mb-6 leading-relaxed">
+            Live soon. Feel free to reach out to{' '}
+            <a href="https://x.com/erthxn" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] font-medium">
+              @erthxn
+            </a>{' '}
+            for early access.
+          </p>
+          <button
+            onClick={() => {
+              // Placeholder connect — real OAuth next
+              localStorage.setItem('circlepay_access', '1');
+              setHasAccess(true);
+            }}
+            className="w-full py-3 text-sm font-medium text-white rounded-full"
+            style={{ background: 'var(--accent)' }}
+          >
+            Connect X for early access
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-md mx-auto px-5 py-6">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
@@ -81,10 +118,7 @@ export default function CirclePage() {
             <label className="text-xs text-[var(--text-muted)] block mb-1.5">X handle</label>
             <input
               value={handle}
-              onChange={(e) => {
-                setHandle(e.target.value.replace('@', ''));
-                if (error) setError('');
-              }}
+              onChange={(e) => setHandle(e.target.value.replace('@', ''))}
               placeholder="erthxn"
               className="neu-input w-full px-4 py-3.5 text-sm"
             />
@@ -127,24 +161,24 @@ export default function CirclePage() {
           </button>
         </div>
       ) : (
-        <div className="mt-16 flex flex-col items-center">
+        <div className="mt-12 flex flex-col items-center">
           <div className="relative">
-            <Logo className="w-32 h-32" />
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2.5">
-              <div className="h-2 w-16 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite]" />
-              <div className="h-2 w-10 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite_0.4s]" />
+            <Logo className="w-36 h-36" />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+              <div className="h-2.5 w-20 bg-[#0D5CFF] rounded-full animate-[motion_1.5s_ease-in-out_infinite]" />
+              <div className="h-2.5 w-12 bg-[#0D5CFF] rounded-full animate-[motion_1.5s_ease-in-out_infinite_0.35s]" />
             </div>
           </div>
-          <p className="mt-10 text-lg font-medium text-[var(--text)]">Reading @{handle.replace('@','')}</p>
-          <p className="mt-3 text-4xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
+          <p className="mt-10 text-lg font-semibold text-[var(--text)]">Reading @{handle.replace('@','')}</p>
+          <p className="mt-4 text-5xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
           <p className="mt-1 text-xs text-[var(--text-muted)]">seconds remaining</p>
         </div>
       )}
 
       <style jsx>{`
         @keyframes motion {
-          0%, 100% { transform: translateX(0); opacity: 0.55; }
-          50% { transform: translateX(14px); opacity: 1; }
+          0%, 100% { transform: translateX(0); opacity: 0.5; }
+          50% { transform: translateX(16px); opacity: 1; }
         }
       `}</style>
     </div>

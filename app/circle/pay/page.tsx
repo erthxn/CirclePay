@@ -26,7 +26,7 @@ function PayPageInner() {
     return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result. Analyze again.</div>;
   }
 
-  const { members = [], prompt = '', handle = '', pool = 0 } = data;
+  const { members = [], prompt = '', handle = '', pool = 0, centerPfp } = data;
 
   function copy() {
     navigator.clipboard.writeText(prompt);
@@ -72,17 +72,15 @@ function PayPageInner() {
               : accent + '33',
         }}
       >
-        {/* Concentric rings */}
         <div className="absolute inset-[18%] rounded-full border border-white/25" />
         <div className="absolute inset-[30%] rounded-full border border-white/15" />
 
-        {/* Curved connecting lines between members */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
           {members.map((_: any, i: number) => {
             if (i === members.length - 1) return null;
             const a1 = (i / members.length) * Math.PI * 2 - Math.PI / 2;
             const a2 = ((i + 1) / members.length) * Math.PI * 2 - Math.PI / 2;
-            const r = 38;
+            const r = 36;
             const x1 = 50 + Math.cos(a1) * r;
             const y1 = 50 + Math.sin(a1) * r;
             const x2 = 50 + Math.cos(a2) * r;
@@ -92,27 +90,30 @@ function PayPageInner() {
                 key={i}
                 d={`M ${x1} ${y1} Q 50 50 ${x2} ${y2}`}
                 fill="none"
-                stroke="rgba(255,255,255,0.35)"
-                strokeWidth="0.5"
+                stroke="rgba(255,255,255,0.4)"
+                strokeWidth="0.6"
               />
             );
           })}
         </svg>
 
-        {/* Center */}
+        {/* Center — real PFP if available */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div
-            className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold shadow-lg overflow-hidden"
-            style={{ background: accent }}
-          >
-            @{handle.slice(0, 2).toUpperCase()}
+          <div className="w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden bg-zinc-800">
+            {centerPfp ? (
+              <img src={centerPfp} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white text-sm font-bold" style={{ background: accent }}>
+                @{handle.slice(0, 2).toUpperCase()}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Members */}
+        {/* Members — prices outside so they don't cover */}
         {members.map((m: Member, i: number) => {
           const angle = (i / Math.max(members.length, 1)) * Math.PI * 2 - Math.PI / 2;
-          const r = 38;
+          const r = 36;
           const x = 50 + Math.cos(angle) * r;
           const y = 50 + Math.sin(angle) * r;
           return (
@@ -126,17 +127,17 @@ function PayPageInner() {
                 zIndex: 2,
               }}
             >
-              <div className="w-11 h-11 rounded-full border-2 border-white shadow overflow-hidden bg-zinc-700">
+              <div className="w-10 h-10 rounded-full border-2 border-white shadow overflow-hidden bg-zinc-700">
                 {m.pfp ? (
                   <img src={m.pfp} alt="" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-[9px] font-bold text-white">
+                  <div className="w-full h-full flex items-center justify-center text-[8px] font-bold text-white">
                     {m.handle.slice(0, 2).toUpperCase()}
                   </div>
                 )}
               </div>
-              <div className="mt-1 text-[8px] font-semibold text-white bg-black/50 px-1.5 py-0.5 rounded-full">
-                ${m.amount.toFixed(0)}
+              <div className="mt-1 text-[9px] font-semibold text-white bg-black/60 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                ${m.amount.toFixed(2)}
               </div>
             </div>
           );
@@ -151,18 +152,10 @@ function PayPageInner() {
       <div className="mt-4 flex items-center justify-between">
         <div className="flex gap-2">
           {colors.map((c) => (
-            <button
-              key={c}
-              onClick={() => setAccent(c)}
-              className="w-6 h-6 rounded-full border-2 border-white/40"
-              style={{ background: c }}
-            />
+            <button key={c} onClick={() => setAccent(c)} className="w-6 h-6 rounded-full border-2 border-white/40" style={{ background: c }} />
           ))}
         </div>
-        <button
-          onClick={() => setBgStyle(bgStyle === 'gradient' ? 'solid' : 'gradient')}
-          className="text-xs font-medium text-[var(--accent)]"
-        >
+        <button onClick={() => setBgStyle(bgStyle === 'gradient' ? 'solid' : 'gradient')} className="text-xs font-medium text-[var(--accent)]">
           {bgStyle === 'gradient' ? 'Solid' : 'Gradient'}
         </button>
       </div>
@@ -188,7 +181,7 @@ function PayPageInner() {
             <div key={i} className="neu-raised flex items-center justify-between px-4 py-3 text-sm">
               <div className="flex items-center gap-2 text-[var(--text)]">
                 <span className="text-[var(--text-muted)]">{i + 1}.</span>
-                {m.pfp && <img src={m.pfp} alt="" className="w-6 h-6 rounded-full" />}
+                {m.pfp && <img src={m.pfp} alt="" className="w-6 h-6 rounded-full object-cover" />}
                 @{m.handle}
               </div>
               <div className="font-medium text-[var(--accent)]">${formatMoney(m.amount)}</div>
