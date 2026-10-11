@@ -7,11 +7,22 @@ const REDIRECT_URI = process.env.X_REDIRECT_URI || 'https://circlepay.fun/api/au
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
   const state = req.nextUrl.searchParams.get('state');
+  const errorParam = req.nextUrl.searchParams.get('error');
+
   const verifier = req.cookies.get('x_verifier')?.value;
   const savedState = req.cookies.get('x_state')?.value;
 
+  // If X sent an error, surface it
+  if (errorParam) {
+    return NextResponse.redirect(new URL(`/circle?error=${errorParam}`, req.url));
+  }
+
   if (!code || !state || state !== savedState || !verifier) {
-    return NextResponse.redirect(new URL('/circle?error=auth', req.url));
+    // Clear any leftover cookies
+    const fail = NextResponse.redirect(new URL('/circle?error=auth', req.url));
+    fail.cookies.delete('x_verifier');
+    fail.cookies.delete('x_state');
+    return fail;
   }
 
   if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -39,13 +50,14 @@ export async function GET(req: NextRequest) {
     });
 
     if (!tokenRes.ok) {
+      const txt = await tokenRes.text();
+      console.error('Token exchange failed:', txt);
       return NextResponse.redirect(new URL('/circle?error=token', req.url));
     }
 
     const tokens = await tokenRes.json();
     const accessToken = tokens.access_token;
 
-    // Fetch user
     const userRes = await fetch('https://api.twitter.com/2/users/me?user.fields=username,profile_image_url', {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
@@ -61,15 +73,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.redirect(new URL('/circle?error=nouser', req.url));
     }
 
-    // Set session cookies
+    // Success — set session cookies with SameSite=Lax (normal navigation)
     const res = NextResponse.redirect(new URL('/circle', req.url));
-    res.cookies.set('x_user', username, { httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 7, path: '/' });
-    res.cookies.set('x_access', '1', { httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 7, path: '/' });
+
+    const sessionOpts = {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax' as const,
+      maxAge: 60 * 60 * 24 * 7,
+      path: '/',
+    };
+
+    res.cookies.set('x_user', username, sessionOpts);
+    res.cookies.set('x_access', '1', sessionOpts);
+
     // Clear temp cookies
     res.cookies.delete('x_verifier');
     res.cookies.delete('x_state');
+
     return res;
-  } catch {
+  } catch (e) {
+    console.error('OAuth callback error:', e);
     return NextResponse.redirect(new URL('/circle?error=unknown', req.url));
   }
 }

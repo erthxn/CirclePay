@@ -34,8 +34,18 @@ export async function GET(req: NextRequest) {
   const url = `https://twitter.com/i/oauth2/authorize?${params.toString()}`;
 
   const res = NextResponse.redirect(url);
-  // Store verifier + state in short-lived cookies
-  res.cookies.set('x_verifier', verifier, { httpOnly: true, secure: true, maxAge: 600, path: '/' });
-  res.cookies.set('x_state', state, { httpOnly: true, secure: true, maxAge: 600, path: '/' });
+
+  // SameSite=None + Secure so the cookies survive the cross-site redirect from X
+  const cookieOpts = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none' as const,
+    maxAge: 600,
+    path: '/',
+  };
+
+  res.cookies.set('x_verifier', verifier, cookieOpts);
+  res.cookies.set('x_state', state, cookieOpts);
+
   return res;
 }
