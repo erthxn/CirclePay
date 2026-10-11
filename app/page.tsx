@@ -22,11 +22,16 @@ export default function Home() {
           Check your X circle
         </Link>
         <Link
-          href="/how-it-works"
+          href="/guides"
           className="neu-btn px-7 py-3.5 text-sm font-medium text-[var(--text)]"
         >
-          How it works
+          How to connect PayBox
         </Link>
+      </div>
+
+      <div className="mt-6 flex gap-4 text-xs text-[var(--text-muted)]">
+        <Link href="/how-it-works" className="hover:text-[var(--text)]">How it works</Link>
+        <Link href="/status" className="hover:text-[var(--text)]">Status</Link>
       </div>
     </div>
   );

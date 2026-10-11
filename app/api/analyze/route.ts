@@ -31,7 +31,8 @@ async function tryRapid(handle: string) {
   if (!key) throw new Error('No X_RapidAPI_Key');
 
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
-  const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30`;
+  // Documented search endpoint from Twitter241 schema
+  const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
 
   const res = await fetch(url, {
     headers: {
@@ -40,23 +41,22 @@ async function tryRapid(handle: string) {
     },
   });
 
-  if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
 
-  // Normalize common RapidAPI shapes
-  const items = data.result?.tweets || data.tweets || data.timeline || data.data || [];
-  return items.map((t: any) => ({
+  const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
+  return (Array.isArray(items) ? items : []).map((t: any) => ({
     user: {
-      username: t.user?.screen_name || t.author?.username || t.user?.username,
-      profile_image_url: t.user?.profile_image_url || t.author?.profile_image_url,
+      username: t.user?.screen_name || t.author?.username || t.user?.username || t.legacy?.user?.screen_name,
+      profile_image_url: t.user?.profile_image_url || t.author?.profile_image_url || t.legacy?.user?.profile_image_url_https,
     },
     public_metrics: {
-      like_count: t.favorite_count || t.like_count || 0,
-      reply_count: t.reply_count || 0,
-      quote_count: t.quote_count || 0,
+      like_count: t.favorite_count || t.like_count || t.legacy?.favorite_count || 0,
+      reply_count: t.reply_count || t.legacy?.reply_count || 0,
+      quote_count: t.quote_count || t.legacy?.quote_count || 0,
     },
     is_quote_status: t.is_quote_status || false,
-    is_reply: t.in_reply_to_status_id != null || t.is_reply,
+    is_reply: t.in_reply_to_status_id != null || t.is_reply || false,
   }));
 }
 
@@ -77,7 +77,7 @@ async function tryApify(handle: string) {
     }),
   });
 
-  if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const items = await res.json();
 
   return (items || []).map((t: any) => ({
@@ -103,7 +103,7 @@ async function tryX(handle: string) {
   const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
 
   const res = await fetch(url, { headers: { Authorization: `Bearer ${bearer}` } });
-  if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
 

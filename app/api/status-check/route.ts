@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
     if (source === 'rapid') {
       if (!process.env.X_RapidAPI_Key) return NextResponse.json({ ok: false, detail: 'No key' });
-      const r = await fetch('https://twitter241.p.rapidapi.com/search?query=elonmusk&count=1', {
+      const r = await fetch('https://twitter241.p.rapidapi.com/search?query=elonmusk&count=1&type=Latest', {
         headers: {
           'X-RapidAPI-Key': process.env.X_RapidAPI_Key,
           'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
@@ -27,7 +27,6 @@ export async function GET(req: NextRequest) {
 
     if (source === 'apify') {
       if (!process.env.APIFY_API) return NextResponse.json({ ok: false, detail: 'No key' });
-      // Lightweight: just check token works by hitting actor info
       const r = await fetch(
         `https://api.apify.com/v2/acts/khadinakbar~x-tweet-scraper?token=${process.env.APIFY_API}`
       );
