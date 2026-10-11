@@ -70,7 +70,7 @@ export default function CirclePage() {
   }
 
   return (
-    <div className="max-w-md mx-auto px-5 py-6">
+    <div className="max-w-md mx-auto px-5 py-6 min-h-[60vh]">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
       <p className="text-sm text-[var(--text-muted)] mb-6">Last 7 days · ranked by engagement</p>
 
@@ -126,24 +126,24 @@ export default function CirclePage() {
           </button>
         </div>
       ) : (
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-8 flex flex-col items-center justify-center min-h-[50vh]">
           <div className="relative">
-            <Logo className="w-36 h-36" />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-              <div className="h-2.5 w-20 bg-[#0D5CFF] rounded-full animate-[motion_1.5s_ease-in-out_infinite]" />
-              <div className="h-2.5 w-12 bg-[#0D5CFF] rounded-full animate-[motion_1.5s_ease-in-out_infinite_0.35s]" />
+            <Logo className="w-40 h-40" />
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+              <div className="h-3 w-24 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite]" />
+              <div className="h-3 w-16 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite_0.4s]" />
             </div>
           </div>
-          <p className="mt-10 text-lg font-semibold text-[var(--text)]">Reading @{handle.replace('@','')}</p>
-          <p className="mt-4 text-5xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
-          <p className="mt-1 text-xs text-[var(--text-muted)]">seconds remaining</p>
+          <p className="mt-12 text-xl font-semibold text-[var(--text)]">Reading @{handle.replace('@','')}</p>
+          <p className="mt-6 text-6xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
+          <p className="mt-2 text-sm text-[var(--text-muted)]">seconds remaining</p>
         </div>
       )}
 
       <style jsx>{`
         @keyframes motion {
-          0%, 100% { transform: translateX(0); opacity: 0.5; }
-          50% { transform: translateX(16px); opacity: 1; }
+          0%, 100% { transform: translateX(0); opacity: 0.45; }
+          50% { transform: translateX(20px); opacity: 1; }
         }
       `}</style>
     </div>

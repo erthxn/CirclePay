@@ -26,6 +26,75 @@ async function trySorsa(handle: string) {
   return res.json();
 }
 
+async function tryRapid(handle: string) {
+  const key = process.env.X_RapidAPI_Key;
+  if (!key) throw new Error('No X_RapidAPI_Key');
+
+  const query = encodeURIComponent(`@${handle} -from:${handle}`);
+  const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30`;
+
+  const res = await fetch(url, {
+    headers: {
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
+    },
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+  const data = await res.json();
+
+  // Normalize common RapidAPI shapes
+  const items = data.result?.tweets || data.tweets || data.timeline || data.data || [];
+  return items.map((t: any) => ({
+    user: {
+      username: t.user?.screen_name || t.author?.username || t.user?.username,
+      profile_image_url: t.user?.profile_image_url || t.author?.profile_image_url,
+    },
+    public_metrics: {
+      like_count: t.favorite_count || t.like_count || 0,
+      reply_count: t.reply_count || 0,
+      quote_count: t.quote_count || 0,
+    },
+    is_quote_status: t.is_quote_status || false,
+    is_reply: t.in_reply_to_status_id != null || t.is_reply,
+  }));
+}
+
+async function tryApify(handle: string) {
+  const token = process.env.APIFY_API;
+  if (!token) throw new Error('No APIFY_API');
+
+  const actor = 'khadinakbar~x-tweet-scraper';
+  const url = `https://api.apify.com/v2/actors/${actor}/run-sync-get-dataset-items?token=${token}`;
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      searchTerms: [`@${handle} -from:${handle}`],
+      maxItems: 30,
+      queryType: 'Latest',
+    }),
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+  const items = await res.json();
+
+  return (items || []).map((t: any) => ({
+    user: {
+      username: t.author?.username || t.user?.username,
+      profile_image_url: t.author?.profileImageUrl || t.user?.profile_image_url,
+    },
+    public_metrics: {
+      like_count: t.likeCount || t.favorite_count || 0,
+      reply_count: t.replyCount || 0,
+      quote_count: t.quoteCount || 0,
+    },
+    is_quote_status: t.isQuoteStatus || false,
+    is_reply: t.isReply || false,
+  }));
+}
+
 async function tryX(handle: string) {
   const bearer = process.env.BEARER_TOKEN;
   if (!bearer) throw new Error('No BEARER_TOKEN');
@@ -103,23 +172,39 @@ export async function POST(req: NextRequest) {
     let tweets: any[] = [];
     let source = 'sorsa';
 
-    try {
-      const sorsa = await trySorsa(h);
-      tweets = sorsa.tweets || [];
-    } catch {
-      source = 'x';
+    const sources = [
+      { name: 'sorsa', fn: () => trySorsa(h).then((d) => d.tweets || []) },
+      { name: 'rapid', fn: () => tryRapid(h) },
+      { name: 'apify', fn: () => tryApify(h) },
+      {
+        name: 'x',
+        fn: async () => {
+          const x = await tryX(h);
+          const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
+          return (x.data || []).map((t: any) => ({
+            ...t,
+            user: users[t.author_id] || {},
+            is_reply: !!t.in_reply_to_user_id,
+            is_quote_status: false,
+          }));
+        },
+      },
+    ];
+
+    for (const s of sources) {
       try {
-        const x = await tryX(h);
-        const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
-        tweets = (x.data || []).map((t: any) => ({
-          ...t,
-          user: users[t.author_id] || {},
-          is_reply: !!t.in_reply_to_user_id,
-          is_quote_status: false,
-        }));
-      } catch (e2: any) {
-        return NextResponse.json({ error: 'Both sources failed', detail: e2.message }, { status: 502 });
+        tweets = await s.fn();
+        if (tweets.length) {
+          source = s.name;
+          break;
+        }
+      } catch {
+        // try next
       }
+    }
+
+    if (!tweets.length) {
+      return NextResponse.json({ error: 'All sources failed or returned empty', source: 'none' }, { status: 502 });
     }
 
     const centerPfp = await fetchSelfPfp(h);
