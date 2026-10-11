@@ -7,13 +7,14 @@ type Member = {
   handle: string;
   score: number;
   amount: number;
-  hue: number;
+  pfp?: string;
 };
 
 function PayPageInner() {
   const [data, setData] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [accent, setAccent] = useState('#0D5CFF');
+  const [bgStyle, setBgStyle] = useState<'gradient' | 'solid'>('gradient');
   const visualRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,14 +23,10 @@ function PayPageInner() {
   }, []);
 
   if (!data) {
-    return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result found. Go back and analyze.</div>;
+    return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result. Analyze again.</div>;
   }
 
   const { members = [], prompt = '', handle = '', pool = 0 } = data;
-  const withHue: Member[] = members.map((m: any, i: number) => ({
-    ...m,
-    hue: (i * 47) % 360,
-  }));
 
   function copy() {
     navigator.clipboard.writeText(prompt);
@@ -50,12 +47,12 @@ function PayPageInner() {
       link.href = canvas.toDataURL('image/png');
       link.click();
     } catch {
-      alert('Download failed. Try a screenshot.');
+      alert('Download failed. Try screenshot.');
     }
   }
 
   function formatMoney(n: number) {
-    return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   const colors = ['#0D5CFF', '#111827', '#7C3AED', '#059669', '#DC2626'];
@@ -65,30 +62,38 @@ function PayPageInner() {
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Your circle</h1>
       <p className="text-sm text-[var(--text-muted)] mb-6">@{handle} · ${formatMoney(Number(pool))} pool</p>
 
-      {/* Visual */}
       <div
         ref={visualRef}
         className="relative mx-auto w-full max-w-sm aspect-square rounded-3xl overflow-hidden"
         style={{
-          background: `radial-gradient(circle at 50% 45%, ${accent}18, #0f172a 70%)`,
+          background:
+            bgStyle === 'gradient'
+              ? `linear-gradient(135deg, ${accent}22, ${accent}66, #f59e0b33)`
+              : accent + '33',
         }}
       >
-        {/* Connecting lines via SVG */}
+        {/* Concentric rings */}
+        <div className="absolute inset-[18%] rounded-full border border-white/25" />
+        <div className="absolute inset-[30%] rounded-full border border-white/15" />
+
+        {/* Curved connecting lines between members */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
-          {withHue.map((m, i) => {
-            const angle = (i / Math.max(withHue.length, 1)) * Math.PI * 2 - Math.PI / 2;
-            const r = 36;
-            const x = 50 + Math.cos(angle) * r;
-            const y = 50 + Math.sin(angle) * r;
+          {members.map((_: any, i: number) => {
+            if (i === members.length - 1) return null;
+            const a1 = (i / members.length) * Math.PI * 2 - Math.PI / 2;
+            const a2 = ((i + 1) / members.length) * Math.PI * 2 - Math.PI / 2;
+            const r = 38;
+            const x1 = 50 + Math.cos(a1) * r;
+            const y1 = 50 + Math.sin(a1) * r;
+            const x2 = 50 + Math.cos(a2) * r;
+            const y2 = 50 + Math.sin(a2) * r;
             return (
-              <line
+              <path
                 key={i}
-                x1="50"
-                y1="50"
-                x2={x}
-                y2={y}
-                stroke="rgba(255,255,255,0.25)"
-                strokeWidth="0.4"
+                d={`M ${x1} ${y1} Q 50 50 ${x2} ${y2}`}
+                fill="none"
+                stroke="rgba(255,255,255,0.35)"
+                strokeWidth="0.5"
               />
             );
           })}
@@ -97,17 +102,17 @@ function PayPageInner() {
         {/* Center */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center text-white text-sm font-bold shadow-lg"
+            className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center text-white text-xs font-bold shadow-lg overflow-hidden"
             style={{ background: accent }}
           >
             @{handle.slice(0, 2).toUpperCase()}
           </div>
         </div>
 
-        {/* Members with price */}
-        {withHue.map((m, i) => {
-          const angle = (i / Math.max(withHue.length, 1)) * Math.PI * 2 - Math.PI / 2;
-          const r = 36;
+        {/* Members */}
+        {members.map((m: Member, i: number) => {
+          const angle = (i / Math.max(members.length, 1)) * Math.PI * 2 - Math.PI / 2;
+          const r = 38;
           const x = 50 + Math.cos(angle) * r;
           const y = 50 + Math.sin(angle) * r;
           return (
@@ -118,23 +123,26 @@ function PayPageInner() {
                 left: `${x}%`,
                 top: `${y}%`,
                 transform: 'translate(-50%, -50%)',
+                zIndex: 2,
               }}
             >
-              <div
-                className="w-11 h-11 rounded-full border-2 border-white flex items-center justify-center text-[9px] font-bold text-white shadow"
-                style={{ background: `hsl(${m.hue}, 65%, 48%)` }}
-              >
-                {m.handle.slice(0, 2).toUpperCase()}
+              <div className="w-11 h-11 rounded-full border-2 border-white shadow overflow-hidden bg-zinc-700">
+                {m.pfp ? (
+                  <img src={m.pfp} alt="" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-[9px] font-bold text-white">
+                    {m.handle.slice(0, 2).toUpperCase()}
+                  </div>
+                )}
               </div>
-              <div className="mt-0.5 text-[8px] font-medium text-white/90 bg-black/40 px-1 rounded">
+              <div className="mt-1 text-[8px] font-semibold text-white bg-black/50 px-1.5 py-0.5 rounded-full">
                 ${m.amount.toFixed(0)}
               </div>
             </div>
           );
         })}
 
-        {/* Clean branding, no black boxes */}
-        <div className="absolute bottom-3 left-0 right-0 flex justify-between px-4 text-[10px] text-white/80 font-medium">
+        <div className="absolute bottom-3 left-0 right-0 flex justify-between px-4 text-[10px] text-white/90 font-medium">
           <span>@{handle}</span>
           <span>circlepay.fun</span>
         </div>
@@ -146,41 +154,41 @@ function PayPageInner() {
             <button
               key={c}
               onClick={() => setAccent(c)}
-              className="w-6 h-6 rounded-full border-2 border-white/50"
+              className="w-6 h-6 rounded-full border-2 border-white/40"
               style={{ background: c }}
             />
           ))}
         </div>
+        <button
+          onClick={() => setBgStyle(bgStyle === 'gradient' ? 'solid' : 'gradient')}
+          className="text-xs font-medium text-[var(--accent)]"
+        >
+          {bgStyle === 'gradient' ? 'Solid' : 'Gradient'}
+        </button>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
-        <button
-          onClick={download}
-          className="py-3 text-sm font-medium text-white rounded-full"
-          style={{ background: 'var(--accent)' }}
-        >
+        <button onClick={download} className="py-3 text-sm font-medium text-white rounded-full" style={{ background: 'var(--accent)' }}>
           Download PNG
         </button>
-        <button
-          onClick={copy}
-          className="py-3 text-sm font-medium rounded-full border border-[var(--accent)] text-[var(--accent)]"
-        >
+        <button onClick={copy} className="py-3 text-sm font-medium rounded-full border border-[var(--accent)] text-[var(--accent)]">
           {copied ? 'Copied' : 'Copy prompt'}
         </button>
       </div>
 
       <div className="mt-5 neu-raised p-4 text-center">
         <p className="text-sm font-medium text-[var(--text)]">Send this prompt to your AI agent</p>
-        <p className="text-xs text-[var(--text-muted)] mt-1">Connected to PayBox (Claude, Grok, or ChatGPT)</p>
+        <p className="text-xs text-[var(--text-muted)] mt-1">Connected to PayBox</p>
       </div>
 
       <div className="mt-6">
         <h2 className="text-sm font-semibold mb-3 text-[var(--text)]">Ranked circle</h2>
         <div className="space-y-2">
-          {withHue.map((m, i) => (
+          {members.map((m: Member, i: number) => (
             <div key={i} className="neu-raised flex items-center justify-between px-4 py-3 text-sm">
-              <div className="text-[var(--text)]">
-                <span className="text-[var(--text-muted)] mr-2">{i + 1}.</span>
+              <div className="flex items-center gap-2 text-[var(--text)]">
+                <span className="text-[var(--text-muted)]">{i + 1}.</span>
+                {m.pfp && <img src={m.pfp} alt="" className="w-6 h-6 rounded-full" />}
                 @{m.handle}
               </div>
               <div className="font-medium text-[var(--accent)]">${formatMoney(m.amount)}</div>
@@ -190,9 +198,7 @@ function PayPageInner() {
       </div>
 
       <div className="mt-5">
-        <pre className="neu-pressed text-xs text-[var(--text)] p-4 whitespace-pre-wrap">
-          {prompt}
-        </pre>
+        <pre className="neu-pressed text-xs text-[var(--text)] p-4 whitespace-pre-wrap">{prompt}</pre>
       </div>
 
       <p className="mt-6 text-xs text-center text-[var(--text-muted)]">

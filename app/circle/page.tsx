@@ -11,7 +11,7 @@ export default function CirclePage() {
   const [pool, setPool] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [seconds, setSeconds] = useState(10);
 
   async function run() {
     const h = handle.trim().replace('@', '');
@@ -19,7 +19,7 @@ export default function CirclePage() {
       setError('Please enter your X handle');
       return;
     }
-    const p = Number(pool) || 0;
+    const p = Number(String(pool).replace(/,/g, '')) || 0;
     if (p <= 0) {
       setError('Enter a reward pool greater than 0');
       return;
@@ -27,17 +27,13 @@ export default function CirclePage() {
 
     setError('');
     setLoading(true);
-    setProgress(0);
+    setSeconds(10);
 
-    const duration = 8000;
-    const interval = 80;
-    const steps = duration / interval;
-    let step = 0;
-
+    const start = Date.now();
     const timer = setInterval(() => {
-      step++;
-      setProgress(Math.min(100, Math.round((step / steps) * 100)));
-    }, interval);
+      const elapsed = Math.floor((Date.now() - start) / 1000);
+      setSeconds(Math.max(0, 10 - elapsed));
+    }, 200);
 
     try {
       const res = await fetch('/api/analyze', {
@@ -45,23 +41,22 @@ export default function CirclePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ handle: h, count, pool: p }),
       });
-
       const data = await res.json();
 
+      // Ensure at least ~10s feel
+      const remaining = 10000 - (Date.now() - start);
+      if (remaining > 0) await new Promise((r) => setTimeout(r, remaining));
+
       clearInterval(timer);
-      setProgress(100);
 
       if (!res.ok || data.error) {
         router.push(`/circle/error?msg=${encodeURIComponent(data.error || 'Request failed')}`);
         return;
       }
 
-      // Store in session for the pay page
       sessionStorage.setItem('circleResult', JSON.stringify(data));
-      setTimeout(() => {
-        router.push('/circle/pay');
-      }, 300);
-    } catch (err) {
+      router.push('/circle/pay');
+    } catch {
       clearInterval(timer);
       router.push('/circle/error?msg=' + encodeURIComponent('Network error'));
     }
@@ -91,7 +86,7 @@ export default function CirclePage() {
                 if (error) setError('');
               }}
               placeholder="erthxn"
-              className={`neu-input w-full px-4 py-3.5 text-sm ${error && !handle ? 'ring-2 ring-red-500' : ''}`}
+              className="neu-input w-full px-4 py-3.5 text-sm"
             />
           </div>
 
@@ -132,30 +127,24 @@ export default function CirclePage() {
           </button>
         </div>
       ) : (
-        <div className="mt-10 flex flex-col items-center">
+        <div className="mt-16 flex flex-col items-center">
           <div className="relative">
-            <Logo className="w-28 h-28" />
-            <div className="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col gap-2">
-              <div className="h-1.5 w-14 bg-[#0D5CFF] rounded-full animate-[bar_1.4s_ease-in-out_infinite]" />
-              <div className="h-1.5 w-9 bg-[#0D5CFF] rounded-full animate-[bar_1.4s_ease-in-out_infinite_0.35s]" />
+            <Logo className="w-32 h-32" />
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2.5">
+              <div className="h-2 w-16 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite]" />
+              <div className="h-2 w-10 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite_0.4s]" />
             </div>
           </div>
-          <p className="mt-8 text-sm font-medium text-[var(--text)]">Reading @{handle.replace('@','')}</p>
-          <p className="mt-1 text-xs text-[var(--text-muted)]">Analyzing interactions…</p>
-          <div className="mt-6 w-56 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-dark)' }}>
-            <div
-              className="h-full bg-[var(--accent)] transition-all duration-75"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <p className="mt-2 text-xs text-[var(--text-muted)]">{progress}%</p>
+          <p className="mt-10 text-lg font-medium text-[var(--text)]">Reading @{handle.replace('@','')}</p>
+          <p className="mt-3 text-4xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
+          <p className="mt-1 text-xs text-[var(--text-muted)]">seconds remaining</p>
         </div>
       )}
 
       <style jsx>{`
-        @keyframes bar {
-          0%, 100% { transform: translateX(0); opacity: 0.5; }
-          50% { transform: translateX(10px); opacity: 1; }
+        @keyframes motion {
+          0%, 100% { transform: translateX(0); opacity: 0.55; }
+          50% { transform: translateX(14px); opacity: 1; }
         }
       `}</style>
     </div>
