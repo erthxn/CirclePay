@@ -8,39 +8,71 @@ export default function CirclePage() {
   const router = useRouter();
   const [handle, setHandle] = useState('');
   const [count, setCount] = useState(5);
-  const [pool, setPool] = useState(20);
+  const [pool, setPool] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   async function run() {
-    if (!handle.trim()) {
+    const h = handle.trim().replace('@', '');
+    if (!h) {
       setError('Please enter your X handle');
       return;
     }
+    const p = Number(pool) || 0;
+    if (p <= 0) {
+      setError('Enter a reward pool greater than 0');
+      return;
+    }
+
     setError('');
     setLoading(true);
     setProgress(0);
 
-    const duration = 30000;
-    const interval = 100;
+    const duration = 8000;
+    const interval = 80;
     const steps = duration / interval;
     let step = 0;
 
     const timer = setInterval(() => {
       step++;
       setProgress(Math.min(100, Math.round((step / steps) * 100)));
-      if (step >= steps) {
-        clearInterval(timer);
-        // Pass data via query for the results page
-        const params = new URLSearchParams({
-          handle: handle.trim(),
-          count: String(count),
-          pool: String(pool),
-        });
-        router.push(`/circle/pay?${params.toString()}`);
-      }
     }, interval);
+
+    try {
+      const res = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ handle: h, count, pool: p }),
+      });
+
+      const data = await res.json();
+
+      clearInterval(timer);
+      setProgress(100);
+
+      if (!res.ok || data.error) {
+        router.push(`/circle/error?msg=${encodeURIComponent(data.error || 'Request failed')}`);
+        return;
+      }
+
+      // Store in session for the pay page
+      sessionStorage.setItem('circleResult', JSON.stringify(data));
+      setTimeout(() => {
+        router.push('/circle/pay');
+      }, 300);
+    } catch (err) {
+      clearInterval(timer);
+      router.push('/circle/error?msg=' + encodeURIComponent('Network error'));
+    }
+  }
+
+  function formatPool(v: string) {
+    const cleaned = v.replace(/[^0-9.]/g, '');
+    if (!cleaned) return '';
+    const [int, dec] = cleaned.split('.');
+    const withCommas = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
   return (
@@ -59,9 +91,8 @@ export default function CirclePage() {
                 if (error) setError('');
               }}
               placeholder="erthxn"
-              className={`neu-input w-full px-4 py-3.5 text-sm ${error ? 'ring-2 ring-red-500' : ''}`}
+              className={`neu-input w-full px-4 py-3.5 text-sm ${error && !handle ? 'ring-2 ring-red-500' : ''}`}
             />
-            {error && <p className="text-xs text-red-600 mt-1.5">{error}</p>}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -80,13 +111,17 @@ export default function CirclePage() {
             <div>
               <label className="text-xs text-[var(--text-muted)] block mb-1.5">Reward pool ($)</label>
               <input
-                type="number"
+                type="text"
+                inputMode="decimal"
                 value={pool}
-                onChange={(e) => setPool(Number(e.target.value) || 0)}
+                onChange={(e) => setPool(formatPool(e.target.value))}
+                placeholder="20"
                 className="neu-input w-full px-4 py-3.5 text-sm"
               />
             </div>
           </div>
+
+          {error && <p className="text-xs text-red-600">{error}</p>}
 
           <button
             onClick={run}
@@ -97,20 +132,19 @@ export default function CirclePage() {
           </button>
         </div>
       ) : (
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-10 flex flex-col items-center">
           <div className="relative">
-            <Logo className="w-24 h-24" />
-            <div className="absolute inset-0 flex items-center justify-end pr-2">
-              <div className="flex flex-col gap-1.5">
-                <div className="h-2 w-12 bg-[#0D5CFF] rounded-full animate-[slide_1.2s_ease-in-out_infinite]" />
-                <div className="h-2 w-8 bg-[#0D5CFF] rounded-full animate-[slide_1.2s_ease-in-out_infinite_0.3s]" />
-              </div>
+            <Logo className="w-28 h-28" />
+            <div className="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+              <div className="h-1.5 w-14 bg-[#0D5CFF] rounded-full animate-[bar_1.4s_ease-in-out_infinite]" />
+              <div className="h-1.5 w-9 bg-[#0D5CFF] rounded-full animate-[bar_1.4s_ease-in-out_infinite_0.35s]" />
             </div>
           </div>
-          <p className="mt-6 text-sm text-[var(--text-muted)]">Reading @{handle}…</p>
-          <div className="mt-4 w-48 h-1.5 bg-[var(--bg-dark)] rounded-full overflow-hidden">
+          <p className="mt-8 text-sm font-medium text-[var(--text)]">Reading @{handle.replace('@','')}</p>
+          <p className="mt-1 text-xs text-[var(--text-muted)]">Analyzing interactions…</p>
+          <div className="mt-6 w-56 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-dark)' }}>
             <div
-              className="h-full bg-[var(--accent)] transition-all duration-100"
+              className="h-full bg-[var(--accent)] transition-all duration-75"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -119,9 +153,9 @@ export default function CirclePage() {
       )}
 
       <style jsx>{`
-        @keyframes slide {
-          0%, 100% { transform: translateX(0); opacity: 0.6; }
-          50% { transform: translateX(8px); opacity: 1; }
+        @keyframes bar {
+          0%, 100% { transform: translateX(0); opacity: 0.5; }
+          50% { transform: translateX(10px); opacity: 1; }
         }
       `}</style>
     </div>

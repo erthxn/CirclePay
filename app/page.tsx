@@ -7,9 +7,6 @@ export default function Home() {
         <div className="text-[5.2rem] sm:text-[7.5rem] font-black tracking-tighter leading-none text-[var(--accent)] select-none">
           CIRCLE
         </div>
-        <p className="absolute inset-0 flex items-center justify-center text-sm sm:text-base font-semibold tracking-wider text-white/90 pointer-events-none drop-shadow-sm">
-          PAY
-        </p>
       </div>
 
       <p className="text-lg sm:text-xl font-medium text-[var(--text)] mb-10 max-w-xs">
