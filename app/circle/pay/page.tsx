@@ -34,9 +34,9 @@ const MARKS: { id: Mark; name: string }[] = [
 
 const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; letter: string; size: number }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#1a1d24' }}>
+    <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#1a1d24', flexShrink: 0 }}>
       {src ? (
-        <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} crossOrigin="anonymous" />
+        <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} crossOrigin="anonymous" />
       ) : (
         <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: size * 0.34, fontWeight: 700 }}>
           {letter}
@@ -48,7 +48,7 @@ const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; lette
 
 function PayBoxMark() {
   return (
-    <svg viewBox="0 0 400 400" width="40" height="40" style={{ opacity: 0.9, transform: 'rotate(-16deg)' }}>
+    <svg viewBox="0 0 400 400" width="36" height="36" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -60,7 +60,7 @@ function PayBoxMark() {
 
 function SolanaMark() {
   return (
-    <svg viewBox="0 0 400 400" width="40" height="40" style={{ opacity: 0.95, transform: 'rotate(-16deg)' }}>
+    <svg viewBox="0 0 400 400" width="36" height="36" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
       <defs>
         <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
           <stop offset="0" stopColor="#14F195" />
@@ -223,19 +223,45 @@ function PayPageInner() {
                   const x = 50 + Math.cos(a) * r;
                   const y = 50 + Math.sin(a) * r;
                   return (
-                    <div key={m.handle} style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+                    <div
+                      key={m.handle}
+                      style={{
+                        position: 'absolute',
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        width: tile,
+                        transform: 'translate(-50%, -50%)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        zIndex: 20,
+                      }}
+                    >
                       <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
-                      <div style={{ marginTop: 4, fontSize: 9, fontWeight: 600, padding: '2px 7px', borderRadius: 999, background: '#fff', color: '#111', textAlign: 'center', lineHeight: 1.2 }}>
+                      <div
+                        style={{
+                          marginTop: 4,
+                          fontSize: 9,
+                          fontWeight: 600,
+                          padding: '2px 0',
+                          width: tile + 10,
+                          borderRadius: 999,
+                          background: '#fff',
+                          color: '#111',
+                          textAlign: 'center',
+                          lineHeight: 1.2,
+                        }}
+                      >
                         ${m.amount.toFixed(2)}
                       </div>
                     </div>
                   );
                 })}
 
-                <div style={{ position: 'absolute', bottom: 10, right: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30 }}>
+                <div style={{ position: 'absolute', bottom: 12, right: 14, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30, lineHeight: 1 }}>
                   {mark === 'paybox' && <PayBoxMark />}
                   {mark === 'solana' && <SolanaMark />}
-                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.2, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 2 }}>
+                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 0 }}>
                     <div>@{handle}</div>
                     <div style={{ opacity: 0.85 }}>circlepay.fun</div>
                   </div>
