@@ -4,54 +4,59 @@ import { useEffect, useState } from 'react';
 
 type Status = { ok: boolean; detail: string; loading?: boolean };
 
+const ENDPOINTS = [
+  { key: 'profile', path: '/api/profile/erthxn', label: 'Profile' },
+  { key: 'mentions', path: '/api/mentions/erthxn?limit=1', label: 'Mentions / Post reader' },
+  { key: 'timeline', path: '/api/timeline/erthxn?limit=1', label: 'Timeline' },
+  { key: 'status', path: '/api/status/2109170862972899567', label: 'Single tweet' },
+  { key: 'trends', path: '/api/trends', label: 'Trends' },
+  { key: 'search', path: '/api/search/users?q=elon', label: 'User search' },
+  { key: 'followers', path: '/api/followers/erthxn?limit=1', label: 'Followers' },
+  { key: 'following', path: '/api/following/erthxn?limit=1', label: 'Following' },
+  { key: 'media', path: '/api/media/erthxn?limit=1', label: 'Media' },
+  { key: 'about', path: '/api/about/erthxn', label: 'About' },
+  { key: 'health', path: '/api/health', label: 'Health' },
+];
+
 export default function StatusPage() {
-  const [statuses, setStatuses] = useState<Record<string, Status>>({
-    blitz: { ok: false, detail: '', loading: true },
-    sorsa: { ok: false, detail: '', loading: true },
-    rapid: { ok: false, detail: '', loading: true },
-    apify: { ok: false, detail: '', loading: true },
-    x: { ok: false, detail: '', loading: true },
-  });
+  const [statuses, setStatuses] = useState<Record<string, Status>>({});
 
   useEffect(() => {
-    const sources = ['blitz', 'sorsa', 'rapid', 'apify', 'x'];
-    sources.forEach(async (source) => {
+    const initial: Record<string, Status> = {};
+    ENDPOINTS.forEach((e) => {
+      initial[e.key] = { ok: false, detail: '', loading: true };
+    });
+    setStatuses(initial);
+
+    ENDPOINTS.forEach(async (ep) => {
       try {
-        const res = await fetch(`/api/status-check?source=${source}`);
+        const res = await fetch(`/api/blitz-status?path=${encodeURIComponent(ep.path)}`);
         const data = await res.json();
         setStatuses((prev) => ({
           ...prev,
-          [source]: { ok: !!data.ok, detail: data.detail || '', loading: false },
+          [ep.key]: { ok: !!data.ok, detail: data.detail || '', loading: false },
         }));
       } catch {
         setStatuses((prev) => ({
           ...prev,
-          [source]: { ok: false, detail: 'Error', loading: false },
+          [ep.key]: { ok: false, detail: 'Error', loading: false },
         }));
       }
     });
   }, []);
 
-  const items = [
-    { key: 'blitz', label: 'Blitz' },
-    { key: 'sorsa', label: 'Sorsa' },
-    { key: 'rapid', label: 'RapidAPI' },
-    { key: 'apify', label: 'Apify' },
-    { key: 'x', label: 'X Official' },
-  ];
-
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Status</h1>
-      <p className="text-sm text-[var(--text-muted)] mb-8">Live checks for data sources</p>
+      <p className="text-sm text-[var(--text-muted)] mb-8">Blitz endpoint health</p>
 
       <div className="space-y-3">
-        {items.map((item) => {
-          const s = statuses[item.key];
+        {ENDPOINTS.map((ep) => {
+          const s = statuses[ep.key] || { ok: false, detail: '', loading: true };
           return (
-            <div key={item.key} className="neu-raised p-4 flex items-center justify-between">
+            <div key={ep.key} className="neu-raised p-4 flex items-center justify-between">
               <div>
-                <div className="font-medium text-[var(--text)]">{item.label}</div>
+                <div className="font-medium text-[var(--text)]">{ep.label}</div>
                 <div className="text-xs text-[var(--text-muted)] mt-0.5">
                   {s.loading ? 'Checking…' : s.detail || (s.ok ? 'OK' : 'Fail')}
                 </div>
@@ -71,6 +76,10 @@ export default function StatusPage() {
           );
         })}
       </div>
+
+      <p className="mt-8 text-center text-xs text-[var(--text-muted)]">
+        <a href="/c/status" className="text-[var(--accent)]">Source status →</a>
+      </p>
     </div>
   );
 }

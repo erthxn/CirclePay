@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { logEvent } from '@/lib/logger';
 
 const BLITZ_BASE = 'https://blitzyxsc-plus.blitzx.workers.dev';
 const SORSA_BASE = 'https://api.sorsa.io/v3';
@@ -13,8 +12,23 @@ function higherResPfp(url?: string) {
     .replace('_200x200', '_400x400');
 }
 
+async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const res = await fetch(url, { ...opts, signal: ctrl.signal });
+    return res;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 async function tryBlitz(handle: string) {
-  const res = await fetch(`${BLITZ_BASE}/api/mentions/${encodeURIComponent(handle)}?limit=40`);
+  const res = await fetchWithTimeout(
+    `${BLITZ_BASE}/api/mentions/${encodeURIComponent(handle)}?limit=25`,
+    {},
+    10000
+  );
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
   if (!data.ok) throw new Error(data.error || 'Blitz failed');
@@ -42,11 +56,15 @@ async function trySorsa(handle: string) {
 
   const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
-  const res = await fetch(`${SORSA_BASE}/mentions`, {
-    method: 'POST',
-    headers: { ApiKey: apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query: handle, order: 'latest', since_date: since }),
-  });
+  const res = await fetchWithTimeout(
+    `${SORSA_BASE}/mentions`,
+    {
+      method: 'POST',
+      headers: { ApiKey: apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: handle, order: 'latest', since_date: since }),
+    },
+    15000
+  );
 
   if (!res.ok) throw new Error(await res.text());
   return res.json();
@@ -59,12 +77,16 @@ async function tryRapid(handle: string) {
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
   const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
 
-  const res = await fetch(url, {
-    headers: {
-      'X-RapidAPI-Key': key,
-      'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
+  const res = await fetchWithTimeout(
+    url,
+    {
+      headers: {
+        'X-RapidAPI-Key': key,
+        'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
+      },
     },
-  });
+    12000
+  );
 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
@@ -92,15 +114,19 @@ async function tryApify(handle: string) {
   const actor = 'khadinakbar~x-tweet-scraper';
   const url = `https://api.apify.com/v2/actors/${actor}/run-sync-get-dataset-items?token=${token}`;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      searchTerms: [`@${handle} -from:${handle}`],
-      maxItems: 30,
-      queryType: 'Latest',
-    }),
-  });
+  const res = await fetchWithTimeout(
+    url,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        searchTerms: [`@${handle} -from:${handle}`],
+        maxItems: 30,
+        queryType: 'Latest',
+      }),
+    },
+    20000
+  );
 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const items = await res.json();
@@ -127,14 +153,22 @@ async function tryX(handle: string) {
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
   const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
 
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${bearer}` } });
+  const res = await fetchWithTimeout(
+    url,
+    { headers: { Authorization: `Bearer ${bearer}` } },
+    12000
+  );
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
 
 async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
   try {
-    const res = await fetch(`${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`);
+    const res = await fetchWithTimeout(
+      `${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`,
+      {},
+      8000
+    );
     if (res.status === 429) return { exists: null, rateLimited: true };
     if (res.status === 404) return { exists: false };
     if (!res.ok) return { exists: null };
@@ -144,7 +178,6 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
       return { exists: null, rateLimited: true };
     }
     if (!data.ok || !data.data) {
-      // Only treat explicit missing as not found
       if (data.error === 'NOT_FOUND' || data.message?.toLowerCase().includes('not found')) {
         return { exists: false };
       }
@@ -169,17 +202,17 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
     const pfp = higherResPfp(t.user?.profile_image_url || t.user?.profile_image_url_https);
 
     let base = 1;
-    if (t.is_quote_status) base = 4;
-    else if (t.is_reply) base = 1.2;
-    else base = 2.5;
+    if (t.is_quote_status) base = 3.5;
+    else if (t.is_reply) base = 1.5;
+    else base = 2.2;
 
     const metrics = t.public_metrics || t;
     const eng =
-      (metrics.like_count || metrics.likes_count || 0) * 0.4 +
-      (metrics.reply_count || 0) * 1.2 +
-      (metrics.quote_count || 0) * 2.5;
+      (metrics.like_count || metrics.likes_count || 0) * 0.35 +
+      (metrics.reply_count || 0) * 1.0 +
+      (metrics.quote_count || 0) * 2.0;
 
-    const add = base * (1 + Math.log1p(eng));
+    const add = base * (1 + Math.log1p(eng) * 0.6);
 
     if (!map[user]) map[user] = { score: 0, count: 0, pfp };
     map[user].score += add;
@@ -190,29 +223,24 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
   return Object.entries(map)
     .map(([handle, v]) => {
       let final = v.score;
-      if (v.count === 1) final *= 0.45;
-      if (v.count >= 3) final *= 1.4;
-      if (v.count >= 5) final *= 1.25;
-      return { handle, score: Math.round(final), count: v.count, pfp: v.pfp };
+      if (v.count === 1) final *= 0.55;
+      if (v.count >= 2) final *= 1.15;
+      if (v.count >= 4) final *= 1.2;
+      if (v.count >= 6) final *= 1.15;
+      return { handle, score: Math.round(final * 10) / 10, count: v.count, pfp: v.pfp };
     })
     .sort((a, b) => b.score - a.score);
 }
 
 export async function POST(req: NextRequest) {
-  const started = Date.now();
   try {
     const { handle, count = 5, pool = 20 } = await req.json();
     const h = String(handle || '').replace('@', '').trim();
-    if (!h) {
-      logEvent({ type: 'analyze', handle: '', status: 'error', detail: 'Handle required', durationMs: Date.now() - started });
-      return NextResponse.json({ error: 'Handle required' }, { status: 400 });
-    }
+    if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
 
     const profile = await fetchSelfPfp(h);
 
-    // Only short-circuit on clear not-found. Rate limits and unknown = continue.
     if (profile.exists === false) {
-      logEvent({ type: 'analyze', handle: h, status: 'not_found', detail: 'Account not found', durationMs: Date.now() - started });
       return NextResponse.json({
         members: [],
         prompt: '',
@@ -255,14 +283,12 @@ export async function POST(req: NextRequest) {
           source = s.name;
           break;
         }
-      } catch (e: any) {
-        logEvent({ type: 'source', handle: h, status: 'fail', detail: `${s.name}: ${e.message}`, durationMs: 0 });
+      } catch {
+        // continue to next source
       }
     }
 
     if (!tweets.length) {
-      const reason = profile.rateLimited ? 'Sources rate-limited or quiet' : 'No recent interactions';
-      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: reason, durationMs: Date.now() - started });
       return NextResponse.json({
         members: [],
         prompt: '',
@@ -280,7 +306,6 @@ export async function POST(req: NextRequest) {
     const ranked = scoreInteractions(tweets, h).slice(0, Math.min(25, Number(count) || 5));
 
     if (!ranked.length) {
-      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: 'No rankable interactions', durationMs: Date.now() - started });
       return NextResponse.json({
         members: [],
         prompt: '',
@@ -319,14 +344,6 @@ export async function POST(req: NextRequest) {
     const lines = members.map((m) => `- @${m.handle}: $${m.amount.toFixed(2)}`).join('\n');
     const prompt = `Send rewards via PayBox to these X handles:\n${lines}\n\nTotal: $${poolNum.toFixed(2)}. Execute the transfers.`;
 
-    logEvent({
-      type: 'analyze',
-      handle: h,
-      status: 'ok',
-      detail: `${members.length} members via ${source}`,
-      durationMs: Date.now() - started,
-    });
-
     return NextResponse.json({
       members,
       prompt,
@@ -337,7 +354,6 @@ export async function POST(req: NextRequest) {
       emptyReason: null,
     });
   } catch (e: any) {
-    logEvent({ type: 'analyze', handle: '', status: 'error', detail: e.message || 'Unknown', durationMs: Date.now() - started });
     return NextResponse.json({ error: e.message || 'Unknown error' }, { status: 500 });
   }
 }
