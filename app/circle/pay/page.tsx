@@ -14,7 +14,7 @@ const STEEL = 'linear-gradient(145deg, #e8eaed 0%, #9ca3af 45%, #4b5563 100%)';
 
 function PayBoxMark() {
   return (
-    <svg viewBox="0 0 400 400" width="52" height="52" style={{ opacity: 0.85, transform: 'rotate(-16deg)' }}>
+    <svg viewBox="0 0 400 400" width="52" height="52" style={{ opacity: 0.9, transform: 'rotate(-16deg)' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -160,7 +160,7 @@ function PayPageInner() {
                 })}
 
                 <div style={{ position: 'absolute', bottom: 8, right: 10, display: 'flex', alignItems: 'flex-end', gap: 6, zIndex: 30 }}>
-                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
+                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)' }}>
                     <div>@{handle}</div>
                     <div style={{ opacity: 0.85 }}>circlepay.fun</div>
                   </div>
