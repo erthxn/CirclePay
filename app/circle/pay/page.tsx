@@ -233,12 +233,12 @@ function PayPageInner() {
                 })}
 
                 <div style={{ position: 'absolute', bottom: 10, right: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30 }}>
-                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.2, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginBottom: 2 }}>
+                  {mark === 'paybox' && <PayBoxMark />}
+                  {mark === 'solana' && <SolanaMark />}
+                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.2, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 2 }}>
                     <div>@{handle}</div>
                     <div style={{ opacity: 0.85 }}>circlepay.fun</div>
                   </div>
-                  {mark === 'paybox' && <PayBoxMark />}
-                  {mark === 'solana' && <SolanaMark />}
                 </div>
               </div>
 
