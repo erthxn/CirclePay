@@ -3,49 +3,28 @@
 import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 
-type Style =
-  | 'orbit' | 'network' | 'petal' | 'glow' | 'hud'
-  | 'rings' | 'spokes' | 'constellation' | 'grid' | 'wave'
-  | 'stack' | 'halo' | 'compass' | 'dots' | 'frame'
-  | 'minimal' | 'bold' | 'soft' | 'dual' | 'pulse';
+type Style = 'orbit' | 'spokes' | 'constellation' | 'halo' | 'frame' | 'bold' | 'radar';
 
 const STYLES: { id: Style; label: string }[] = [
   { id: 'orbit', label: 'Orbit' },
-  { id: 'network', label: 'Network' },
-  { id: 'petal', label: 'Petal' },
-  { id: 'glow', label: 'Glow' },
-  { id: 'hud', label: 'HUD' },
-  { id: 'rings', label: 'Rings' },
   { id: 'spokes', label: 'Spokes' },
   { id: 'constellation', label: 'Constellation' },
-  { id: 'grid', label: 'Grid' },
-  { id: 'wave', label: 'Wave' },
-  { id: 'stack', label: 'Stack' },
   { id: 'halo', label: 'Halo' },
-  { id: 'compass', label: 'Compass' },
-  { id: 'dots', label: 'Dots' },
   { id: 'frame', label: 'Frame' },
-  { id: 'minimal', label: 'Minimal' },
   { id: 'bold', label: 'Bold' },
-  { id: 'soft', label: 'Soft' },
-  { id: 'dual', label: 'Dual' },
-  { id: 'pulse', label: 'Pulse' },
+  { id: 'radar', label: 'Radar' },
 ];
 
 const COLORS = [
   { name: 'Blue', hex: '#0D5CFF' },
-  { name: 'Cosmic', hex: '#23212C' },
-  { name: 'Violet', hex: '#36255C' },
-  { name: 'Cyan', hex: '#22d3ee' },
-  { name: 'Ink', hex: '#111111' },
+  { name: 'Black', hex: '#111111' },
 ];
 
-const BGS = [
-  { name: 'Light', value: 'linear-gradient(145deg, #eef2f8, #f7f8fa)' },
-  { name: 'Cream', value: '#f4f1eb' },
-  { name: 'Gray', value: '#e8eaed' },
-  { name: 'Dark', value: '#1a1d24' },
-  { name: 'Black', value: '#000000' },
+type BgId = 'paybox' | 'solana' | 'plain';
+const BGS: { id: BgId; name: string }[] = [
+  { id: 'paybox', name: 'PayBox' },
+  { id: 'solana', name: 'Solana' },
+  { id: 'plain', name: 'Plain' },
 ];
 
 const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -74,11 +53,41 @@ function Tile({ letter, hue, size = 48 }: { letter: string; hue: number; size?: 
   );
 }
 
+function PayBoxMark() {
+  return (
+    <svg viewBox="0 0 400 400" className="w-[70%] h-[70%] opacity-[0.08]">
+      <g fill="currentColor">
+        <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
+        <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
+        <path d="M112 255 Q190 225 200 212 Q210 225 290 255 L205 305 Q200 308 195 305 Z" />
+      </g>
+    </svg>
+  );
+}
+
+function SolanaMark() {
+  return (
+    <svg viewBox="0 0 400 400" className="w-[70%] h-[70%] opacity-[0.12]">
+      <defs>
+        <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
+          <stop offset="0" stopColor="#14F195" />
+          <stop offset="1" stopColor="#9945FF" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#solg)">
+        <path d="M130 92 H312 Q324 92 316 102 L272 144 Q268 148 262 148 H88 Q76 148 84 138 L124 96 Q127 92 130 92 Z" />
+        <path d="M88 172 H262 Q268 172 272 176 L316 218 Q324 228 312 228 H130 Q127 228 124 224 L84 182 Q76 172 88 172 Z" />
+        <path d="M130 252 H312 Q324 252 316 262 L272 304 Q268 308 262 308 H88 Q76 308 84 298 L124 256 Q127 252 130 252 Z" />
+      </g>
+    </svg>
+  );
+}
+
 export default function TestCardPage() {
   const [style, setStyle] = useState<Style>('orbit');
   const [count, setCount] = useState(5);
   const [accent, setAccent] = useState('#0D5CFF');
-  const [bg, setBg] = useState(BGS[0].value);
+  const [bg, setBg] = useState<BgId>('paybox');
   const [hidden, setHidden] = useState<Style[]>([]);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -106,6 +115,12 @@ export default function TestCardPage() {
       if (next) setStyle(next.id);
     }
   }
+
+  const isDark = bg === 'plain' ? false : false;
+  const cardBg =
+    bg === 'plain'
+      ? '#f4f6f8'
+      : 'linear-gradient(160deg, #f7f8fa 0%, #e8eef8 55%, #f4f1eb 100%)';
 
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
@@ -159,7 +174,7 @@ export default function TestCardPage() {
             onClick={() => setAccent(c.hex)}
             title={c.name}
             className="w-6 h-6 rounded-full border-2"
-            style={{ background: c.hex, borderColor: accent === c.hex ? '#fff' : 'transparent' }}
+            style={{ background: c.hex, borderColor: accent === c.hex ? '#0D5CFF' : 'transparent' }}
           />
         ))}
       </div>
@@ -168,10 +183,10 @@ export default function TestCardPage() {
         <p className="text-[11px] text-[var(--text-muted)]">Bg</p>
         {BGS.map((b) => (
           <button
-            key={b.name}
-            onClick={() => setBg(b.value)}
+            key={b.id}
+            onClick={() => setBg(b.id)}
             className={`px-2.5 py-1 text-[11px] rounded-full ${
-              bg === b.value ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
+              bg === b.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
             }`}
           >
             {b.name}
@@ -182,9 +197,14 @@ export default function TestCardPage() {
       <div
         ref={ref}
         className="mx-auto w-full max-w-sm aspect-square relative overflow-hidden rounded-[28px]"
-        style={{ background: bg }}
+        style={{ background: cardBg, color: accent }}
       >
-        <Card style={style} members={members} accent={accent} dark={bg === '#000000' || bg === '#1a1d24'} />
+        {bg !== 'plain' && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {bg === 'paybox' ? <PayBoxMark /> : <SolanaMark />}
+          </div>
+        )}
+        <Card style={style} members={members} accent={accent} dark={isDark} />
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
@@ -205,12 +225,13 @@ export default function TestCardPage() {
 
 type M = { letter: string; amount: number; hue: number };
 
-function Card({ style, members, accent, dark }: { style: Style; members: M[]; accent: string; dark: boolean }) {
+function Card({ style, members, accent }: { style: Style; members: M[]; accent: string; dark: boolean }) {
   const n = members.length;
   const tileSize = n <= 5 ? 52 : n <= 7 ? 46 : n <= 10 ? 40 : 34;
+  const line = accent;
 
   const brand = (
-    <div className={`absolute bottom-3 right-3 text-right text-[10px] leading-tight ${dark ? 'text-white' : 'text-[#1a1d24]'}`}>
+    <div className="absolute bottom-3 right-3 text-right text-[10px] leading-tight text-[#1a1d24]">
       <div>@erthxn</div>
       <div className="opacity-70">circlepay.fun</div>
     </div>
@@ -244,99 +265,17 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
   if (style === 'orbit') {
     return (
       <>
-        <div className="absolute inset-[18%] rounded-full border" style={{ borderColor: accent + '55' }} />
-        <div className="absolute inset-[30%] rounded-full border" style={{ borderColor: accent + '33' }} />
+        <div className="absolute inset-[18%] rounded-full border" style={{ borderColor: line, opacity: 0.35 }} />
+        <div className="absolute inset-[30%] rounded-full border" style={{ borderColor: line, opacity: 0.2 }} />
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
           {members.map((_, i) => {
             if (i === n - 1) return null;
             const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
             const a2 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
             const r = 34;
-            return <path key={i} d={`M ${50+Math.cos(a1)*r} ${50+Math.sin(a1)*r} Q 50 50 ${50+Math.cos(a2)*r} ${50+Math.sin(a2)*r}`} fill="none" stroke={accent} strokeOpacity="0.35" strokeWidth="0.5" />;
+            return <path key={i} d={`M ${50+Math.cos(a1)*r} ${50+Math.sin(a1)*r} Q 50 50 ${50+Math.cos(a2)*r} ${50+Math.sin(a2)*r}`} fill="none" stroke={line} strokeOpacity="0.45" strokeWidth="0.6" />;
           })}
         </svg>
-        {center}
-        {nodes(34)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'network') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          {members.map((_, i) => {
-            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-            return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*32} y2={50+Math.sin(a)*32} stroke={accent} strokeWidth="0.5" />;
-          })}
-        </svg>
-        {center}
-        {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'petal') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          {members.map((_, i) => {
-            const s = (i / n) * Math.PI * 2 - Math.PI / 2;
-            const e = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
-            const r = 40;
-            return (
-              <path
-                key={i}
-                d={`M 50 50 L ${50+Math.cos(s)*r} ${50+Math.sin(s)*r} A ${r} ${r} 0 0 1 ${50+Math.cos(e)*r} ${50+Math.sin(e)*r} Z`}
-                fill={accent}
-                fillOpacity={0.15 + (i % 3) * 0.15}
-                stroke={accent}
-                strokeWidth="0.4"
-              />
-            );
-          })}
-        </svg>
-        {center}
-        {nodes(28)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'glow') {
-    return (
-      <>
-        <div className="absolute inset-[12%] rounded-full border-[5px]" style={{ borderColor: accent, boxShadow: `0 0 22px ${accent}` }} />
-        {center}
-        {nodes(34)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'hud') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke={accent} strokeWidth="0.4" />
-          <circle cx="50" cy="50" r="32" fill="none" stroke={accent} strokeWidth="0.3" strokeDasharray="1.4 1.4" />
-          <circle cx="50" cy="50" r="16" fill="none" stroke={accent} strokeWidth="0.3" />
-        </svg>
-        {center}
-        {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'rings') {
-    return (
-      <>
-        {[18, 28, 38].map((r) => (
-          <div key={r} className="absolute rounded-full border" style={{ inset: `${50 - r}%`, borderColor: accent + '40' }} />
-        ))}
         {center}
         {nodes(34)}
         {brand}
@@ -350,7 +289,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
           {members.map((_, i) => {
             const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-            return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*40} y2={50+Math.sin(a)*40} stroke={accent} strokeWidth="1.2" />;
+            return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*40} y2={50+Math.sin(a)*40} stroke={line} strokeWidth="1.1" />;
           })}
         </svg>
         {center}
@@ -368,7 +307,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
             const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
             const a2 = ((i + 2) / n) * Math.PI * 2 - Math.PI / 2;
             const r = 34;
-            return <line key={i} x1={50+Math.cos(a1)*r} y1={50+Math.sin(a1)*r} x2={50+Math.cos(a2)*r} y2={50+Math.sin(a2)*r} stroke={accent} strokeWidth="0.35" />;
+            return <line key={i} x1={50+Math.cos(a1)*r} y1={50+Math.sin(a1)*r} x2={50+Math.cos(a2)*r} y2={50+Math.sin(a2)*r} stroke={line} strokeWidth="0.55" />;
           })}
         </svg>
         {center}
@@ -378,87 +317,10 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     );
   }
 
-  if (style === 'grid') {
-    const cols = Math.ceil(Math.sqrt(n));
-    return (
-      <>
-        <div className="absolute inset-6 grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
-          {members.map((m) => (
-            <div key={m.letter} className="flex flex-col items-center justify-center">
-              <Tile letter={m.letter} hue={m.hue} size={tileSize - 4} />
-              {price(m.amount)}
-            </div>
-          ))}
-        </div>
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'wave') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          <path d="M 0 55 Q 25 40 50 55 T 100 55" fill="none" stroke={accent} strokeWidth="0.6" />
-          <path d="M 0 65 Q 25 50 50 65 T 100 65" fill="none" stroke={accent} strokeWidth="0.4" opacity="0.5" />
-        </svg>
-        {center}
-        {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'stack') {
-    return (
-      <>
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
-          {members.slice(0, Math.min(n, 8)).map((m) => (
-            <div key={m.letter} className="flex items-center gap-2">
-              <Tile letter={m.letter} hue={m.hue} size={32} />
-              {price(m.amount)}
-            </div>
-          ))}
-        </div>
-        {brand}
-      </>
-    );
-  }
-
   if (style === 'halo') {
     return (
       <>
-        <div className="absolute inset-[16%] rounded-full" style={{ background: `radial-gradient(circle, ${accent}33, transparent 70%)` }} />
-        {center}
-        {nodes(34)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'compass') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          <polygon points="50,12 54,46 50,50 46,46" fill={accent} />
-          <polygon points="50,88 54,54 50,50 46,54" fill={accent} opacity="0.5" />
-          <circle cx="50" cy="50" r="36" fill="none" stroke={accent} strokeWidth="0.4" />
-        </svg>
-        {center}
-        {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'dots') {
-    return (
-      <>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          {Array.from({ length: 40 }).map((_, i) => (
-            <circle key={i} cx={10 + (i * 17) % 80} cy={10 + (i * 23) % 80} r="0.6" fill={accent} opacity="0.4" />
-          ))}
-        </svg>
+        <div className="absolute inset-[14%] rounded-full" style={{ background: `radial-gradient(circle, ${accent}28, transparent 68%)` }} />
         {center}
         {nodes(34)}
         {brand}
@@ -469,19 +331,9 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
   if (style === 'frame') {
     return (
       <>
-        <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: accent }} />
+        <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: line }} />
         {center}
         {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'minimal') {
-    return (
-      <>
-        {center}
-        {nodes(36)}
         {brand}
       </>
     );
@@ -501,56 +353,38 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     );
   }
 
-  if (style === 'soft') {
-    return (
-      <>
-        <div className="absolute inset-4 rounded-3xl" style={{ background: accent + '18' }} />
-        {center}
-        {nodes(32)}
-        {brand}
-      </>
-    );
-  }
-
-  if (style === 'dual') {
-    // 5 looks best: 2 inner, 3 outer. Otherwise split evenly.
-    const innerN = n === 5 ? 2 : Math.floor(n / 2);
-    const outer = members.slice(innerN);
-    const inner = members.slice(0, innerN);
-    return (
-      <>
-        <div className="absolute inset-[22%] rounded-full border" style={{ borderColor: accent + '40' }} />
-        <div className="absolute inset-[36%] rounded-full border" style={{ borderColor: accent + '25' }} />
-        {center}
-        {inner.map((m, i) => {
-          const a = (i / Math.max(inner.length, 1)) * Math.PI * 2 - Math.PI / 2;
-          return (
-            <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*20}%`, top: `${50+Math.sin(a)*20}%`, transform: 'translate(-50%,-50%)' }}>
-              <Tile letter={m.letter} hue={m.hue} size={tileSize - 6} />
-              {price(m.amount)}
-            </div>
-          );
-        })}
-        {outer.map((m, i) => {
-          const a = (i / Math.max(outer.length, 1)) * Math.PI * 2 - Math.PI / 2 + 0.4;
-          return (
-            <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*36}%`, top: `${50+Math.sin(a)*36}%`, transform: 'translate(-50%,-50%)' }}>
-              <Tile letter={m.letter} hue={m.hue} size={tileSize} />
-              {price(m.amount)}
-            </div>
-          );
-        })}
-        {brand}
-      </>
-    );
-  }
-
+  // radar — cleaner dual ring
+  const innerN = n === 5 ? 2 : Math.max(2, Math.floor(n / 3));
+  const outer = members.slice(innerN);
+  const inner = members.slice(0, innerN);
   return (
     <>
-      <div className="absolute inset-[22%] rounded-full border-2 animate-pulse" style={{ borderColor: accent }} />
-      <div className="absolute inset-[34%] rounded-full border animate-pulse" style={{ borderColor: accent, animationDelay: '0.3s' }} />
+      <div className="absolute inset-[20%] rounded-full border" style={{ borderColor: line, opacity: 0.35 }} />
+      <div className="absolute inset-[34%] rounded-full border" style={{ borderColor: line, opacity: 0.22 }} />
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="32" fill="none" stroke={line} strokeOpacity="0.15" strokeWidth="0.4" />
+        <line x1="50" y1="18" x2="50" y2="82" stroke={line} strokeOpacity="0.12" strokeWidth="0.3" />
+        <line x1="18" y1="50" x2="82" y2="50" stroke={line} strokeOpacity="0.12" strokeWidth="0.3" />
+      </svg>
       {center}
-      {nodes(36)}
+      {inner.map((m, i) => {
+        const a = (i / Math.max(inner.length, 1)) * Math.PI * 2 - Math.PI / 2;
+        return (
+          <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*20}%`, top: `${50+Math.sin(a)*20}%`, transform: 'translate(-50%,-50%)' }}>
+            <Tile letter={m.letter} hue={m.hue} size={tileSize - 8} />
+            {price(m.amount)}
+          </div>
+        );
+      })}
+      {outer.map((m, i) => {
+        const a = (i / Math.max(outer.length, 1)) * Math.PI * 2 - Math.PI / 2 + 0.5;
+        return (
+          <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*36}%`, top: `${50+Math.sin(a)*36}%`, transform: 'translate(-50%,-50%)' }}>
+            <Tile letter={m.letter} hue={m.hue} size={tileSize} />
+            {price(m.amount)}
+          </div>
+        );
+      })}
       {brand}
     </>
   );
