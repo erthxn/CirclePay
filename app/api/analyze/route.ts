@@ -132,18 +132,30 @@ async function tryX(handle: string) {
   return res.json();
 }
 
-async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean }> {
+async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
   try {
     const res = await fetch(`${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`);
-    if (!res.ok) return { exists: false };
+    if (res.status === 429) return { exists: null, rateLimited: true };
+    if (res.status === 404) return { exists: false };
+    if (!res.ok) return { exists: null };
+
     const data = await res.json();
-    if (!data.ok || !data.data) return { exists: false };
+    if (data.statusCode === 429 || data.error === 'RATE_LIMITED') {
+      return { exists: null, rateLimited: true };
+    }
+    if (!data.ok || !data.data) {
+      // Only treat explicit missing as not found
+      if (data.error === 'NOT_FOUND' || data.message?.toLowerCase().includes('not found')) {
+        return { exists: false };
+      }
+      return { exists: null };
+    }
     return {
       pfp: higherResPfp(data.data?.avatarUrl || data.data?.profile_image_url),
       exists: true,
     };
   } catch {
-    return { exists: false };
+    return { exists: null };
   }
 }
 
@@ -197,7 +209,9 @@ export async function POST(req: NextRequest) {
     }
 
     const profile = await fetchSelfPfp(h);
-    if (!profile.exists) {
+
+    // Only short-circuit on clear not-found. Rate limits and unknown = continue.
+    if (profile.exists === false) {
       logEvent({ type: 'analyze', handle: h, status: 'not_found', detail: 'Account not found', durationMs: Date.now() - started });
       return NextResponse.json({
         members: [],
@@ -247,7 +261,8 @@ export async function POST(req: NextRequest) {
     }
 
     if (!tweets.length) {
-      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: 'No recent interactions', durationMs: Date.now() - started });
+      const reason = profile.rateLimited ? 'Sources rate-limited or quiet' : 'No recent interactions';
+      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: reason, durationMs: Date.now() - started });
       return NextResponse.json({
         members: [],
         prompt: '',
@@ -256,7 +271,9 @@ export async function POST(req: NextRequest) {
         source: 'none',
         centerPfp: profile.pfp,
         emptyReason: 'no_activity',
-        message: 'No recent interactions in the last 7 days',
+        message: profile.rateLimited
+          ? 'Could not read recent activity (sources busy). Try again in a minute.'
+          : 'No recent interactions in the last 7 days',
       });
     }
 

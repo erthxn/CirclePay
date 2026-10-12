@@ -14,14 +14,20 @@ type Log = {
 export default function LogsPage() {
   const [logs, setLogs] = useState<Log[]>([]);
   const [loading, setLoading] = useState(true);
+  const [note, setNote] = useState('');
 
   async function load() {
     try {
       const res = await fetch('/api/logs');
       const data = await res.json();
       setLogs(data.logs || []);
+      if ((data.logs || []).length === 0) {
+        setNote('Logs are per-server instance and clear on cold start. Run an analysis, then refresh immediately.');
+      } else {
+        setNote('');
+      }
     } catch {
-      // ignore
+      setNote('Could not load logs');
     } finally {
       setLoading(false);
     }
@@ -35,19 +41,23 @@ export default function LogsPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[var(--text)]">Logs</h1>
-          <p className="text-sm text-[var(--text-muted)]">Recent analyze attempts (ephemeral per instance)</p>
+          <p className="text-sm text-[var(--text-muted)]">Recent analyze attempts</p>
         </div>
         <button onClick={load} className="text-xs font-medium text-[var(--accent)]">Refresh</button>
       </div>
+
+      {note && (
+        <div className="mb-4 neu-raised p-3 text-xs text-[var(--text-muted)]">{note}</div>
+      )}
 
       {loading && <p className="text-sm text-[var(--text-muted)]">Loading…</p>}
 
       {!loading && logs.length === 0 && (
         <div className="neu-raised p-6 text-center text-sm text-[var(--text-muted)]">
-          No logs yet. Run an analysis to see entries here.
+          No logs on this instance yet.
         </div>
       )}
 
