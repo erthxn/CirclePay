@@ -5,6 +5,19 @@ import { useRouter } from 'next/navigation';
 
 const LETTERS = ['C', 'I', 'R', 'C', 'L', 'E'];
 
+function stepsFor(handle: string) {
+  const u = `@${handle}`;
+  return [
+    'connecting to computer…',
+    `checking ${u}…`,
+    `searching ${u} latest posts…`,
+    `reading replies and mentions…`,
+    `scoring interactions…`,
+    `ranking circle…`,
+    'preparing prompt…',
+  ];
+}
+
 export default function CirclePage() {
   const router = useRouter();
   const [handle, setHandle] = useState('');
@@ -12,8 +25,7 @@ export default function CirclePage() {
   const [pool, setPool] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
-  const [phase, setPhase] = useState('Connecting…');
+  const [thought, setThought] = useState('');
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -34,24 +46,22 @@ export default function CirclePage() {
       return;
     }
 
+    const steps = stepsFor(h);
     setError('');
     setLoading(true);
-    setElapsed(0);
-    setPhase('Connecting…');
+    setThought(steps[0]);
 
     const start = Date.now();
     timerRef.current = setInterval(() => {
-      const sec = Math.floor((Date.now() - start) / 1000);
-      setElapsed(sec);
-      if (sec < 2) setPhase('Connecting…');
-      else if (sec < 5) setPhase('Reading interactions…');
-      else if (sec < 8) setPhase('Ranking circle…');
-      else setPhase('Finalizing…');
+      const sec = (Date.now() - start) / 1000;
+      // ~1.7s per step, covers ~12s through the sequence
+      const idx = Math.min(steps.length - 1, Math.floor(sec / 1.7));
+      setThought(steps[idx]);
     }, 400);
 
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 25000);
+      const timeout = setTimeout(() => controller.abort(), 28000);
 
       const res = await fetch('/api/analyze', {
         method: 'POST',
@@ -63,13 +73,15 @@ export default function CirclePage() {
 
       const data = await res.json();
 
-      const minDisplay = 2800;
+      // natural pace: at least ~11s, don't rush a fast response
+      const minDisplay = 11000;
       const took = Date.now() - start;
       if (took < minDisplay) {
         await new Promise((r) => setTimeout(r, minDisplay - took));
       }
 
       if (timerRef.current) clearInterval(timerRef.current);
+      setThought('done');
 
       if (!res.ok || data.error) {
         router.push(`/circle/error?msg=${encodeURIComponent(data.error || 'Request failed')}`);
@@ -166,11 +178,9 @@ export default function CirclePage() {
             ))}
           </div>
 
-          <p className="mt-10 text-lg font-semibold text-[var(--text)]">
-            Reading @{handle.replace('@', '')}
+          <p className="mt-10 text-sm text-[var(--text-muted)] text-center max-w-[16rem] leading-relaxed">
+            {thought}
           </p>
-          <p className="mt-1.5 text-sm text-[var(--text-muted)]">{phase}</p>
-          <p className="mt-4 text-xs tabular-nums text-[var(--text-muted)]">{elapsed}s</p>
         </div>
       )}
     </div>
