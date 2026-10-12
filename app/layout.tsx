@@ -3,21 +3,32 @@ import './globals.css';
 import Logo from '@/components/Logo';
 import Menu from '@/components/Menu';
 
+const OG_IMAGE = 'https://circlepay-theta.vercel.app/opengraph-image';
+
 export const metadata: Metadata = {
   title: 'CirclePay',
   description: 'Reward your X circle with crypto via PayBox',
-  metadataBase: new URL('https://circlepay.fun'),
+  metadataBase: new URL('https://circlepay-theta.vercel.app'),
   openGraph: {
     title: 'CirclePay',
     description: 'Reward your X circle with crypto via PayBox',
     url: 'https://circlepay.fun',
     siteName: 'CirclePay',
     type: 'website',
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'CirclePay',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'CirclePay',
     description: 'Reward your X circle with crypto via PayBox',
+    images: [OG_IMAGE],
   },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover',
 };
