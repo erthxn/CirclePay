@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 
 type Status = { ok: boolean; detail: string; loading?: boolean };
 
+const PASS = 'oluwaseun07';
+
 export default function SourceStatusPage() {
+  const [authed, setAuthed] = useState(false);
+  const [pw, setPw] = useState('');
+  const [err, setErr] = useState('');
   const [statuses, setStatuses] = useState<Record<string, Status>>({
     blitz: { ok: false, detail: '', loading: true },
     sorsa: { ok: false, detail: '', loading: true },
@@ -14,6 +19,13 @@ export default function SourceStatusPage() {
   });
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('cp_admin') === '1') {
+      setAuthed(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!authed) return;
     const sources = ['blitz', 'sorsa', 'rapid', 'apify', 'x'];
     sources.forEach(async (source) => {
       try {
@@ -30,7 +42,42 @@ export default function SourceStatusPage() {
         }));
       }
     });
-  }, []);
+  }, [authed]);
+
+  function unlock() {
+    if (pw === PASS) {
+      sessionStorage.setItem('cp_admin', '1');
+      setAuthed(true);
+      setErr('');
+    } else {
+      setErr('Wrong password');
+    }
+  }
+
+  if (!authed) {
+    return (
+      <div className="max-w-sm mx-auto px-5 py-16">
+        <h1 className="text-xl font-bold mb-2 text-[var(--text)]">Admin</h1>
+        <p className="text-sm text-[var(--text-muted)] mb-6">Source status is restricted.</p>
+        <input
+          type="password"
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && unlock()}
+          placeholder="Password"
+          className="neu-input w-full px-4 py-3 text-sm mb-3"
+        />
+        {err && <p className="text-xs text-red-600 mb-2">{err}</p>}
+        <button
+          onClick={unlock}
+          className="w-full py-3 text-sm font-medium text-white rounded-full"
+          style={{ background: 'var(--accent)' }}
+        >
+          Unlock
+        </button>
+      </div>
+    );
+  }
 
   const items = [
     { key: 'blitz', label: 'Blitz' },
@@ -43,7 +90,7 @@ export default function SourceStatusPage() {
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Source status</h1>
-      <p className="text-sm text-[var(--text-muted)] mb-8">Fallback data sources</p>
+      <p className="text-sm text-[var(--text-muted)] mb-8">Admin only</p>
 
       <div className="space-y-3">
         {items.map((item) => {
@@ -71,10 +118,6 @@ export default function SourceStatusPage() {
           );
         })}
       </div>
-
-      <p className="mt-8 text-center text-xs text-[var(--text-muted)]">
-        <a href="/status" className="text-[var(--accent)]">← Blitz endpoints</a>
-      </p>
     </div>
   );
 }

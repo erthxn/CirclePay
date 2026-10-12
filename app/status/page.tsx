@@ -6,7 +6,7 @@ type Status = { ok: boolean; detail: string; loading?: boolean };
 
 const ENDPOINTS = [
   { key: 'profile', path: '/api/profile/erthxn', label: 'Profile' },
-  { key: 'mentions', path: '/api/mentions/erthxn?limit=1', label: 'Mentions / Post reader' },
+  { key: 'mentions', path: '/api/mentions/erthxn?limit=1', label: 'Post reader' },
   { key: 'timeline', path: '/api/timeline/erthxn?limit=1', label: 'Timeline' },
   { key: 'status', path: '/api/status/2109170862972899567', label: 'Single tweet' },
   { key: 'trends', path: '/api/trends', label: 'Trends' },
@@ -48,7 +48,7 @@ export default function StatusPage() {
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Status</h1>
-      <p className="text-sm text-[var(--text-muted)] mb-8">Blitz endpoint health</p>
+      <p className="text-sm text-[var(--text-muted)] mb-8">Endpoint health</p>
 
       <div className="space-y-3">
         {ENDPOINTS.map((ep) => {
@@ -76,10 +76,6 @@ export default function StatusPage() {
           );
         })}
       </div>
-
-      <p className="mt-8 text-center text-xs text-[var(--text-muted)]">
-        <a href="/c/status" className="text-[var(--accent)]">Source status →</a>
-      </p>
     </div>
   );
 }

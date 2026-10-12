@@ -10,17 +10,64 @@ type Member = {
   pfp?: string;
 };
 
+type StyleId = 'glass' | 'skeuo' | 'brutal' | 'minimal' | 'hand' | 'flat';
+
+const STYLES: { id: StyleId; label: string }[] = [
+  { id: 'glass', label: 'Glass' },
+  { id: 'skeuo', label: 'Skeuo' },
+  { id: 'brutal', label: 'Brutal' },
+  { id: 'minimal', label: 'Minimal' },
+  { id: 'hand', label: 'Hand' },
+  { id: 'flat', label: 'Flat' },
+];
+
+function hexToRgba(hex: string, a: number) {
+  const h = hex.replace('#', '');
+  const n = parseInt(h.length === 3 ? h.split('').map((c) => c + c).join('') : h, 16);
+  const r = (n >> 16) & 255;
+  const g = (n >> 8) & 255;
+  const b = n & 255;
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function cardBg(style: StyleId, accent: string, solid: boolean) {
+  if (solid) return hexToRgba(accent, 0.18);
+  switch (style) {
+    case 'glass':
+      return `linear-gradient(145deg, ${hexToRgba(accent, 0.22)}, ${hexToRgba(accent, 0.08)})`;
+    case 'skeuo':
+      return `linear-gradient(160deg, ${hexToRgba(accent, 0.16)}, #f4f6f8)`;
+    case 'brutal':
+      return accent;
+    case 'minimal':
+      return '#f7f7f8';
+    case 'hand':
+      return '#fff8ee';
+    case 'flat':
+    default:
+      return hexToRgba(accent, 0.14);
+  }
+}
+
 function PayPageInner() {
   const [data, setData] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [accent, setAccent] = useState('#0D5CFF');
   const [bgStyle, setBgStyle] = useState<'gradient' | 'solid'>('gradient');
+  const [styleId, setStyleId] = useState<StyleId>('glass');
   const visualRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const raw = sessionStorage.getItem('circleResult');
     if (raw) setData(JSON.parse(raw));
+    const saved = localStorage.getItem('cp_style') as StyleId | null;
+    if (saved) setStyleId(saved);
   }, []);
+
+  function setStyle(id: StyleId) {
+    setStyleId(id);
+    localStorage.setItem('cp_style', id);
+  }
 
   if (!data) {
     return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result. Analyze again.</div>;
@@ -37,12 +84,20 @@ function PayPageInner() {
   async function download() {
     if (!visualRef.current) return;
     try {
-      const canvas = await html2canvas(visualRef.current, {
+      const node = visualRef.current;
+      const bg = cardBg(styleId, accent, bgStyle === 'solid');
+      const prev = node.style.background;
+      node.style.background = bg;
+
+      const canvas = await html2canvas(node, {
         backgroundColor: null,
         scale: 3,
         useCORS: true,
         logging: false,
       });
+
+      node.style.background = prev;
+
       const link = document.createElement('a');
       link.download = `circlepay-${handle}.png`;
       link.href = canvas.toDataURL('image/png');
@@ -65,34 +120,55 @@ function PayPageInner() {
   ];
 
   const isEmpty = emptyReason || !members.length;
+  const cardClass = {
+    glass: 'backdrop-blur-md border border-white/40',
+    skeuo: 'shadow-[8px_8px_16px_rgba(0,0,0,0.08),-6px_-6px_12px_rgba(255,255,255,0.8)]',
+    brutal: 'border-4 border-black rounded-none',
+    minimal: 'border border-zinc-200',
+    hand: 'border-2 border-dashed border-zinc-400',
+    flat: 'border border-transparent',
+  }[styleId];
 
   return (
     <div className="max-w-5xl mx-auto px-5 py-6 lg:py-10">
       <div className="lg:grid lg:grid-cols-2 lg:gap-10 lg:items-start">
         <div>
           <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Your circle</h1>
-          <p className="text-sm text-[var(--text-muted)] mb-6">@{handle} · ${formatMoney(Number(pool))} pool</p>
+          <p className="text-sm text-[var(--text-muted)] mb-4">@{handle} · ${formatMoney(Number(pool))} pool</p>
+
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {STYLES.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setStyle(s.id)}
+                className={`px-2.5 py-1 text-[11px] rounded-full ${
+                  styleId === s.id
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'neu-btn text-[var(--text-muted)]'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
 
           {isEmpty ? (
             <div className="neu-raised p-8 text-center">
-              <div className="text-4xl mb-3">·</div>
               <p className="font-medium text-[var(--text)]">
                 {emptyReason === 'not_found' ? 'Account not found' : 'No recent activity'}
               </p>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                {message || 'No interactions in the last 7 days. Try another handle or check back later.'}
+                {message || 'No interactions in the last 7 days.'}
               </p>
             </div>
           ) : (
             <>
               <div
                 ref={visualRef}
-                className="relative mx-auto w-full max-w-sm aspect-square rounded-3xl overflow-hidden shadow-lg"
+                className={`relative mx-auto w-full max-w-sm aspect-square overflow-hidden ${cardClass}`}
                 style={{
-                  background:
-                    bgStyle === 'gradient'
-                      ? `linear-gradient(145deg, ${accent}18 0%, ${accent}40 50%, #fff 100%)`
-                      : accent + '28',
+                  background: cardBg(styleId, accent, bgStyle === 'solid'),
+                  borderRadius: styleId === 'brutal' ? 0 : 28,
                 }}
               >
                 <div className="absolute inset-[20%] rounded-full border border-white/40" />
@@ -164,7 +240,7 @@ function PayPageInner() {
                   );
                 })}
 
-                <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center text-[11px] text-white font-medium leading-tight drop-shadow">
+                <div className="absolute bottom-4 right-4 flex flex-col items-end text-[11px] text-white font-medium leading-tight drop-shadow">
                   <span>@{handle}</span>
                   <span className="opacity-80 text-[10px]">circlepay.fun</span>
                 </div>

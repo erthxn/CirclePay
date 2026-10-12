@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Logo from '@/components/Logo';
 
 export default function CirclePage() {
   const router = useRouter();
@@ -36,16 +35,16 @@ export default function CirclePage() {
     setError('');
     setLoading(true);
     setElapsed(0);
-    setPhase('Connecting to sources…');
+    setPhase('Connecting…');
 
     const start = Date.now();
     timerRef.current = setInterval(() => {
       const sec = Math.floor((Date.now() - start) / 1000);
       setElapsed(sec);
-      if (sec < 2) setPhase('Connecting to sources…');
-      else if (sec < 5) setPhase('Reading recent interactions…');
-      else if (sec < 8) setPhase('Ranking your circle…');
-      else setPhase('Finalizing results…');
+      if (sec < 2) setPhase('Connecting…');
+      else if (sec < 5) setPhase('Reading interactions…');
+      else if (sec < 8) setPhase('Ranking circle…');
+      else setPhase('Finalizing…');
     }, 400);
 
     try {
@@ -62,7 +61,7 @@ export default function CirclePage() {
 
       const data = await res.json();
 
-      const minDisplay = 3000;
+      const minDisplay = 2800;
       const took = Date.now() - start;
       if (took < minDisplay) {
         await new Promise((r) => setTimeout(r, minDisplay - took));
@@ -95,7 +94,7 @@ export default function CirclePage() {
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
-  const estimate = Math.max(0, 10 - elapsed);
+  const estimate = Math.max(0, 8 - elapsed);
 
   return (
     <div className="max-w-md mx-auto px-5 py-6 min-h-[60vh]">
@@ -154,13 +153,11 @@ export default function CirclePage() {
           </button>
         </div>
       ) : (
-        <div className="mt-8 flex flex-col items-center justify-center min-h-[50vh]">
-          <div className="relative">
-            <Logo className="w-40 h-40" />
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-              <div className="h-3 w-24 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite]" />
-              <div className="h-3 w-16 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite_0.4s]" />
-            </div>
+        <div className="mt-16 flex flex-col items-center justify-center min-h-[40vh]">
+          <div className="relative w-24 h-24">
+            <div className="absolute inset-0 rounded-full border-4 border-[var(--accent)]/20" />
+            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[var(--accent)] animate-spin" />
+            <div className="absolute inset-3 rounded-full border-2 border-[var(--accent)]/30" />
           </div>
 
           <p className="mt-10 text-xl font-semibold text-[var(--text)]">Reading @{handle.replace('@', '')}</p>
@@ -175,13 +172,6 @@ export default function CirclePage() {
           </p>
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes motion {
-          0%, 100% { transform: translateX(0); opacity: 0.45; }
-          50% { transform: translateX(20px); opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }
