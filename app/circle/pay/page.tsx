@@ -10,20 +10,23 @@ type Member = {
   pfp?: string;
 };
 
-function hexToRgba(hex: string, a: number) {
-  const h = hex.replace('#', '');
-  const n = parseInt(h.length === 3 ? h.split('').map((c) => c + c).join('') : h, 16);
-  const r = (n >> 16) & 255;
-  const g = (n >> 8) & 255;
-  const b = n & 255;
-  return `rgba(${r},${g},${b},${a})`;
+const STEEL = 'linear-gradient(145deg, #e8eaed 0%, #9ca3af 45%, #4b5563 100%)';
+
+function PayBoxMark() {
+  return (
+    <svg viewBox="0 0 400 400" width="52" height="52" style={{ opacity: 0.85, transform: 'rotate(-16deg)' }}>
+      <g fill="#ffffff">
+        <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
+        <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
+        <path d="M112 255 Q190 225 200 212 Q210 225 290 255 L205 305 Q200 308 195 305 Z" />
+      </g>
+    </svg>
+  );
 }
 
 function PayPageInner() {
   const [data, setData] = useState<any>(null);
   const [copied, setCopied] = useState(false);
-  const [accent, setAccent] = useState('#0D5CFF');
-  const [bgStyle, setBgStyle] = useState<'gradient' | 'solid'>('gradient');
   const visualRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,23 +49,19 @@ function PayPageInner() {
   async function download() {
     if (!visualRef.current) return;
     try {
-      const node = visualRef.current;
-      const bg =
-        bgStyle === 'solid'
-          ? hexToRgba(accent, 0.18)
-          : `linear-gradient(145deg, ${hexToRgba(accent, 0.2)}, #f7f8fa)`;
-      const prev = node.style.background;
-      node.style.background = bg;
-
-      const canvas = await html2canvas(node, {
-        backgroundColor: null,
+      const canvas = await html2canvas(visualRef.current, {
+        backgroundColor: '#9ca3af',
         scale: 3,
         useCORS: true,
         logging: false,
+        onclone: (doc) => {
+          const el = doc.querySelector('[data-card]') as HTMLElement | null;
+          if (el) {
+            el.style.background = STEEL;
+            el.style.borderRadius = '28px';
+          }
+        },
       });
-
-      node.style.background = prev;
-
       const link = document.createElement('a');
       link.download = `circlepay-${handle}.png`;
       link.href = canvas.toDataURL('image/png');
@@ -76,19 +75,10 @@ function PayPageInner() {
     return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  const colors = [
-    { hex: '#0D5CFF', name: 'Blue' },
-    { hex: '#23212C', name: 'Cosmic' },
-    { hex: '#36255C', name: 'Violet' },
-    { hex: '#D2C3F6', name: 'Lavender' },
-    { hex: '#F1FEC8', name: 'Vanilla' },
-  ];
-
   const isEmpty = emptyReason || !members.length;
-  const cardBg =
-    bgStyle === 'solid'
-      ? hexToRgba(accent, 0.18)
-      : `linear-gradient(145deg, ${hexToRgba(accent, 0.2)}, #f7f8fa)`;
+  const n = members.length;
+  const tile = n <= 5 ? 50 : n <= 7 ? 44 : n <= 10 ? 38 : 32;
+  const r = n <= 5 ? 30 : 32;
 
   return (
     <div className="max-w-5xl mx-auto px-5 py-6 lg:py-10">
@@ -110,99 +100,72 @@ function PayPageInner() {
             <>
               <div
                 ref={visualRef}
+                data-card
                 className="relative mx-auto w-full max-w-sm aspect-square overflow-hidden"
-                style={{ background: cardBg, borderRadius: 28 }}
+                style={{ background: STEEL, borderRadius: 28 }}
               >
-                <div className="absolute inset-[20%] rounded-full border border-white/40" />
-                <div className="absolute inset-[32%] rounded-full border border-white/25" />
+                <div style={{ position: 'absolute', inset: '20%', borderRadius: '50%', border: '1px solid #fff', opacity: 0.5 }} />
+                <div style={{ position: 'absolute', inset: '32%', borderRadius: '50%', border: '1px solid #fff', opacity: 0.3 }} />
 
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
+                <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} viewBox="0 0 100 100">
                   {members.map((_: any, i: number) => {
-                    if (i === members.length - 1) return null;
-                    const a1 = (i / members.length) * Math.PI * 2 - Math.PI / 2;
-                    const a2 = ((i + 1) / members.length) * Math.PI * 2 - Math.PI / 2;
-                    const r = 34;
-                    const x1 = 50 + Math.cos(a1) * r;
-                    const y1 = 50 + Math.sin(a1) * r;
-                    const x2 = 50 + Math.cos(a2) * r;
-                    const y2 = 50 + Math.sin(a2) * r;
+                    if (i === n - 1) return null;
+                    const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
+                    const a2 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
                     return (
                       <path
                         key={i}
-                        d={`M ${x1} ${y1} Q 50 50 ${x2} ${y2}`}
+                        d={`M ${50 + Math.cos(a1) * r} ${50 + Math.sin(a1) * r} Q 50 50 ${50 + Math.cos(a2) * r} ${50 + Math.sin(a2) * r}`}
                         fill="none"
-                        stroke="rgba(255,255,255,0.55)"
-                        strokeWidth="0.5"
+                        stroke="#fff"
+                        strokeOpacity="0.55"
+                        strokeWidth="0.7"
                       />
                     );
                   })}
                 </svg>
 
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[4.5rem] h-[4.5rem] rounded-full border-[3px] border-white shadow-md overflow-hidden bg-white">
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                  <div style={{ width: n <= 5 ? 60 : 54, height: n <= 5 ? 60 : 54, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#0D5CFF' }}>
                     {centerPfp ? (
-                      <img src={centerPfp} alt="" className="w-full h-full object-cover" crossOrigin="anonymous" />
+                      <img src={centerPfp} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} crossOrigin="anonymous" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-white text-sm font-bold" style={{ background: accent }}>
-                        @{handle.slice(0, 2).toUpperCase()}
+                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700 }}>
+                        @{handle.slice(0, 1).toUpperCase()}
                       </div>
                     )}
                   </div>
                 </div>
 
                 {members.map((m: Member, i: number) => {
-                  const angle = (i / Math.max(members.length, 1)) * Math.PI * 2 - Math.PI / 2;
-                  const r = 34;
-                  const x = 50 + Math.cos(angle) * r;
-                  const y = 50 + Math.sin(angle) * r;
+                  const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+                  const x = 50 + Math.cos(a) * r;
+                  const y = 50 + Math.sin(a) * r;
                   return (
-                    <div
-                      key={i}
-                      className="absolute flex flex-col items-center"
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: 'translate(-50%, -50%)',
-                        zIndex: 2,
-                      }}
-                    >
-                      <div className="w-11 h-11 rounded-full border-2 border-white shadow overflow-hidden bg-white">
+                    <div key={i} style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+                      <div style={{ width: tile, height: tile, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#0D5CFF' }}>
                         {m.pfp ? (
-                          <img src={m.pfp} alt="" className="w-full h-full object-cover" crossOrigin="anonymous" />
+                          <img src={m.pfp} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} crossOrigin="anonymous" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[9px] font-bold text-white" style={{ background: accent }}>
-                            {m.handle.slice(0, 2).toUpperCase()}
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 10, fontWeight: 700 }}>
+                            {m.handle.slice(0, 1).toUpperCase()}
                           </div>
                         )}
                       </div>
-                      <div className="mt-1 text-[10px] font-semibold text-white bg-black/70 px-2 py-0.5 rounded-full whitespace-nowrap shadow">
+                      <div style={{ marginTop: 2, fontSize: 9, fontWeight: 600, padding: '1px 6px', borderRadius: 999, background: '#fff', color: '#111', whiteSpace: 'nowrap' }}>
                         ${m.amount.toFixed(2)}
                       </div>
                     </div>
                   );
                 })}
 
-                <div className="absolute bottom-4 right-4 flex flex-col items-end text-[11px] text-white font-medium leading-tight drop-shadow">
-                  <span>@{handle}</span>
-                  <span className="opacity-80 text-[10px]">circlepay.fun</span>
+                <div style={{ position: 'absolute', bottom: 8, right: 10, display: 'flex', alignItems: 'flex-end', gap: 6, zIndex: 30 }}>
+                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
+                    <div>@{handle}</div>
+                    <div style={{ opacity: 0.85 }}>circlepay.fun</div>
+                  </div>
+                  <PayBoxMark />
                 </div>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between">
-                <div className="flex gap-2">
-                  {colors.map((c) => (
-                    <button
-                      key={c.hex}
-                      onClick={() => setAccent(c.hex)}
-                      title={c.name}
-                      className="w-6 h-6 rounded-full border-2 border-white/40"
-                      style={{ background: c.hex }}
-                    />
-                  ))}
-                </div>
-                <button onClick={() => setBgStyle(bgStyle === 'gradient' ? 'solid' : 'gradient')} className="text-xs font-medium text-[var(--accent)]">
-                  {bgStyle === 'gradient' ? 'Solid' : 'Gradient'}
-                </button>
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-3">
