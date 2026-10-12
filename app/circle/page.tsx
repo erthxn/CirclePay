@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/Logo';
 
@@ -11,7 +11,15 @@ export default function CirclePage() {
   const [pool, setPool] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [seconds, setSeconds] = useState(10);
+  const [elapsed, setElapsed] = useState(0);
+  const [phase, setPhase] = useState('Connecting…');
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
 
   async function run() {
     const h = handle.trim().replace('@', '');
@@ -27,26 +35,41 @@ export default function CirclePage() {
 
     setError('');
     setLoading(true);
-    setSeconds(10);
+    setElapsed(0);
+    setPhase('Connecting to sources…');
 
     const start = Date.now();
-    const timer = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - start) / 1000);
-      setSeconds(Math.max(0, 10 - elapsed));
-    }, 200);
+    timerRef.current = setInterval(() => {
+      const sec = Math.floor((Date.now() - start) / 1000);
+      setElapsed(sec);
+      if (sec < 2) setPhase('Connecting to sources…');
+      else if (sec < 5) setPhase('Reading recent interactions…');
+      else if (sec < 8) setPhase('Ranking your circle…');
+      else setPhase('Finalizing results…');
+    }, 400);
 
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 25000);
+
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ handle: h, count, pool: p }),
+        signal: controller.signal,
       });
+      clearTimeout(timeout);
+
       const data = await res.json();
 
-      const remaining = 10000 - (Date.now() - start);
-      if (remaining > 0) await new Promise((r) => setTimeout(r, remaining));
+      // Minimum display so the reading state feels intentional
+      const minDisplay = 3500;
+      const took = Date.now() - start;
+      if (took < minDisplay) {
+        await new Promise((r) => setTimeout(r, minDisplay - took));
+      }
 
-      clearInterval(timer);
+      if (timerRef.current) clearInterval(timerRef.current);
 
       if (!res.ok || data.error) {
         router.push(`/circle/error?msg=${encodeURIComponent(data.error || 'Request failed')}`);
@@ -55,9 +78,13 @@ export default function CirclePage() {
 
       sessionStorage.setItem('circleResult', JSON.stringify(data));
       router.push('/circle/pay');
-    } catch {
-      clearInterval(timer);
-      router.push('/circle/error?msg=' + encodeURIComponent('Network error'));
+    } catch (err: any) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      const msg =
+        err?.name === 'AbortError'
+          ? 'Request timed out — try again'
+          : 'Network error';
+      router.push('/circle/error?msg=' + encodeURIComponent(msg));
     }
   }
 
@@ -68,6 +95,9 @@ export default function CirclePage() {
     const withCommas = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
+
+  // Rough remaining estimate based on typical 6–12s range
+  const estimate = Math.max(0, 10 - elapsed);
 
   return (
     <div className="max-w-md mx-auto px-5 py-6 min-h-[60vh]">
@@ -134,9 +164,17 @@ export default function CirclePage() {
               <div className="h-3 w-16 bg-[#0D5CFF] rounded-full animate-[motion_1.6s_ease-in-out_infinite_0.4s]" />
             </div>
           </div>
-          <p className="mt-12 text-xl font-semibold text-[var(--text)]">Reading @{handle.replace('@','')}</p>
-          <p className="mt-6 text-6xl font-bold tabular-nums text-[var(--accent)]">{seconds}</p>
-          <p className="mt-2 text-sm text-[var(--text-muted)]">seconds remaining</p>
+
+          <p className="mt-10 text-xl font-semibold text-[var(--text)]">Reading @{handle.replace('@', '')}</p>
+          <p className="mt-2 text-sm text-[var(--text-muted)]">{phase}</p>
+
+          <div className="mt-8 flex items-baseline gap-1">
+            <span className="text-5xl font-bold tabular-nums text-[var(--accent)]">{elapsed}</span>
+            <span className="text-sm text-[var(--text-muted)]">s</span>
+          </div>
+          <p className="mt-1 text-xs text-[var(--text-muted)]">
+            {estimate > 0 ? `~${estimate}s remaining` : 'Almost done…'}
+          </p>
         </div>
       )}
 
