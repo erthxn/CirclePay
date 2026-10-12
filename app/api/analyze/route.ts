@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const BLITZ_BASE = 'https://blitzyxsc-plus.blitzx.workers.dev';
 const SORSA_BASE = 'https://api.sorsa.io/v3';
 
 function higherResPfp(url?: string) {
@@ -7,7 +8,31 @@ function higherResPfp(url?: string) {
   return url
     .replace('_normal', '_400x400')
     .replace('_bigger', '_400x400')
-    .replace('_mini', '_400x400');
+    .replace('_mini', '_400x400')
+    .replace('_200x200', '_400x400');
+}
+
+async function tryBlitz(handle: string) {
+  const res = await fetch(`${BLITZ_BASE}/api/mentions/${encodeURIComponent(handle)}?limit=40`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'Blitz failed');
+
+  const tweets = data.data?.tweets || [];
+  return tweets.map((t: any) => ({
+    user: {
+      username: t.author?.screenName || t.author?.username,
+      profile_image_url: t.author?.avatarUrl,
+    },
+    public_metrics: {
+      like_count: t.favoriteCount || t.likeCount || 0,
+      reply_count: t.replyCount || 0,
+      quote_count: t.quoteCount || 0,
+    },
+    is_quote_status: !!t.isQuoteStatus,
+    is_reply: !!t.isReply,
+    text: t.text,
+  }));
 }
 
 async function trySorsa(handle: string) {
@@ -31,7 +56,6 @@ async function tryRapid(handle: string) {
   if (!key) throw new Error('No X_RapidAPI_Key');
 
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
-  // Documented search endpoint from Twitter241 schema
   const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
 
   const res = await fetch(url, {
@@ -108,17 +132,11 @@ async function tryX(handle: string) {
 }
 
 async function fetchSelfPfp(handle: string): Promise<string | undefined> {
-  const bearer = process.env.BEARER_TOKEN;
-  if (!bearer) return undefined;
-
   try {
-    const res = await fetch(
-      `https://api.twitter.com/2/users/by/username/${encodeURIComponent(handle)}?user.fields=profile_image_url`,
-      { headers: { Authorization: `Bearer ${bearer}` } }
-    );
+    const res = await fetch(`${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`);
     if (!res.ok) return undefined;
     const data = await res.json();
-    return higherResPfp(data.data?.profile_image_url);
+    return higherResPfp(data.data?.avatarUrl || data.data?.profile_image_url);
   } catch {
     return undefined;
   }
@@ -170,9 +188,10 @@ export async function POST(req: NextRequest) {
     if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
 
     let tweets: any[] = [];
-    let source = 'sorsa';
+    let source = 'blitz';
 
     const sources = [
+      { name: 'blitz', fn: () => tryBlitz(h) },
       { name: 'sorsa', fn: () => trySorsa(h).then((d) => d.tweets || []) },
       { name: 'rapid', fn: () => tryRapid(h) },
       { name: 'apify', fn: () => tryApify(h) },

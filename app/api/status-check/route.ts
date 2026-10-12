@@ -4,6 +4,17 @@ export async function GET(req: NextRequest) {
   const source = req.nextUrl.searchParams.get('source');
 
   try {
+    if (source === 'blitz') {
+      const r = await fetch('https://blitzyxsc-plus.blitzx.workers.dev/api/profile/erthxn');
+      const ok = r.ok;
+      let detail = ok ? 'Reachable' : `HTTP ${r.status}`;
+      if (ok) {
+        const data = await r.json();
+        if (!data.ok) detail = data.error || 'Not ok';
+      }
+      return NextResponse.json({ ok, detail });
+    }
+
     if (source === 'sorsa') {
       if (!process.env.SORSA_API) return NextResponse.json({ ok: false, detail: 'No key' });
       const r = await fetch('https://api.sorsa.io/v3/mentions', {
