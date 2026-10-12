@@ -8,9 +8,9 @@ const LETTERS = ['C', 'I', 'R', 'C', 'L', 'E'];
 function stepsFor(handle: string) {
   const u = `@${handle}`;
   return [
-    'connecting to computer…',
-    `checking ${u}…`,
-    `searching ${u} latest posts…`,
+    'connecting…',
+    `looking up ${u}…`,
+    `searching recent posts…`,
     `reading replies and mentions…`,
     `scoring interactions…`,
     `ranking circle…`,
@@ -27,6 +27,7 @@ export default function CirclePage() {
   const [loading, setLoading] = useState(false);
   const [thought, setThought] = useState('');
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const lockedRef = useRef(false);
 
   useEffect(() => {
     return () => {
@@ -47,14 +48,15 @@ export default function CirclePage() {
     }
 
     const steps = stepsFor(h);
+    lockedRef.current = false;
     setError('');
     setLoading(true);
     setThought(steps[0]);
 
     const start = Date.now();
     timerRef.current = setInterval(() => {
+      if (lockedRef.current) return;
       const sec = (Date.now() - start) / 1000;
-      // ~1.7s per step, covers ~12s through the sequence
       const idx = Math.min(steps.length - 1, Math.floor(sec / 1.7));
       setThought(steps[idx]);
     }, 400);
@@ -73,15 +75,25 @@ export default function CirclePage() {
 
       const data = await res.json();
 
-      // natural pace: at least ~11s, don't rush a fast response
+      // once we know the outcome, stop the scripted steps and say the truth
+      lockedRef.current = true;
+      if (timerRef.current) clearInterval(timerRef.current);
+
+      if (data.emptyReason === 'not_found') {
+        setThought(`couldn't find @${h}`);
+      } else if (data.emptyReason === 'no_activity') {
+        setThought(`no recent activity on @${h}`);
+      } else if (!res.ok || data.error) {
+        setThought('something went wrong');
+      } else {
+        setThought('preparing prompt…');
+      }
+
       const minDisplay = 11000;
       const took = Date.now() - start;
       if (took < minDisplay) {
         await new Promise((r) => setTimeout(r, minDisplay - took));
       }
-
-      if (timerRef.current) clearInterval(timerRef.current);
-      setThought('done');
 
       if (!res.ok || data.error) {
         router.push(`/circle/error?msg=${encodeURIComponent(data.error || 'Request failed')}`);
@@ -91,7 +103,9 @@ export default function CirclePage() {
       sessionStorage.setItem('circleResult', JSON.stringify(data));
       router.push('/circle/pay');
     } catch (err: any) {
+      lockedRef.current = true;
       if (timerRef.current) clearInterval(timerRef.current);
+      setThought('connection issue');
       const msg =
         err?.name === 'AbortError'
           ? 'Request timed out — try again'

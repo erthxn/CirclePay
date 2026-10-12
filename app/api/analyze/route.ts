@@ -202,17 +202,17 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
     const pfp = higherResPfp(t.user?.profile_image_url || t.user?.profile_image_url_https);
 
     let base = 1;
-    if (t.is_quote_status) base = 3.5;
-    else if (t.is_reply) base = 1.5;
-    else base = 2.2;
+    if (t.is_quote_status) base = 2.4;
+    else if (t.is_reply) base = 1.4;
+    else base = 1.8;
 
     const metrics = t.public_metrics || t;
     const eng =
-      (metrics.like_count || metrics.likes_count || 0) * 0.35 +
-      (metrics.reply_count || 0) * 1.0 +
-      (metrics.quote_count || 0) * 2.0;
+      (metrics.like_count || metrics.likes_count || 0) * 0.25 +
+      (metrics.reply_count || 0) * 0.8 +
+      (metrics.quote_count || 0) * 1.4;
 
-    const add = base * (1 + Math.log1p(eng) * 0.6);
+    const add = base * (1 + Math.log1p(eng) * 0.35);
 
     if (!map[user]) map[user] = { score: 0, count: 0, pfp };
     map[user].score += add;
@@ -223,13 +223,55 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
   return Object.entries(map)
     .map(([handle, v]) => {
       let final = v.score;
-      if (v.count === 1) final *= 0.55;
-      if (v.count >= 2) final *= 1.15;
-      if (v.count >= 4) final *= 1.2;
-      if (v.count >= 6) final *= 1.15;
+      if (v.count === 1) final *= 0.85;
+      if (v.count >= 2) final *= 1.05;
+      if (v.count >= 4) final *= 1.08;
       return { handle, score: Math.round(final * 10) / 10, count: v.count, pfp: v.pfp };
     })
     .sort((a, b) => b.score - a.score);
+}
+
+function distribute(ranked: { score: number }[], poolNum: number) {
+  // compress scores so top isn't 70%+
+  const compressed = ranked.map((m) => Math.pow(Math.max(m.score, 0.1), 0.42));
+  const total = compressed.reduce((s, n) => s + n, 0) || 1;
+  let remainingCents = Math.round(poolNum * 100);
+
+  const raw = compressed.map((c) => Math.floor((c / total) * remainingCents));
+
+  // soft cap: no one above ~38% of pool
+  const cap = Math.floor(remainingCents * 0.38);
+  let excess = 0;
+  for (let i = 0; i < raw.length; i++) {
+    if (raw[i] > cap) {
+      excess += raw[i] - cap;
+      raw[i] = cap;
+    }
+  }
+
+  // redistribute excess to the rest, proportionally, respecting cap
+  if (excess > 0) {
+    const open = raw.map((n, i) => (n < cap ? i : -1)).filter((i) => i >= 0);
+    let guard = 0;
+    while (excess > 0 && open.length && guard < 500) {
+      for (const i of open) {
+        if (excess <= 0) break;
+        if (raw[i] < cap) {
+          raw[i] += 1;
+          excess -= 1;
+        }
+      }
+      guard++;
+    }
+  }
+
+  let used = raw.reduce((s, n) => s + n, 0);
+  let leftover = remainingCents - used;
+  for (let i = 0; i < leftover; i++) {
+    raw[i % raw.length] += 1;
+  }
+
+  return raw;
 }
 
 export async function POST(req: NextRequest) {
@@ -284,7 +326,7 @@ export async function POST(req: NextRequest) {
           break;
         }
       } catch {
-        // continue to next source
+        // continue
       }
     }
 
@@ -298,7 +340,7 @@ export async function POST(req: NextRequest) {
         centerPfp: profile.pfp,
         emptyReason: 'no_activity',
         message: profile.rateLimited
-          ? 'Could not read recent activity (sources busy). Try again in a minute.'
+          ? 'Could not read recent activity. Try again in a minute.'
           : 'No recent interactions in the last 7 days',
       });
     }
@@ -318,27 +360,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const total = ranked.reduce((s, m) => s + m.score, 0) || 1;
     const poolNum = Number(pool);
+    const cents = distribute(ranked, poolNum);
 
-    let remainingCents = Math.round(poolNum * 100);
-    const raw = ranked.map((m) => ({
-      ...m,
-      cents: Math.floor((m.score / total) * remainingCents),
-    }));
-    let used = raw.reduce((s, m) => s + m.cents, 0);
-    let leftover = remainingCents - used;
-
-    for (let i = 0; i < leftover; i++) {
-      raw[i % raw.length].cents += 1;
-    }
-
-    const members = raw.map((m) => ({
+    const members = ranked.map((m, i) => ({
       handle: m.handle,
       score: m.score,
       count: m.count,
       pfp: m.pfp,
-      amount: Number((m.cents / 100).toFixed(2)),
+      amount: Number((cents[i] / 100).toFixed(2)),
     }));
 
     const lines = members.map((m) => `- @${m.handle}: $${m.amount.toFixed(2)}`).join('\n');

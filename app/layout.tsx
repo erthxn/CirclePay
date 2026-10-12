@@ -6,6 +6,19 @@ import Menu from '@/components/Menu';
 export const metadata: Metadata = {
   title: 'CirclePay',
   description: 'Reward your X circle with crypto via PayBox',
+  metadataBase: new URL('https://circlepay.fun'),
+  openGraph: {
+    title: 'CirclePay',
+    description: 'Reward your X circle with crypto via PayBox',
+    url: 'https://circlepay.fun',
+    siteName: 'CirclePay',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CirclePay',
+    description: 'Reward your X circle with crypto via PayBox',
+  },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover',
 };
 
