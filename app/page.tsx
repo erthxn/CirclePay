@@ -3,6 +3,12 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-5 text-center">
+      <div className="mb-4">
+        <span className="inline-block px-2.5 py-1 text-[10px] font-semibold tracking-wide rounded-full bg-[var(--accent)] text-white">
+          STEEL CARD LIVE
+        </span>
+      </div>
+
       <div className="relative mb-6">
         <div className="text-[5.2rem] sm:text-[7.5rem] font-black tracking-tighter leading-none text-[var(--accent)] select-none">
           CIRCLE
