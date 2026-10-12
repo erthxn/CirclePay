@@ -62,8 +62,7 @@ export default function CirclePage() {
 
       const data = await res.json();
 
-      // Minimum display so the reading state feels intentional
-      const minDisplay = 3500;
+      const minDisplay = 3000;
       const took = Date.now() - start;
       if (took < minDisplay) {
         await new Promise((r) => setTimeout(r, minDisplay - took));
@@ -96,7 +95,6 @@ export default function CirclePage() {
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
-  // Rough remaining estimate based on typical 6–12s range
   const estimate = Math.max(0, 10 - elapsed);
 
   return (

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logEvent } from '@/lib/logger';
 
 const BLITZ_BASE = 'https://blitzyxsc-plus.blitzx.workers.dev';
 const SORSA_BASE = 'https://api.sorsa.io/v3';
@@ -131,14 +132,18 @@ async function tryX(handle: string) {
   return res.json();
 }
 
-async function fetchSelfPfp(handle: string): Promise<string | undefined> {
+async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean }> {
   try {
     const res = await fetch(`${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`);
-    if (!res.ok) return undefined;
+    if (!res.ok) return { exists: false };
     const data = await res.json();
-    return higherResPfp(data.data?.avatarUrl || data.data?.profile_image_url);
+    if (!data.ok || !data.data) return { exists: false };
+    return {
+      pfp: higherResPfp(data.data?.avatarUrl || data.data?.profile_image_url),
+      exists: true,
+    };
   } catch {
-    return undefined;
+    return { exists: false };
   }
 }
 
@@ -182,10 +187,29 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const started = Date.now();
   try {
     const { handle, count = 5, pool = 20 } = await req.json();
     const h = String(handle || '').replace('@', '').trim();
-    if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
+    if (!h) {
+      logEvent({ type: 'analyze', handle: '', status: 'error', detail: 'Handle required', durationMs: Date.now() - started });
+      return NextResponse.json({ error: 'Handle required' }, { status: 400 });
+    }
+
+    const profile = await fetchSelfPfp(h);
+    if (!profile.exists) {
+      logEvent({ type: 'analyze', handle: h, status: 'not_found', detail: 'Account not found', durationMs: Date.now() - started });
+      return NextResponse.json({
+        members: [],
+        prompt: '',
+        handle: h,
+        pool: Number(pool),
+        source: 'none',
+        centerPfp: null,
+        emptyReason: 'not_found',
+        message: 'Account not found on X',
+      });
+    }
 
     let tweets: any[] = [];
     let source = 'blitz';
@@ -217,21 +241,39 @@ export async function POST(req: NextRequest) {
           source = s.name;
           break;
         }
-      } catch {
-        // try next
+      } catch (e: any) {
+        logEvent({ type: 'source', handle: h, status: 'fail', detail: `${s.name}: ${e.message}`, durationMs: 0 });
       }
     }
 
     if (!tweets.length) {
-      return NextResponse.json({ error: 'All sources failed or returned empty', source: 'none' }, { status: 502 });
+      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: 'No recent interactions', durationMs: Date.now() - started });
+      return NextResponse.json({
+        members: [],
+        prompt: '',
+        handle: h,
+        pool: Number(pool),
+        source: 'none',
+        centerPfp: profile.pfp,
+        emptyReason: 'no_activity',
+        message: 'No recent interactions in the last 7 days',
+      });
     }
-
-    const centerPfp = await fetchSelfPfp(h);
 
     const ranked = scoreInteractions(tweets, h).slice(0, Math.min(25, Number(count) || 5));
 
     if (!ranked.length) {
-      return NextResponse.json({ members: [], prompt: '', message: 'No recent interactions', source, centerPfp });
+      logEvent({ type: 'analyze', handle: h, status: 'empty', detail: 'No rankable interactions', durationMs: Date.now() - started });
+      return NextResponse.json({
+        members: [],
+        prompt: '',
+        handle: h,
+        pool: Number(pool),
+        source,
+        centerPfp: profile.pfp,
+        emptyReason: 'no_activity',
+        message: 'No recent interactions in the last 7 days',
+      });
     }
 
     const total = ranked.reduce((s, m) => s + m.score, 0) || 1;
@@ -260,8 +302,25 @@ export async function POST(req: NextRequest) {
     const lines = members.map((m) => `- @${m.handle}: $${m.amount.toFixed(2)}`).join('\n');
     const prompt = `Send rewards via PayBox to these X handles:\n${lines}\n\nTotal: $${poolNum.toFixed(2)}. Execute the transfers.`;
 
-    return NextResponse.json({ members, prompt, handle: h, pool: poolNum, source, centerPfp });
+    logEvent({
+      type: 'analyze',
+      handle: h,
+      status: 'ok',
+      detail: `${members.length} members via ${source}`,
+      durationMs: Date.now() - started,
+    });
+
+    return NextResponse.json({
+      members,
+      prompt,
+      handle: h,
+      pool: poolNum,
+      source,
+      centerPfp: profile.pfp,
+      emptyReason: null,
+    });
   } catch (e: any) {
+    logEvent({ type: 'analyze', handle: '', status: 'error', detail: e.message || 'Unknown', durationMs: Date.now() - started });
     return NextResponse.json({ error: e.message || 'Unknown error' }, { status: 500 });
   }
 }
