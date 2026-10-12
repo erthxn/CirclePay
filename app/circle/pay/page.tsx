@@ -10,17 +10,6 @@ type Member = {
   pfp?: string;
 };
 
-type StyleId = 'glass' | 'skeuo' | 'brutal' | 'minimal' | 'hand' | 'flat';
-
-const STYLES: { id: StyleId; label: string }[] = [
-  { id: 'glass', label: 'Glass' },
-  { id: 'skeuo', label: 'Skeuo' },
-  { id: 'brutal', label: 'Brutal' },
-  { id: 'minimal', label: 'Minimal' },
-  { id: 'hand', label: 'Hand' },
-  { id: 'flat', label: 'Flat' },
-];
-
 function hexToRgba(hex: string, a: number) {
   const h = hex.replace('#', '');
   const n = parseInt(h.length === 3 ? h.split('').map((c) => c + c).join('') : h, 16);
@@ -30,44 +19,17 @@ function hexToRgba(hex: string, a: number) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
-function cardBg(style: StyleId, accent: string, solid: boolean) {
-  if (solid) return hexToRgba(accent, 0.18);
-  switch (style) {
-    case 'glass':
-      return `linear-gradient(145deg, ${hexToRgba(accent, 0.22)}, ${hexToRgba(accent, 0.08)})`;
-    case 'skeuo':
-      return `linear-gradient(160deg, ${hexToRgba(accent, 0.16)}, #f4f6f8)`;
-    case 'brutal':
-      return accent;
-    case 'minimal':
-      return '#f7f7f8';
-    case 'hand':
-      return '#fff8ee';
-    case 'flat':
-    default:
-      return hexToRgba(accent, 0.14);
-  }
-}
-
 function PayPageInner() {
   const [data, setData] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [accent, setAccent] = useState('#0D5CFF');
   const [bgStyle, setBgStyle] = useState<'gradient' | 'solid'>('gradient');
-  const [styleId, setStyleId] = useState<StyleId>('glass');
   const visualRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const raw = sessionStorage.getItem('circleResult');
     if (raw) setData(JSON.parse(raw));
-    const saved = localStorage.getItem('cp_style') as StyleId | null;
-    if (saved) setStyleId(saved);
   }, []);
-
-  function setStyle(id: StyleId) {
-    setStyleId(id);
-    localStorage.setItem('cp_style', id);
-  }
 
   if (!data) {
     return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result. Analyze again.</div>;
@@ -85,7 +47,10 @@ function PayPageInner() {
     if (!visualRef.current) return;
     try {
       const node = visualRef.current;
-      const bg = cardBg(styleId, accent, bgStyle === 'solid');
+      const bg =
+        bgStyle === 'solid'
+          ? hexToRgba(accent, 0.18)
+          : `linear-gradient(145deg, ${hexToRgba(accent, 0.2)}, #f7f8fa)`;
       const prev = node.style.background;
       node.style.background = bg;
 
@@ -120,37 +85,17 @@ function PayPageInner() {
   ];
 
   const isEmpty = emptyReason || !members.length;
-  const cardClass = {
-    glass: 'backdrop-blur-md border border-white/40',
-    skeuo: 'shadow-[8px_8px_16px_rgba(0,0,0,0.08),-6px_-6px_12px_rgba(255,255,255,0.8)]',
-    brutal: 'border-4 border-black rounded-none',
-    minimal: 'border border-zinc-200',
-    hand: 'border-2 border-dashed border-zinc-400',
-    flat: 'border border-transparent',
-  }[styleId];
+  const cardBg =
+    bgStyle === 'solid'
+      ? hexToRgba(accent, 0.18)
+      : `linear-gradient(145deg, ${hexToRgba(accent, 0.2)}, #f7f8fa)`;
 
   return (
     <div className="max-w-5xl mx-auto px-5 py-6 lg:py-10">
       <div className="lg:grid lg:grid-cols-2 lg:gap-10 lg:items-start">
         <div>
           <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Your circle</h1>
-          <p className="text-sm text-[var(--text-muted)] mb-4">@{handle} · ${formatMoney(Number(pool))} pool</p>
-
-          <div className="mb-4 flex flex-wrap gap-1.5">
-            {STYLES.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => setStyle(s.id)}
-                className={`px-2.5 py-1 text-[11px] rounded-full ${
-                  styleId === s.id
-                    ? 'bg-[var(--accent)] text-white'
-                    : 'neu-btn text-[var(--text-muted)]'
-                }`}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
+          <p className="text-sm text-[var(--text-muted)] mb-6">@{handle} · ${formatMoney(Number(pool))} pool</p>
 
           {isEmpty ? (
             <div className="neu-raised p-8 text-center">
@@ -165,11 +110,8 @@ function PayPageInner() {
             <>
               <div
                 ref={visualRef}
-                className={`relative mx-auto w-full max-w-sm aspect-square overflow-hidden ${cardClass}`}
-                style={{
-                  background: cardBg(styleId, accent, bgStyle === 'solid'),
-                  borderRadius: styleId === 'brutal' ? 0 : 28,
-                }}
+                className="relative mx-auto w-full max-w-sm aspect-square overflow-hidden"
+                style={{ background: cardBg, borderRadius: 28 }}
               >
                 <div className="absolute inset-[20%] rounded-full border border-white/40" />
                 <div className="absolute inset-[32%] rounded-full border border-white/25" />
