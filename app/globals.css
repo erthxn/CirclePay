@@ -24,11 +24,57 @@ html, body {
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(1200px 600px at 50% -10%, #fbfaf8 0%, transparent 55%),
-    radial-gradient(800px 400px at 100% 100%, #ebe6de 0%, transparent 50%),
-    #f4f1eb;
+  background: #f4f1eb;
   min-height: 100vh;
+}
+
+.curve {
+  position: absolute;
+  border-radius: 50%;
+  background: #f4f1eb;
+  box-shadow:
+    inset -8px -8px 16px rgba(228, 224, 216, 0.7),
+    inset 8px 8px 16px rgba(255, 255, 255, 0.8),
+    6px 6px 14px rgba(228, 224, 216, 0.45);
+}
+
+.curve-tr {
+  width: 180px;
+  height: 180px;
+  top: 72px;
+  right: -70px;
+}
+
+.curve-br {
+  width: 220px;
+  height: 220px;
+  bottom: 40px;
+  right: -90px;
+}
+
+.curve-bl {
+  width: 140px;
+  height: 140px;
+  bottom: 120px;
+  left: -50px;
+}
+
+@media (min-width: 768px) {
+  .curve-tr {
+    width: 240px;
+    height: 240px;
+    right: -90px;
+  }
+  .curve-br {
+    width: 300px;
+    height: 300px;
+    right: -120px;
+  }
+  .curve-bl {
+    width: 180px;
+    height: 180px;
+    left: -70px;
+  }
 }
 
 .neu-raised {
