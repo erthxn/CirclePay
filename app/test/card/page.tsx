@@ -3,30 +3,71 @@
 import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 
-type Style = 'orbit' | 'network' | 'petal' | 'glow' | 'spark' | 'hud';
+type Style =
+  | 'orbit' | 'network' | 'petal' | 'glow' | 'hud'
+  | 'rings' | 'spokes' | 'constellation' | 'grid' | 'wave'
+  | 'stack' | 'halo' | 'compass' | 'dots' | 'frame'
+  | 'minimal' | 'bold' | 'soft' | 'dual' | 'pulse';
 
 const STYLES: { id: Style; label: string }[] = [
   { id: 'orbit', label: 'Orbit' },
   { id: 'network', label: 'Network' },
   { id: 'petal', label: 'Petal' },
-  { id: 'glow', label: 'Glow ring' },
-  { id: 'spark', label: 'Spark' },
+  { id: 'glow', label: 'Glow' },
   { id: 'hud', label: 'HUD' },
+  { id: 'rings', label: 'Rings' },
+  { id: 'spokes', label: 'Spokes' },
+  { id: 'constellation', label: 'Constellation' },
+  { id: 'grid', label: 'Grid' },
+  { id: 'wave', label: 'Wave' },
+  { id: 'stack', label: 'Stack' },
+  { id: 'halo', label: 'Halo' },
+  { id: 'compass', label: 'Compass' },
+  { id: 'dots', label: 'Dots' },
+  { id: 'frame', label: 'Frame' },
+  { id: 'minimal', label: 'Minimal' },
+  { id: 'bold', label: 'Bold' },
+  { id: 'soft', label: 'Soft' },
+  { id: 'dual', label: 'Dual' },
+  { id: 'pulse', label: 'Pulse' },
 ];
 
-const MEMBERS = [
-  { handle: 'alpha', amount: 12.4, hue: 210 },
-  { handle: 'beta', amount: 8.2, hue: 280 },
-  { handle: 'gamma', amount: 6.1, hue: 160 },
-  { handle: 'delta', amount: 4.8, hue: 30 },
-  { handle: 'echo', amount: 3.5, hue: 340 },
+const COLORS = [
+  { name: 'Blue', hex: '#0D5CFF' },
+  { name: 'Cosmic', hex: '#23212C' },
+  { name: 'Violet', hex: '#36255C' },
+  { name: 'Cyan', hex: '#22d3ee' },
+  { name: 'Ink', hex: '#111111' },
 ];
 
-function ph(hue: number, letter: string) {
+const BGS = [
+  { name: 'Light', value: 'linear-gradient(145deg, #eef2f8, #f7f8fa)' },
+  { name: 'Cream', value: '#f4f1eb' },
+  { name: 'Gray', value: '#e8eaed' },
+  { name: 'Dark', value: '#1a1d24' },
+  { name: 'Black', value: '#000000' },
+];
+
+const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function makeMembers(n: number) {
+  return POOL.slice(0, n).map((letter, i) => ({
+    letter,
+    amount: Math.round((20 - i * (15 / n)) * 100) / 100,
+    hue: (i * 360) / n,
+  }));
+}
+
+function Tile({ letter, hue, size = 44 }: { letter: string; hue: number; size?: number }) {
   return (
     <div
-      className="w-full h-full flex items-center justify-center text-white text-xs font-bold"
-      style={{ background: `linear-gradient(145deg, hsl(${hue},70%,55%), hsl(${hue},60%,40%))` }}
+      className="rounded-full overflow-hidden flex items-center justify-center text-white font-bold shadow"
+      style={{
+        width: size,
+        height: size,
+        fontSize: size * 0.36,
+        background: `linear-gradient(145deg, hsl(${hue},72%,58%), hsl(${hue},62%,42%))`,
+      }}
     >
       {letter}
     </div>
@@ -35,7 +76,14 @@ function ph(hue: number, letter: string) {
 
 export default function TestCardPage() {
   const [style, setStyle] = useState<Style>('orbit');
+  const [count, setCount] = useState(5);
+  const [accent, setAccent] = useState('#0D5CFF');
+  const [bg, setBg] = useState(BGS[0].value);
+  const [hidden, setHidden] = useState<Style[]>([]);
   const ref = useRef<HTMLDivElement>(null);
+
+  const members = makeMembers(count);
+  const visible = STYLES.filter((s) => !hidden.includes(s.id));
 
   async function download() {
     if (!ref.current) return;
@@ -46,291 +94,447 @@ export default function TestCardPage() {
       logging: false,
     });
     const link = document.createElement('a');
-    link.download = `circlepay-test-${style}.png`;
+    link.download = `circlepay-${style}-${count}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   }
 
+  function kill(id: Style) {
+    setHidden((h) => [...h, id]);
+    if (style === id && visible.length > 1) {
+      const next = visible.find((s) => s.id !== id);
+      if (next) setStyle(next.id);
+    }
+  }
+
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
-      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Card lab</h1>
-      <p className="text-sm text-[var(--text-muted)] mb-5">Test designs · no API</p>
+      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Card studio</h1>
+      <p className="text-sm text-[var(--text-muted)] mb-5">Pick, eliminate, download · no API</p>
 
-      <div className="flex flex-wrap gap-1.5 mb-5">
-        {STYLES.map((s) => (
+      <div className="mb-3">
+        <p className="text-[11px] text-[var(--text-muted)] mb-1.5">Style</p>
+        <div className="flex flex-wrap gap-1.5">
+          {visible.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setStyle(s.id)}
+              className={`px-2.5 py-1 text-[11px] rounded-full ${
+                style === s.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-3 flex items-center gap-2">
+        <p className="text-[11px] text-[var(--text-muted)]">Size</p>
+        {[5, 10, 20, 25].map((n) => (
           <button
-            key={s.id}
-            onClick={() => setStyle(s.id)}
-            className={`px-3 py-1.5 text-xs rounded-full ${
-              style === s.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
+            key={n}
+            onClick={() => setCount(n)}
+            className={`px-2.5 py-1 text-[11px] rounded-full ${
+              count === n ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
             }`}
           >
-            {s.label}
+            {n}
           </button>
         ))}
       </div>
 
-      <div ref={ref} className="mx-auto w-full max-w-sm aspect-square relative">
-        {style === 'orbit' && <Orbit />}
-        {style === 'network' && <Network />}
-        {style === 'petal' && <Petal />}
-        {style === 'glow' && <Glow />}
-        {style === 'spark' && <Spark />}
-        {style === 'hud' && <Hud />}
+      <div className="mb-3 flex items-center gap-2">
+        <p className="text-[11px] text-[var(--text-muted)]">Color</p>
+        {COLORS.map((c) => (
+          <button
+            key={c.hex}
+            onClick={() => setAccent(c.hex)}
+            title={c.name}
+            className="w-6 h-6 rounded-full border-2"
+            style={{ background: c.hex, borderColor: accent === c.hex ? '#fff' : 'transparent' }}
+          />
+        ))}
       </div>
 
-      <button
-        onClick={download}
-        className="mt-5 w-full py-3 text-sm font-medium text-white rounded-full"
-        style={{ background: 'var(--accent)' }}
-      >
-        Download PNG
-      </button>
-      <p className="mt-3 text-xs text-center text-[var(--text-muted)]">@erthxn · circlepay.fun</p>
-    </div>
-  );
-}
-
-function Orbit() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden" style={{ background: 'linear-gradient(145deg, #dbe6ff, #f7f8fa)' }}>
-      <div className="absolute inset-[18%] rounded-full border border-white/50" />
-      <div className="absolute inset-[30%] rounded-full border border-white/30" />
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-        {MEMBERS.map((_, i) => {
-          if (i === MEMBERS.length - 1) return null;
-          const a1 = (i / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-          const a2 = ((i + 1) / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-          const r = 34;
-          return (
-            <path
-              key={i}
-              d={`M ${50 + Math.cos(a1) * r} ${50 + Math.sin(a1) * r} Q 50 50 ${50 + Math.cos(a2) * r} ${50 + Math.sin(a2) * r}`}
-              fill="none"
-              stroke="rgba(255,255,255,0.7)"
-              strokeWidth="0.6"
-            />
-          );
-        })}
-      </svg>
-      <Center label="ER" hue={220} />
-      {MEMBERS.map((m, i) => (
-        <Node key={i} i={i} n={MEMBERS.length} r={34}>
-          <div className="w-11 h-11 rounded-full border-2 border-white overflow-hidden shadow">{ph(m.hue, m.handle[0].toUpperCase())}</div>
-          <div className="mt-1 text-[10px] font-semibold text-white bg-black/70 px-2 py-0.5 rounded-full">${m.amount.toFixed(2)}</div>
-        </Node>
-      ))}
-      <Brand light />
-    </div>
-  );
-}
-
-function Network() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden" style={{ background: 'linear-gradient(180deg, #d8d8d8, #c4c4c4)' }}>
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-        {MEMBERS.map((_, i) => {
-          const a = (i / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-          const r = 32;
-          return (
-            <line
-              key={i}
-              x1="50"
-              y1="50"
-              x2={50 + Math.cos(a) * r}
-              y2={50 + Math.sin(a) * r}
-              stroke="#111"
-              strokeWidth="0.6"
-            />
-          );
-        })}
-      </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-24 h-24 rounded-full bg-black text-white flex flex-col items-center justify-center shadow-lg">
-          <span className="text-xs font-bold tracking-wider">CIRCLE</span>
-          <span className="text-[9px] opacity-70">PAY</span>
-        </div>
-      </div>
-      {MEMBERS.map((m, i) => (
-        <Node key={i} i={i} n={MEMBERS.length} r={32}>
-          <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-[10px] font-medium shadow">
-            ${m.amount.toFixed(0)}
-          </div>
-        </Node>
-      ))}
-      <Brand dark />
-    </div>
-  );
-}
-
-function Petal() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden bg-[#111]">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-        {MEMBERS.map((m, i) => {
-          const start = (i / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-          const end = ((i + 1) / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-          const r = 38;
-          const x1 = 50 + Math.cos(start) * r;
-          const y1 = 50 + Math.sin(start) * r;
-          const x2 = 50 + Math.cos(end) * r;
-          const y2 = 50 + Math.sin(end) * r;
-          const light = i % 2 === 0;
-          return (
-            <path
-              key={i}
-              d={`M 50 50 L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`}
-              fill={light ? '#f2f2f2' : '#3a3a3a'}
-              stroke="#111"
-              strokeWidth="0.8"
-            />
-          );
-        })}
-        <circle cx="50" cy="50" r="10" fill="#111" />
-      </svg>
-      {MEMBERS.map((m, i) => {
-        const a = ((i + 0.5) / MEMBERS.length) * Math.PI * 2 - Math.PI / 2;
-        const r = 26;
-        return (
-          <div
-            key={i}
-            className="absolute text-[10px] font-medium"
-            style={{
-              left: `${50 + Math.cos(a) * r}%`,
-              top: `${50 + Math.sin(a) * r}%`,
-              transform: 'translate(-50%, -50%)',
-              color: i % 2 === 0 ? '#222' : '#eee',
-            }}
+      <div className="mb-5 flex items-center gap-2 flex-wrap">
+        <p className="text-[11px] text-[var(--text-muted)]">Bg</p>
+        {BGS.map((b) => (
+          <button
+            key={b.name}
+            onClick={() => setBg(b.value)}
+            className={`px-2.5 py-1 text-[11px] rounded-full ${
+              bg === b.value ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'
+            }`}
           >
-            ${m.amount.toFixed(0)}
-          </div>
-        );
-      })}
-      <Brand light />
-    </div>
-  );
-}
-
-function Glow() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden" style={{ background: '#1a1d28' }}>
-      <div className="absolute inset-[14%] rounded-full border-[6px] border-[#22d3ee]/80" style={{ boxShadow: '0 0 24px #22d3ee, inset 0 0 20px rgba(34,211,238,0.25)' }} />
-      <div className="absolute inset-[18%] rounded-full border border-white/10" />
-      <Center label="ER" hue={190} />
-      {MEMBERS.map((m, i) => (
-        <Node key={i} i={i} n={MEMBERS.length} r={34}>
-          <div className="w-11 h-11 rounded-full border-2 border-[#22d3ee] overflow-hidden" style={{ boxShadow: '0 0 10px #22d3ee' }}>
-            {ph(m.hue, m.handle[0].toUpperCase())}
-          </div>
-          <div className="mt-1 text-[10px] font-semibold text-[#22d3ee]">${m.amount.toFixed(2)}</div>
-        </Node>
-      ))}
-      <Brand light />
-    </div>
-  );
-}
-
-function Spark() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden bg-black">
-      <svg className="absolute inset-[10%] w-[80%] h-[80%]" viewBox="0 0 100 100">
-        <path
-          d="M50 4 L58 28 L50 22 L42 28 Z M96 50 L72 58 L78 50 L72 42 Z M50 96 L42 72 L50 78 L58 72 Z M4 50 L28 42 L22 50 L28 58 Z M82 18 L68 36 L74 28 L64 32 Z M82 82 L64 68 L74 72 L68 64 Z M18 82 L32 64 L26 72 L36 68 Z M18 18 L36 32 L26 28 L32 36 Z"
-          fill="none"
-          stroke="white"
-          strokeWidth="1.2"
-        />
-        <circle cx="50" cy="50" r="28" fill="none" stroke="white" strokeWidth="0.4" opacity="0.4" />
-      </svg>
-      <Center label="ER" hue={0} dark />
-      {MEMBERS.map((m, i) => (
-        <Node key={i} i={i} n={MEMBERS.length} r={32}>
-          <div className="w-10 h-10 rounded-full border border-white overflow-hidden">{ph(m.hue, m.handle[0].toUpperCase())}</div>
-        </Node>
-      ))}
-      <Brand light />
-    </div>
-  );
-}
-
-function Hud() {
-  return (
-    <div className="absolute inset-0 rounded-[28px] overflow-hidden bg-black text-white">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="white" strokeWidth="0.4" />
-        <circle cx="50" cy="50" r="32" fill="none" stroke="white" strokeWidth="0.3" strokeDasharray="1.5 1.5" />
-        <circle cx="50" cy="50" r="18" fill="none" stroke="white" strokeWidth="0.3" />
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-          const a = (deg * Math.PI) / 180;
-          return (
-            <line
-              key={deg}
-              x1={50 + Math.cos(a) * 38}
-              y1={50 + Math.sin(a) * 38}
-              x2={50 + Math.cos(a) * 42}
-              y2={50 + Math.sin(a) * 42}
-              stroke="white"
-              strokeWidth="0.4"
-            />
-          );
-        })}
-      </svg>
-      <Center label="ER" hue={0} dark />
-      {MEMBERS.map((m, i) => (
-        <Node key={i} i={i} n={MEMBERS.length} r={32}>
-          <div className="w-8 h-8 rounded-full border border-white overflow-hidden">{ph(m.hue, m.handle[0].toUpperCase())}</div>
-          <div className="mt-0.5 text-[8px] font-mono text-white/80">${m.amount.toFixed(0)}</div>
-        </Node>
-      ))}
-      <div className="absolute top-3 left-3 text-[8px] font-mono opacity-60">CIRCLE / SCAN</div>
-      <Brand light />
-    </div>
-  );
-}
-
-function Center({ label, hue, dark }: { label: string; hue: number; dark?: boolean }) {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center z-10">
-      <div className={`w-16 h-16 rounded-full overflow-hidden border-2 ${dark ? 'border-white' : 'border-white'} shadow-md`}>
-        {ph(hue, label)}
+            {b.name}
+          </button>
+        ))}
       </div>
+
+      <div
+        ref={ref}
+        className="mx-auto w-full max-w-sm aspect-square relative overflow-hidden rounded-[28px]"
+        style={{ background: bg }}
+      >
+        <Card style={style} members={members} accent={accent} dark={bg === '#000000' || bg === '#1a1d24'} />
+      </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <button onClick={download} className="py-3 text-sm font-medium text-white rounded-full" style={{ background: 'var(--accent)' }}>
+          Download PNG
+        </button>
+        <button onClick={() => kill(style)} className="py-3 text-sm font-medium rounded-full border border-red-400 text-red-500">
+          Eliminate
+        </button>
+      </div>
+
+      <p className="mt-3 text-xs text-center text-[var(--text-muted)]">
+        {visible.length} left · @erthxn · circlepay.fun
+      </p>
     </div>
   );
 }
 
-function Node({
-  i,
-  n,
-  r,
-  children,
-}: {
-  i: number;
-  n: number;
-  r: number;
-  children: React.ReactNode;
-}) {
-  const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-  const x = 50 + Math.cos(a) * r;
-  const y = 50 + Math.sin(a) * r;
-  return (
-    <div
-      className="absolute flex flex-col items-center z-20"
-      style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}
-    >
-      {children}
-    </div>
-  );
-}
+type M = { letter: string; amount: number; hue: number };
 
-function Brand({ light, dark }: { light?: boolean; dark?: boolean }) {
-  return (
-    <div
-      className={`absolute bottom-3 right-3 text-right text-[10px] leading-tight ${
-        light ? 'text-white' : dark ? 'text-black' : 'text-[var(--text)]'
-      }`}
-    >
+function Card({ style, members, accent, dark }: { style: Style; members: M[]; accent: string; dark: boolean }) {
+  const n = members.length;
+  const brand = (
+    <div className={`absolute bottom-3 right-3 text-right text-[10px] leading-tight ${dark ? 'text-white' : 'text-[#1a1d24]'}`}>
       <div>@erthxn</div>
       <div className="opacity-70">circlepay.fun</div>
     </div>
+  );
+
+  const nodes = (r: number, size = 36) =>
+    members.map((m, i) => {
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      const x = 50 + Math.cos(a) * r;
+      const y = 50 + Math.sin(a) * r;
+      return (
+        <div key={i} className="absolute flex flex-col items-center z-20" style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}>
+          <Tile letter={m.letter} hue={m.hue} size={size} />
+          <div className="mt-0.5 text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: accent, color: '#fff' }}>
+            ${m.amount.toFixed(1)}
+          </div>
+        </div>
+      );
+    });
+
+  const center = (
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <Tile letter="@" hue={210} size={56} />
+    </div>
+  );
+
+  if (style === 'orbit') {
+    return (
+      <>
+        <div className="absolute inset-[18%] rounded-full border" style={{ borderColor: accent + '55' }} />
+        <div className="absolute inset-[30%] rounded-full border" style={{ borderColor: accent + '33' }} />
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {members.map((_, i) => {
+            if (i === n - 1) return null;
+            const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
+            const a2 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
+            const r = 34;
+            return <path key={i} d={`M ${50+Math.cos(a1)*r} ${50+Math.sin(a1)*r} Q 50 50 ${50+Math.cos(a2)*r} ${50+Math.sin(a2)*r}`} fill="none" stroke={accent} strokeOpacity="0.35" strokeWidth="0.5" />;
+          })}
+        </svg>
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'network') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {members.map((_, i) => {
+            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+            return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*32} y2={50+Math.sin(a)*32} stroke={accent} strokeWidth="0.5" />;
+          })}
+        </svg>
+        {center}
+        {nodes(32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'petal') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {members.map((m, i) => {
+            const s = (i / n) * Math.PI * 2 - Math.PI / 2;
+            const e = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
+            const r = 40;
+            return (
+              <path
+                key={i}
+                d={`M 50 50 L ${50+Math.cos(s)*r} ${50+Math.sin(s)*r} A ${r} ${r} 0 0 1 ${50+Math.cos(e)*r} ${50+Math.sin(e)*r} Z`}
+                fill={accent}
+                fillOpacity={0.15 + (i % 3) * 0.15}
+                stroke={accent}
+                strokeWidth="0.4"
+              />
+            );
+          })}
+        </svg>
+        {center}
+        {nodes(28, 32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'glow') {
+    return (
+      <>
+        <div className="absolute inset-[12%] rounded-full border-[5px]" style={{ borderColor: accent, boxShadow: `0 0 22px ${accent}` }} />
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'hud') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke={accent} strokeWidth="0.4" />
+          <circle cx="50" cy="50" r="32" fill="none" stroke={accent} strokeWidth="0.3" strokeDasharray="1.4 1.4" />
+          <circle cx="50" cy="50" r="16" fill="none" stroke={accent} strokeWidth="0.3" />
+        </svg>
+        {center}
+        {nodes(32, 30)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'rings') {
+    return (
+      <>
+        {[18, 28, 38].map((r) => (
+          <div key={r} className="absolute rounded-full border" style={{ inset: `${50 - r}%`, borderColor: accent + '40' }} />
+        ))}
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'spokes') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {members.map((_, i) => {
+            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+            return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*40} y2={50+Math.sin(a)*40} stroke={accent} strokeWidth="1.2" />;
+          })}
+        </svg>
+        {center}
+        {nodes(36)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'constellation') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {members.map((_, i) => {
+            const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
+            const a2 = ((i + 2) / n) * Math.PI * 2 - Math.PI / 2;
+            const r = 34;
+            return <line key={i} x1={50+Math.cos(a1)*r} y1={50+Math.sin(a1)*r} x2={50+Math.cos(a2)*r} y2={50+Math.sin(a2)*r} stroke={accent} strokeWidth="0.35" />;
+          })}
+        </svg>
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'grid') {
+    const cols = Math.ceil(Math.sqrt(n));
+    return (
+      <>
+        <div className="absolute inset-6 grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+          {members.map((m) => (
+            <div key={m.letter} className="flex flex-col items-center justify-center">
+              <Tile letter={m.letter} hue={m.hue} size={36} />
+              <span className="text-[9px] mt-0.5" style={{ color: accent }}>${m.amount.toFixed(1)}</span>
+            </div>
+          ))}
+        </div>
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'wave') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          <path d="M 0 55 Q 25 40 50 55 T 100 55" fill="none" stroke={accent} strokeWidth="0.6" />
+          <path d="M 0 65 Q 25 50 50 65 T 100 65" fill="none" stroke={accent} strokeWidth="0.4" opacity="0.5" />
+        </svg>
+        {center}
+        {nodes(32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'stack') {
+    return (
+      <>
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+          {members.slice(0, Math.min(n, 8)).map((m) => (
+            <div key={m.letter} className="flex items-center gap-2">
+              <Tile letter={m.letter} hue={m.hue} size={28} />
+              <span className="text-xs font-medium" style={{ color: accent }}>${m.amount.toFixed(1)}</span>
+            </div>
+          ))}
+        </div>
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'halo') {
+    return (
+      <>
+        <div className="absolute inset-[16%] rounded-full" style={{ background: `radial-gradient(circle, ${accent}33, transparent 70%)` }} />
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'compass') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          <polygon points="50,12 54,46 50,50 46,46" fill={accent} />
+          <polygon points="50,88 54,54 50,50 46,54" fill={accent} opacity="0.5" />
+          <circle cx="50" cy="50" r="36" fill="none" stroke={accent} strokeWidth="0.4" />
+        </svg>
+        {center}
+        {nodes(32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'dots') {
+    return (
+      <>
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+          {Array.from({ length: 40 }).map((_, i) => (
+            <circle key={i} cx={10 + (i * 17) % 80} cy={10 + (i * 23) % 80} r="0.6" fill={accent} opacity="0.4" />
+          ))}
+        </svg>
+        {center}
+        {nodes(34)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'frame') {
+    return (
+      <>
+        <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: accent }} />
+        {center}
+        {nodes(32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'minimal') {
+    return (
+      <>
+        {center}
+        {nodes(36, 32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'bold') {
+    return (
+      <>
+        <div className="absolute inset-0" style={{ background: accent }} />
+        {center}
+        {nodes(34)}
+        <div className="absolute bottom-3 right-3 text-right text-[10px] leading-tight text-white">
+          <div>@erthxn</div>
+          <div className="opacity-70">circlepay.fun</div>
+        </div>
+      </>
+    );
+  }
+
+  if (style === 'soft') {
+    return (
+      <>
+        <div className="absolute inset-4 rounded-3xl" style={{ background: accent + '18' }} />
+        {center}
+        {nodes(32)}
+        {brand}
+      </>
+    );
+  }
+
+  if (style === 'dual') {
+    const half = Math.ceil(n / 2);
+    return (
+      <>
+        <div className="absolute inset-[20%] rounded-full border" style={{ borderColor: accent + '40' }} />
+        <div className="absolute inset-[34%] rounded-full border" style={{ borderColor: accent + '25' }} />
+        {center}
+        {members.slice(0, half).map((m, i) => {
+          const a = (i / half) * Math.PI * 2 - Math.PI / 2;
+          return (
+            <div key={m.letter} className="absolute z-20" style={{ left: `${50+Math.cos(a)*22}%`, top: `${50+Math.sin(a)*22}%`, transform: 'translate(-50%,-50%)' }}>
+              <Tile letter={m.letter} hue={m.hue} size={28} />
+            </div>
+          );
+        })}
+        {members.slice(half).map((m, i) => {
+          const a = (i / (n - half)) * Math.PI * 2 - Math.PI / 2;
+          return (
+            <div key={m.letter} className="absolute z-20" style={{ left: `${50+Math.cos(a)*36}%`, top: `${50+Math.sin(a)*36}%`, transform: 'translate(-50%,-50%)' }}>
+              <Tile letter={m.letter} hue={m.hue} size={32} />
+            </div>
+          );
+        })}
+        {brand}
+      </>
+    );
+  }
+
+  // pulse
+  return (
+    <>
+      <div className="absolute inset-[22%] rounded-full border-2 animate-pulse" style={{ borderColor: accent }} />
+      <div className="absolute inset-[34%] rounded-full border animate-pulse" style={{ borderColor: accent, animationDelay: '0.3s' }} />
+      {center}
+      {nodes(36)}
+      {brand}
+    </>
   );
 }
