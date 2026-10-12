@@ -58,14 +58,14 @@ function makeMembers(n: number) {
   }));
 }
 
-function Tile({ letter, hue, size = 44 }: { letter: string; hue: number; size?: number }) {
+function Tile({ letter, hue, size = 48 }: { letter: string; hue: number; size?: number }) {
   return (
     <div
       className="rounded-full overflow-hidden flex items-center justify-center text-white font-bold shadow"
       style={{
         width: size,
         height: size,
-        fontSize: size * 0.36,
+        fontSize: size * 0.38,
         background: `linear-gradient(145deg, hsl(${hue},72%,58%), hsl(${hue},62%,42%))`,
       }}
     >
@@ -109,7 +109,14 @@ export default function TestCardPage() {
 
   return (
     <div className="max-w-lg mx-auto px-5 py-6">
-      <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Card studio</h1>
+      <div className="flex items-center justify-between mb-1">
+        <h1 className="text-2xl font-bold text-[var(--text)]">Card studio</h1>
+        {hidden.length > 0 && (
+          <button onClick={() => { setHidden([]); setStyle('orbit'); }} className="text-xs text-[var(--accent)]">
+            Restore all
+          </button>
+        )}
+      </div>
       <p className="text-sm text-[var(--text-muted)] mb-5">Pick, eliminate, download · no API</p>
 
       <div className="mb-3">
@@ -131,7 +138,7 @@ export default function TestCardPage() {
 
       <div className="mb-3 flex items-center gap-2">
         <p className="text-[11px] text-[var(--text-muted)]">Size</p>
-        {[5, 10, 20, 25].map((n) => (
+        {[5, 7, 10, 15].map((n) => (
           <button
             key={n}
             onClick={() => setCount(n)}
@@ -200,6 +207,8 @@ type M = { letter: string; amount: number; hue: number };
 
 function Card({ style, members, accent, dark }: { style: Style; members: M[]; accent: string; dark: boolean }) {
   const n = members.length;
+  const tileSize = n <= 5 ? 52 : n <= 7 ? 46 : n <= 10 ? 40 : 34;
+
   const brand = (
     <div className={`absolute bottom-3 right-3 text-right text-[10px] leading-tight ${dark ? 'text-white' : 'text-[#1a1d24]'}`}>
       <div>@erthxn</div>
@@ -207,7 +216,13 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     </div>
   );
 
-  const nodes = (r: number, size = 36) =>
+  const price = (amount: number) => (
+    <div className="mt-0.5 text-[9px] font-semibold px-1.5 py-0.5 rounded-full whitespace-nowrap" style={{ background: accent, color: '#fff' }}>
+      ${amount.toFixed(2)}
+    </div>
+  );
+
+  const nodes = (r: number, size = tileSize) =>
     members.map((m, i) => {
       const a = (i / n) * Math.PI * 2 - Math.PI / 2;
       const x = 50 + Math.cos(a) * r;
@@ -215,16 +230,14 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
       return (
         <div key={i} className="absolute flex flex-col items-center z-20" style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}>
           <Tile letter={m.letter} hue={m.hue} size={size} />
-          <div className="mt-0.5 text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: accent, color: '#fff' }}>
-            ${m.amount.toFixed(1)}
-          </div>
+          {price(m.amount)}
         </div>
       );
     });
 
   const center = (
     <div className="absolute inset-0 flex items-center justify-center z-10">
-      <Tile letter="@" hue={210} size={56} />
+      <Tile letter="@" hue={210} size={n <= 5 ? 64 : 56} />
     </div>
   );
 
@@ -269,7 +282,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     return (
       <>
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-          {members.map((m, i) => {
+          {members.map((_, i) => {
             const s = (i / n) * Math.PI * 2 - Math.PI / 2;
             const e = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
             const r = 40;
@@ -286,7 +299,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
           })}
         </svg>
         {center}
-        {nodes(28, 32)}
+        {nodes(28)}
         {brand}
       </>
     );
@@ -312,7 +325,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
           <circle cx="50" cy="50" r="16" fill="none" stroke={accent} strokeWidth="0.3" />
         </svg>
         {center}
-        {nodes(32, 30)}
+        {nodes(32)}
         {brand}
       </>
     );
@@ -372,8 +385,8 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
         <div className="absolute inset-6 grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
           {members.map((m) => (
             <div key={m.letter} className="flex flex-col items-center justify-center">
-              <Tile letter={m.letter} hue={m.hue} size={36} />
-              <span className="text-[9px] mt-0.5" style={{ color: accent }}>${m.amount.toFixed(1)}</span>
+              <Tile letter={m.letter} hue={m.hue} size={tileSize - 4} />
+              {price(m.amount)}
             </div>
           ))}
         </div>
@@ -402,8 +415,8 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
           {members.slice(0, Math.min(n, 8)).map((m) => (
             <div key={m.letter} className="flex items-center gap-2">
-              <Tile letter={m.letter} hue={m.hue} size={28} />
-              <span className="text-xs font-medium" style={{ color: accent }}>${m.amount.toFixed(1)}</span>
+              <Tile letter={m.letter} hue={m.hue} size={32} />
+              {price(m.amount)}
             </div>
           ))}
         </div>
@@ -468,7 +481,7 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     return (
       <>
         {center}
-        {nodes(36, 32)}
+        {nodes(36)}
         {brand}
       </>
     );
@@ -500,25 +513,30 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
   }
 
   if (style === 'dual') {
-    const half = Math.ceil(n / 2);
+    // 5 looks best: 2 inner, 3 outer. Otherwise split evenly.
+    const innerN = n === 5 ? 2 : Math.floor(n / 2);
+    const outer = members.slice(innerN);
+    const inner = members.slice(0, innerN);
     return (
       <>
-        <div className="absolute inset-[20%] rounded-full border" style={{ borderColor: accent + '40' }} />
-        <div className="absolute inset-[34%] rounded-full border" style={{ borderColor: accent + '25' }} />
+        <div className="absolute inset-[22%] rounded-full border" style={{ borderColor: accent + '40' }} />
+        <div className="absolute inset-[36%] rounded-full border" style={{ borderColor: accent + '25' }} />
         {center}
-        {members.slice(0, half).map((m, i) => {
-          const a = (i / half) * Math.PI * 2 - Math.PI / 2;
+        {inner.map((m, i) => {
+          const a = (i / Math.max(inner.length, 1)) * Math.PI * 2 - Math.PI / 2;
           return (
-            <div key={m.letter} className="absolute z-20" style={{ left: `${50+Math.cos(a)*22}%`, top: `${50+Math.sin(a)*22}%`, transform: 'translate(-50%,-50%)' }}>
-              <Tile letter={m.letter} hue={m.hue} size={28} />
+            <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*20}%`, top: `${50+Math.sin(a)*20}%`, transform: 'translate(-50%,-50%)' }}>
+              <Tile letter={m.letter} hue={m.hue} size={tileSize - 6} />
+              {price(m.amount)}
             </div>
           );
         })}
-        {members.slice(half).map((m, i) => {
-          const a = (i / (n - half)) * Math.PI * 2 - Math.PI / 2;
+        {outer.map((m, i) => {
+          const a = (i / Math.max(outer.length, 1)) * Math.PI * 2 - Math.PI / 2 + 0.4;
           return (
-            <div key={m.letter} className="absolute z-20" style={{ left: `${50+Math.cos(a)*36}%`, top: `${50+Math.sin(a)*36}%`, transform: 'translate(-50%,-50%)' }}>
-              <Tile letter={m.letter} hue={m.hue} size={32} />
+            <div key={m.letter} className="absolute flex flex-col items-center z-20" style={{ left: `${50+Math.cos(a)*36}%`, top: `${50+Math.sin(a)*36}%`, transform: 'translate(-50%,-50%)' }}>
+              <Tile letter={m.letter} hue={m.hue} size={tileSize} />
+              {price(m.amount)}
             </div>
           );
         })}
@@ -527,7 +545,6 @@ function Card({ style, members, accent, dark }: { style: Style; members: M[]; ac
     );
   }
 
-  // pulse
   return (
     <>
       <div className="absolute inset-[22%] rounded-full border-2 animate-pulse" style={{ borderColor: accent }} />
