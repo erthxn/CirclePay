@@ -223,7 +223,7 @@ function Card({ style, members, mark }: { style: Style; members: M[]; mark: Mark
   const sw = bold ? 2.2 : 0.7;
 
   const brand = (
-    <div style={{ position: 'absolute', bottom: 8, right: 10, display: 'flex', alignItems: 'flex-end', gap: 6, zIndex: 30 }}>
+    <div style={{ position: 'absolute', bottom: 8, right: 4, display: 'flex', alignItems: 'flex-end', gap: 6, zIndex: 30 }}>
       <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.15, color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
         <div>@erthxn</div>
         <div style={{ opacity: 0.85 }}>circlepay.fun</div>
@@ -234,7 +234,21 @@ function Card({ style, members, mark }: { style: Style; members: M[]; mark: Mark
   );
 
   const price = (amount: number) => (
-    <div style={{ marginTop: 2, fontSize: 9, fontWeight: 600, padding: '1px 6px', borderRadius: 999, background: '#ffffff', color: '#111', whiteSpace: 'nowrap' }}>
+    <div style={{ 
+      position: 'absolute', 
+      top: '100%', 
+      left: '50%', 
+      transform: 'translateX(-50%)', 
+      marginTop: 2, 
+      fontSize: 9, 
+      fontWeight: 600, 
+      lineHeight: 1, 
+      padding: '1px 6px', 
+      borderRadius: 999, 
+      background: '#ffffff', 
+      color: '#111', 
+      whiteSpace: 'nowrap' 
+    }}>
       ${amount.toFixed(2)}
     </div>
   );
@@ -245,7 +259,7 @@ function Card({ style, members, mark }: { style: Style; members: M[]; mark: Mark
       const x = 50 + Math.cos(a) * radius;
       const y = 50 + Math.sin(a) * radius;
       return (
-        <div key={i} style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+        <div key={i} style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', zIndex: 20 }}>
           <Tile letter={m.letter} hue={m.hue} size={size} />
           {price(m.amount)}
         </div>
@@ -339,7 +353,7 @@ function Card({ style, members, mark }: { style: Style; members: M[]; mark: Mark
         {inner.map((m, i) => {
           const a = (i / Math.max(inner.length, 1)) * Math.PI * 2 - Math.PI / 2;
           return (
-            <div key={m.letter} style={{ position: 'absolute', left: `${50+Math.cos(a)*18}%`, top: `${50+Math.sin(a)*18}%`, transform: 'translate(-50%,-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+            <div key={m.letter} style={{ position: 'absolute', left: `${50+Math.cos(a)*18}%`, top: `${50+Math.sin(a)*18}%`, transform: 'translate(-50%,-50%)', zIndex: 20 }}>
               <Tile letter={m.letter} hue={m.hue} size={tileSize - 8} />
               {price(m.amount)}
             </div>
@@ -348,7 +362,7 @@ function Card({ style, members, mark }: { style: Style; members: M[]; mark: Mark
         {outer.map((m, i) => {
           const a = (i / Math.max(outer.length, 1)) * Math.PI * 2 - Math.PI / 2 + 0.5;
           return (
-            <div key={m.letter} style={{ position: 'absolute', left: `${50+Math.cos(a)*r}%`, top: `${50+Math.sin(a)*r}%`, transform: 'translate(-50%,-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+            <div key={m.letter} style={{ position: 'absolute', left: `${50+Math.cos(a)*r}%`, top: `${50+Math.sin(a)*r}%`, transform: 'translate(-50%,-50%)', zIndex: 20 }}>
               <Tile letter={m.letter} hue={m.hue} size={tileSize} />
               {price(m.amount)}
             </div>
