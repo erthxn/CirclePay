@@ -1,31 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { setTheme, type StyleId } from './ThemeProvider';
-
-const STYLES: { id: StyleId; label: string }[] = [
-  { id: 'glass', label: 'Glass' },
-  { id: 'skeuo', label: 'Skeuo' },
-  { id: 'brutal', label: 'Brutal' },
-  { id: 'minimal', label: 'Minimal' },
-  { id: 'hand', label: 'Hand' },
-  { id: 'flat', label: 'Flat' },
-];
 
 export default function Menu() {
   const [open, setOpen] = useState(false);
-  const [style, setStyle] = useState<StyleId>('skeuo');
-
-  useEffect(() => {
-    const saved = (localStorage.getItem('cp_style') as StyleId) || 'skeuo';
-    setStyle(saved);
-  }, []);
-
-  function pick(id: StyleId) {
-    setStyle(id);
-    setTheme(id);
-  }
 
   return (
     <>
@@ -67,25 +46,6 @@ export default function Menu() {
                 Builder ↗
               </a>
             </nav>
-
-            <div className="mt-8">
-              <p className="text-xs font-medium text-[var(--text-muted)] mb-2">UI style</p>
-              <div className="flex flex-wrap gap-1.5">
-                {STYLES.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => pick(s.id)}
-                    className={`px-2.5 py-1 text-[11px] rounded-full ${
-                      style === s.id
-                        ? 'bg-[var(--accent)] text-white'
-                        : 'neu-btn text-[var(--text-muted)]'
-                    }`}
-                  >
-                    {s.label}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             <div className="mt-auto text-xs text-[var(--text-muted)] pt-8">
               CirclePay · circlepay.fun
