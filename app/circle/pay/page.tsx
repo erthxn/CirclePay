@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense, memo } from 'react';
 import html2canvas from 'html2canvas';
 
 type Member = { handle: string; score: number; amount: number; pfp?: string };
@@ -32,9 +32,23 @@ const MARKS: { id: Mark; name: string }[] = [
   { id: 'none', name: 'None' },
 ];
 
+const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; letter: string; size: number }) {
+  return (
+    <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#1a1d24' }}>
+      {src ? (
+        <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} crossOrigin="anonymous" />
+      ) : (
+        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: size * 0.34, fontWeight: 700 }}>
+          {letter}
+        </div>
+      )}
+    </div>
+  );
+});
+
 function PayBoxMark() {
   return (
-    <svg viewBox="0 0 400 400" width="44" height="44" style={{ opacity: 0.9, transform: 'rotate(-16deg)' }}>
+    <svg viewBox="0 0 400 400" width="40" height="40" style={{ opacity: 0.9, transform: 'rotate(-16deg)' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -46,7 +60,7 @@ function PayBoxMark() {
 
 function SolanaMark() {
   return (
-    <svg viewBox="0 0 400 400" width="44" height="44" style={{ opacity: 0.95, transform: 'rotate(-16deg)' }}>
+    <svg viewBox="0 0 400 400" width="40" height="40" style={{ opacity: 0.95, transform: 'rotate(-16deg)' }}>
       <defs>
         <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
           <stop offset="0" stopColor="#14F195" />
@@ -118,69 +132,16 @@ function PayPageInner() {
     return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
+  function cycleMark() {
+    const i = MARKS.findIndex((m) => m.id === mark);
+    setMark(MARKS[(i + 1) % MARKS.length].id);
+  }
+
   const isEmpty = emptyReason || !members.length;
   const n = members.length;
   const bold = style === 'bold';
   const tile = bold ? (n <= 5 ? 56 : n <= 7 ? 48 : 40) : n <= 5 ? 50 : n <= 7 ? 44 : n <= 10 ? 38 : 32;
   const r = n <= 5 ? 28 : n <= 7 ? 30 : 32;
-
-  function Avatar({ src, letter, size }: { src?: string; letter: string; size: number }) {
-    return (
-      <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#0D5CFF' }}>
-        {src ? (
-          <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} crossOrigin="anonymous" />
-        ) : (
-          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: size * 0.34, fontWeight: 700 }}>
-            {letter}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  function Node({ m, i, radius, size }: { m: Member; i: number; radius: number; size: number }) {
-    const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-    const x = 50 + Math.cos(a) * radius;
-    const y = 50 + Math.sin(a) * radius;
-    return (
-      <div style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
-        <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={size} />
-        <div style={{ marginTop: 4, fontSize: 9, fontWeight: 600, padding: '2px 7px', borderRadius: 999, background: '#fff', color: '#111', textAlign: 'center', lineHeight: 1.2 }}>
-          ${m.amount.toFixed(2)}
-        </div>
-      </div>
-    );
-  }
-
-  function Lines() {
-    if (style === 'halo') return null;
-    return (
-      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} viewBox="0 0 100 100">
-        {style === 'orbit' && members.map((_: any, i: number) => {
-          if (i === n - 1) return null;
-          const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
-          const a2 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
-          return <path key={i} d={`M ${50+Math.cos(a1)*r} ${50+Math.sin(a1)*r} Q 50 50 ${50+Math.cos(a2)*r} ${50+Math.sin(a2)*r}`} fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="0.7" />;
-        })}
-        {style === 'spokes' && members.map((_: any, i: number) => {
-          const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-          return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*(r+2)} y2={50+Math.sin(a)*(r+2)} stroke="#fff" strokeWidth={bold ? 2.2 : 1.2} />;
-        })}
-        {style === 'constellation' && members.map((_: any, i: number) => {
-          const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
-          const a2 = ((i + 2) / n) * Math.PI * 2 - Math.PI / 2;
-          return <line key={i} x1={50+Math.cos(a1)*r} y1={50+Math.sin(a1)*r} x2={50+Math.cos(a2)*r} y2={50+Math.sin(a2)*r} stroke="#fff" strokeWidth="0.65" />;
-        })}
-        {style === 'radar' && (
-          <>
-            <circle cx="50" cy="50" r="28" fill="none" stroke="#fff" strokeOpacity="0.25" strokeWidth="0.4" />
-            <line x1="50" y1="22" x2="50" y2="78" stroke="#fff" strokeOpacity="0.22" strokeWidth="0.35" />
-            <line x1="22" y1="50" x2="78" y2="50" stroke="#fff" strokeOpacity="0.22" strokeWidth="0.35" />
-          </>
-        )}
-      </svg>
-    );
-  }
 
   return (
     <div className="max-w-5xl mx-auto px-5 py-6 lg:py-10">
@@ -196,28 +157,18 @@ function PayPageInner() {
             </div>
           ) : (
             <>
-              <div className="mb-3">
-                <div className="flex flex-wrap gap-1.5">
-                  {STYLES.map((s) => (
-                    <button key={s.id} onClick={() => setStyle(s.id)} className={`px-2.5 py-1 text-[11px] rounded-full ${style === s.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'}`}>
-                      {s.label}
-                    </button>
-                  ))}
-                </div>
+              <div className="mb-3 flex flex-wrap gap-1.5">
+                {STYLES.map((s) => (
+                  <button key={s.id} onClick={() => setStyle(s.id)} className={`px-2.5 py-1 text-[11px] rounded-full ${style === s.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'}`}>
+                    {s.label}
+                  </button>
+                ))}
               </div>
 
               <div className="mb-3 flex flex-wrap gap-1.5">
                 {GRADS.map((g) => (
                   <button key={g.id} onClick={() => setGrad(g.id)} className={`px-2.5 py-1 text-[11px] rounded-full ${grad === g.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'}`}>
                     {g.name}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mb-3 flex gap-1.5">
-                {MARKS.map((m) => (
-                  <button key={m.id} onClick={() => setMark(m.id)} className={`px-2.5 py-1 text-[11px] rounded-full ${mark === m.id ? 'bg-[var(--accent)] text-white' : 'neu-btn text-[var(--text)]'}`}>
-                    {m.name}
                   </button>
                 ))}
               </div>
@@ -229,12 +180,8 @@ function PayPageInner() {
                     <div style={{ position: 'absolute', inset: '32%', borderRadius: '50%', border: '1px solid #fff', opacity: 0.3 }} />
                   </>
                 )}
-                {style === 'halo' && (
-                  <div style={{ position: 'absolute', inset: '16%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.22), transparent 68%)' }} />
-                )}
-                {style === 'bold' && (
-                  <div style={{ position: 'absolute', inset: '18%', borderRadius: '50%', border: '3px solid #fff', opacity: 0.7 }} />
-                )}
+                {style === 'halo' && <div style={{ position: 'absolute', inset: '16%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.22), transparent 68%)' }} />}
+                {style === 'bold' && <div style={{ position: 'absolute', inset: '18%', borderRadius: '50%', border: '3px solid #fff', opacity: 0.7 }} />}
                 {style === 'radar' && (
                   <>
                     <div style={{ position: 'absolute', inset: '22%', borderRadius: '50%', border: '1px solid #fff', opacity: 0.45 }} />
@@ -242,15 +189,48 @@ function PayPageInner() {
                   </>
                 )}
 
-                <Lines />
+                <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 100 100">
+                  {style === 'orbit' && members.map((_: any, i: number) => {
+                    if (i === n - 1) return null;
+                    const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
+                    const a2 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
+                    return <path key={i} d={`M ${50+Math.cos(a1)*r} ${50+Math.sin(a1)*r} Q 50 50 ${50+Math.cos(a2)*r} ${50+Math.sin(a2)*r}`} fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="0.7" />;
+                  })}
+                  {style === 'spokes' && members.map((_: any, i: number) => {
+                    const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+                    return <line key={i} x1="50" y1="50" x2={50+Math.cos(a)*(r+2)} y2={50+Math.sin(a)*(r+2)} stroke="#fff" strokeWidth={bold ? 2.2 : 1.2} />;
+                  })}
+                  {style === 'constellation' && members.map((_: any, i: number) => {
+                    const a1 = (i / n) * Math.PI * 2 - Math.PI / 2;
+                    const a2 = ((i + 2) / n) * Math.PI * 2 - Math.PI / 2;
+                    return <line key={i} x1={50+Math.cos(a1)*r} y1={50+Math.sin(a1)*r} x2={50+Math.cos(a2)*r} y2={50+Math.sin(a2)*r} stroke="#fff" strokeWidth="0.65" />;
+                  })}
+                  {style === 'radar' && (
+                    <>
+                      <circle cx="50" cy="50" r="28" fill="none" stroke="#fff" strokeOpacity="0.25" strokeWidth="0.4" />
+                      <line x1="50" y1="22" x2="50" y2="78" stroke="#fff" strokeOpacity="0.22" strokeWidth="0.35" />
+                      <line x1="22" y1="50" x2="78" y2="50" stroke="#fff" strokeOpacity="0.22" strokeWidth="0.35" />
+                    </>
+                  )}
+                </svg>
 
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
                   <Avatar src={centerPfp} letter={handle.slice(0, 1).toUpperCase()} size={bold ? 64 : n <= 5 ? 58 : 52} />
                 </div>
 
-                {members.map((m: Member, i: number) => (
-                  <Node key={i} m={m} i={i} radius={r} size={tile} />
-                ))}
+                {members.map((m: Member, i: number) => {
+                  const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+                  const x = 50 + Math.cos(a) * r;
+                  const y = 50 + Math.sin(a) * r;
+                  return (
+                    <div key={m.handle} style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 20 }}>
+                      <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
+                      <div style={{ marginTop: 4, fontSize: 9, fontWeight: 600, padding: '2px 7px', borderRadius: 999, background: '#fff', color: '#111', textAlign: 'center', lineHeight: 1.2 }}>
+                        ${m.amount.toFixed(2)}
+                      </div>
+                    </div>
+                  );
+                })}
 
                 <div style={{ position: 'absolute', bottom: 10, right: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30 }}>
                   <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.2, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginBottom: 2 }}>
@@ -262,7 +242,13 @@ function PayPageInner() {
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-3 flex items-center justify-end">
+                <button onClick={cycleMark} className="text-xs font-medium text-[var(--accent)]">
+                  {mark === 'paybox' ? 'PayBox' : mark === 'solana' ? 'Solana' : 'None'}
+                </button>
+              </div>
+
+              <div className="mt-3 grid grid-cols-2 gap-3">
                 <button onClick={download} className="py-3 text-sm font-medium text-white rounded-full" style={{ background: 'var(--accent)' }}>Download PNG</button>
                 <button onClick={copy} className="py-3 text-sm font-medium rounded-full border border-[var(--accent)] text-[var(--accent)]">{copied ? 'Copied' : 'Copy prompt'}</button>
               </div>
