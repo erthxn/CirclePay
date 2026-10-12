@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
+const LETTERS = ['C', 'I', 'R', 'C', 'L', 'E'];
+
 export default function CirclePage() {
   const router = useRouter();
   const [handle, setHandle] = useState('');
@@ -94,8 +96,6 @@ export default function CirclePage() {
     return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
   }
 
-  const estimate = Math.max(0, 8 - elapsed);
-
   return (
     <div className="max-w-md mx-auto px-5 py-6 min-h-[60vh]">
       <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Check your X circle</h1>
@@ -154,22 +154,23 @@ export default function CirclePage() {
         </div>
       ) : (
         <div className="mt-16 flex flex-col items-center justify-center min-h-[40vh]">
-          <div className="relative w-24 h-24">
-            <div className="absolute inset-0 rounded-full border-4 border-[var(--accent)]/20" />
-            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[var(--accent)] animate-spin" />
-            <div className="absolute inset-3 rounded-full border-2 border-[var(--accent)]/30" />
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {LETTERS.map((letter, i) => (
+              <div
+                key={i}
+                className="tile"
+                style={{ animationDelay: `${i * 0.18}s` }}
+              >
+                {letter}
+              </div>
+            ))}
           </div>
 
-          <p className="mt-10 text-xl font-semibold text-[var(--text)]">Reading @{handle.replace('@', '')}</p>
-          <p className="mt-2 text-sm text-[var(--text-muted)]">{phase}</p>
-
-          <div className="mt-8 flex items-baseline gap-1">
-            <span className="text-5xl font-bold tabular-nums text-[var(--accent)]">{elapsed}</span>
-            <span className="text-sm text-[var(--text-muted)]">s</span>
-          </div>
-          <p className="mt-1 text-xs text-[var(--text-muted)]">
-            {estimate > 0 ? `~${estimate}s remaining` : 'Almost done…'}
+          <p className="mt-10 text-lg font-semibold text-[var(--text)]">
+            Reading @{handle.replace('@', '')}
           </p>
+          <p className="mt-1.5 text-sm text-[var(--text-muted)]">{phase}</p>
+          <p className="mt-4 text-xs tabular-nums text-[var(--text-muted)]">{elapsed}s</p>
         </div>
       )}
     </div>

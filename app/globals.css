@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f4f1eb;
-  --bg-light: #fbfaf8;
-  --bg-dark: #e4e0d8;
+  --bg: #e8eaed;
+  --bg-light: #ffffff;
+  --bg-dark: #c5c8ce;
   --text: #1a1d24;
   --text-muted: #5c6370;
   --accent: #0D5CFF;
@@ -24,18 +24,18 @@ html, body {
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f4f1eb;
+  background: #e8eaed;
   min-height: 100vh;
 }
 
 .curve {
   position: absolute;
   border-radius: 50%;
-  background: #f4f1eb;
+  background: #e8eaed;
   box-shadow:
-    inset -8px -8px 16px rgba(228, 224, 216, 0.7),
-    inset 8px 8px 16px rgba(255, 255, 255, 0.8),
-    6px 6px 14px rgba(228, 224, 216, 0.45);
+    inset -8px -8px 16px rgba(197, 200, 206, 0.7),
+    inset 8px 8px 16px rgba(255, 255, 255, 0.85),
+    6px 6px 14px rgba(197, 200, 206, 0.45);
 }
 
 .curve-tr {
@@ -116,4 +116,45 @@ body {
 
 button, a {
   -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes tileFlip {
+  0%, 18% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-18px) rotate(-12deg);
+    opacity: 0.85;
+  }
+  35% {
+    transform: translateY(-8px) rotate(8deg);
+  }
+  45%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.tile {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  background: linear-gradient(145deg, #3d7bff, #0D5CFF);
+  box-shadow: 0 6px 14px rgba(13, 92, 255, 0.28);
+  animation: tileFlip 2.4s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .tile {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
 }
