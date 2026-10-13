@@ -32,6 +32,12 @@ export default function Home() {
         <Link href="/how-it-works" className="hover:text-[var(--text)]">How it works</Link>
         <Link href="/status" className="hover:text-[var(--text)]">Status</Link>
       </div>
+
+      <div className="mt-10 flex gap-4 text-[11px] text-[var(--text-muted)]">
+        <Link href="/terms" className="hover:text-[var(--text)]">Terms</Link>
+        <Link href="/privacy" className="hover:text-[var(--text)]">Privacy</Link>
+        <Link href="/disclaimer" className="hover:text-[var(--text)]">Disclaimer</Link>
+      </div>
     </div>
   );
 }
