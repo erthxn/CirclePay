@@ -23,7 +23,7 @@ async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000)
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {
-    const res = await fetch(url, { ...opts, signal: ctrl.signal });
+    const res = await fetch(url, { ...opts, signal: ctrl.signal, cache: 'no-store' });
     return res;
   } finally {
     clearTimeout(t);
@@ -31,42 +31,64 @@ async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000)
 }
 
 function normalizeTweets(raw: any[]): any[] {
-  return (raw || []).map((t: any) => ({
-    user: {
-      username: t.author?.screenName || t.author?.username || t.user?.username || t.user?.screen_name,
-      profile_image_url: t.author?.avatarUrl || t.user?.profile_image_url || t.author?.profile_image_url,
-    },
-    public_metrics: {
-      like_count: t.favoriteCount || t.likeCount || t.public_metrics?.like_count || 0,
-      reply_count: t.replyCount || t.public_metrics?.reply_count || 0,
-      quote_count: t.quoteCount || t.public_metrics?.quote_count || 0,
-    },
-    is_quote_status: !!t.isQuoteStatus || !!t.is_quote_status,
-    is_reply: !!t.isReply || !!t.is_reply,
-    text: t.text,
-  }));
+  return (raw || [])
+    .map((t: any) => {
+      const author = t.author || t.user || {};
+      const username =
+        author.screenName ||
+        author.username ||
+        author.screen_name ||
+        t.user?.username ||
+        t.user?.screen_name;
+      if (!username) return null;
+      return {
+        user: {
+          username,
+          profile_image_url: author.avatarUrl || author.profile_image_url || author.avatar_url,
+        },
+        public_metrics: {
+          like_count: t.favoriteCount || t.likeCount || t.likes || t.public_metrics?.like_count || 0,
+          reply_count: t.replyCount || t.replies || t.public_metrics?.reply_count || 0,
+          quote_count: t.quoteCount || t.quotes || t.public_metrics?.quote_count || 0,
+        },
+        is_quote_status: !!t.isQuoteStatus || !!t.is_quote_status,
+        is_reply: !!t.isReply || !!t.is_reply || !!t.inReplyToStatusId,
+        text: t.text,
+      };
+    })
+    .filter(Boolean);
+}
+
+async function pullPath(base: string, path: string) {
+  try {
+    const res = await fetchWithTimeout(base + path, {}, 10000);
+    if (!res.ok) return [];
+    const data = await res.json();
+    const tweets = data.data?.tweets || data.tweets || data.data || [];
+    return Array.isArray(tweets) ? normalizeTweets(tweets) : [];
+  } catch {
+    return [];
+  }
 }
 
 async function trySource(base: string, handle: string) {
-  // prefer mentions endpoint
-  const paths = [
-    `/api/mentions/${encodeURIComponent(handle)}?limit=30`,
-    `/api/timeline/${encodeURIComponent(handle)}?limit=20`,
-  ];
+  const [mentions, timeline] = await Promise.all([
+    pullPath(base, `/api/mentions/${encodeURIComponent(handle)}?limit=40`),
+    pullPath(base, `/api/timeline/${encodeURIComponent(handle)}?limit=30`),
+  ]);
 
-  for (const p of paths) {
-    try {
-      const res = await fetchWithTimeout(base + p, {}, 10000);
-      if (!res.ok) continue;
-      const data = await res.json();
-      const tweets = data.data?.tweets || data.tweets || data.data || [];
-      const list = Array.isArray(tweets) ? tweets : [];
-      if (list.length) return normalizeTweets(list);
-    } catch {
-      // next path
-    }
-  }
-  throw new Error('empty');
+  // prefer interactions about the user (mentions + timeline authors that aren't self)
+  const merged = [...mentions, ...timeline];
+  const seen = new Set<string>();
+  const unique = merged.filter((t) => {
+    const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  if (!unique.length) throw new Error('empty');
+  return unique;
 }
 
 async function trySorsa(handle: string) {
@@ -177,18 +199,15 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
 
       const data = await res.json();
       const d = data.data || data;
-      if (data.ok === false || data.error === 'NOT_FOUND') {
-        if (data.error === 'NOT_FOUND' || String(data.message || '').toLowerCase().includes('not found')) {
-          return { exists: false };
-        }
-        continue;
+      if (data.ok === false && (data.error === 'NOT_FOUND' || String(data.message || '').toLowerCase().includes('not found'))) {
+        return { exists: false };
       }
       const avatar = d.avatarUrl || d.profile_image_url || d.avatar_url;
-      if (avatar || d.screenName || d.username) {
+      if (avatar || d.screenName || d.username || d.screen_name) {
         return { pfp: higherResPfp(avatar), exists: true };
       }
     } catch {
-      // next source
+      // next
     }
   }
   return { exists: null };
