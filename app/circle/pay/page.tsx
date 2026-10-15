@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 
 type Member = { handle: string; score: number; amount: number; pfp?: string };
 type Style = 'orbit' | 'spokes' | 'constellation' | 'halo' | 'bold' | 'radar';
-type Mark = 'paybox' | 'solana' | 'none';
+type Mark = 'paybox' | 'migma' | 'solana' | 'none';
 type Grad = 'steel' | 'moon' | 'navy' | 'gold' | 'dusk' | 'ink';
 
 const STYLES: { id: Style; label: string }[] = [
@@ -28,6 +28,7 @@ const GRADS: { id: Grad; name: string; css: string; solid: string }[] = [
 
 const MARKS: { id: Mark; name: string }[] = [
   { id: 'paybox', name: 'PayBox' },
+  { id: 'migma', name: 'Migma' },
   { id: 'solana', name: 'Solana' },
   { id: 'none', name: 'None' },
 ];
@@ -48,7 +49,7 @@ const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; lette
 
 function PayBoxMark() {
   return (
-    <svg viewBox="90 90 220 220" width="28" height="28" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
+    <svg viewBox="90 90 220 220" width="26" height="26" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -58,9 +59,17 @@ function PayBoxMark() {
   );
 }
 
+function MigmaMark() {
+  return (
+    <svg viewBox="0 0 360 360" width="26" height="26" style={{ opacity: 0.92, transform: 'rotate(-8deg)', display: 'block' }}>
+      <polygon points="92,99 180,149 268,99 268,268 92,268" fill="#ffffff" />
+    </svg>
+  );
+}
+
 function SolanaMark() {
   return (
-    <svg viewBox="70 80 260 240" width="28" height="28" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
+    <svg viewBox="70 80 260 240" width="26" height="26" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
       <defs>
         <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
           <stop offset="0" stopColor="#14F195" />
@@ -143,8 +152,9 @@ function PayPageInner() {
   const tile = bold ? (n <= 5 ? 56 : n <= 7 ? 48 : 40) : n <= 5 ? 50 : n <= 7 ? 44 : n <= 10 ? 38 : 32;
   const pillH = 16;
   const gap = 4;
+  const pillW = tile + 6;
+  const nodeW = Math.max(tile, pillW);
   const nodeH = tile + gap + pillH;
-  const nodeW = tile + 18;
   const r = n <= 5 ? 28 : n <= 7 ? 30 : 32;
 
   return (
@@ -246,9 +256,10 @@ function PayPageInner() {
                       <div
                         style={{
                           position: 'absolute',
-                          left: 0,
+                          left: '50%',
                           top: tile + gap,
-                          width: nodeW,
+                          marginLeft: -(pillW / 2),
+                          width: pillW,
                           height: pillH,
                           fontSize: 9,
                           fontWeight: 600,
@@ -257,6 +268,9 @@ function PayPageInner() {
                           background: '#fff',
                           color: '#111',
                           textAlign: 'center',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
                       >
                         ${m.amount.toFixed(2)}
@@ -265,19 +279,20 @@ function PayPageInner() {
                   );
                 })}
 
-                <div style={{ position: 'absolute', bottom: 10, right: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30 }}>
+                <div style={{ position: 'absolute', bottom: 10, right: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 30 }}>
                   {mark === 'paybox' && <PayBoxMark />}
+                  {mark === 'migma' && <MigmaMark />}
                   {mark === 'solana' && <SolanaMark />}
-                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.1, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 2 }}>
+                  <div style={{ textAlign: 'center', fontSize: 10, lineHeight: 1.1, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 2 }}>
                     <div>@{handle}</div>
-                    <div style={{ opacity: 0.85 }}>circlepay.fun</div>
+                    <div style={{ opacity: 0.85 }}>circlepay.fyi</div>
                   </div>
                 </div>
               </div>
 
               <div className="mt-3 flex items-center justify-end">
                 <button onClick={cycleMark} className="text-xs font-medium text-[var(--accent)]">
-                  {mark === 'paybox' ? 'PayBox' : mark === 'solana' ? 'Solana' : 'None'}
+                  {mark === 'paybox' ? 'PayBox' : mark === 'migma' ? 'Migma' : mark === 'solana' ? 'Solana' : 'None'}
                 </button>
               </div>
 
