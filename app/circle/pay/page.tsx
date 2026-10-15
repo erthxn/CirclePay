@@ -34,7 +34,7 @@ const MARKS: { id: Mark; name: string }[] = [
 
 const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; letter: string; size: number }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#1a1d24', flexShrink: 0, margin: '0 auto' }}>
+    <div style={{ width: size, height: size, borderRadius: '50%', border: '2px solid #fff', overflow: 'hidden', background: '#1a1d24', flexShrink: 0 }}>
       {src ? (
         <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} crossOrigin="anonymous" />
       ) : (
@@ -48,7 +48,7 @@ const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; lette
 
 function PayBoxMark() {
   return (
-    <svg viewBox="90 90 220 220" width="28" height="28" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block', marginBottom: -2 }}>
+    <svg viewBox="90 90 220 220" width="28" height="28" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -60,7 +60,7 @@ function PayBoxMark() {
 
 function SolanaMark() {
   return (
-    <svg viewBox="70 80 260 240" width="28" height="28" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block', marginBottom: -2 }}>
+    <svg viewBox="70 80 260 240" width="28" height="28" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
       <defs>
         <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
           <stop offset="0" stopColor="#14F195" />
@@ -141,7 +141,10 @@ function PayPageInner() {
   const n = members.length;
   const bold = style === 'bold';
   const tile = bold ? (n <= 5 ? 56 : n <= 7 ? 48 : 40) : n <= 5 ? 50 : n <= 7 ? 44 : n <= 10 ? 38 : 32;
-  const box = tile + 14;
+  const pillH = 16;
+  const gap = 4;
+  const nodeH = tile + gap + pillH;
+  const nodeW = tile + 18;
   const r = n <= 5 ? 28 : n <= 7 ? 30 : 32;
 
   return (
@@ -230,27 +233,30 @@ function PayPageInner() {
                         position: 'absolute',
                         left: `${x}%`,
                         top: `${y}%`,
-                        width: box,
-                        marginLeft: -(box / 2),
+                        width: nodeW,
+                        height: nodeH,
+                        marginLeft: -(nodeW / 2),
                         marginTop: -(tile / 2),
-                        textAlign: 'center',
                         zIndex: 20,
                       }}
                     >
-                      <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
+                      <div style={{ position: 'absolute', left: '50%', top: 0, marginLeft: -(tile / 2) }}>
+                        <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
+                      </div>
                       <div
                         style={{
-                          marginTop: 4,
+                          position: 'absolute',
+                          left: 0,
+                          top: tile + gap,
+                          width: nodeW,
+                          height: pillH,
                           fontSize: 9,
                           fontWeight: 600,
-                          padding: '2px 0',
-                          width: box,
+                          lineHeight: `${pillH}px`,
                           borderRadius: 999,
                           background: '#fff',
                           color: '#111',
                           textAlign: 'center',
-                          lineHeight: 1.2,
-                          display: 'block',
                         }}
                       >
                         ${m.amount.toFixed(2)}
@@ -262,7 +268,7 @@ function PayPageInner() {
                 <div style={{ position: 'absolute', bottom: 10, right: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 30 }}>
                   {mark === 'paybox' && <PayBoxMark />}
                   {mark === 'solana' && <SolanaMark />}
-                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.1, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 1 }}>
+                  <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.1, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.45)', marginTop: 2 }}>
                     <div>@{handle}</div>
                     <div style={{ opacity: 0.85 }}>circlepay.fun</div>
                   </div>

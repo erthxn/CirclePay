@@ -75,7 +75,6 @@ export default function CirclePage() {
 
       const data = await res.json();
 
-      // once we know the outcome, stop the scripted steps and say the truth
       lockedRef.current = true;
       if (timerRef.current) clearInterval(timerRef.current);
 
@@ -150,7 +149,7 @@ export default function CirclePage() {
                 onChange={(e) => setCount(Number(e.target.value))}
                 className="neu-input w-full px-4 py-3.5 text-sm appearance-none"
               >
-                {[5, 10, 20, 25].map((n) => (
+                {[5, 7, 10, 15].map((n) => (
                   <option key={n} value={n}>{n}</option>
                 ))}
               </select>
