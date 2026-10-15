@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const SOURCES = [
-  { id: 'plus', base: 'https://blitzyxsc-plus.vercel.app' },
-  { id: 'nx', base: 'https://blitzyxsc-nx.vercel.app' },
-  { id: 'go', base: 'https://blitzyxsc-go.vercel.app' },
-  { id: 'nd', base: 'https://blitzyxsc-nd.vercel.app' },
-  { id: 'py', base: 'https://blitzyxsc.vercel.app' },
+const PRIMARY = 'https://blitzyxsc.vercel.app';
+const FALLBACKS = [
+  'https://blitzyxsc-plus.vercel.app',
+  'https://blitzyxsc-nx.vercel.app',
+  'https://blitzyxsc-go.vercel.app',
+  'https://blitzyxsc-nd.vercel.app',
 ];
 
 const SORSA_BASE = 'https://api.sorsa.io/v3';
@@ -23,8 +23,7 @@ async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000)
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {
-    const res = await fetch(url, { ...opts, signal: ctrl.signal, cache: 'no-store' });
-    return res;
+    return await fetch(url, { ...opts, signal: ctrl.signal, cache: 'no-store' });
   } finally {
     clearTimeout(t);
   }
@@ -44,14 +43,14 @@ function normalizeTweets(raw: any[]): any[] {
       return {
         user: {
           username,
-          profile_image_url: author.avatarUrl || author.profile_image_url || author.avatar_url,
+          profile_image_url: author.avatarUrl || author.profile_image_url || author.avatar_url || author.profileImageUrl,
         },
         public_metrics: {
           like_count: t.favoriteCount || t.likeCount || t.likes || t.public_metrics?.like_count || 0,
           reply_count: t.replyCount || t.replies || t.public_metrics?.reply_count || 0,
           quote_count: t.quoteCount || t.quotes || t.public_metrics?.quote_count || 0,
         },
-        is_quote_status: !!t.isQuoteStatus || !!t.is_quote_status,
+        is_quote_status: !!t.isQuoteStatus || !!t.is_quote_status || !!t.is_quote,
         is_reply: !!t.isReply || !!t.is_reply || !!t.inReplyToStatusId,
         text: t.text,
       };
@@ -64,20 +63,44 @@ async function pullPath(base: string, path: string) {
     const res = await fetchWithTimeout(base + path, {}, 10000);
     if (!res.ok) return [];
     const data = await res.json();
-    const tweets = data.data?.tweets || data.tweets || data.data || [];
+    const tweets =
+      data.data?.tweets ||
+      data.tweets ||
+      data.data ||
+      data.items ||
+      (Array.isArray(data) ? data : []);
     return Array.isArray(tweets) ? normalizeTweets(tweets) : [];
   } catch {
     return [];
   }
 }
 
-async function trySource(base: string, handle: string) {
+async function tryPrimary(handle: string) {
+  const [quotes, mentions, timeline] = await Promise.all([
+    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=30`),
+    pullPath(PRIMARY, `/mentions/${encodeURIComponent(handle)}?limit=40`),
+    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}?limit=20`),
+  ]);
+
+  const merged = [...quotes, ...mentions, ...timeline];
+  const seen = new Set<string>();
+  const unique = merged.filter((t) => {
+    const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  if (!unique.length) throw new Error('empty');
+  return unique;
+}
+
+async function tryFallback(base: string, handle: string) {
   const [mentions, timeline] = await Promise.all([
     pullPath(base, `/api/mentions/${encodeURIComponent(handle)}?limit=40`),
     pullPath(base, `/api/timeline/${encodeURIComponent(handle)}?limit=30`),
   ]);
 
-  // prefer interactions about the user (mentions + timeline authors that aren't self)
   const merged = [...mentions, ...timeline];
   const seen = new Set<string>();
   const unique = merged.filter((t) => {
@@ -190,9 +213,26 @@ async function tryX(handle: string) {
 }
 
 async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
-  for (const s of SOURCES) {
+  // primary first
+  try {
+    const res = await fetchWithTimeout(`${PRIMARY}/profile/${encodeURIComponent(handle)}`, {}, 8000);
+    if (res.ok) {
+      const data = await res.json();
+      const d = data.data || data.profile || data;
+      const avatar = d.avatarUrl || d.avatar || d.profile_image_url || d.avatar_url;
+      if (d.screenName || d.username || d.screen_name || avatar) {
+        return { pfp: higherResPfp(avatar), exists: true };
+      }
+    } else if (res.status === 404) {
+      return { exists: false };
+    }
+  } catch {
+    // fall through
+  }
+
+  for (const base of FALLBACKS) {
     try {
-      const res = await fetchWithTimeout(`${s.base}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
+      const res = await fetchWithTimeout(`${base}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
       if (res.status === 429) return { exists: null, rateLimited: true };
       if (res.status === 404) return { exists: false };
       if (!res.ok) continue;
@@ -317,7 +357,8 @@ export async function POST(req: NextRequest) {
     let source = 'none';
 
     const chain: { name: string; fn: () => Promise<any[]> }[] = [
-      ...SOURCES.map((s) => ({ name: s.id, fn: () => trySource(s.base, h) })),
+      { name: 'primary', fn: () => tryPrimary(h) },
+      ...FALLBACKS.map((base, i) => ({ name: `fb${i}`, fn: () => tryFallback(base, h) })),
       { name: 'sorsa', fn: () => trySorsa(h) },
       { name: 'rapid', fn: () => tryRapid(h) },
       { name: 'apify', fn: () => tryApify(h) },
