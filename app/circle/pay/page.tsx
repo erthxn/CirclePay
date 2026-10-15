@@ -49,7 +49,7 @@ const Avatar = memo(function Avatar({ src, letter, size }: { src?: string; lette
 
 function PayBoxMark() {
   return (
-    <svg viewBox="90 90 220 220" width="32" height="32" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
+    <svg viewBox="90 90 220 220" width="34" height="34" style={{ opacity: 0.9, transform: 'rotate(-16deg)', display: 'block' }}>
       <g fill="#ffffff">
         <path d="M108 148 L190 95 L190 165 Q188 190 172 208 L108 242 Z" />
         <path d="M297 148 L210 95 L210 165 Q212 190 228 208 L297 242 Z" />
@@ -61,7 +61,7 @@ function PayBoxMark() {
 
 function MigmaMark() {
   return (
-    <svg viewBox="0 0 360 360" width="36" height="36" style={{ opacity: 0.95, display: 'block' }}>
+    <svg viewBox="0 0 360 360" width="44" height="44" style={{ opacity: 0.95, display: 'block' }}>
       <polygon points="92,99 180,149 268,99 268,268 92,268" fill="#ffffff" />
     </svg>
   );
@@ -69,7 +69,7 @@ function MigmaMark() {
 
 function SolanaMark() {
   return (
-    <svg viewBox="70 80 260 240" width="32" height="32" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
+    <svg viewBox="70 80 260 240" width="34" height="34" style={{ opacity: 0.95, transform: 'rotate(-16deg)', display: 'block' }}>
       <defs>
         <linearGradient id="solg" x1="320" y1="90" x2="80" y2="310">
           <stop offset="0" stopColor="#14F195" />
@@ -151,8 +151,8 @@ function PayPageInner() {
   const bold = style === 'bold';
   const tile = bold ? (n <= 5 ? 56 : n <= 7 ? 48 : 40) : n <= 5 ? 50 : n <= 7 ? 44 : n <= 10 ? 38 : 32;
   const pillH = 18;
-  const gap = 6;
-  const pillW = tile + 10;
+  const gap = 5;
+  const pillW = tile + 8;
   const r = n <= 5 ? 30 : n <= 7 ? 32 : 34;
 
   return (
@@ -250,7 +250,9 @@ function PayPageInner() {
                         alignItems: 'center',
                       }}
                     >
-                      <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
+                      <div style={{ width: tile, height: tile }}>
+                        <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
+                      </div>
                       <div
                         style={{
                           marginTop: gap,
@@ -274,11 +276,11 @@ function PayPageInner() {
                   );
                 })}
 
-                <div style={{ position: 'absolute', bottom: 8, right: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 30 }}>
+                <div style={{ position: 'absolute', bottom: 6, right: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 30 }}>
                   {mark === 'paybox' && <PayBoxMark />}
                   {mark === 'migma' && <MigmaMark />}
                   {mark === 'solana' && <SolanaMark />}
-                  <div style={{ textAlign: 'center', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.5)', marginTop: 4 }}>
+                  <div style={{ textAlign: 'center', fontSize: 10, lineHeight: 1.15, color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.5)', marginTop: 2 }}>
                     <div>@{handle}</div>
                     <div style={{ opacity: 0.85 }}>circlepay.fyi</div>
                   </div>
