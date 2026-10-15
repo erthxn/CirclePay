@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const BLITZ_BASE = 'https://blitzyxsc-plus.blitzx.workers.dev';
+const SOURCES = [
+  { id: 'plus', base: 'https://blitzyxsc-plus.vercel.app' },
+  { id: 'nx', base: 'https://blitzyxsc-nx.vercel.app' },
+  { id: 'go', base: 'https://blitzyxsc-go.vercel.app' },
+  { id: 'nd', base: 'https://blitzyxsc-nd.vercel.app' },
+  { id: 'py', base: 'https://blitzyxsc.vercel.app' },
+];
+
 const SORSA_BASE = 'https://api.sorsa.io/v3';
 
 function higherResPfp(url?: string) {
@@ -23,31 +30,43 @@ async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000)
   }
 }
 
-async function tryBlitz(handle: string) {
-  const res = await fetchWithTimeout(
-    `${BLITZ_BASE}/api/mentions/${encodeURIComponent(handle)}?limit=25`,
-    {},
-    10000
-  );
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'Blitz failed');
-
-  const tweets = data.data?.tweets || [];
-  return tweets.map((t: any) => ({
+function normalizeTweets(raw: any[]): any[] {
+  return (raw || []).map((t: any) => ({
     user: {
-      username: t.author?.screenName || t.author?.username,
-      profile_image_url: t.author?.avatarUrl,
+      username: t.author?.screenName || t.author?.username || t.user?.username || t.user?.screen_name,
+      profile_image_url: t.author?.avatarUrl || t.user?.profile_image_url || t.author?.profile_image_url,
     },
     public_metrics: {
-      like_count: t.favoriteCount || t.likeCount || 0,
-      reply_count: t.replyCount || 0,
-      quote_count: t.quoteCount || 0,
+      like_count: t.favoriteCount || t.likeCount || t.public_metrics?.like_count || 0,
+      reply_count: t.replyCount || t.public_metrics?.reply_count || 0,
+      quote_count: t.quoteCount || t.public_metrics?.quote_count || 0,
     },
-    is_quote_status: !!t.isQuoteStatus,
-    is_reply: !!t.isReply,
+    is_quote_status: !!t.isQuoteStatus || !!t.is_quote_status,
+    is_reply: !!t.isReply || !!t.is_reply,
     text: t.text,
   }));
+}
+
+async function trySource(base: string, handle: string) {
+  // prefer mentions endpoint
+  const paths = [
+    `/api/mentions/${encodeURIComponent(handle)}?limit=30`,
+    `/api/timeline/${encodeURIComponent(handle)}?limit=20`,
+  ];
+
+  for (const p of paths) {
+    try {
+      const res = await fetchWithTimeout(base + p, {}, 10000);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const tweets = data.data?.tweets || data.tweets || data.data || [];
+      const list = Array.isArray(tweets) ? tweets : [];
+      if (list.length) return normalizeTweets(list);
+    } catch {
+      // next path
+    }
+  }
+  throw new Error('empty');
 }
 
 async function trySorsa(handle: string) {
@@ -67,7 +86,8 @@ async function trySorsa(handle: string) {
   );
 
   if (!res.ok) throw new Error(await res.text());
-  return res.json();
+  const d = await res.json();
+  return normalizeTweets(d.tweets || d.data || []);
 }
 
 async function tryRapid(handle: string) {
@@ -92,19 +112,7 @@ async function tryRapid(handle: string) {
   const data = await res.json();
 
   const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
-  return (Array.isArray(items) ? items : []).map((t: any) => ({
-    user: {
-      username: t.user?.screen_name || t.author?.username || t.user?.username || t.legacy?.user?.screen_name,
-      profile_image_url: t.user?.profile_image_url || t.author?.profile_image_url || t.legacy?.user?.profile_image_url_https,
-    },
-    public_metrics: {
-      like_count: t.favorite_count || t.like_count || t.legacy?.favorite_count || 0,
-      reply_count: t.reply_count || t.legacy?.reply_count || 0,
-      quote_count: t.quote_count || t.legacy?.quote_count || 0,
-    },
-    is_quote_status: t.is_quote_status || false,
-    is_reply: t.in_reply_to_status_id != null || t.is_reply || false,
-  }));
+  return normalizeTweets(Array.isArray(items) ? items : []);
 }
 
 async function tryApify(handle: string) {
@@ -130,20 +138,7 @@ async function tryApify(handle: string) {
 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const items = await res.json();
-
-  return (items || []).map((t: any) => ({
-    user: {
-      username: t.author?.username || t.user?.username,
-      profile_image_url: t.author?.profileImageUrl || t.user?.profile_image_url,
-    },
-    public_metrics: {
-      like_count: t.likeCount || t.favorite_count || 0,
-      reply_count: t.replyCount || 0,
-      quote_count: t.quoteCount || 0,
-    },
-    is_quote_status: t.isQuoteStatus || false,
-    is_reply: t.isReply || false,
-  }));
+  return normalizeTweets(items || []);
 }
 
 async function tryX(handle: string) {
@@ -159,37 +154,44 @@ async function tryX(handle: string) {
     12000
   );
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const x = await res.json();
+  const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
+  return (x.data || []).map((t: any) => ({
+    user: {
+      username: users[t.author_id]?.username,
+      profile_image_url: users[t.author_id]?.profile_image_url,
+    },
+    public_metrics: t.public_metrics || {},
+    is_quote_status: false,
+    is_reply: !!t.in_reply_to_user_id,
+  }));
 }
 
 async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
-  try {
-    const res = await fetchWithTimeout(
-      `${BLITZ_BASE}/api/profile/${encodeURIComponent(handle)}`,
-      {},
-      8000
-    );
-    if (res.status === 429) return { exists: null, rateLimited: true };
-    if (res.status === 404) return { exists: false };
-    if (!res.ok) return { exists: null };
+  for (const s of SOURCES) {
+    try {
+      const res = await fetchWithTimeout(`${s.base}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
+      if (res.status === 429) return { exists: null, rateLimited: true };
+      if (res.status === 404) return { exists: false };
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.statusCode === 429 || data.error === 'RATE_LIMITED') {
-      return { exists: null, rateLimited: true };
-    }
-    if (!data.ok || !data.data) {
-      if (data.error === 'NOT_FOUND' || data.message?.toLowerCase().includes('not found')) {
-        return { exists: false };
+      const data = await res.json();
+      const d = data.data || data;
+      if (data.ok === false || data.error === 'NOT_FOUND') {
+        if (data.error === 'NOT_FOUND' || String(data.message || '').toLowerCase().includes('not found')) {
+          return { exists: false };
+        }
+        continue;
       }
-      return { exists: null };
+      const avatar = d.avatarUrl || d.profile_image_url || d.avatar_url;
+      if (avatar || d.screenName || d.username) {
+        return { pfp: higherResPfp(avatar), exists: true };
+      }
+    } catch {
+      // next source
     }
-    return {
-      pfp: higherResPfp(data.data?.avatarUrl || data.data?.profile_image_url),
-      exists: true,
-    };
-  } catch {
-    return { exists: null };
   }
+  return { exists: null };
 }
 
 function scoreInteractions(tweets: any[], selfHandle: string) {
@@ -232,14 +234,12 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
 }
 
 function distribute(ranked: { score: number }[], poolNum: number) {
-  // compress scores so top isn't 70%+
   const compressed = ranked.map((m) => Math.pow(Math.max(m.score, 0.1), 0.42));
   const total = compressed.reduce((s, n) => s + n, 0) || 1;
   let remainingCents = Math.round(poolNum * 100);
 
   const raw = compressed.map((c) => Math.floor((c / total) * remainingCents));
 
-  // soft cap: no one above ~38% of pool
   const cap = Math.floor(remainingCents * 0.38);
   let excess = 0;
   for (let i = 0; i < raw.length; i++) {
@@ -249,7 +249,6 @@ function distribute(ranked: { score: number }[], poolNum: number) {
     }
   }
 
-  // redistribute excess to the rest, proportionally, respecting cap
   if (excess > 0) {
     const open = raw.map((n, i) => (n < cap ? i : -1)).filter((i) => i >= 0);
     let guard = 0;
@@ -296,32 +295,21 @@ export async function POST(req: NextRequest) {
     }
 
     let tweets: any[] = [];
-    let source = 'blitz';
+    let source = 'none';
 
-    const sources = [
-      { name: 'blitz', fn: () => tryBlitz(h) },
-      { name: 'sorsa', fn: () => trySorsa(h).then((d) => d.tweets || []) },
+    const chain: { name: string; fn: () => Promise<any[]> }[] = [
+      ...SOURCES.map((s) => ({ name: s.id, fn: () => trySource(s.base, h) })),
+      { name: 'sorsa', fn: () => trySorsa(h) },
       { name: 'rapid', fn: () => tryRapid(h) },
       { name: 'apify', fn: () => tryApify(h) },
-      {
-        name: 'x',
-        fn: async () => {
-          const x = await tryX(h);
-          const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
-          return (x.data || []).map((t: any) => ({
-            ...t,
-            user: users[t.author_id] || {},
-            is_reply: !!t.in_reply_to_user_id,
-            is_quote_status: false,
-          }));
-        },
-      },
+      { name: 'x', fn: () => tryX(h) },
     ];
 
-    for (const s of sources) {
+    for (const s of chain) {
       try {
-        tweets = await s.fn();
-        if (tweets.length) {
+        const got = await s.fn();
+        if (got && got.length) {
+          tweets = got;
           source = s.name;
           break;
         }

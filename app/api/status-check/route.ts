@@ -1,18 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const BLITZ_SOURCES = [
+  { id: 'plus', base: 'https://blitzyxsc-plus.vercel.app' },
+  { id: 'nx', base: 'https://blitzyxsc-nx.vercel.app' },
+  { id: 'go', base: 'https://blitzyxsc-go.vercel.app' },
+  { id: 'nd', base: 'https://blitzyxsc-nd.vercel.app' },
+  { id: 'py', base: 'https://blitzyxsc.vercel.app' },
+];
+
 export async function GET(req: NextRequest) {
   const source = req.nextUrl.searchParams.get('source');
 
   try {
-    if (source === 'blitz') {
-      const r = await fetch('https://blitzyxsc-plus.blitzx.workers.dev/api/profile/erthxn');
-      const ok = r.ok;
-      let detail = ok ? 'Reachable' : `HTTP ${r.status}`;
-      if (ok) {
-        const data = await r.json();
-        if (!data.ok) detail = data.error || 'Not ok';
+    const blitz = BLITZ_SOURCES.find((s) => s.id === source);
+    if (blitz) {
+      const r = await fetch(`${blitz.base}/health`, { signal: AbortSignal.timeout(8000) }).catch(() => null);
+      if (!r) {
+        const r2 = await fetch(`${blitz.base}/api/profile/erthxn`, { signal: AbortSignal.timeout(8000) }).catch(() => null);
+        return NextResponse.json({ ok: !!r2?.ok, detail: r2?.ok ? 'Reachable' : 'Down' });
       }
-      return NextResponse.json({ ok, detail });
+      return NextResponse.json({ ok: r.ok, detail: r.ok ? 'Reachable' : `HTTP ${r.status}` });
     }
 
     if (source === 'sorsa') {
