@@ -26,8 +26,10 @@ export default function CirclePage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [thought, setThought] = useState('');
+  const [challenge, setChallenge] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lockedRef = useRef(false);
+  const pageLoad = useRef(Date.now());
 
   useEffect(() => {
     return () => {
@@ -35,7 +37,7 @@ export default function CirclePage() {
     };
   }, []);
 
-  async function run() {
+  async function run(withProof = false) {
     const h = handle.trim().replace('@', '');
     if (!h) {
       setError('Please enter your X handle');
@@ -50,6 +52,7 @@ export default function CirclePage() {
     const steps = stepsFor(h);
     lockedRef.current = false;
     setError('');
+    setChallenge(false);
     setLoading(true);
     setThought(steps[0]);
 
@@ -65,10 +68,13 @@ export default function CirclePage() {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 28000);
 
+      const body: any = { handle: h, count, pool: p };
+      if (withProof) body.proof = pageLoad.current;
+
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ handle: h, count, pool: p }),
+        body: JSON.stringify(body),
         signal: controller.signal,
       });
       clearTimeout(timeout);
@@ -77,6 +83,20 @@ export default function CirclePage() {
 
       lockedRef.current = true;
       if (timerRef.current) clearInterval(timerRef.current);
+
+      // Medium risk — ask for confirmation, don't burn sources
+      if (res.status === 428 && data.challenge) {
+        setLoading(false);
+        setChallenge(true);
+        return;
+      }
+
+      // Rate limited or blocked
+      if (res.status === 429) {
+        setLoading(false);
+        setError(data.error || 'Too many requests. Try again later.');
+        return;
+      }
 
       if (data.emptyReason === 'not_found') {
         setThought(`couldn't find @${h}`);
@@ -169,13 +189,28 @@ export default function CirclePage() {
 
           {error && <p className="text-xs text-red-600">{error}</p>}
 
-          <button
-            onClick={run}
-            className="w-full py-3.5 text-sm font-medium text-white rounded-full"
-            style={{ background: 'var(--accent)', boxShadow: '0 8px 20px rgba(13,92,255,0.3)' }}
-          >
-            Analyze & generate prompt
-          </button>
+          {challenge && (
+            <div className="neu-raised p-4 text-center">
+              <p className="text-sm text-[var(--text)] mb-3">Quick check before we run this</p>
+              <button
+                onClick={() => run(true)}
+                className="px-5 py-2.5 text-sm font-medium text-white rounded-full"
+                style={{ background: 'var(--accent)' }}
+              >
+                I'm not a bot
+              </button>
+            </div>
+          )}
+
+          {!challenge && (
+            <button
+              onClick={() => run(false)}
+              className="w-full py-3.5 text-sm font-medium text-white rounded-full"
+              style={{ background: 'var(--accent)', boxShadow: '0 8px 20px rgba(13,92,255,0.3)' }}
+            >
+              Analyze & generate prompt
+            </button>
+          )}
         </div>
       ) : (
         <div className="mt-16 flex flex-col items-center justify-center min-h-[40vh]">

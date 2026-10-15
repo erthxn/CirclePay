@@ -13,6 +13,13 @@ const SORSA_BASE = 'https://api.sorsa.io/v3';
 const cache = new Map<string, { at: number; data: any }>();
 const CACHE_MS = 8 * 60 * 1000;
 
+// Risk / rate limit state (warm lambda only — good enough for now)
+const ipHits = new Map<string, number[]>();
+const handleLast = new Map<string, number>();
+const IP_WINDOW = 10 * 60 * 1000;
+const IP_MAX = 6;
+const HANDLE_COOLDOWN = 3 * 60 * 1000;
+
 function higherResPfp(url?: string) {
   if (!url) return undefined;
   return url
@@ -30,6 +37,85 @@ function isValidHandle(h?: string) {
   if (!/^[A-Za-z0-9_]+$/.test(clean)) return false;
   if (/^(RT|R|by|to|from|via)$/i.test(clean)) return false;
   return true;
+}
+
+function getIp(req: NextRequest) {
+  const fwd = req.headers.get('x-forwarded-for') || '';
+  return fwd.split(',')[0].trim() || req.headers.get('x-real-ip') || 'unknown';
+}
+
+function riskScore(req: NextRequest, handle: string) {
+  let score = 0;
+  const reasons: string[] = [];
+
+  const ua = req.headers.get('user-agent') || '';
+  if (!ua || ua.length < 12) {
+    score += 40;
+    reasons.push('missing-ua');
+  } else if (/bot|crawl|spider|python|curl|wget|scrapy|axios|node-fetch/i.test(ua)) {
+    score += 50;
+    reasons.push('bot-ua');
+  }
+
+  const referer = req.headers.get('referer') || '';
+  const origin = req.headers.get('origin') || '';
+  const allowed = ['circlepay.fun', 'circlepay.fyi', 'vercel.app', 'localhost'];
+  const fromSite = allowed.some((d) => referer.includes(d) || origin.includes(d));
+  if (!fromSite && !referer && !origin) {
+    score += 25;
+    reasons.push('no-origin');
+  }
+
+  // Rapid burst from this IP
+  const ip = getIp(req);
+  const now = Date.now();
+  const hits = (ipHits.get(ip) || []).filter((t) => now - t < 60 * 1000);
+  if (hits.length >= 4) {
+    score += 35;
+    reasons.push('burst');
+  }
+
+  // Same handle hammered recently (any IP)
+  const last = handleLast.get(handle.toLowerCase()) || 0;
+  if (now - last < 30 * 1000) {
+    score += 20;
+    reasons.push('handle-burst');
+  }
+
+  return { score, reasons };
+}
+
+function checkLimits(req: NextRequest, handle: string) {
+  const ip = getIp(req);
+  const now = Date.now();
+  const key = handle.toLowerCase();
+
+  // Per-IP window
+  const hits = (ipHits.get(ip) || []).filter((t) => now - t < IP_WINDOW);
+  if (hits.length >= IP_MAX) {
+    return { ok: false, status: 429, error: 'Too many checks from this network. Try again in a few minutes.' };
+  }
+
+  // Per-handle cooldown
+  const last = handleLast.get(key) || 0;
+  if (now - last < HANDLE_COOLDOWN) {
+    const wait = Math.ceil((HANDLE_COOLDOWN - (now - last)) / 1000);
+    return { ok: false, status: 429, error: `This handle was checked recently. Wait ${wait}s.` };
+  }
+
+  // Record
+  hits.push(now);
+  ipHits.set(ip, hits);
+  handleLast.set(key, now);
+
+  // Cleanup occasionally
+  if (ipHits.size > 5000) {
+    for (const [k, arr] of ipHits) {
+      if (!arr.some((t) => now - t < IP_WINDOW)) ipHits.delete(k);
+    }
+  }
+
+  return { ok: true };
 }
 
 async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 15000) {
@@ -341,9 +427,39 @@ function distribute(ranked: { score: number }[], poolNum: number) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { handle, count = 5, pool = 20 } = await req.json();
+    const body = await req.json();
+    const { handle, count = 5, pool = 20, proof } = body;
     const h = String(handle || '').replace('@', '').trim();
     if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
+
+    // --- Risk check before any expensive work ---
+    const risk = riskScore(req, h);
+
+    // High risk: refuse without touching sources
+    if (risk.score >= 70) {
+      return NextResponse.json(
+        { error: 'Request blocked', challenge: false },
+        { status: 429 }
+      );
+    }
+
+    // Medium risk: require a simple proof (client confirms after a short delay)
+    // proof is a timestamp the page set when it loaded; must be 1.5–30s ago
+    if (risk.score >= 35) {
+      const now = Date.now();
+      const ts = Number(proof);
+      if (!ts || now - ts < 1500 || now - ts > 30000) {
+        return NextResponse.json(
+          { challenge: true, error: 'Please confirm and try again' },
+          { status: 428 }
+        );
+      }
+    }
+
+    const limit = checkLimits(req, h);
+    if (!limit.ok) {
+      return NextResponse.json({ error: limit.error }, { status: limit.status });
+    }
 
     const cacheKey = `${h.toLowerCase()}|${count}|${pool}`;
     const hit = cache.get(cacheKey);
