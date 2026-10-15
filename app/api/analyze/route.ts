@@ -10,7 +10,6 @@ const OTHERS = [
 
 const SORSA_BASE = 'https://api.sorsa.io/v3';
 
-// simple in-memory cache (survives warm lambda)
 const cache = new Map<string, { at: number; data: any }>();
 const CACHE_MS = 8 * 60 * 1000;
 
@@ -33,7 +32,7 @@ function isValidHandle(h?: string) {
   return true;
 }
 
-async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000) {
+async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 15000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {
@@ -74,7 +73,7 @@ function normalizeTweets(raw: any[]): any[] {
 
 async function pullPath(base: string, path: string) {
   try {
-    const res = await fetchWithTimeout(base + path, {}, 10000);
+    const res = await fetchWithTimeout(base + path, {}, 12000);
     if (!res.ok) return [];
     const data = await res.json();
     const tweets =
@@ -90,129 +89,135 @@ async function pullPath(base: string, path: string) {
 }
 
 async function tryPlus(handle: string) {
-  const [timeline, mentions] = await Promise.all([
-    pullPath(PLUS, `/api/timeline/${encodeURIComponent(handle)}?limit=40`),
-    pullPath(PLUS, `/api/mentions/${encodeURIComponent(handle)}?limit=30`),
+  const results = await Promise.allSettled([
+    pullPath(PLUS, `/api/timeline/${encodeURIComponent(handle)}?limit=50`),
+    pullPath(PLUS, `/api/mentions/${encodeURIComponent(handle)}?limit=40`),
   ]);
-
-  const merged = [...timeline, ...mentions];
+  const all = results.flatMap((r) => (r.status === 'fulfilled' ? r.value : []));
   const seen = new Set<string>();
-  const unique = merged.filter((t) => {
+  return all.filter((t) => {
     const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
-
-  if (!unique.length) throw new Error('empty');
-  return unique;
 }
 
 async function tryPrimary(handle: string) {
-  const [quotes, mentions, timeline] = await Promise.all([
+  const results = await Promise.allSettled([
     pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=30`),
     pullPath(PRIMARY, `/mentions/${encodeURIComponent(handle)}?limit=30`),
     pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}?limit=20`),
   ]);
-
-  const merged = [...quotes, ...mentions, ...timeline];
+  const all = results.flatMap((r) => (r.status === 'fulfilled' ? r.value : []));
   const seen = new Set<string>();
-  const unique = merged.filter((t) => {
+  return all.filter((t) => {
     const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
-
-  if (!unique.length) throw new Error('empty');
-  return unique;
 }
 
 async function tryOther(base: string, handle: string) {
-  const [mentions, timeline] = await Promise.all([
+  const results = await Promise.allSettled([
     pullPath(base, `/api/mentions/${encodeURIComponent(handle)}?limit=30`),
     pullPath(base, `/api/timeline/${encodeURIComponent(handle)}?limit=20`),
   ]);
-  const merged = [...mentions, ...timeline];
-  if (!merged.length) throw new Error('empty');
-  return merged;
+  return results.flatMap((r) => (r.status === 'fulfilled' ? r.value : []));
 }
 
 async function trySorsa(handle: string) {
   const apiKey = process.env.SORSA_API;
-  if (!apiKey) throw new Error('No SORSA_API');
-  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-  const res = await fetchWithTimeout(
-    `${SORSA_BASE}/mentions`,
-    {
-      method: 'POST',
-      headers: { ApiKey: apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: handle, order: 'latest', since_date: since }),
-    },
-    15000
-  );
-  if (!res.ok) throw new Error(await res.text());
-  const d = await res.json();
-  return normalizeTweets(d.tweets || d.data || []);
+  if (!apiKey) return [];
+  try {
+    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const res = await fetchWithTimeout(
+      `${SORSA_BASE}/mentions`,
+      {
+        method: 'POST',
+        headers: { ApiKey: apiKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: handle, order: 'latest', since_date: since }),
+      },
+      15000
+    );
+    if (!res.ok) return [];
+    const d = await res.json();
+    return normalizeTweets(d.tweets || d.data || []);
+  } catch {
+    return [];
+  }
 }
 
 async function tryRapid(handle: string) {
   const key = process.env.X_RapidAPI_Key;
-  if (!key) throw new Error('No X_RapidAPI_Key');
-  const query = encodeURIComponent(`@${handle} -from:${handle}`);
-  const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
-  const res = await fetchWithTimeout(url, {
-    headers: {
-      'X-RapidAPI-Key': key,
-      'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
-    },
-  }, 12000);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-  const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
-  return normalizeTweets(Array.isArray(items) ? items : []);
+  if (!key) return [];
+  try {
+    const query = encodeURIComponent(`@${handle} -from:${handle}`);
+    const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
+    const res = await fetchWithTimeout(url, {
+      headers: {
+        'X-RapidAPI-Key': key,
+        'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
+      },
+    }, 12000);
+    if (!res.ok) return [];
+    const data = await res.json();
+    const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
+    return normalizeTweets(Array.isArray(items) ? items : []);
+  } catch {
+    return [];
+  }
 }
 
 async function tryApify(handle: string) {
   const token = process.env.APIFY_API;
-  if (!token) throw new Error('No APIFY_API');
-  const actor = 'khadinakbar~x-tweet-scraper';
-  const url = `https://api.apify.com/v2/actors/${actor}/run-sync-get-dataset-items?token=${token}`;
-  const res = await fetchWithTimeout(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      searchTerms: [`@${handle} -from:${handle}`],
-      maxItems: 30,
-      queryType: 'Latest',
-    }),
-  }, 20000);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const items = await res.json();
-  return normalizeTweets(items || []);
+  if (!token) return [];
+  try {
+    const actor = 'khadinakbar~x-tweet-scraper';
+    const url = `https://api.apify.com/v2/actors/${actor}/run-sync-get-dataset-items?token=${token}`;
+    const res = await fetchWithTimeout(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        searchTerms: [`@${handle} -from:${handle}`],
+        maxItems: 30,
+        queryType: 'Latest',
+      }),
+    }, 20000);
+    if (!res.ok) return [];
+    const items = await res.json();
+    return normalizeTweets(items || []);
+  } catch {
+    return [];
+  }
 }
 
 async function tryX(handle: string) {
   const bearer = process.env.BEARER_TOKEN;
-  if (!bearer) throw new Error('No BEARER_TOKEN');
-  const query = encodeURIComponent(`@${handle} -from:${handle}`);
-  const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
-  const res = await fetchWithTimeout(url, { headers: { Authorization: `Bearer ${bearer}` } }, 12000);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const x = await res.json();
-  const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
-  return (x.data || []).map((t: any) => ({
-    user: {
-      username: users[t.author_id]?.username,
-      profile_image_url: users[t.author_id]?.profile_image_url,
-    },
-    public_metrics: t.public_metrics || {},
-    is_quote_status: false,
-    is_reply: !!t.in_reply_to_user_id,
-  }));
+  if (!bearer) return [];
+  try {
+    const query = encodeURIComponent(`@${handle} -from:${handle}`);
+    const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
+    const res = await fetchWithTimeout(url, { headers: { Authorization: `Bearer ${bearer}` } }, 12000);
+    if (!res.ok) return [];
+    const x = await res.json();
+    const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
+    return (x.data || []).map((t: any) => ({
+      user: {
+        username: users[t.author_id]?.username,
+        profile_image_url: users[t.author_id]?.profile_image_url,
+      },
+      public_metrics: t.public_metrics || {},
+      is_quote_status: false,
+      is_reply: !!t.in_reply_to_user_id,
+    }));
+  } catch {
+    return [];
+  }
 }
 
-async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
+async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null }> {
   const tryExtract = (data: any) => {
     const d = data.data || data.profile || data;
     const avatar =
@@ -227,7 +232,6 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
     return null;
   };
 
-  // plus first for reliable avatar
   try {
     const res = await fetchWithTimeout(`${PLUS}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
     if (res.ok) {
@@ -240,19 +244,10 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
     // continue
   }
 
-  try {
-    const res = await fetchWithTimeout(`${PRIMARY}/profile/${encodeURIComponent(handle)}`, {}, 8000);
-    if (res.ok) {
-      const got = tryExtract(await res.json());
-      if (got) return got;
-    }
-  } catch {
-    // continue
-  }
-
-  for (const base of OTHERS) {
+  for (const base of [PRIMARY, ...OTHERS]) {
     try {
-      const res = await fetchWithTimeout(`${base}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
+      const path = base === PRIMARY ? `/profile/${encodeURIComponent(handle)}` : `/api/profile/${encodeURIComponent(handle)}`;
+      const res = await fetchWithTimeout(base + path, {}, 8000);
       if (res.status === 404) return { exists: false };
       if (!res.ok) continue;
       const got = tryExtract(await res.json());
@@ -406,9 +401,7 @@ export async function POST(req: NextRequest) {
         source: 'none',
         centerPfp: profile.pfp,
         emptyReason: 'no_activity',
-        message: profile.rateLimited
-          ? 'Could not read recent activity. Try again in a minute.'
-          : 'No recent interactions in the last 7 days',
+        message: 'No recent interactions in the last 7 days',
       });
     }
 
