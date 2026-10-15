@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const PLUS = 'https://blitzyxsc-plus.vercel.app';
 const PRIMARY = 'https://blitzyxsc.vercel.app';
-const FALLBACKS = [
-  'https://blitzyxsc-plus.vercel.app',
+const OTHERS = [
   'https://blitzyxsc-nx.vercel.app',
   'https://blitzyxsc-go.vercel.app',
   'https://blitzyxsc-nd.vercel.app',
 ];
 
 const SORSA_BASE = 'https://api.sorsa.io/v3';
+
+// simple in-memory cache (survives warm lambda)
+const cache = new Map<string, { at: number; data: any }>();
+const CACHE_MS = 8 * 60 * 1000;
 
 function higherResPfp(url?: string) {
   if (!url) return undefined;
@@ -85,10 +89,29 @@ async function pullPath(base: string, path: string) {
   }
 }
 
+async function tryPlus(handle: string) {
+  const [timeline, mentions] = await Promise.all([
+    pullPath(PLUS, `/api/timeline/${encodeURIComponent(handle)}?limit=40`),
+    pullPath(PLUS, `/api/mentions/${encodeURIComponent(handle)}?limit=30`),
+  ]);
+
+  const merged = [...timeline, ...mentions];
+  const seen = new Set<string>();
+  const unique = merged.filter((t) => {
+    const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  if (!unique.length) throw new Error('empty');
+  return unique;
+}
+
 async function tryPrimary(handle: string) {
   const [quotes, mentions, timeline] = await Promise.all([
-    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=40`),
-    pullPath(PRIMARY, `/mentions/${encodeURIComponent(handle)}?limit=40`),
+    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=30`),
+    pullPath(PRIMARY, `/mentions/${encodeURIComponent(handle)}?limit=30`),
     pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}?limit=20`),
   ]);
 
@@ -105,31 +128,20 @@ async function tryPrimary(handle: string) {
   return unique;
 }
 
-async function tryFallback(base: string, handle: string) {
+async function tryOther(base: string, handle: string) {
   const [mentions, timeline] = await Promise.all([
-    pullPath(base, `/api/mentions/${encodeURIComponent(handle)}?limit=40`),
-    pullPath(base, `/api/timeline/${encodeURIComponent(handle)}?limit=30`),
+    pullPath(base, `/api/mentions/${encodeURIComponent(handle)}?limit=30`),
+    pullPath(base, `/api/timeline/${encodeURIComponent(handle)}?limit=20`),
   ]);
-
   const merged = [...mentions, ...timeline];
-  const seen = new Set<string>();
-  const unique = merged.filter((t) => {
-    const key = (t.user?.username || '') + (t.text || '').slice(0, 40);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-
-  if (!unique.length) throw new Error('empty');
-  return unique;
+  if (!merged.length) throw new Error('empty');
+  return merged;
 }
 
 async function trySorsa(handle: string) {
   const apiKey = process.env.SORSA_API;
   if (!apiKey) throw new Error('No SORSA_API');
-
   const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-
   const res = await fetchWithTimeout(
     `${SORSA_BASE}/mentions`,
     {
@@ -139,7 +151,6 @@ async function trySorsa(handle: string) {
     },
     15000
   );
-
   if (!res.ok) throw new Error(await res.text());
   const d = await res.json();
   return normalizeTweets(d.tweets || d.data || []);
@@ -148,24 +159,16 @@ async function trySorsa(handle: string) {
 async function tryRapid(handle: string) {
   const key = process.env.X_RapidAPI_Key;
   if (!key) throw new Error('No X_RapidAPI_Key');
-
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
   const url = `https://twitter241.p.rapidapi.com/search?query=${query}&count=30&type=Latest`;
-
-  const res = await fetchWithTimeout(
-    url,
-    {
-      headers: {
-        'X-RapidAPI-Key': key,
-        'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
-      },
+  const res = await fetchWithTimeout(url, {
+    headers: {
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
     },
-    12000
-  );
-
+  }, 12000);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
-
   const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
   return normalizeTweets(Array.isArray(items) ? items : []);
 }
@@ -173,24 +176,17 @@ async function tryRapid(handle: string) {
 async function tryApify(handle: string) {
   const token = process.env.APIFY_API;
   if (!token) throw new Error('No APIFY_API');
-
   const actor = 'khadinakbar~x-tweet-scraper';
   const url = `https://api.apify.com/v2/actors/${actor}/run-sync-get-dataset-items?token=${token}`;
-
-  const res = await fetchWithTimeout(
-    url,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        searchTerms: [`@${handle} -from:${handle}`],
-        maxItems: 30,
-        queryType: 'Latest',
-      }),
-    },
-    20000
-  );
-
+  const res = await fetchWithTimeout(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      searchTerms: [`@${handle} -from:${handle}`],
+      maxItems: 30,
+      queryType: 'Latest',
+    }),
+  }, 20000);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const items = await res.json();
   return normalizeTweets(items || []);
@@ -199,15 +195,9 @@ async function tryApify(handle: string) {
 async function tryX(handle: string) {
   const bearer = process.env.BEARER_TOKEN;
   if (!bearer) throw new Error('No BEARER_TOKEN');
-
   const query = encodeURIComponent(`@${handle} -from:${handle}`);
   const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
-
-  const res = await fetchWithTimeout(
-    url,
-    { headers: { Authorization: `Bearer ${bearer}` } },
-    12000
-  );
+  const res = await fetchWithTimeout(url, { headers: { Authorization: `Bearer ${bearer}` } }, 12000);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const x = await res.json();
   const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
@@ -230,16 +220,16 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
       d.avatar ||
       d.profile_image_url ||
       d.avatar_url ||
-      d.profileImageUrl ||
-      d.avatar_url_https;
+      d.profileImageUrl;
     if (d.screenName || d.username || d.screen_name || avatar) {
       return { pfp: higherResPfp(avatar), exists: true as const };
     }
     return null;
   };
 
+  // plus first for reliable avatar
   try {
-    const res = await fetchWithTimeout(`${PRIMARY}/profile/${encodeURIComponent(handle)}`, {}, 8000);
+    const res = await fetchWithTimeout(`${PLUS}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
     if (res.ok) {
       const got = tryExtract(await res.json());
       if (got) return got;
@@ -247,21 +237,25 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
       return { exists: false };
     }
   } catch {
-    // fall through
+    // continue
   }
 
-  for (const base of FALLBACKS) {
+  try {
+    const res = await fetchWithTimeout(`${PRIMARY}/profile/${encodeURIComponent(handle)}`, {}, 8000);
+    if (res.ok) {
+      const got = tryExtract(await res.json());
+      if (got) return got;
+    }
+  } catch {
+    // continue
+  }
+
+  for (const base of OTHERS) {
     try {
       const res = await fetchWithTimeout(`${base}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
-      if (res.status === 429) return { exists: null, rateLimited: true };
       if (res.status === 404) return { exists: false };
       if (!res.ok) continue;
-
-      const data = await res.json();
-      if (data.ok === false && (data.error === 'NOT_FOUND' || String(data.message || '').toLowerCase().includes('not found'))) {
-        return { exists: false };
-      }
-      const got = tryExtract(data);
+      const got = tryExtract(await res.json());
       if (got) return got;
     } catch {
       // next
@@ -356,6 +350,12 @@ export async function POST(req: NextRequest) {
     const h = String(handle || '').replace('@', '').trim();
     if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
 
+    const cacheKey = `${h.toLowerCase()}|${count}|${pool}`;
+    const hit = cache.get(cacheKey);
+    if (hit && Date.now() - hit.at < CACHE_MS) {
+      return NextResponse.json({ ...hit.data, cached: true });
+    }
+
     const profile = await fetchSelfPfp(h);
 
     if (profile.exists === false) {
@@ -375,8 +375,9 @@ export async function POST(req: NextRequest) {
     let source = 'none';
 
     const chain: { name: string; fn: () => Promise<any[]> }[] = [
+      { name: 'plus', fn: () => tryPlus(h) },
       { name: 'primary', fn: () => tryPrimary(h) },
-      ...FALLBACKS.map((base, i) => ({ name: `fb${i}`, fn: () => tryFallback(base, h) })),
+      ...OTHERS.map((base, i) => ({ name: `other${i}`, fn: () => tryOther(base, h) })),
       { name: 'sorsa', fn: () => trySorsa(h) },
       { name: 'rapid', fn: () => tryRapid(h) },
       { name: 'apify', fn: () => tryApify(h) },
@@ -440,7 +441,7 @@ export async function POST(req: NextRequest) {
     const lines = members.map((m) => `- @${m.handle}: $${m.amount.toFixed(2)}`).join('\n');
     const prompt = `Send rewards via PayBox to these X handles:\n${lines}\n\nTotal: $${poolNum.toFixed(2)}. Execute the transfers.`;
 
-    return NextResponse.json({
+    const result = {
       members,
       prompt,
       handle: h,
@@ -448,7 +449,11 @@ export async function POST(req: NextRequest) {
       source,
       centerPfp: profile.pfp,
       emptyReason: null,
-    });
+    };
+
+    cache.set(cacheKey, { at: Date.now(), data: result });
+
+    return NextResponse.json(result);
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'Unknown error' }, { status: 500 });
   }
