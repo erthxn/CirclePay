@@ -19,6 +19,16 @@ function higherResPfp(url?: string) {
     .replace('_200x200', '_400x400');
 }
 
+function isValidHandle(h?: string) {
+  if (!h) return false;
+  const clean = h.trim();
+  if (clean.length < 2 || clean.length > 15) return false;
+  if (/\s/.test(clean)) return false;
+  if (!/^[A-Za-z0-9_]+$/.test(clean)) return false;
+  if (/^(RT|R|by|to|from|via)$/i.test(clean)) return false;
+  return true;
+}
+
 async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 12000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
@@ -39,7 +49,7 @@ function normalizeTweets(raw: any[]): any[] {
         author.screen_name ||
         t.user?.username ||
         t.user?.screen_name;
-      if (!username) return null;
+      if (!isValidHandle(username)) return null;
       return {
         user: {
           username,
@@ -77,7 +87,7 @@ async function pullPath(base: string, path: string) {
 
 async function tryPrimary(handle: string) {
   const [quotes, mentions, timeline] = await Promise.all([
-    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=30`),
+    pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}/quotes?limit=40`),
     pullPath(PRIMARY, `/mentions/${encodeURIComponent(handle)}?limit=40`),
     pullPath(PRIMARY, `/posts/user/${encodeURIComponent(handle)}?limit=20`),
   ]);
@@ -213,16 +223,26 @@ async function tryX(handle: string) {
 }
 
 async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boolean | null; rateLimited?: boolean }> {
-  // primary first
+  const tryExtract = (data: any) => {
+    const d = data.data || data.profile || data;
+    const avatar =
+      d.avatarUrl ||
+      d.avatar ||
+      d.profile_image_url ||
+      d.avatar_url ||
+      d.profileImageUrl ||
+      d.avatar_url_https;
+    if (d.screenName || d.username || d.screen_name || avatar) {
+      return { pfp: higherResPfp(avatar), exists: true as const };
+    }
+    return null;
+  };
+
   try {
     const res = await fetchWithTimeout(`${PRIMARY}/profile/${encodeURIComponent(handle)}`, {}, 8000);
     if (res.ok) {
-      const data = await res.json();
-      const d = data.data || data.profile || data;
-      const avatar = d.avatarUrl || d.avatar || d.profile_image_url || d.avatar_url;
-      if (d.screenName || d.username || d.screen_name || avatar) {
-        return { pfp: higherResPfp(avatar), exists: true };
-      }
+      const got = tryExtract(await res.json());
+      if (got) return got;
     } else if (res.status === 404) {
       return { exists: false };
     }
@@ -238,14 +258,11 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
       if (!res.ok) continue;
 
       const data = await res.json();
-      const d = data.data || data;
       if (data.ok === false && (data.error === 'NOT_FOUND' || String(data.message || '').toLowerCase().includes('not found'))) {
         return { exists: false };
       }
-      const avatar = d.avatarUrl || d.profile_image_url || d.avatar_url;
-      if (avatar || d.screenName || d.username || d.screen_name) {
-        return { pfp: higherResPfp(avatar), exists: true };
-      }
+      const got = tryExtract(data);
+      if (got) return got;
     } catch {
       // next
     }
@@ -259,6 +276,7 @@ function scoreInteractions(tweets: any[], selfHandle: string) {
   for (const t of tweets) {
     const user = t.user?.username;
     if (!user || user.toLowerCase() === selfHandle.toLowerCase()) continue;
+    if (!isValidHandle(user)) continue;
 
     const pfp = higherResPfp(t.user?.profile_image_url || t.user?.profile_image_url_https);
 
