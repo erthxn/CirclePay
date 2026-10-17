@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useMemo, memo } from 'react';
+import { forwardRef, useMemo, memo, useEffect, useState } from 'react';
 import type { Card, Connector, Customization, BgCard } from '@/lib/studio/types';
 import {
   makeMembers,
@@ -26,6 +26,13 @@ interface Props {
  * LivePreview renders the active card with the active connector overlay
  * and applies the user's customization. Uses inline SVG for crispness
  * and to honor html2canvas export at scale:3.
+ *
+ * The useMemo deps now work correctly because the store (after the v2.1 fix)
+ * returns NEW array/object references on every dispatch, so React's useMemo
+ * re-runs and the SVG string is rebuilt — fixing bugs #1 and #4.
+ *
+ * Also adds a brief "pulse" effect whenever the gradient or bg pattern changes,
+ * giving immediate visual feedback (bug #4 fix).
  */
 const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
   { card, connector, customization, bgCard, reducedMotion, backgroundOnly },
@@ -38,24 +45,32 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
   const gradientCss = useMemo(
     () => buildGradientCss(customization.gradientStops, customization.gradientAngle),
     [customization.gradientStops, customization.gradientAngle],
-  )
+  );
+
+  // Stable key string for the gradient — used as a useMemo dependency AND
+  // as a React key on the SVG so React unmounts/remounts the SVG element
+  // when the gradient changes (forces a clean visual swap).
+  const gradientKey = useMemo(
+    () => customization.gradientStops.map((s) => `${s.color}@${s.offset}`).join('|') + `|${customization.gradientAngle}`,
+    [customization.gradientStops, customization.gradientAngle],
+  );
 
   // BG card pattern overlay (if a bg card is selected)
   const bgPatternSvg = useMemo(() => {
     if (!bgCard?.pattern) return '';
     return renderBgPattern(bgCard.pattern, 'live-bg');
-  }, [bgCard]);
+  }, [bgCard?.pattern, bgCard?.id]);
 
   const bgPatternDefs = useMemo(() => {
     if (!bgCard?.pattern) return '';
     return renderBgPatternDefs(bgCard.pattern, 'live-bg');
-  }, [bgCard]);
+  }, [bgCard?.pattern, bgCard?.id]);
 
   // Build the SVG snippet for the connector overlay
   const connectorSvg = useMemo(() => {
     if (!connector || backgroundOnly) return '';
     const filterId = connector.filter ?? null;
-    const cx = 50, cy = 50;  // viewBox 0-100, center at 50,50
+    const cx = 50, cy = 50;
     return members
       .map((m) => buildConnectorStroke(connector, customization, cx, cy, m, filterId))
       .join('');
@@ -112,6 +127,14 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
 
   const defsSvg = useMemo(() => renderSvgDefs(), []);
 
+  // Visual feedback pulse — fires whenever the gradient or bg changes.
+  // Briefly applies a "pulse" class that animates a ring around the preview,
+  // giving the user immediate confirmation their selection was applied.
+  const [pulse, setPulse] = useState(0);
+  useEffect(() => {
+    setPulse((p) => p + 1);
+  }, [gradientKey, bgCard?.id, connector?.id, customization.mark]);
+
   if (!card && !bgCard) {
     return (
       <div ref={ref} className="w-full aspect-square rounded-2xl bg-[var(--bg)] flex items-center justify-center text-[var(--text-muted)] text-sm neu-pressed">
@@ -129,16 +152,27 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
       style={{
         background: gradientCss,
         borderRadius: 28,
-        // hint GPU layer
         willChange: reducedMotion ? undefined : 'transform',
         transform: reducedMotion ? undefined : 'translateZ(0)',
+        transition: 'background 0.25s ease',
       }}
     >
+      {/* Pulse ring — fires on every selection change. Visual feedback (bug #4 fix). */}
+      {!reducedMotion && (
+        <div
+          key={pulse}
+          className="absolute inset-0 pointer-events-none rounded-[28px]"
+          style={{
+            boxShadow: '0 0 0 2px rgba(13,92,255,0.6) inset',
+            animation: 'studio-preview-pulse 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+          }}
+        />
+      )}
       <svg
+        key={`${gradientKey}::${bgCard?.id ?? 'none'}::${connector?.id ?? 'none'}::${customization.mark}::${customization.memberCount}`}
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
         className="absolute inset-0 w-full h-full"
-        // inline SVG to ensure html2canvas can read it
         dangerouslySetInnerHTML={{
           __html: `
             ${defsSvg}

@@ -1,19 +1,22 @@
 'use client';
 
 import { memo, useState, useCallback } from 'react';
-import type { Card, Connector } from '@/lib/studio/types';
-import { useStudioSelector, useDispatch, useLazyMount } from './useStudioState';
+import type { Card } from '@/lib/studio/types';
+import { useDispatch, useLazyMount } from './useStudioState';
 
 interface Props {
   card: Card;
+  /** Selected card id, passed down from the gallery so each tile doesn't
+   *  subscribe to the store individually (otherwise 250 tiles each
+   *  re-render on every selection change — the cause of bug #3). */
+  selectedId: string | null;
 }
 
 /**
  * Single gallery tile. Renders a PNG thumbnail with native lazy loading,
  * only mounts interactive overlay (select button + active ring) when scrolled into view.
  */
-const CardTile = memo(function CardTile({ card }: Props) {
-  const selectedId = useStudioSelector((s) => s.selectedCardId);
+const CardTile = memo(function CardTile({ card, selectedId }: Props) {
   const dispatch = useDispatch();
   const { ref, mounted } = useLazyMount<HTMLButtonElement>('300px 0px');
   const [imgLoaded, setImgLoaded] = useState(false);

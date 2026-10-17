@@ -151,6 +151,16 @@ export default function StudioClient({ cards, connectors, bgCards, activeLibrary
                   {copied ? 'Copied!' : 'Share link'}
                 </button>
               </div>
+
+              {/* Use in circle — apply this bg + connector to /circle/pay (bug #5 fix) */}
+              <a
+                href={`/circle/pay?b=${selectedBgCard?.id ?? ''}${selectedCard ? `&c=${selectedCard.id}` : ''}${selectedConnector ? `&n=${selectedConnector.id}` : ''}`}
+                className="studio-tap mt-2 block w-full py-3 text-sm font-medium rounded-full text-white text-center studio-fab"
+                style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-hover, #0B4FE0))', boxShadow: '0 6px 16px rgba(13,92,255,0.25)' }}
+              >
+                Use in your circle →
+              </a>
+
               {(selectedCard || selectedBgCard) && (
                 <p className="mt-2 text-[11px] text-[var(--text-muted)] text-center">
                   {selectedBgCard?.name ?? selectedCard?.name}

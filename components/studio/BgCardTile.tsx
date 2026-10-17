@@ -2,28 +2,27 @@
 
 import { memo, useState, useCallback } from 'react';
 import type { BgCard } from '@/lib/studio/types';
-import { useStudioSelector, useDispatch, useLazyMount } from './useStudioState';
+import { useDispatch, useLazyMount } from './useStudioState';
 
 interface Props {
   bgCard: BgCard;
-  /** When true, clicking the tile selects it as the bg card. When false, no selection (just preview). */
-  selectable?: boolean;
+  /** Selected id passed from parent gallery — fixes the 200-tile re-render lag. */
+  selectedId: string | null;
 }
 
 /**
  * BG card tile — pure background design (no member tiles, no connectors).
  * Lazy-mount via IntersectionObserver, lazy-load PNG.
  */
-const BgCardTile = memo(function BgCardTile({ bgCard, selectable = true }: Props) {
-  const selectedId = useStudioSelector((s) => s.selectedBgCardId);
+const BgCardTile = memo(function BgCardTile({ bgCard, selectedId }: Props) {
   const dispatch = useDispatch();
   const { ref, mounted } = useLazyMount<HTMLButtonElement>('300px 0px');
   const [loaded, setLoaded] = useState(false);
 
-  const selected = selectable && selectedId === bgCard.id;
+  const selected = selectedId === bgCard.id;
   const select = useCallback(() => {
-    if (selectable) dispatch({ type: 'SELECT_BG_CARD', bgCardId: bgCard.id });
-  }, [dispatch, bgCard.id, selectable]);
+    dispatch({ type: 'SELECT_BG_CARD', bgCardId: bgCard.id });
+  }, [dispatch, bgCard.id]);
 
   return (
     <button

@@ -295,6 +295,19 @@ input[type="color"]::-moz-color-swatch {
   }
 }
 
+/* Pulse ring on LivePreview — fires whenever the user picks a new card/bg/connector.
+   Gives immediate visual feedback that the selection was applied (bug #4 fix). */
+@keyframes studio-preview-pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(1.0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
 /* Stagger entrance for gallery tiles */
 @keyframes studio-stagger-in {
   from {

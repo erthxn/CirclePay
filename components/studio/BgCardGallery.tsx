@@ -11,10 +11,13 @@ interface Props {
 
 /**
  * BG card gallery — groups 200 bg cards by category.
+ * Subscribes to selectedBgCardId ONCE (parent gallery) and passes it down as prop
+ * — fixes the 200-tile re-render lag (bug #3).
  */
 const BgCardGallery = memo(function BgCardGallery({ selectable = true }: Props) {
   const bgCards = useStudioSelector((s) => s.bgCards);
   const rawFilter = useStudioSelector((s) => s.galleryFilter);
+  const selectedBgCardId = useStudioSelector((s) => s.selectedBgCardId);
   const deferredFilter = useDeferredValue(rawFilter);
 
   const grouped = useMemo(() => {
@@ -55,7 +58,7 @@ const BgCardGallery = memo(function BgCardGallery({ selectable = true }: Props) 
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2.5">
             {list.map((c) => (
-              <BgCardTile key={c.id} bgCard={c} selectable={selectable} />
+              <BgCardTile key={c.id} bgCard={c} selectedId={selectable ? selectedBgCardId : null} />
             ))}
           </div>
         </section>

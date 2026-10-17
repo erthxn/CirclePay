@@ -1,8 +1,11 @@
 // Pure-JS external store for the Studio.
-// No React imports here — keeps the store testable & framework-agnostic.
-// React integration is via useSyncExternalStore in useStudioState.ts.
+// CRITICAL: All state updates MUST be immutable — replace the state object
+// (and any nested object/array that changed) with a new reference on every
+// dispatch. useSyncExternalStore uses Object.is on getSnapshot's return value
+// to decide whether to re-render, so mutating in place would silently break
+// re-renders (this was the root cause of bugs #1, #3, #4 in v2).
 
-import { DEFAULT_CUSTOMIZATION, type StudioState, type StudioAction, type BgCard } from './types';
+import { DEFAULT_CUSTOMIZATION, type StudioState, type StudioAction, type BgCard, type Customization, type CardMark, type MemberCount } from './types';
 
 type Listener = () => void;
 
@@ -11,10 +14,11 @@ export function createStore(
   initialConnectors: any[] = [],
   initialBgCards: any[] = [],
 ) {
-  const state: StudioState = {
+  // Build initial customization from defaults + first card + first connector.
+  let state: StudioState = {
     selectedCardId: initialCards[0]?.id ?? null,
     selectedConnectorId: initialConnectors[0]?.id ?? null,
-    selectedBgCardId: initialBgCards[0]?.id ?? null,
+    selectedBgCardId: null,  // start null so the user's bg pick is reflected properly
     customization: { ...DEFAULT_CUSTOMIZATION },
     galleryFilter: '',
     activeCategory: null,
@@ -26,204 +30,304 @@ export function createStore(
     bgCards: initialBgCards,
   };
 
-  // When we have a selected card, sync the customization defaults from it
+  // Sync defaults from the initial card (without dispatching)
   if (state.selectedCardId) {
     const card = initialCards.find((c) => c.id === state.selectedCardId);
     if (card) {
-      state.customization = customizationFromCard(card);
+      state = { ...state, customization: customizationFromCard(card) };
     }
   }
   if (state.selectedConnectorId) {
     const conn = initialConnectors.find((c) => c.id === state.selectedConnectorId);
     if (conn) {
-      state.customization.strokeWidth = conn.stroke_width;
-      state.customization.strokeOpacity = conn.stroke_opacity;
-      state.customization.dashArray = conn.stroke_dasharray || '';
-      state.customization.filterEnabled = !!conn.filter;
-      state.customization.strokeOverride = conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke;
+      state = {
+        ...state,
+        customization: {
+          ...state.customization,
+          strokeWidth: conn.stroke_width,
+          strokeOpacity: conn.stroke_opacity,
+          dashArray: conn.stroke_dasharray || '',
+          filterEnabled: !!conn.filter,
+          strokeOverride: conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke,
+        },
+      };
     }
   }
 
   const listeners = new Set<Listener>();
-  let dispatchDepth = 0;
-  let pendingNotify = false;
 
-  function notify() {
-    if (dispatchDepth > 0) {
-      pendingNotify = true;
-      return;
-    }
-    listeners.forEach((l) => l());
+  function getState(): StudioState {
+    return state;
+  }
+
+  function subscribe(listener: Listener): () => void {
+    listeners.add(listener);
+    return () => { listeners.delete(listener); };
   }
 
   function dispatch(action: StudioAction) {
-    dispatchDepth++;
-    try {
-      reducer(state, action);
-    } finally {
-      dispatchDepth--;
-      if (dispatchDepth === 0 && pendingNotify) {
-        pendingNotify = false;
-        listeners.forEach((l) => l());
-      } else if (dispatchDepth === 0) {
-        listeners.forEach((l) => l());
-      }
+    const next = reducer(state, action);
+    // Only notify if the new state is referentially different
+    if (next !== state) {
+      state = next;
+      listeners.forEach((l) => l());
     }
   }
 
-  return {
-    getState: () => state,
-    subscribe(listener: Listener) {
-      listeners.add(listener);
-      return () => listeners.delete(listener);
-    },
-    dispatch,
-  };
+  return { getState, subscribe, dispatch };
 }
 
 // Helpers
-export function customizationFromCard(card: any) {
+export function customizationFromCard(card: any): Customization {
   return {
     ...DEFAULT_CUSTOMIZATION,
     gradientStops: Array.isArray(card?.gradient_stops)
       ? card.gradient_stops.map((s: any) => {
-          if (Array.isArray(s)) return { color: s[0], offset: typeof s[1] === 'number' ? s[1] : parseFloat(s[1]) };
+          if (Array.isArray(s)) {
+            return { color: s[0], offset: typeof s[1] === 'number' ? s[1] : parseFloat(s[1]) };
+          }
           return s;
         })
       : DEFAULT_CUSTOMIZATION.gradientStops,
     gradientAngle: card?.gradient_angle ?? DEFAULT_CUSTOMIZATION.gradientAngle,
-    mark: card?.mark ?? DEFAULT_CUSTOMIZATION.mark,
-    memberCount: card?.n ?? DEFAULT_CUSTOMIZATION.memberCount,
+    mark: (card?.mark as CardMark) ?? DEFAULT_CUSTOMIZATION.mark,
+    memberCount: (card?.n as MemberCount) ?? DEFAULT_CUSTOMIZATION.memberCount,
   };
 }
 
-function reducer(state: StudioState, action: StudioAction): void {
+/**
+ * Reducer — PURE function. Returns the SAME state reference if nothing
+ * changed, or a NEW state reference if anything changed. Never mutates.
+ */
+function reducer(state: StudioState, action: StudioAction): StudioState {
   switch (action.type) {
     case 'SELECT_CARD': {
-      state.selectedCardId = action.cardId;
+      if (state.selectedCardId === action.cardId) return state;
       const card = state.cards.find((c) => c.id === action.cardId);
-      if (card) {
-        state.customization = customizationFromCard(card);
-      }
-      break;
+      if (!card) return state;
+      return {
+        ...state,
+        selectedCardId: action.cardId,
+        customization: customizationFromCard(card),
+      };
     }
+
     case 'SELECT_CONNECTOR': {
-      state.selectedConnectorId = action.connectorId;
+      if (state.selectedConnectorId === action.connectorId) return state;
       const conn = state.connectors.find((c) => c.id === action.connectorId);
-      if (conn) {
-        state.customization.strokeWidth = conn.stroke_width;
-        state.customization.strokeOpacity = conn.stroke_opacity;
-        state.customization.dashArray = conn.stroke_dasharray || '';
-        state.customization.filterEnabled = !!conn.filter;
-        state.customization.strokeOverride = conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke;
-      }
-      break;
+      if (!conn) return state;
+      return {
+        ...state,
+        selectedConnectorId: action.connectorId,
+        customization: {
+          ...state.customization,
+          strokeWidth: conn.stroke_width,
+          strokeOpacity: conn.stroke_opacity,
+          dashArray: conn.stroke_dasharray || '',
+          filterEnabled: !!conn.filter,
+          strokeOverride: conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke,
+        },
+      };
     }
+
     case 'SELECT_BG_CARD': {
-      state.selectedBgCardId = action.bgCardId;
+      if (state.selectedBgCardId === action.bgCardId) return state;
       const bg = state.bgCards.find((c: BgCard) => c.id === action.bgCardId);
-      if (bg) {
-        // Override customization gradient with the bg card's stops
-        state.customization.gradientStops = bg.gradient_stops;
-        state.customization.gradientAngle = bg.gradient_angle;
-      }
-      break;
+      if (!bg) return state;
+      return {
+        ...state,
+        selectedBgCardId: action.bgCardId,
+        // CRITICAL: rebuild customization with NEW gradientStops array reference
+        // so that LivePreview's useMemo sees a different dependency.
+        customization: {
+          ...state.customization,
+          gradientStops: bg.gradient_stops.map((s) => ({ ...s })),
+          gradientAngle: bg.gradient_angle,
+        },
+      };
     }
-    case 'SET_ACTIVE_TAB': {
-      state.activeTab = action.tab;
-      break;
-    }
-    case 'SET_ACTIVE_LIBRARY': {
-      state.activeLibrary = action.library;
-      break;
-    }
-    case 'SET_EDITOR_VIEW': {
-      state.editorView = action.view;
-      break;
-    }
+
     case 'SET_GRADIENT_STOP': {
-      const stops = state.customization.gradientStops.slice();
-      if (stops[action.index]) {
-        stops[action.index] = { ...stops[action.index], color: action.color };
-      }
-      state.customization.gradientStops = stops;
-      break;
+      const stops = state.customization.gradientStops;
+      if (!stops[action.index]) return state;
+      const newStops = stops.map((s, i) =>
+        i === action.index ? { ...s, color: action.color } : s,
+      );
+      return {
+        ...state,
+        customization: { ...state.customization, gradientStops: newStops },
+      };
     }
+
     case 'ADD_GRADIENT_STOP': {
-      const stops = state.customization.gradientStops.slice();
+      const stops = state.customization.gradientStops;
       const last = stops[stops.length - 1] ?? { color: '#000000', offset: 100 };
       const newOffset = Math.min(95, last.offset - 5);
-      stops.push({ color: '#ffffff', offset: newOffset });
-      stops.sort((a, b) => a.offset - b.offset);
-      state.customization.gradientStops = stops;
-      break;
+      const newStops = [...stops, { color: '#ffffff', offset: newOffset }].sort(
+        (a, b) => a.offset - b.offset,
+      );
+      return {
+        ...state,
+        customization: { ...state.customization, gradientStops: newStops },
+      };
     }
+
     case 'REMOVE_GRADIENT_STOP': {
-      if (state.customization.gradientStops.length <= 2) break;
-      const stops = state.customization.gradientStops.slice();
-      stops.splice(action.index, 1);
-      state.customization.gradientStops = stops;
-      break;
+      if (state.customization.gradientStops.length <= 2) return state;
+      const newStops = state.customization.gradientStops.filter((_, i) => i !== action.index);
+      return {
+        ...state,
+        customization: { ...state.customization, gradientStops: newStops },
+      };
     }
+
     case 'SET_GRADIENT_ANGLE': {
-      state.customization.gradientAngle = action.angle;
-      break;
+      if (state.customization.gradientAngle === action.angle) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, gradientAngle: action.angle },
+      };
     }
+
     case 'SET_STROKE_WIDTH': {
-      state.customization.strokeWidth = action.width;
-      break;
+      if (state.customization.strokeWidth === action.width) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, strokeWidth: action.width },
+      };
     }
+
     case 'SET_STROKE_OPACITY': {
-      state.customization.strokeOpacity = action.opacity;
-      break;
+      if (state.customization.strokeOpacity === action.opacity) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, strokeOpacity: action.opacity },
+      };
     }
+
     case 'SET_DASH_ARRAY': {
-      state.customization.dashArray = action.dash;
-      break;
+      if (state.customization.dashArray === action.dash) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, dashArray: action.dash },
+      };
     }
+
     case 'SET_MARK': {
-      state.customization.mark = action.mark;
-      break;
+      if (state.customization.mark === action.mark) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, mark: action.mark },
+      };
     }
+
     case 'SET_MEMBER_COUNT': {
-      state.customization.memberCount = action.count;
-      break;
+      if (state.customization.memberCount === action.count) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, memberCount: action.count },
+      };
     }
+
     case 'TOGGLE_FILTER': {
-      state.customization.filterEnabled = !state.customization.filterEnabled;
-      break;
+      return {
+        ...state,
+        customization: { ...state.customization, filterEnabled: !state.customization.filterEnabled },
+      };
     }
+
     case 'SET_STROKE_OVERRIDE': {
-      state.customization.strokeOverride = action.color;
-      break;
+      if (state.customization.strokeOverride === action.color) return state;
+      return {
+        ...state,
+        customization: { ...state.customization, strokeOverride: action.color },
+      };
     }
+
     case 'SET_GALLERY_FILTER': {
-      state.galleryFilter = action.query;
-      break;
+      if (state.galleryFilter === action.query) return state;
+      return { ...state, galleryFilter: action.query };
     }
+
     case 'SET_ACTIVE_CATEGORY': {
-      state.activeCategory = action.category;
-      break;
+      if (state.activeCategory === action.category) return state;
+      return { ...state, activeCategory: action.category };
     }
+
+    case 'SET_ACTIVE_TAB': {
+      if (state.activeTab === action.tab) return state;
+      return { ...state, activeTab: action.tab };
+    }
+
+    case 'SET_ACTIVE_LIBRARY': {
+      if (state.activeLibrary === action.library) return state;
+      return { ...state, activeLibrary: action.library };
+    }
+
+    case 'SET_EDITOR_VIEW': {
+      if (state.editorView === action.view) return state;
+      return { ...state, editorView: action.view };
+    }
+
     case 'RESET_CUSTOMIZATION': {
-      state.customization = { ...DEFAULT_CUSTOMIZATION };
+      let custom: Customization = { ...DEFAULT_CUSTOMIZATION };
       const card = state.cards.find((c) => c.id === state.selectedCardId);
-      if (card) state.customization = customizationFromCard(card);
+      if (card) custom = customizationFromCard(card);
       const conn = state.connectors.find((c) => c.id === state.selectedConnectorId);
       if (conn) {
-        state.customization.strokeWidth = conn.stroke_width;
-        state.customization.strokeOpacity = conn.stroke_opacity;
-        state.customization.dashArray = conn.stroke_dasharray || '';
-        state.customization.filterEnabled = !!conn.filter;
-        state.customization.strokeOverride = conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke;
+        custom = {
+          ...custom,
+          strokeWidth: conn.stroke_width,
+          strokeOpacity: conn.stroke_opacity,
+          dashArray: conn.stroke_dasharray || '',
+          filterEnabled: !!conn.filter,
+          strokeOverride: conn.stroke?.startsWith('url(') ? '#ffffff' : conn.stroke,
+        };
       }
-      break;
+      return { ...state, customization: custom };
     }
+
+    case 'LOAD_FROM_CARD': {
+      return {
+        ...state,
+        selectedCardId: action.card.id,
+        customization: customizationFromCard(action.card),
+      };
+    }
+
+    case 'LOAD_FROM_BG_CARD': {
+      return {
+        ...state,
+        selectedBgCardId: action.bgCard.id,
+        customization: {
+          ...state.customization,
+          gradientStops: action.bgCard.gradient_stops.map((s) => ({ ...s })),
+          gradientAngle: action.bgCard.gradient_angle,
+        },
+      };
+    }
+
+    case 'LOAD_FROM_CONNECTOR': {
+      return {
+        ...state,
+        selectedConnectorId: action.connector.id,
+        customization: {
+          ...state.customization,
+          strokeWidth: action.connector.stroke_width,
+          strokeOpacity: action.connector.stroke_opacity,
+          dashArray: action.connector.stroke_dasharray || '',
+          filterEnabled: !!action.connector.filter,
+          strokeOverride: action.connector.stroke?.startsWith('url(') ? '#ffffff' : action.connector.stroke,
+        },
+      };
+    }
+
     case 'HYDRATE': {
-      Object.assign(state, action.state);
-      break;
+      return { ...state, ...action.state };
     }
-    default: break;
+
+    default:
+      return state;
   }
 }
 
@@ -246,41 +350,4 @@ export function encodeStateToQuery(state: StudioState): string {
   if (!state.customization.filterEnabled) params.set('f', '0');
   if (state.customization.strokeOverride) params.set('sc', state.customization.strokeOverride.replace('#', ''));
   return params.toString();
-}
-
-export function decodeQueryToActions(query: URLSearchParams): Partial<StudioState> {
-  const result: Partial<StudioState> = {};
-  const c = query.get('c');
-  if (c) result.selectedCardId = c;
-  const n = query.get('n');
-  if (n) result.selectedConnectorId = n;
-  return result;
-}
-
-export function decodeQueryToCustomization(query: URLSearchParams): Partial<{ customization: any }> {
-  const customization: any = {};
-  const s = query.get('s');
-  if (s) {
-    customization.gradientStops = s.split(',').map((pair) => {
-      const [color, offset] = pair.split('.');
-      return { color: `#${color}`, offset: parseFloat(offset) };
-    });
-  }
-  const a = query.get('a');
-  if (a) customization.gradientAngle = parseFloat(a);
-  const w = query.get('w');
-  if (w) customization.strokeWidth = parseFloat(w);
-  const o = query.get('o');
-  if (o) customization.strokeOpacity = parseFloat(o);
-  const d = query.get('d');
-  if (d) customization.dashArray = d;
-  const m = query.get('m');
-  if (m) customization.mark = m;
-  const mc = query.get('mc');
-  if (mc) customization.memberCount = parseInt(mc, 10);
-  const f = query.get('f');
-  if (f === '0') customization.filterEnabled = false;
-  const sc = query.get('sc');
-  if (sc) customization.strokeOverride = `#${sc}`;
-  return Object.keys(customization).length ? { customization } : {};
 }

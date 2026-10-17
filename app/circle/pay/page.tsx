@@ -351,6 +351,15 @@ function PayPageInner() {
                 <button onClick={copy} className="studio-tap py-3 text-sm font-medium rounded-full border border-[var(--accent)] text-[var(--accent)] studio-fab">{copied ? 'Copied' : 'Copy prompt'}</button>
               </div>
 
+              {/* Open in Studio — full customization: 200 bg cards + 100 connectors + custom gradient (bug #5 fix) */}
+              <a
+                href={`/studio/custom?b=${selectedBgId ?? ''}`}
+                className="studio-tap mt-3 block w-full py-3 text-sm font-medium rounded-full text-white text-center studio-fab"
+                style={{ background: 'linear-gradient(135deg, var(--accent), #0B4FE0)', boxShadow: '0 6px 16px rgba(13,92,255,0.25)' }}
+              >
+                Open in Studio →
+              </a>
+
               <div className="mt-5 neu-raised p-4 text-center">
                 <p className="text-sm font-medium text-[var(--text)]">Send this prompt to your AI agent</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Connected to PayBox</p>

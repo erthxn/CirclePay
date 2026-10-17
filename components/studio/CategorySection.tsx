@@ -7,9 +7,11 @@ import CardTile from './CardTile';
 interface Props {
   category: string;
   cards: Card[];
+  /** Passed down to each CardTile so they don't subscribe to the store individually. */
+  selectedId: string | null;
 }
 
-const CategorySection = memo(function CategorySection({ category, cards }: Props) {
+const CategorySection = memo(function CategorySection({ category, cards, selectedId }: Props) {
   const sorted = useMemo(() => cards.slice().sort((a, b) => a.name.localeCompare(b.name)), [cards]);
   return (
     <section id={`cat-${category.replace(/\s+/g, '-').toLowerCase()}`} className="mb-8">
@@ -19,7 +21,7 @@ const CategorySection = memo(function CategorySection({ category, cards }: Props
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2.5">
         {sorted.map((c) => (
-          <CardTile key={c.id} card={c} />
+          <CardTile key={c.id} card={c} selectedId={selectedId} />
         ))}
       </div>
     </section>

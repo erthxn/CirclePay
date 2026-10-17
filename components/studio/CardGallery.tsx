@@ -5,12 +5,18 @@ import { useStudioSelector } from './useStudioState';
 import CategorySection from './CategorySection';
 
 /**
- * CardGallery groups cards by category and renders each category as a virtualized section.
- * Filter input is deferred via useDeferredValue to keep typing responsive on low-end devices.
+ * CardGallery groups cards by category and renders each category as a section.
+ * Filter input is deferred via useDeferredValue to keep typing responsive.
+ *
+ * Note: the gallery subscribes to selectedCardId ONCE and passes it down as
+ * a prop to each CardTile — this is the fix for the mobile lag (bug #3).
+ * Previously each of the 250 tiles subscribed to selectedCardId individually,
+ * causing 250 re-renders on every selection change.
  */
 const CardGallery = memo(function CardGallery() {
   const cards = useStudioSelector((s) => s.cards);
   const rawFilter = useStudioSelector((s) => s.galleryFilter);
+  const selectedCardId = useStudioSelector((s) => s.selectedCardId);
   const deferredFilter = useDeferredValue(rawFilter);
 
   const grouped = useMemo(() => {
@@ -43,7 +49,7 @@ const CardGallery = memo(function CardGallery() {
   return (
     <div>
       {grouped.map(([cat, list]) => (
-        <CategorySection key={cat} category={cat} cards={list} />
+        <CategorySection key={cat} category={cat} cards={list} selectedId={selectedCardId} />
       ))}
     </div>
   );

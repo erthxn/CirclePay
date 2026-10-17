@@ -4,8 +4,12 @@ import { memo, useState, useCallback, useMemo, useDeferredValue } from 'react';
 import type { Connector } from '@/lib/studio/types';
 import { useStudioSelector, useDispatch, useLazyMount } from './useStudioState';
 
-const ConnectorTile = memo(function ConnectorTile({ conn }: { conn: Connector }) {
-  const selectedId = useStudioSelector((s) => s.selectedConnectorId);
+interface TileProps {
+  conn: Connector;
+  selectedId: string | null;
+}
+
+const ConnectorTile = memo(function ConnectorTile({ conn, selectedId }: TileProps) {
   const dispatch = useDispatch();
   const { ref, mounted } = useLazyMount<HTMLButtonElement>('300px 0px');
   const [loaded, setLoaded] = useState(false);
@@ -60,10 +64,11 @@ const ConnectorTile = memo(function ConnectorTile({ conn }: { conn: Connector })
 const ConnectorPicker = memo(function ConnectorPicker() {
   const connectors = useStudioSelector((s) => s.connectors);
   const rawFilter = useStudioSelector((s) => s.galleryFilter);
+  const selectedConnectorId = useStudioSelector((s) => s.selectedConnectorId);
+  const activeCategory = useStudioSelector((s) => s.activeCategory);
   const deferredFilter = useDeferredValue(rawFilter);
   const dispatch = useDispatch();
   const setActiveCategory = useCallback((cat: string | null) => dispatch({ type: 'SET_ACTIVE_CATEGORY', category: cat }), [dispatch]);
-  const activeCategory = useStudioSelector((s) => s.activeCategory);
 
   const grouped = useMemo(() => {
     const q = deferredFilter.trim().toLowerCase();
@@ -110,7 +115,7 @@ const ConnectorPicker = memo(function ConnectorPicker() {
             <h4 className="text-[11px] text-[var(--text-muted)] mb-2 px-1">{cat}</h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
               {list.map((c) => (
-                <ConnectorTile key={c.id} conn={c} />
+                <ConnectorTile key={c.id} conn={c} selectedId={selectedConnectorId} />
               ))}
             </div>
           </section>
