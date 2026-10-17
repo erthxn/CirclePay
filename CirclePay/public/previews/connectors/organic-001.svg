@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400"><defs>
+        <linearGradient id="grad-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#888"/>
+            <stop offset="0.5" stop-color="#fff"/>
+            <stop offset="1" stop-color="#888"/>
+        </linearGradient>
+        <linearGradient id="grad-copper" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A3F1D"/>
+            <stop offset="0.5" stop-color="#FFD8B5"/>
+            <stop offset="1" stop-color="#7A3F1D"/>
+        </linearGradient>
+        <linearGradient id="grad-gold-wire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A5800"/>
+            <stop offset="0.5" stop-color="#FFF6B0"/>
+            <stop offset="1" stop-color="#7A5800"/>
+        </linearGradient>
+        <linearGradient id="grad-sunset" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF6B35"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-ocean" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0077B6"/><stop offset="1" stop-color="#90E0EF"/>
+        </linearGradient>
+        <linearGradient id="grad-fire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-forest" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0F5132"/><stop offset="1" stop-color="#6EE7B7"/>
+        </linearGradient>
+        <linearGradient id="grad-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF1493"/><stop offset="1" stop-color="#7C3AED"/>
+        </linearGradient>
+        <linearGradient id="grad-rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="0.33" stop-color="#FFFF00"/><stop offset="0.66" stop-color="#00FF00"/><stop offset="1" stop-color="#9D4EDD"/>
+        </linearGradient>
+        <linearGradient id="grad-synthwave" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF006E"/><stop offset="0.5" stop-color="#8338EC"/><stop offset="1" stop-color="#3A86FF"/>
+        </linearGradient>
+        <linearGradient id="grad-aurora" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#00F5D4"/><stop offset="0.5" stop-color="#00BBF9"/><stop offset="1" stop-color="#9B5DE5"/>
+        </linearGradient>
+        <linearGradient id="grad-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FFF6B0"/><stop offset="0.5" stop-color="#E8C66B"/><stop offset="1" stop-color="#B8860B"/>
+        </linearGradient>
+        <linearGradient id="grad-cosmic" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#10002B"/><stop offset="0.5" stop-color="#9D4EDD"/><stop offset="1" stop-color="#FF61DC"/>
+        </linearGradient>
+        <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-magenta" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-orange" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-pink" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-lime" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-inner" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs><rect x="0" y="0" width="400" height="400" rx="28" fill="#1A1A2E"/><path d="M 200.00 200.00 L 202.22 192.50 L 203.70 185.00 L 203.92 177.50 L 202.83 170.00 L 200.78 162.50 L 198.47 155.00 L 196.67 147.50 L 196.00 140.00 L 196.67 132.50 L 198.47 125.00 L 200.78 117.50 L 202.83 110.00 L 203.92 102.50 L 203.70 95.00 L 202.22 87.50 L 200.00 80.00" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.85"/><ellipse cx="204.00" cy="200.00" rx="4" ry="2" transform="rotate(0.0 204.00 200.00)" fill="#ffffff" opacity="0.7"/><ellipse cx="198.83" cy="170.00" rx="4" ry="2" transform="rotate(180.0 198.83 170.00)" fill="#ffffff" opacity="0.7"/><ellipse cx="200.00" cy="140.00" rx="4" ry="2" transform="rotate(0.0 200.00 140.00)" fill="#ffffff" opacity="0.7"/><ellipse cx="198.83" cy="110.00" rx="4" ry="2" transform="rotate(180.0 198.83 110.00)" fill="#ffffff" opacity="0.7"/><path d="M 200.00 200.00 L 207.82 199.80 L 215.41 198.88 L 222.61 196.78 L 229.41 193.42 L 235.91 189.15 L 242.32 184.64 L 248.90 180.61 L 255.83 177.65 L 263.17 175.98 L 270.86 175.37 L 278.70 175.25 L 286.47 174.88 L 293.94 173.60 L 301.00 171.07 L 307.68 167.35 L 314.13 162.92" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.85"/><ellipse cx="201.24" cy="203.80" rx="4" ry="2" transform="rotate(72.00000000000006 201.24 203.80)" fill="#ffffff" opacity="0.7"/><ellipse cx="228.17" cy="189.62" rx="4" ry="2" transform="rotate(-107.99999999999996 228.17 189.62)" fill="#ffffff" opacity="0.7"/><ellipse cx="257.06" cy="181.46" rx="4" ry="2" transform="rotate(72.00000000000006 257.06 181.46)" fill="#ffffff" opacity="0.7"/><ellipse cx="285.23" cy="171.07" rx="4" ry="2" transform="rotate(-108.00000000000016 285.23 171.07)" fill="#ffffff" opacity="0.7"/><path d="M 200.00 200.00 L 202.61 207.37 L 205.83 214.31 L 210.05 220.51 L 215.35 225.93 L 221.41 230.80 L 227.69 235.51 L 233.55 240.52 L 238.50 246.19 L 242.37 252.65 L 245.32 259.78 L 247.86 267.20 L 250.61 274.47 L 254.14 281.19 L 258.73 287.12 L 264.33 292.32 L 270.53 297.08" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.85"/><ellipse cx="196.76" cy="202.35" rx="4" ry="2" transform="rotate(143.99999999999997 196.76 202.35)" fill="#ffffff" opacity="0.7"/><ellipse cx="218.58" cy="223.58" rx="4" ry="2" transform="rotate(-36.000000000000036 218.58 223.58)" fill="#ffffff" opacity="0.7"/><ellipse cx="235.27" cy="248.54" rx="4" ry="2" transform="rotate(143.99999999999997 235.27 248.54)" fill="#ffffff" opacity="0.7"/><ellipse cx="253.85" cy="272.12" rx="4" ry="2" transform="rotate(-35.99999999999988 253.85 272.12)" fill="#ffffff" opacity="0.7"/><path d="M 200.00 200.00 L 193.79 204.76 L 188.19 209.96 L 183.60 215.90 L 180.08 222.61 L 177.33 229.88 L 174.79 237.31 L 171.83 244.43 L 167.97 250.89 L 163.02 256.56 L 157.15 261.58 L 150.88 266.29 L 144.81 271.15 L 139.52 276.57 L 135.29 282.77 L 132.08 289.71 L 129.47 297.08" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.85"/><ellipse cx="196.76" cy="197.65" rx="4" ry="2" transform="rotate(-143.99999999999997 196.76 197.65)" fill="#ffffff" opacity="0.7"/><ellipse cx="183.31" cy="224.96" rx="4" ry="2" transform="rotate(36.000000000000036 183.31 224.96)" fill="#ffffff" opacity="0.7"/><ellipse cx="164.73" cy="248.54" rx="4" ry="2" transform="rotate(-143.99999999999997 164.73 248.54)" fill="#ffffff" opacity="0.7"/><ellipse cx="148.05" cy="273.50" rx="4" ry="2" transform="rotate(35.99999999999988 148.05 273.50)" fill="#ffffff" opacity="0.7"/><path d="M 200.00 200.00 L 193.55 195.57 L 186.88 191.85 L 179.81 189.32 L 172.34 188.04 L 164.58 187.67 L 156.73 187.55 L 149.04 186.94 L 141.70 185.26 L 134.78 182.30 L 128.20 178.28 L 121.78 173.76 L 115.28 169.50 L 108.48 166.14 L 101.28 164.04 L 93.69 163.12 L 85.87 162.92" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.85"/><ellipse cx="201.24" cy="196.20" rx="4" ry="2" transform="rotate(-72.00000000000006 201.24 196.20)" fill="#ffffff" opacity="0.7"/><ellipse cx="171.11" cy="191.84" rx="4" ry="2" transform="rotate(107.99999999999996 171.11 191.84)" fill="#ffffff" opacity="0.7"/><ellipse cx="142.94" cy="181.46" rx="4" ry="2" transform="rotate(-72.00000000000006 142.94 181.46)" fill="#ffffff" opacity="0.7"/><ellipse cx="114.04" cy="173.30" rx="4" ry="2" transform="rotate(107.99999999999996 114.04 173.30)" fill="#ffffff" opacity="0.7"/><g transform="translate(200.00 200.00)">
+        <defs><linearGradient id="ctile999" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(210,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(210,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="28.0" fill="url(#ctile999)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="6.72" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="22" font-weight="700" fill="#fff">@</text>
+    </g><g transform="translate(200.00 80.00)">
+        <defs><linearGradient id="ctile0" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(0,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(0,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile0)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">A</text>
+    </g><g transform="translate(200.00 102.00)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$20.00</text>
+    </g><g transform="translate(314.13 162.92)">
+        <defs><linearGradient id="ctile1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(72,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(72,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile1)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">B</text>
+    </g><g transform="translate(314.13 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$17.00</text>
+    </g><g transform="translate(270.53 297.08)">
+        <defs><linearGradient id="ctile2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(144,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(144,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile2)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">C</text>
+    </g><g transform="translate(270.53 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$14.00</text>
+    </g><g transform="translate(129.47 297.08)">
+        <defs><linearGradient id="ctile3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(216,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(216,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile3)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">D</text>
+    </g><g transform="translate(129.47 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$11.00</text>
+    </g><g transform="translate(85.87 162.92)">
+        <defs><linearGradient id="ctile4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(288,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(288,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile4)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">E</text>
+    </g><g transform="translate(85.87 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$8.00</text>
+    </g></svg>
