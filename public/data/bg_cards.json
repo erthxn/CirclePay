@@ -1,0 +1,6725 @@
+{
+  "schema_version": "1.0",
+  "total": 200,
+  "categories": [
+    "Sunset Glow",
+    "Ocean Depths",
+    "Aurora Cosmic",
+    "Metallic Premium",
+    "Neon Cyber",
+    "Pastel Dream",
+    "Dark Lux",
+    "Glassmorphism",
+    "Holographic",
+    "Geometric Mesh"
+  ],
+  "patterns": [
+    "grain",
+    "dot-grid",
+    "line-grid",
+    "radial-glow",
+    "diagonal-stripes",
+    "circuit-pattern",
+    "hex-pattern",
+    "topographic",
+    "vignette",
+    "halo-glow",
+    "stars",
+    "bokeh",
+    "wave-lines"
+  ],
+  "cards": [
+    {
+      "id": "sunset-glow-001",
+      "name": "Coral Dusk",
+      "category": "Sunset Glow",
+      "subcategory": "Coral Dusk",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FF512F",
+          0
+        ],
+        [
+          "#DD2476",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FF512F 0, #DD2476 100)",
+      "solid_color": "#DD2476",
+      "tags": [
+        "sunset glow",
+        "coral dusk",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-001.svg",
+      "preview_png": "previews/sunset-glow-001.png"
+    },
+    {
+      "id": "sunset-glow-002",
+      "name": "Peach Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Peach Sunset",
+      "pattern": "wave-lines",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FF9A8B",
+          0
+        ],
+        [
+          "#FF6A88",
+          50
+        ],
+        [
+          "#FF99AC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FF9A8B 0, #FF6A88 50, #FF99AC 100)",
+      "solid_color": "#FF99AC",
+      "tags": [
+        "sunset glow",
+        "peach sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-002.svg",
+      "preview_png": "previews/sunset-glow-002.png"
+    },
+    {
+      "id": "sunset-glow-003",
+      "name": "Warm Honey",
+      "category": "Sunset Glow",
+      "subcategory": "Warm Honey",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#F6D365",
+          0
+        ],
+        [
+          "#FDA085",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #F6D365 0, #FDA085 100)",
+      "solid_color": "#FDA085",
+      "tags": [
+        "sunset glow",
+        "warm honey",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-003.svg",
+      "preview_png": "previews/sunset-glow-003.png"
+    },
+    {
+      "id": "sunset-glow-004",
+      "name": "Violet Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Violet Sunset",
+      "pattern": "bokeh",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#7028E4",
+          0
+        ],
+        [
+          "#E5B2CA",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #7028E4 0, #E5B2CA 100)",
+      "solid_color": "#E5B2CA",
+      "tags": [
+        "sunset glow",
+        "violet sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-004.svg",
+      "preview_png": "previews/sunset-glow-004.png"
+    },
+    {
+      "id": "sunset-glow-005",
+      "name": "Desert Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Desert Sunset",
+      "pattern": "radial-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FF512F",
+          0
+        ],
+        [
+          "#F09819",
+          50
+        ],
+        [
+          "#FFD200",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FF512F 0, #F09819 50, #FFD200 100)",
+      "solid_color": "#FFD200",
+      "tags": [
+        "sunset glow",
+        "desert sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-005.svg",
+      "preview_png": "previews/sunset-glow-005.png"
+    },
+    {
+      "id": "sunset-glow-006",
+      "name": "Amber Glow",
+      "category": "Sunset Glow",
+      "subcategory": "Amber Glow",
+      "pattern": "stars",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FF8008",
+          0
+        ],
+        [
+          "#FFC837",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FF8008 0, #FFC837 100)",
+      "solid_color": "#FFC837",
+      "tags": [
+        "sunset glow",
+        "amber glow",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-006.svg",
+      "preview_png": "previews/sunset-glow-006.png"
+    },
+    {
+      "id": "sunset-glow-007",
+      "name": "Fire Sky",
+      "category": "Sunset Glow",
+      "subcategory": "Fire Sky",
+      "pattern": "line-grid",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#EE9CA7",
+          0
+        ],
+        [
+          "#FFDDE1",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #EE9CA7 0, #FFDDE1 100)",
+      "solid_color": "#FFDDE1",
+      "tags": [
+        "sunset glow",
+        "fire sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-007.svg",
+      "preview_png": "previews/sunset-glow-007.png"
+    },
+    {
+      "id": "sunset-glow-008",
+      "name": "Crimson Dusk",
+      "category": "Sunset Glow",
+      "subcategory": "Crimson Dusk",
+      "pattern": "halo-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#BA5370",
+          0
+        ],
+        [
+          "#F4E2D8",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #BA5370 0, #F4E2D8 100)",
+      "solid_color": "#F4E2D8",
+      "tags": [
+        "sunset glow",
+        "crimson dusk",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-008.svg",
+      "preview_png": "previews/sunset-glow-008.png"
+    },
+    {
+      "id": "sunset-glow-009",
+      "name": "Rose Gold Sky",
+      "category": "Sunset Glow",
+      "subcategory": "Rose Gold Sky",
+      "pattern": "dot-grid",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFE259",
+          0
+        ],
+        [
+          "#FFA751",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFE259 0, #FFA751 100)",
+      "solid_color": "#FFA751",
+      "tags": [
+        "sunset glow",
+        "rose gold sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-009.svg",
+      "preview_png": "previews/sunset-glow-009.png"
+    },
+    {
+      "id": "sunset-glow-010",
+      "name": "Burning Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Burning Sunset",
+      "pattern": "vignette",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FF416C",
+          0
+        ],
+        [
+          "#FF4B2B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FF416C 0, #FF4B2B 100)",
+      "solid_color": "#FF4B2B",
+      "tags": [
+        "sunset glow",
+        "burning sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-010.svg",
+      "preview_png": "previews/sunset-glow-010.png"
+    },
+    {
+      "id": "sunset-glow-011",
+      "name": "Sahara Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Sahara Sunset",
+      "pattern": "grain",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#C04848",
+          0
+        ],
+        [
+          "#480048",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #C04848 0, #480048 100)",
+      "solid_color": "#480048",
+      "tags": [
+        "sunset glow",
+        "sahara sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-011.svg",
+      "preview_png": "previews/sunset-glow-011.png"
+    },
+    {
+      "id": "sunset-glow-012",
+      "name": "Mango Dusk",
+      "category": "Sunset Glow",
+      "subcategory": "Mango Dusk",
+      "pattern": "topographic",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFE000",
+          0
+        ],
+        [
+          "#799F0C",
+          50
+        ],
+        [
+          "#00B4DB",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFE000 0, #799F0C 50, #00B4DB 100)",
+      "solid_color": "#00B4DB",
+      "tags": [
+        "sunset glow",
+        "mango dusk",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-012.svg",
+      "preview_png": "previews/sunset-glow-012.png"
+    },
+    {
+      "id": "sunset-glow-013",
+      "name": "Sunset Fire",
+      "category": "Sunset Glow",
+      "subcategory": "Sunset Fire",
+      "pattern": null,
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FF6B35",
+          0
+        ],
+        [
+          "#F7931E",
+          50
+        ],
+        [
+          "#FFD700",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FF6B35 0, #F7931E 50, #FFD700 100)",
+      "solid_color": "#FFD700",
+      "tags": [
+        "sunset glow",
+        "sunset fire",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-013.svg",
+      "preview_png": "previews/sunset-glow-013.png"
+    },
+    {
+      "id": "sunset-glow-014",
+      "name": "Tangerine Sky",
+      "category": "Sunset Glow",
+      "subcategory": "Tangerine Sky",
+      "pattern": "hex-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FCE38A",
+          0
+        ],
+        [
+          "#F38181",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FCE38A 0, #F38181 100)",
+      "solid_color": "#F38181",
+      "tags": [
+        "sunset glow",
+        "tangerine sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-014.svg",
+      "preview_png": "previews/sunset-glow-014.png"
+    },
+    {
+      "id": "sunset-glow-015",
+      "name": "Plum Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Plum Sunset",
+      "pattern": null,
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#D31027",
+          0
+        ],
+        [
+          "#EA384D",
+          50
+        ],
+        [
+          "#ED8936",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #D31027 0, #EA384D 50, #ED8936 100)",
+      "solid_color": "#ED8936",
+      "tags": [
+        "sunset glow",
+        "plum sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-015.svg",
+      "preview_png": "previews/sunset-glow-015.png"
+    },
+    {
+      "id": "sunset-glow-016",
+      "name": "Apricot Dream",
+      "category": "Sunset Glow",
+      "subcategory": "Apricot Dream",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FCC4D8",
+          0
+        ],
+        [
+          "#FBAB7E",
+          50
+        ],
+        [
+          "#FCE38A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FCC4D8 0, #FBAB7E 50, #FCE38A 100)",
+      "solid_color": "#FCE38A",
+      "tags": [
+        "sunset glow",
+        "apricot dream",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-016.svg",
+      "preview_png": "previews/sunset-glow-016.png"
+    },
+    {
+      "id": "sunset-glow-017",
+      "name": "Rose Quartz Sun",
+      "category": "Sunset Glow",
+      "subcategory": "Rose Quartz Sun",
+      "pattern": "wave-lines",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFA8A8",
+          0
+        ],
+        [
+          "#FF5E62",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFA8A8 0, #FF5E62 100)",
+      "solid_color": "#FF5E62",
+      "tags": [
+        "sunset glow",
+        "rose quartz sun",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-017.svg",
+      "preview_png": "previews/sunset-glow-017.png"
+    },
+    {
+      "id": "sunset-glow-018",
+      "name": "Coral Reef Sunset",
+      "category": "Sunset Glow",
+      "subcategory": "Coral Reef Sunset",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FF9966",
+          0
+        ],
+        [
+          "#FF5E62",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FF9966 0, #FF5E62 100)",
+      "solid_color": "#FF5E62",
+      "tags": [
+        "sunset glow",
+        "coral reef sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-018.svg",
+      "preview_png": "previews/sunset-glow-018.png"
+    },
+    {
+      "id": "sunset-glow-019",
+      "name": "Golden Hour",
+      "category": "Sunset Glow",
+      "subcategory": "Golden Hour",
+      "pattern": "bokeh",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFC3A0",
+          0
+        ],
+        [
+          "#FFAFBD",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFC3A0 0, #FFAFBD 100)",
+      "solid_color": "#FFAFBD",
+      "tags": [
+        "sunset glow",
+        "golden hour",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-019.svg",
+      "preview_png": "previews/sunset-glow-019.png"
+    },
+    {
+      "id": "sunset-glow-020",
+      "name": "Ember Sky",
+      "category": "Sunset Glow",
+      "subcategory": "Ember Sky",
+      "pattern": "radial-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#E65C00",
+          0
+        ],
+        [
+          "#F9D423",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #E65C00 0, #F9D423 100)",
+      "solid_color": "#F9D423",
+      "tags": [
+        "sunset glow",
+        "ember sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/sunset-glow-020.svg",
+      "preview_png": "previews/sunset-glow-020.png"
+    },
+    {
+      "id": "ocean-depths-021",
+      "name": "Electric Sea",
+      "category": "Ocean Depths",
+      "subcategory": "Electric Sea",
+      "pattern": "stars",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#2E3192",
+          0
+        ],
+        [
+          "#1BFFFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #2E3192 0, #1BFFFF 100)",
+      "solid_color": "#1BFFFF",
+      "tags": [
+        "ocean depths",
+        "electric sea",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-021.svg",
+      "preview_png": "previews/ocean-depths-021.png"
+    },
+    {
+      "id": "ocean-depths-022",
+      "name": "Aqua Mint",
+      "category": "Ocean Depths",
+      "subcategory": "Aqua Mint",
+      "pattern": "line-grid",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#00C9FF",
+          0
+        ],
+        [
+          "#92FE9D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #00C9FF 0, #92FE9D 100)",
+      "solid_color": "#92FE9D",
+      "tags": [
+        "ocean depths",
+        "aqua mint",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-022.svg",
+      "preview_png": "previews/ocean-depths-022.png"
+    },
+    {
+      "id": "ocean-depths-023",
+      "name": "Deep Sea",
+      "category": "Ocean Depths",
+      "subcategory": "Deep Sea",
+      "pattern": "halo-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#000046",
+          0
+        ],
+        [
+          "#1CB5E0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #000046 0, #1CB5E0 100)",
+      "solid_color": "#1CB5E0",
+      "tags": [
+        "ocean depths",
+        "deep sea",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-023.svg",
+      "preview_png": "previews/ocean-depths-023.png"
+    },
+    {
+      "id": "ocean-depths-024",
+      "name": "Lagoon",
+      "category": "Ocean Depths",
+      "subcategory": "Lagoon",
+      "pattern": "dot-grid",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#1A2980",
+          0
+        ],
+        [
+          "#26D0CE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #1A2980 0, #26D0CE 100)",
+      "solid_color": "#26D0CE",
+      "tags": [
+        "ocean depths",
+        "lagoon",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-024.svg",
+      "preview_png": "previews/ocean-depths-024.png"
+    },
+    {
+      "id": "ocean-depths-025",
+      "name": "Moody Teal",
+      "category": "Ocean Depths",
+      "subcategory": "Moody Teal",
+      "pattern": "vignette",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#0F2027",
+          0
+        ],
+        [
+          "#203A43",
+          50
+        ],
+        [
+          "#2C5364",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #0F2027 0, #203A43 50, #2C5364 100)",
+      "solid_color": "#2C5364",
+      "tags": [
+        "ocean depths",
+        "moody teal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-025.svg",
+      "preview_png": "previews/ocean-depths-025.png"
+    },
+    {
+      "id": "ocean-depths-026",
+      "name": "Triton Blue",
+      "category": "Ocean Depths",
+      "subcategory": "Triton Blue",
+      "pattern": "grain",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#36D1DC",
+          0
+        ],
+        [
+          "#5B86E5",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #36D1DC 0, #5B86E5 100)",
+      "solid_color": "#5B86E5",
+      "tags": [
+        "ocean depths",
+        "triton blue",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-026.svg",
+      "preview_png": "previews/ocean-depths-026.png"
+    },
+    {
+      "id": "ocean-depths-027",
+      "name": "Pacific Depths",
+      "category": "Ocean Depths",
+      "subcategory": "Pacific Depths",
+      "pattern": "topographic",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#005C97",
+          0
+        ],
+        [
+          "#363795",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #005C97 0, #363795 100)",
+      "solid_color": "#363795",
+      "tags": [
+        "ocean depths",
+        "pacific depths",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-027.svg",
+      "preview_png": "previews/ocean-depths-027.png"
+    },
+    {
+      "id": "ocean-depths-028",
+      "name": "Marine Layer",
+      "category": "Ocean Depths",
+      "subcategory": "Marine Layer",
+      "pattern": null,
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#003973",
+          0
+        ],
+        [
+          "#E5E5BE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #003973 0, #E5E5BE 100)",
+      "solid_color": "#E5E5BE",
+      "tags": [
+        "ocean depths",
+        "marine layer",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-028.svg",
+      "preview_png": "previews/ocean-depths-028.png"
+    },
+    {
+      "id": "ocean-depths-029",
+      "name": "Abyssal",
+      "category": "Ocean Depths",
+      "subcategory": "Abyssal",
+      "pattern": "hex-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#000428",
+          0
+        ],
+        [
+          "#004E92",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #000428 0, #004E92 100)",
+      "solid_color": "#004E92",
+      "tags": [
+        "ocean depths",
+        "abyssal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-029.svg",
+      "preview_png": "previews/ocean-depths-029.png"
+    },
+    {
+      "id": "ocean-depths-030",
+      "name": "Tropical Wave",
+      "category": "Ocean Depths",
+      "subcategory": "Tropical Wave",
+      "pattern": null,
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#08605F",
+          0
+        ],
+        [
+          "#48B1B5",
+          50
+        ],
+        [
+          "#75D7B4",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #08605F 0, #48B1B5 50, #75D7B4 100)",
+      "solid_color": "#75D7B4",
+      "tags": [
+        "ocean depths",
+        "tropical wave",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-030.svg",
+      "preview_png": "previews/ocean-depths-030.png"
+    },
+    {
+      "id": "ocean-depths-031",
+      "name": "Stormy Sea",
+      "category": "Ocean Depths",
+      "subcategory": "Stormy Sea",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#134E5E",
+          0
+        ],
+        [
+          "#71B280",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #134E5E 0, #71B280 100)",
+      "solid_color": "#71B280",
+      "tags": [
+        "ocean depths",
+        "stormy sea",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-031.svg",
+      "preview_png": "previews/ocean-depths-031.png"
+    },
+    {
+      "id": "ocean-depths-032",
+      "name": "Tide Pool",
+      "category": "Ocean Depths",
+      "subcategory": "Tide Pool",
+      "pattern": "wave-lines",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#43C6AC",
+          0
+        ],
+        [
+          "#191654",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #43C6AC 0, #191654 100)",
+      "solid_color": "#191654",
+      "tags": [
+        "ocean depths",
+        "tide pool",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-032.svg",
+      "preview_png": "previews/ocean-depths-032.png"
+    },
+    {
+      "id": "ocean-depths-033",
+      "name": "Midnight Ocean",
+      "category": "Ocean Depths",
+      "subcategory": "Midnight Ocean",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#0F2027",
+          0
+        ],
+        [
+          "#2C5364",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #0F2027 0, #2C5364 100)",
+      "solid_color": "#2C5364",
+      "tags": [
+        "ocean depths",
+        "midnight ocean",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-033.svg",
+      "preview_png": "previews/ocean-depths-033.png"
+    },
+    {
+      "id": "ocean-depths-034",
+      "name": "Glacier Blue",
+      "category": "Ocean Depths",
+      "subcategory": "Glacier Blue",
+      "pattern": "bokeh",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#83A4D4",
+          0
+        ],
+        [
+          "#B6FBFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #83A4D4 0, #B6FBFF 100)",
+      "solid_color": "#B6FBFF",
+      "tags": [
+        "ocean depths",
+        "glacier blue",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-034.svg",
+      "preview_png": "previews/ocean-depths-034.png"
+    },
+    {
+      "id": "ocean-depths-035",
+      "name": "Arctic Mist",
+      "category": "Ocean Depths",
+      "subcategory": "Arctic Mist",
+      "pattern": "radial-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#2193B0",
+          0
+        ],
+        [
+          "#6DD5ED",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #2193B0 0, #6DD5ED 100)",
+      "solid_color": "#6DD5ED",
+      "tags": [
+        "ocean depths",
+        "arctic mist",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-035.svg",
+      "preview_png": "previews/ocean-depths-035.png"
+    },
+    {
+      "id": "ocean-depths-036",
+      "name": "Coral Sea",
+      "category": "Ocean Depths",
+      "subcategory": "Coral Sea",
+      "pattern": "stars",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#00B4DB",
+          0
+        ],
+        [
+          "#0083B0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #00B4DB 0, #0083B0 100)",
+      "solid_color": "#0083B0",
+      "tags": [
+        "ocean depths",
+        "coral sea",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-036.svg",
+      "preview_png": "previews/ocean-depths-036.png"
+    },
+    {
+      "id": "ocean-depths-037",
+      "name": "Lapis Lazuli",
+      "category": "Ocean Depths",
+      "subcategory": "Lapis Lazuli",
+      "pattern": "line-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#1A2980",
+          0
+        ],
+        [
+          "#26D0CE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #1A2980 0, #26D0CE 100)",
+      "solid_color": "#26D0CE",
+      "tags": [
+        "ocean depths",
+        "lapis lazuli",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-037.svg",
+      "preview_png": "previews/ocean-depths-037.png"
+    },
+    {
+      "id": "ocean-depths-038",
+      "name": "Ocean Floor",
+      "category": "Ocean Depths",
+      "subcategory": "Ocean Floor",
+      "pattern": "halo-glow",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#1F1C2C",
+          0
+        ],
+        [
+          "#928DAB",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #1F1C2C 0, #928DAB 100)",
+      "solid_color": "#928DAB",
+      "tags": [
+        "ocean depths",
+        "ocean floor",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-038.svg",
+      "preview_png": "previews/ocean-depths-038.png"
+    },
+    {
+      "id": "ocean-depths-039",
+      "name": "Deep Current",
+      "category": "Ocean Depths",
+      "subcategory": "Deep Current",
+      "pattern": "dot-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#4568DC",
+          0
+        ],
+        [
+          "#B06AB3",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #4568DC 0, #B06AB3 100)",
+      "solid_color": "#B06AB3",
+      "tags": [
+        "ocean depths",
+        "deep current",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-039.svg",
+      "preview_png": "previews/ocean-depths-039.png"
+    },
+    {
+      "id": "ocean-depths-040",
+      "name": "Aqua Marine",
+      "category": "Ocean Depths",
+      "subcategory": "Aqua Marine",
+      "pattern": "vignette",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#00C9FF",
+          0
+        ],
+        [
+          "#92FE9D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #00C9FF 0, #92FE9D 100)",
+      "solid_color": "#92FE9D",
+      "tags": [
+        "ocean depths",
+        "aqua marine",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/ocean-depths-040.svg",
+      "preview_png": "previews/ocean-depths-040.png"
+    },
+    {
+      "id": "aurora-cosmic-041",
+      "name": "Northern Lights",
+      "category": "Aurora Cosmic",
+      "subcategory": "Northern Lights",
+      "pattern": "grain",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#172347",
+          0
+        ],
+        [
+          "#025385",
+          50
+        ],
+        [
+          "#0EF3C5",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #172347 0, #025385 50, #0EF3C5 100)",
+      "solid_color": "#0EF3C5",
+      "tags": [
+        "aurora cosmic",
+        "northern lights",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-041.svg",
+      "preview_png": "previews/aurora-cosmic-041.png"
+    },
+    {
+      "id": "aurora-cosmic-042",
+      "name": "Lakeside Aurora",
+      "category": "Aurora Cosmic",
+      "subcategory": "Lakeside Aurora",
+      "pattern": "topographic",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#1D1640",
+          0
+        ],
+        [
+          "#3D276F",
+          25
+        ],
+        [
+          "#001D83",
+          50
+        ],
+        [
+          "#39977F",
+          75
+        ],
+        [
+          "#B4DAC3",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #1D1640 0, #3D276F 25, #001D83 50, #39977F 75, #B4DAC3 100)",
+      "solid_color": "#B4DAC3",
+      "tags": [
+        "aurora cosmic",
+        "lakeside aurora",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-042.svg",
+      "preview_png": "previews/aurora-cosmic-042.png"
+    },
+    {
+      "id": "aurora-cosmic-043",
+      "name": "Nebula Violet",
+      "category": "Aurora Cosmic",
+      "subcategory": "Nebula Violet",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#8E2DE2",
+          0
+        ],
+        [
+          "#4A00E0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #8E2DE2 0, #4A00E0 100)",
+      "solid_color": "#4A00E0",
+      "tags": [
+        "aurora cosmic",
+        "nebula violet",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-043.svg",
+      "preview_png": "previews/aurora-cosmic-043.png"
+    },
+    {
+      "id": "aurora-cosmic-044",
+      "name": "Cosmic Dust",
+      "category": "Aurora Cosmic",
+      "subcategory": "Cosmic Dust",
+      "pattern": "hex-pattern",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#3A1C71",
+          0
+        ],
+        [
+          "#D76D77",
+          50
+        ],
+        [
+          "#FFAF7B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #3A1C71 0, #D76D77 50, #FFAF7B 100)",
+      "solid_color": "#FFAF7B",
+      "tags": [
+        "aurora cosmic",
+        "cosmic dust",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-044.svg",
+      "preview_png": "previews/aurora-cosmic-044.png"
+    },
+    {
+      "id": "aurora-cosmic-045",
+      "name": "Aurora Borealis",
+      "category": "Aurora Cosmic",
+      "subcategory": "Aurora Borealis",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#00C9FF",
+          0
+        ],
+        [
+          "#92FE9D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #00C9FF 0, #92FE9D 100)",
+      "solid_color": "#92FE9D",
+      "tags": [
+        "aurora cosmic",
+        "aurora borealis",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-045.svg",
+      "preview_png": "previews/aurora-cosmic-045.png"
+    },
+    {
+      "id": "aurora-cosmic-046",
+      "name": "Galaxy Spiral",
+      "category": "Aurora Cosmic",
+      "subcategory": "Galaxy Spiral",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#7B2CBF",
+          0
+        ],
+        [
+          "#3C096C",
+          35
+        ],
+        [
+          "#10002B",
+          75
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #7B2CBF 0, #3C096C 35, #10002B 75, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "aurora cosmic",
+        "galaxy spiral",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-046.svg",
+      "preview_png": "previews/aurora-cosmic-046.png"
+    },
+    {
+      "id": "aurora-cosmic-047",
+      "name": "Nebula Burst",
+      "category": "Aurora Cosmic",
+      "subcategory": "Nebula Burst",
+      "pattern": "wave-lines",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF61DC",
+          0
+        ],
+        [
+          "#9D4EDD",
+          30
+        ],
+        [
+          "#5A189A",
+          65
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "aurora cosmic",
+        "nebula burst",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-047.svg",
+      "preview_png": "previews/aurora-cosmic-047.png"
+    },
+    {
+      "id": "aurora-cosmic-048",
+      "name": "Stardust",
+      "category": "Aurora Cosmic",
+      "subcategory": "Stardust",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#E0AAFF",
+          0
+        ],
+        [
+          "#7B2CBF",
+          35
+        ],
+        [
+          "#3C096C",
+          75
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #E0AAFF 0, #7B2CBF 35, #3C096C 75, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "aurora cosmic",
+        "stardust",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-048.svg",
+      "preview_png": "previews/aurora-cosmic-048.png"
+    },
+    {
+      "id": "aurora-cosmic-049",
+      "name": "Andromeda",
+      "category": "Aurora Cosmic",
+      "subcategory": "Andromeda",
+      "pattern": "bokeh",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#7209B7",
+          0
+        ],
+        [
+          "#3A0CA3",
+          35
+        ],
+        [
+          "#10002B",
+          75
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #7209B7 0, #3A0CA3 35, #10002B 75, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "aurora cosmic",
+        "andromeda",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-049.svg",
+      "preview_png": "previews/aurora-cosmic-049.png"
+    },
+    {
+      "id": "aurora-cosmic-050",
+      "name": "Milky Way",
+      "category": "Aurora Cosmic",
+      "subcategory": "Milky Way",
+      "pattern": "radial-glow",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#F72585",
+          0
+        ],
+        [
+          "#7209B7",
+          35
+        ],
+        [
+          "#10002B",
+          75
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #F72585 0, #7209B7 35, #10002B 75, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "aurora cosmic",
+        "milky way",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-050.svg",
+      "preview_png": "previews/aurora-cosmic-050.png"
+    },
+    {
+      "id": "aurora-cosmic-051",
+      "name": "Black Hole Sun",
+      "category": "Aurora Cosmic",
+      "subcategory": "Black Hole Sun",
+      "pattern": "stars",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FFBA08",
+          0
+        ],
+        [
+          "#D00000",
+          20
+        ],
+        [
+          "#6A040F",
+          55
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FFBA08 0, #D00000 20, #6A040F 55, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "aurora cosmic",
+        "black hole sun",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-051.svg",
+      "preview_png": "previews/aurora-cosmic-051.png"
+    },
+    {
+      "id": "aurora-cosmic-052",
+      "name": "Quasar",
+      "category": "Aurora Cosmic",
+      "subcategory": "Quasar",
+      "pattern": "line-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#48BFE3",
+          0
+        ],
+        [
+          "#5E60CE",
+          35
+        ],
+        [
+          "#7400B8",
+          70
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #48BFE3 0, #5E60CE 35, #7400B8 70, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "aurora cosmic",
+        "quasar",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-052.svg",
+      "preview_png": "previews/aurora-cosmic-052.png"
+    },
+    {
+      "id": "aurora-cosmic-053",
+      "name": "Pulsar",
+      "category": "Aurora Cosmic",
+      "subcategory": "Pulsar",
+      "pattern": "halo-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#80FFDB",
+          0
+        ],
+        [
+          "#64DFDF",
+          30
+        ],
+        [
+          "#48BFE3",
+          65
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #80FFDB 0, #64DFDF 30, #48BFE3 65, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "aurora cosmic",
+        "pulsar",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-053.svg",
+      "preview_png": "previews/aurora-cosmic-053.png"
+    },
+    {
+      "id": "aurora-cosmic-054",
+      "name": "Solar Wind",
+      "category": "Aurora Cosmic",
+      "subcategory": "Solar Wind",
+      "pattern": "dot-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#FF9E00",
+          0
+        ],
+        [
+          "#FF6D00",
+          30
+        ],
+        [
+          "#E53170",
+          65
+        ],
+        [
+          "#240046",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #FF9E00 0, #FF6D00 30, #E53170 65, #240046 100)",
+      "solid_color": "#240046",
+      "tags": [
+        "aurora cosmic",
+        "solar wind",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-054.svg",
+      "preview_png": "previews/aurora-cosmic-054.png"
+    },
+    {
+      "id": "aurora-cosmic-055",
+      "name": "Cosmic Latte",
+      "category": "Aurora Cosmic",
+      "subcategory": "Cosmic Latte",
+      "pattern": "vignette",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#10002B",
+          0
+        ],
+        [
+          "#9D4EDD",
+          50
+        ],
+        [
+          "#FF61DC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #10002B 0, #9D4EDD 50, #FF61DC 100)",
+      "solid_color": "#FF61DC",
+      "tags": [
+        "aurora cosmic",
+        "cosmic latte",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-055.svg",
+      "preview_png": "previews/aurora-cosmic-055.png"
+    },
+    {
+      "id": "aurora-cosmic-056",
+      "name": "Stellar Birth",
+      "category": "Aurora Cosmic",
+      "subcategory": "Stellar Birth",
+      "pattern": "grain",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#240046",
+          0
+        ],
+        [
+          "#5A189A",
+          33
+        ],
+        [
+          "#9D4EDD",
+          66
+        ],
+        [
+          "#E0AAFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #240046 0, #5A189A 33, #9D4EDD 66, #E0AAFF 100)",
+      "solid_color": "#E0AAFF",
+      "tags": [
+        "aurora cosmic",
+        "stellar birth",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-056.svg",
+      "preview_png": "previews/aurora-cosmic-056.png"
+    },
+    {
+      "id": "aurora-cosmic-057",
+      "name": "Supernova",
+      "category": "Aurora Cosmic",
+      "subcategory": "Supernova",
+      "pattern": "topographic",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FFD60A",
+          0
+        ],
+        [
+          "#FF6B35",
+          30
+        ],
+        [
+          "#C9184A",
+          65
+        ],
+        [
+          "#240046",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FFD60A 0, #FF6B35 30, #C9184A 65, #240046 100)",
+      "solid_color": "#240046",
+      "tags": [
+        "aurora cosmic",
+        "supernova",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-057.svg",
+      "preview_png": "previews/aurora-cosmic-057.png"
+    },
+    {
+      "id": "aurora-cosmic-058",
+      "name": "Veil Nebula",
+      "category": "Aurora Cosmic",
+      "subcategory": "Veil Nebula",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#3A0CA3",
+          0
+        ],
+        [
+          "#7209B7",
+          33
+        ],
+        [
+          "#F72585",
+          66
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #3A0CA3 0, #7209B7 33, #F72585 66, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "aurora cosmic",
+        "veil nebula",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-058.svg",
+      "preview_png": "previews/aurora-cosmic-058.png"
+    },
+    {
+      "id": "aurora-cosmic-059",
+      "name": "Aurora Mist",
+      "category": "Aurora Cosmic",
+      "subcategory": "Aurora Mist",
+      "pattern": "hex-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#00F5D4",
+          0
+        ],
+        [
+          "#00BBF9",
+          33
+        ],
+        [
+          "#9B5DE5",
+          66
+        ],
+        [
+          "#240046",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #00F5D4 0, #00BBF9 33, #9B5DE5 66, #240046 100)",
+      "solid_color": "#240046",
+      "tags": [
+        "aurora cosmic",
+        "aurora mist",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-059.svg",
+      "preview_png": "previews/aurora-cosmic-059.png"
+    },
+    {
+      "id": "aurora-cosmic-060",
+      "name": "Deep Field",
+      "category": "Aurora Cosmic",
+      "subcategory": "Deep Field",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#10002B",
+          0
+        ],
+        [
+          "#240046",
+          25
+        ],
+        [
+          "#5A189A",
+          50
+        ],
+        [
+          "#9D4EDD",
+          75
+        ],
+        [
+          "#E0AAFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #10002B 0, #240046 25, #5A189A 50, #9D4EDD 75, #E0AAFF 100)",
+      "solid_color": "#E0AAFF",
+      "tags": [
+        "aurora cosmic",
+        "deep field",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/aurora-cosmic-060.svg",
+      "preview_png": "previews/aurora-cosmic-060.png"
+    },
+    {
+      "id": "metallic-premium-061",
+      "name": "Pure Gold",
+      "category": "Metallic Premium",
+      "subcategory": "Pure Gold",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#FFF6B0",
+          0
+        ],
+        [
+          "#E8C66B",
+          35
+        ],
+        [
+          "#B8860B",
+          75
+        ],
+        [
+          "#6B4F0A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "solid_color": "#6B4F0A",
+      "tags": [
+        "metallic premium",
+        "pure gold",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-061.svg",
+      "preview_png": "previews/metallic-premium-061.png"
+    },
+    {
+      "id": "metallic-premium-062",
+      "name": "Rose Gold",
+      "category": "Metallic Premium",
+      "subcategory": "Rose Gold",
+      "pattern": "wave-lines",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFE4E1",
+          0
+        ],
+        [
+          "#E8B4A0",
+          30
+        ],
+        [
+          "#B76E79",
+          70
+        ],
+        [
+          "#7A3E47",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFE4E1 0, #E8B4A0 30, #B76E79 70, #7A3E47 100)",
+      "solid_color": "#7A3E47",
+      "tags": [
+        "metallic premium",
+        "rose gold",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-062.svg",
+      "preview_png": "previews/metallic-premium-062.png"
+    },
+    {
+      "id": "metallic-premium-063",
+      "name": "Platinum",
+      "category": "Metallic Premium",
+      "subcategory": "Platinum",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F5F5F5",
+          0
+        ],
+        [
+          "#D9D9D9",
+          30
+        ],
+        [
+          "#A8A8A8",
+          70
+        ],
+        [
+          "#5C5C5C",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F5F5F5 0, #D9D9D9 30, #A8A8A8 70, #5C5C5C 100)",
+      "solid_color": "#5C5C5C",
+      "tags": [
+        "metallic premium",
+        "platinum",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-063.svg",
+      "preview_png": "previews/metallic-premium-063.png"
+    },
+    {
+      "id": "metallic-premium-064",
+      "name": "Chrome",
+      "category": "Metallic Premium",
+      "subcategory": "Chrome",
+      "pattern": "bokeh",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#FFFFFF",
+          0
+        ],
+        [
+          "#C0C0C0",
+          25
+        ],
+        [
+          "#7A7A7A",
+          55
+        ],
+        [
+          "#C0C0C0",
+          85
+        ],
+        [
+          "#FFFFFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #FFFFFF 0, #C0C0C0 25, #7A7A7A 55, #C0C0C0 85, #FFFFFF 100)",
+      "solid_color": "#FFFFFF",
+      "tags": [
+        "metallic premium",
+        "chrome",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-064.svg",
+      "preview_png": "previews/metallic-premium-064.png"
+    },
+    {
+      "id": "metallic-premium-065",
+      "name": "Brushed Bronze",
+      "category": "Metallic Premium",
+      "subcategory": "Brushed Bronze",
+      "pattern": "radial-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#EDD9BB",
+          0
+        ],
+        [
+          "#C68A3E",
+          40
+        ],
+        [
+          "#7A4F1D",
+          80
+        ],
+        [
+          "#3F2810",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #EDD9BB 0, #C68A3E 40, #7A4F1D 80, #3F2810 100)",
+      "solid_color": "#3F2810",
+      "tags": [
+        "metallic premium",
+        "brushed bronze",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-065.svg",
+      "preview_png": "previews/metallic-premium-065.png"
+    },
+    {
+      "id": "metallic-premium-066",
+      "name": "Copper Wire",
+      "category": "Metallic Premium",
+      "subcategory": "Copper Wire",
+      "pattern": "stars",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFD8B5",
+          0
+        ],
+        [
+          "#B87333",
+          45
+        ],
+        [
+          "#6B3F1D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFD8B5 0, #B87333 45, #6B3F1D 100)",
+      "solid_color": "#6B3F1D",
+      "tags": [
+        "metallic premium",
+        "copper wire",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-066.svg",
+      "preview_png": "previews/metallic-premium-066.png"
+    },
+    {
+      "id": "metallic-premium-067",
+      "name": "Polished Brass",
+      "category": "Metallic Premium",
+      "subcategory": "Polished Brass",
+      "pattern": "line-grid",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#F1E4A6",
+          0
+        ],
+        [
+          "#D4AF37",
+          45
+        ],
+        [
+          "#7C5E0F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #F1E4A6 0, #D4AF37 45, #7C5E0F 100)",
+      "solid_color": "#7C5E0F",
+      "tags": [
+        "metallic premium",
+        "polished brass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-067.svg",
+      "preview_png": "previews/metallic-premium-067.png"
+    },
+    {
+      "id": "metallic-premium-068",
+      "name": "Titanium",
+      "category": "Metallic Premium",
+      "subcategory": "Titanium",
+      "pattern": "halo-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#C9CCD1",
+          0
+        ],
+        [
+          "#8B8E92",
+          35
+        ],
+        [
+          "#3A3D40",
+          75
+        ],
+        [
+          "#15171A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #C9CCD1 0, #8B8E92 35, #3A3D40 75, #15171A 100)",
+      "solid_color": "#15171A",
+      "tags": [
+        "metallic premium",
+        "titanium",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-068.svg",
+      "preview_png": "previews/metallic-premium-068.png"
+    },
+    {
+      "id": "metallic-premium-069",
+      "name": "Gunmetal",
+      "category": "Metallic Premium",
+      "subcategory": "Gunmetal",
+      "pattern": "dot-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#7D8590",
+          0
+        ],
+        [
+          "#3B4045",
+          50
+        ],
+        [
+          "#1A1D20",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #7D8590 0, #3B4045 50, #1A1D20 100)",
+      "solid_color": "#1A1D20",
+      "tags": [
+        "metallic premium",
+        "gunmetal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-069.svg",
+      "preview_png": "previews/metallic-premium-069.png"
+    },
+    {
+      "id": "metallic-premium-070",
+      "name": "Silver Frost",
+      "category": "Metallic Premium",
+      "subcategory": "Silver Frost",
+      "pattern": "vignette",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#FAFBFC",
+          0
+        ],
+        [
+          "#C5CBD0",
+          40
+        ],
+        [
+          "#8B95A1",
+          80
+        ],
+        [
+          "#3B4250",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #FAFBFC 0, #C5CBD0 40, #8B95A1 80, #3B4250 100)",
+      "solid_color": "#3B4250",
+      "tags": [
+        "metallic premium",
+        "silver frost",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-070.svg",
+      "preview_png": "previews/metallic-premium-070.png"
+    },
+    {
+      "id": "metallic-premium-071",
+      "name": "Black Gold",
+      "category": "Metallic Premium",
+      "subcategory": "Black Gold",
+      "pattern": "grain",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#1A1A1A",
+          0
+        ],
+        [
+          "#3D2E0A",
+          40
+        ],
+        [
+          "#B8860B",
+          75
+        ],
+        [
+          "#1A1A1A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #3D2E0A 40, #B8860B 75, #1A1A1A 100)",
+      "solid_color": "#1A1A1A",
+      "tags": [
+        "metallic premium",
+        "black gold",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-071.svg",
+      "preview_png": "previews/metallic-premium-071.png"
+    },
+    {
+      "id": "metallic-premium-072",
+      "name": "Pearl Steel",
+      "category": "Metallic Premium",
+      "subcategory": "Pearl Steel",
+      "pattern": "topographic",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F8F9FA",
+          0
+        ],
+        [
+          "#DEE2E6",
+          35
+        ],
+        [
+          "#ADB5BD",
+          75
+        ],
+        [
+          "#495057",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F8F9FA 0, #DEE2E6 35, #ADB5BD 75, #495057 100)",
+      "solid_color": "#495057",
+      "tags": [
+        "metallic premium",
+        "pearl steel",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-072.svg",
+      "preview_png": "previews/metallic-premium-072.png"
+    },
+    {
+      "id": "metallic-premium-073",
+      "name": "Champagne Gold",
+      "category": "Metallic Premium",
+      "subcategory": "Champagne Gold",
+      "pattern": null,
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#F7E7CE",
+          0
+        ],
+        [
+          "#E5C29F",
+          40
+        ],
+        [
+          "#A37B47",
+          80
+        ],
+        [
+          "#5A3F1F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #F7E7CE 0, #E5C29F 40, #A37B47 80, #5A3F1F 100)",
+      "solid_color": "#5A3F1F",
+      "tags": [
+        "metallic premium",
+        "champagne gold",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-073.svg",
+      "preview_png": "previews/metallic-premium-073.png"
+    },
+    {
+      "id": "metallic-premium-074",
+      "name": "Antique Silver",
+      "category": "Metallic Premium",
+      "subcategory": "Antique Silver",
+      "pattern": "hex-pattern",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#E8E8E8",
+          0
+        ],
+        [
+          "#A0A0A0",
+          40
+        ],
+        [
+          "#606060",
+          75
+        ],
+        [
+          "#1F1F1F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #E8E8E8 0, #A0A0A0 40, #606060 75, #1F1F1F 100)",
+      "solid_color": "#1F1F1F",
+      "tags": [
+        "metallic premium",
+        "antique silver",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-074.svg",
+      "preview_png": "previews/metallic-premium-074.png"
+    },
+    {
+      "id": "metallic-premium-075",
+      "name": "Liquid Mercury",
+      "category": "Metallic Premium",
+      "subcategory": "Liquid Mercury",
+      "pattern": null,
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#E6E6E6",
+          0
+        ],
+        [
+          "#B8B8B8",
+          25
+        ],
+        [
+          "#8C8C8C",
+          50
+        ],
+        [
+          "#B8B8B8",
+          75
+        ],
+        [
+          "#E6E6E6",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #E6E6E6 0, #B8B8B8 25, #8C8C8C 50, #B8B8B8 75, #E6E6E6 100)",
+      "solid_color": "#E6E6E6",
+      "tags": [
+        "metallic premium",
+        "liquid mercury",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-075.svg",
+      "preview_png": "previews/metallic-premium-075.png"
+    },
+    {
+      "id": "metallic-premium-076",
+      "name": "Robinhood Gold",
+      "category": "Metallic Premium",
+      "subcategory": "Robinhood Gold",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#C9A227",
+          0
+        ],
+        [
+          "#F4D160",
+          50
+        ],
+        [
+          "#B8860B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #C9A227 0, #F4D160 50, #B8860B 100)",
+      "solid_color": "#B8860B",
+      "tags": [
+        "metallic premium",
+        "robinhood gold",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-076.svg",
+      "preview_png": "previews/metallic-premium-076.png"
+    },
+    {
+      "id": "metallic-premium-077",
+      "name": "Apple Titanium",
+      "category": "Metallic Premium",
+      "subcategory": "Apple Titanium",
+      "pattern": "wave-lines",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#F5F5F7",
+          0
+        ],
+        [
+          "#E8E8ED",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #F5F5F7 0, #E8E8ED 100)",
+      "solid_color": "#E8E8ED",
+      "tags": [
+        "metallic premium",
+        "apple titanium",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-077.svg",
+      "preview_png": "previews/metallic-premium-077.png"
+    },
+    {
+      "id": "metallic-premium-078",
+      "name": "Revolut Steel",
+      "category": "Metallic Premium",
+      "subcategory": "Revolut Steel",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#2B2D33",
+          0
+        ],
+        [
+          "#4A4E59",
+          50
+        ],
+        [
+          "#6B7280",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #2B2D33 0, #4A4E59 50, #6B7280 100)",
+      "solid_color": "#6B7280",
+      "tags": [
+        "metallic premium",
+        "revolut steel",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-078.svg",
+      "preview_png": "previews/metallic-premium-078.png"
+    },
+    {
+      "id": "metallic-premium-079",
+      "name": "Phantom Violet",
+      "category": "Metallic Premium",
+      "subcategory": "Phantom Violet",
+      "pattern": "bokeh",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#AB9FF2",
+          0
+        ],
+        [
+          "#6E3FF3",
+          50
+        ],
+        [
+          "#4123D5",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #AB9FF2 0, #6E3FF3 50, #4123D5 100)",
+      "solid_color": "#4123D5",
+      "tags": [
+        "metallic premium",
+        "phantom violet",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-079.svg",
+      "preview_png": "previews/metallic-premium-079.png"
+    },
+    {
+      "id": "metallic-premium-080",
+      "name": "Mercury Aurora",
+      "category": "Metallic Premium",
+      "subcategory": "Mercury Aurora",
+      "pattern": "radial-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#6155F5",
+          0
+        ],
+        [
+          "#D55F5A",
+          50
+        ],
+        [
+          "#F2C14E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #6155F5 0, #D55F5A 50, #F2C14E 100)",
+      "solid_color": "#F2C14E",
+      "tags": [
+        "metallic premium",
+        "mercury aurora",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-080.svg",
+      "preview_png": "previews/metallic-premium-080.png"
+    },
+    {
+      "id": "metallic-premium-081",
+      "name": "Stripe Holo",
+      "category": "Metallic Premium",
+      "subcategory": "Stripe Holo",
+      "pattern": "stars",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#635BFF",
+          0
+        ],
+        [
+          "#00D4FF",
+          50
+        ],
+        [
+          "#FF5996",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #635BFF 0, #00D4FF 50, #FF5996 100)",
+      "solid_color": "#FF5996",
+      "tags": [
+        "metallic premium",
+        "stripe holo",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-081.svg",
+      "preview_png": "previews/metallic-premium-081.png"
+    },
+    {
+      "id": "metallic-premium-082",
+      "name": "Iron Ore",
+      "category": "Metallic Premium",
+      "subcategory": "Iron Ore",
+      "pattern": "line-grid",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#3D3D3D",
+          0
+        ],
+        [
+          "#1A1A1A",
+          50
+        ],
+        [
+          "#7A1F1F",
+          80
+        ],
+        [
+          "#0A0A0A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #3D3D3D 0, #1A1A1A 50, #7A1F1F 80, #0A0A0A 100)",
+      "solid_color": "#0A0A0A",
+      "tags": [
+        "metallic premium",
+        "iron ore",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-082.svg",
+      "preview_png": "previews/metallic-premium-082.png"
+    },
+    {
+      "id": "metallic-premium-083",
+      "name": "Bronze Patina",
+      "category": "Metallic Premium",
+      "subcategory": "Bronze Patina",
+      "pattern": "halo-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#7CB7B6",
+          0
+        ],
+        [
+          "#5A8F8E",
+          35
+        ],
+        [
+          "#3A5F5E",
+          70
+        ],
+        [
+          "#0D1F1F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #7CB7B6 0, #5A8F8E 35, #3A5F5E 70, #0D1F1F 100)",
+      "solid_color": "#0D1F1F",
+      "tags": [
+        "metallic premium",
+        "bronze patina",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-083.svg",
+      "preview_png": "previews/metallic-premium-083.png"
+    },
+    {
+      "id": "metallic-premium-084",
+      "name": "Gold Vein",
+      "category": "Metallic Premium",
+      "subcategory": "Gold Vein",
+      "pattern": "dot-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#5D3A00",
+          0
+        ],
+        [
+          "#B8860B",
+          35
+        ],
+        [
+          "#FFD700",
+          65
+        ],
+        [
+          "#7A5800",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #5D3A00 0, #B8860B 35, #FFD700 65, #7A5800 100)",
+      "solid_color": "#7A5800",
+      "tags": [
+        "metallic premium",
+        "gold vein",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-084.svg",
+      "preview_png": "previews/metallic-premium-084.png"
+    },
+    {
+      "id": "metallic-premium-085",
+      "name": "Carbon Steel",
+      "category": "Metallic Premium",
+      "subcategory": "Carbon Steel",
+      "pattern": "vignette",
+      "gradient_angle": 120,
+      "gradient_stops": [
+        [
+          "#1A1A1A",
+          0
+        ],
+        [
+          "#2D2D2D",
+          30
+        ],
+        [
+          "#0A0A0A",
+          60
+        ],
+        [
+          "#1A1A1A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(120deg, #1A1A1A 0, #2D2D2D 30, #0A0A0A 60, #1A1A1A 100)",
+      "solid_color": "#1A1A1A",
+      "tags": [
+        "metallic premium",
+        "carbon steel",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/metallic-premium-085.svg",
+      "preview_png": "previews/metallic-premium-085.png"
+    },
+    {
+      "id": "neon-cyber-086",
+      "name": "Synthwave Pink",
+      "category": "Neon Cyber",
+      "subcategory": "Synthwave Pink",
+      "pattern": "grain",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF006E",
+          0
+        ],
+        [
+          "#8338EC",
+          50
+        ],
+        [
+          "#3A86FF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF006E 0, #8338EC 50, #3A86FF 100)",
+      "solid_color": "#3A86FF",
+      "tags": [
+        "neon cyber",
+        "synthwave pink",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-086.svg",
+      "preview_png": "previews/neon-cyber-086.png"
+    },
+    {
+      "id": "neon-cyber-087",
+      "name": "Hot Electric",
+      "category": "Neon Cyber",
+      "subcategory": "Hot Electric",
+      "pattern": "topographic",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#FC5C7D",
+          0
+        ],
+        [
+          "#6A82FB",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #FC5C7D 0, #6A82FB 100)",
+      "solid_color": "#6A82FB",
+      "tags": [
+        "neon cyber",
+        "hot electric",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-087.svg",
+      "preview_png": "previews/neon-cyber-087.png"
+    },
+    {
+      "id": "neon-cyber-088",
+      "name": "Cyber Mint",
+      "category": "Neon Cyber",
+      "subcategory": "Cyber Mint",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#00F5A0",
+          0
+        ],
+        [
+          "#00D9F5",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #00F5A0 0, #00D9F5 100)",
+      "solid_color": "#00D9F5",
+      "tags": [
+        "neon cyber",
+        "cyber mint",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-088.svg",
+      "preview_png": "previews/neon-cyber-088.png"
+    },
+    {
+      "id": "neon-cyber-089",
+      "name": "Cyber Dark",
+      "category": "Neon Cyber",
+      "subcategory": "Cyber Dark",
+      "pattern": "hex-pattern",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0F0C29",
+          0
+        ],
+        [
+          "#302B63",
+          50
+        ],
+        [
+          "#24243E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0F0C29 0, #302B63 50, #24243E 100)",
+      "solid_color": "#24243E",
+      "tags": [
+        "neon cyber",
+        "cyber dark",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-089.svg",
+      "preview_png": "previews/neon-cyber-089.png"
+    },
+    {
+      "id": "neon-cyber-090",
+      "name": "Fire Neon",
+      "category": "Neon Cyber",
+      "subcategory": "Fire Neon",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF416C",
+          0
+        ],
+        [
+          "#FF4B2B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF416C 0, #FF4B2B 100)",
+      "solid_color": "#FF4B2B",
+      "tags": [
+        "neon cyber",
+        "fire neon",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-090.svg",
+      "preview_png": "previews/neon-cyber-090.png"
+    },
+    {
+      "id": "neon-cyber-091",
+      "name": "Magenta Pulse",
+      "category": "Neon Cyber",
+      "subcategory": "Magenta Pulse",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#EE0979",
+          0
+        ],
+        [
+          "#FF6A00",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #EE0979 0, #FF6A00 100)",
+      "solid_color": "#FF6A00",
+      "tags": [
+        "neon cyber",
+        "magenta pulse",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-091.svg",
+      "preview_png": "previews/neon-cyber-091.png"
+    },
+    {
+      "id": "neon-cyber-092",
+      "name": "Vapor Dream",
+      "category": "Neon Cyber",
+      "subcategory": "Vapor Dream",
+      "pattern": "wave-lines",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FC466B",
+          0
+        ],
+        [
+          "#3F5EFB",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FC466B 0, #3F5EFB 100)",
+      "solid_color": "#3F5EFB",
+      "tags": [
+        "neon cyber",
+        "vapor dream",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-092.svg",
+      "preview_png": "previews/neon-cyber-092.png"
+    },
+    {
+      "id": "neon-cyber-093",
+      "name": "Matrix Green",
+      "category": "Neon Cyber",
+      "subcategory": "Matrix Green",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#000000",
+          0
+        ],
+        [
+          "#0F9B0F",
+          50
+        ],
+        [
+          "#00FF00",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #000000 0, #0F9B0F 50, #00FF00 100)",
+      "solid_color": "#00FF00",
+      "tags": [
+        "neon cyber",
+        "matrix green",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-093.svg",
+      "preview_png": "previews/neon-cyber-093.png"
+    },
+    {
+      "id": "neon-cyber-094",
+      "name": "Electric Violet",
+      "category": "Neon Cyber",
+      "subcategory": "Electric Violet",
+      "pattern": "bokeh",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#8E2DE2",
+          0
+        ],
+        [
+          "#4A00E0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #8E2DE2 0, #4A00E0 100)",
+      "solid_color": "#4A00E0",
+      "tags": [
+        "neon cyber",
+        "electric violet",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-094.svg",
+      "preview_png": "previews/neon-cyber-094.png"
+    },
+    {
+      "id": "neon-cyber-095",
+      "name": "Cyber Plasma",
+      "category": "Neon Cyber",
+      "subcategory": "Cyber Plasma",
+      "pattern": "radial-glow",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#12C2E9",
+          0
+        ],
+        [
+          "#C471ED",
+          50
+        ],
+        [
+          "#F64F59",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #12C2E9 0, #C471ED 50, #F64F59 100)",
+      "solid_color": "#F64F59",
+      "tags": [
+        "neon cyber",
+        "cyber plasma",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-095.svg",
+      "preview_png": "previews/neon-cyber-095.png"
+    },
+    {
+      "id": "neon-cyber-096",
+      "name": "Neon Sunset",
+      "category": "Neon Cyber",
+      "subcategory": "Neon Sunset",
+      "pattern": "stars",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF512F",
+          0
+        ],
+        [
+          "#DD2476",
+          50
+        ],
+        [
+          "#FF006E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF512F 0, #DD2476 50, #FF006E 100)",
+      "solid_color": "#FF006E",
+      "tags": [
+        "neon cyber",
+        "neon sunset",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-096.svg",
+      "preview_png": "previews/neon-cyber-096.png"
+    },
+    {
+      "id": "neon-cyber-097",
+      "name": "Disco Glow",
+      "category": "Neon Cyber",
+      "subcategory": "Disco Glow",
+      "pattern": "line-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#FC5C7D",
+          0
+        ],
+        [
+          "#6A82FB",
+          50
+        ],
+        [
+          "#00F5A0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #FC5C7D 0, #6A82FB 50, #00F5A0 100)",
+      "solid_color": "#00F5A0",
+      "tags": [
+        "neon cyber",
+        "disco glow",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-097.svg",
+      "preview_png": "previews/neon-cyber-097.png"
+    },
+    {
+      "id": "neon-cyber-098",
+      "name": "Tokyo Night",
+      "category": "Neon Cyber",
+      "subcategory": "Tokyo Night",
+      "pattern": "halo-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0F0C29",
+          0
+        ],
+        [
+          "#302B63",
+          50
+        ],
+        [
+          "#24243E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0F0C29 0, #302B63 50, #24243E 100)",
+      "solid_color": "#24243E",
+      "tags": [
+        "neon cyber",
+        "tokyo night",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-098.svg",
+      "preview_png": "previews/neon-cyber-098.png"
+    },
+    {
+      "id": "neon-cyber-099",
+      "name": "Outrun",
+      "category": "Neon Cyber",
+      "subcategory": "Outrun",
+      "pattern": "dot-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#FF006E",
+          0
+        ],
+        [
+          "#8338EC",
+          33
+        ],
+        [
+          "#3A86FF",
+          66
+        ],
+        [
+          "#0F0C29",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #FF006E 0, #8338EC 33, #3A86FF 66, #0F0C29 100)",
+      "solid_color": "#0F0C29",
+      "tags": [
+        "neon cyber",
+        "outrun",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-099.svg",
+      "preview_png": "previews/neon-cyber-099.png"
+    },
+    {
+      "id": "neon-cyber-100",
+      "name": "Magenta Cyan",
+      "category": "Neon Cyber",
+      "subcategory": "Magenta Cyan",
+      "pattern": "vignette",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF0099",
+          0
+        ],
+        [
+          "#00C9FF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF0099 0, #00C9FF 100)",
+      "solid_color": "#00C9FF",
+      "tags": [
+        "neon cyber",
+        "magenta cyan",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-100.svg",
+      "preview_png": "previews/neon-cyber-100.png"
+    },
+    {
+      "id": "neon-cyber-101",
+      "name": "Pulsar Neon",
+      "category": "Neon Cyber",
+      "subcategory": "Pulsar Neon",
+      "pattern": "grain",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#00F5A0",
+          0
+        ],
+        [
+          "#00D9F5",
+          50
+        ],
+        [
+          "#8338EC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #00F5A0 0, #00D9F5 50, #8338EC 100)",
+      "solid_color": "#8338EC",
+      "tags": [
+        "neon cyber",
+        "pulsar neon",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-101.svg",
+      "preview_png": "previews/neon-cyber-101.png"
+    },
+    {
+      "id": "neon-cyber-102",
+      "name": "Laser Beam",
+      "category": "Neon Cyber",
+      "subcategory": "Laser Beam",
+      "pattern": "topographic",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FF0040",
+          0
+        ],
+        [
+          "#FF6B00",
+          50
+        ],
+        [
+          "#FFD700",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FF0040 0, #FF6B00 50, #FFD700 100)",
+      "solid_color": "#FFD700",
+      "tags": [
+        "neon cyber",
+        "laser beam",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-102.svg",
+      "preview_png": "previews/neon-cyber-102.png"
+    },
+    {
+      "id": "neon-cyber-103",
+      "name": "Cyber Dawn",
+      "category": "Neon Cyber",
+      "subcategory": "Cyber Dawn",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#FCE38A",
+          0
+        ],
+        [
+          "#F38181",
+          50
+        ],
+        [
+          "#FC5C7D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #FCE38A 0, #F38181 50, #FC5C7D 100)",
+      "solid_color": "#FC5C7D",
+      "tags": [
+        "neon cyber",
+        "cyber dawn",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-103.svg",
+      "preview_png": "previews/neon-cyber-103.png"
+    },
+    {
+      "id": "neon-cyber-104",
+      "name": "Plasma Burn",
+      "category": "Neon Cyber",
+      "subcategory": "Plasma Burn",
+      "pattern": "hex-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#11998E",
+          0
+        ],
+        [
+          "#38EF7D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #11998E 0, #38EF7D 100)",
+      "solid_color": "#38EF7D",
+      "tags": [
+        "neon cyber",
+        "plasma burn",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-104.svg",
+      "preview_png": "previews/neon-cyber-104.png"
+    },
+    {
+      "id": "neon-cyber-105",
+      "name": "Neon Aurora",
+      "category": "Neon Cyber",
+      "subcategory": "Neon Aurora",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#00F5A0",
+          0
+        ],
+        [
+          "#00D9F5",
+          33
+        ],
+        [
+          "#8338EC",
+          66
+        ],
+        [
+          "#FC5C7D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #00F5A0 0, #00D9F5 33, #8338EC 66, #FC5C7D 100)",
+      "solid_color": "#FC5C7D",
+      "tags": [
+        "neon cyber",
+        "neon aurora",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/neon-cyber-105.svg",
+      "preview_png": "previews/neon-cyber-105.png"
+    },
+    {
+      "id": "pastel-dream-106",
+      "name": "Cotton Candy",
+      "category": "Pastel Dream",
+      "subcategory": "Cotton Candy",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FBC2EB",
+          0
+        ],
+        [
+          "#A6C1EE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FBC2EB 0, #A6C1EE 100)",
+      "solid_color": "#A6C1EE",
+      "tags": [
+        "pastel dream",
+        "cotton candy",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-106.svg",
+      "preview_png": "previews/pastel-dream-106.png"
+    },
+    {
+      "id": "pastel-dream-107",
+      "name": "Lavender Mist",
+      "category": "Pastel Dream",
+      "subcategory": "Lavender Mist",
+      "pattern": "wave-lines",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FDCBF1",
+          0
+        ],
+        [
+          "#E6DEE9",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FDCBF1 0, #E6DEE9 100)",
+      "solid_color": "#E6DEE9",
+      "tags": [
+        "pastel dream",
+        "lavender mist",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-107.svg",
+      "preview_png": "previews/pastel-dream-107.png"
+    },
+    {
+      "id": "pastel-dream-108",
+      "name": "Mint Cream",
+      "category": "Pastel Dream",
+      "subcategory": "Mint Cream",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#A1FFCE",
+          0
+        ],
+        [
+          "#FAFFD1",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #A1FFCE 0, #FAFFD1 100)",
+      "solid_color": "#FAFFD1",
+      "tags": [
+        "pastel dream",
+        "mint cream",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-108.svg",
+      "preview_png": "previews/pastel-dream-108.png"
+    },
+    {
+      "id": "pastel-dream-109",
+      "name": "Rose Lilac",
+      "category": "Pastel Dream",
+      "subcategory": "Rose Lilac",
+      "pattern": "bokeh",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFE0F0",
+          0
+        ],
+        [
+          "#D4A5FF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFE0F0 0, #D4A5FF 100)",
+      "solid_color": "#D4A5FF",
+      "tags": [
+        "pastel dream",
+        "rose lilac",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-109.svg",
+      "preview_png": "previews/pastel-dream-109.png"
+    },
+    {
+      "id": "pastel-dream-110",
+      "name": "Rainbow Pastel",
+      "category": "Pastel Dream",
+      "subcategory": "Rainbow Pastel",
+      "pattern": "radial-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#C9FFD3",
+          0
+        ],
+        [
+          "#FFE5C9",
+          50
+        ],
+        [
+          "#FFC9D3",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #C9FFD3 0, #FFE5C9 50, #FFC9D3 100)",
+      "solid_color": "#FFC9D3",
+      "tags": [
+        "pastel dream",
+        "rainbow pastel",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-110.svg",
+      "preview_png": "previews/pastel-dream-110.png"
+    },
+    {
+      "id": "pastel-dream-111",
+      "name": "Soft Peach",
+      "category": "Pastel Dream",
+      "subcategory": "Soft Peach",
+      "pattern": "stars",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFE0B2",
+          0
+        ],
+        [
+          "#FFCCBC",
+          50
+        ],
+        [
+          "#FFAB91",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFE0B2 0, #FFCCBC 50, #FFAB91 100)",
+      "solid_color": "#FFAB91",
+      "tags": [
+        "pastel dream",
+        "soft peach",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-111.svg",
+      "preview_png": "previews/pastel-dream-111.png"
+    },
+    {
+      "id": "pastel-dream-112",
+      "name": "Sky Whisper",
+      "category": "Pastel Dream",
+      "subcategory": "Sky Whisper",
+      "pattern": "line-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#E0F2FE",
+          0
+        ],
+        [
+          "#BAE6FD",
+          50
+        ],
+        [
+          "#7DD3FC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #E0F2FE 0, #BAE6FD 50, #7DD3FC 100)",
+      "solid_color": "#7DD3FC",
+      "tags": [
+        "pastel dream",
+        "sky whisper",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-112.svg",
+      "preview_png": "previews/pastel-dream-112.png"
+    },
+    {
+      "id": "pastel-dream-113",
+      "name": "Bubblegum",
+      "category": "Pastel Dream",
+      "subcategory": "Bubblegum",
+      "pattern": "halo-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FDF2F8",
+          0
+        ],
+        [
+          "#FBCFE8",
+          50
+        ],
+        [
+          "#F472B6",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FDF2F8 0, #FBCFE8 50, #F472B6 100)",
+      "solid_color": "#F472B6",
+      "tags": [
+        "pastel dream",
+        "bubblegum",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-113.svg",
+      "preview_png": "previews/pastel-dream-113.png"
+    },
+    {
+      "id": "pastel-dream-114",
+      "name": "Lemon Sorbet",
+      "category": "Pastel Dream",
+      "subcategory": "Lemon Sorbet",
+      "pattern": "dot-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FEF9C3",
+          0
+        ],
+        [
+          "#FDE68A",
+          50
+        ],
+        [
+          "#FACC15",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FEF9C3 0, #FDE68A 50, #FACC15 100)",
+      "solid_color": "#FACC15",
+      "tags": [
+        "pastel dream",
+        "lemon sorbet",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-114.svg",
+      "preview_png": "previews/pastel-dream-114.png"
+    },
+    {
+      "id": "pastel-dream-115",
+      "name": "Seafoam",
+      "category": "Pastel Dream",
+      "subcategory": "Seafoam",
+      "pattern": "vignette",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#CCFBF1",
+          0
+        ],
+        [
+          "#99F6E4",
+          50
+        ],
+        [
+          "#5EEAD4",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #CCFBF1 0, #99F6E4 50, #5EEAD4 100)",
+      "solid_color": "#5EEAD4",
+      "tags": [
+        "pastel dream",
+        "seafoam",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-115.svg",
+      "preview_png": "previews/pastel-dream-115.png"
+    },
+    {
+      "id": "pastel-dream-116",
+      "name": "Powder Blue",
+      "category": "Pastel Dream",
+      "subcategory": "Powder Blue",
+      "pattern": "grain",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#E0E7FF",
+          0
+        ],
+        [
+          "#C7D2FE",
+          50
+        ],
+        [
+          "#A5B4FC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #E0E7FF 0, #C7D2FE 50, #A5B4FC 100)",
+      "solid_color": "#A5B4FC",
+      "tags": [
+        "pastel dream",
+        "powder blue",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-116.svg",
+      "preview_png": "previews/pastel-dream-116.png"
+    },
+    {
+      "id": "pastel-dream-117",
+      "name": "Spring Bloom",
+      "category": "Pastel Dream",
+      "subcategory": "Spring Bloom",
+      "pattern": "topographic",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FBC2EB",
+          0
+        ],
+        [
+          "#A6C1EE",
+          50
+        ],
+        [
+          "#84FAB0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FBC2EB 0, #A6C1EE 50, #84FAB0 100)",
+      "solid_color": "#84FAB0",
+      "tags": [
+        "pastel dream",
+        "spring bloom",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-117.svg",
+      "preview_png": "previews/pastel-dream-117.png"
+    },
+    {
+      "id": "pastel-dream-118",
+      "name": "Marshmallow",
+      "category": "Pastel Dream",
+      "subcategory": "Marshmallow",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FAFAFA",
+          0
+        ],
+        [
+          "#E1BEE7",
+          33
+        ],
+        [
+          "#F48FB1",
+          66
+        ],
+        [
+          "#84FAB0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FAFAFA 0, #E1BEE7 33, #F48FB1 66, #84FAB0 100)",
+      "solid_color": "#84FAB0",
+      "tags": [
+        "pastel dream",
+        "marshmallow",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-118.svg",
+      "preview_png": "previews/pastel-dream-118.png"
+    },
+    {
+      "id": "pastel-dream-119",
+      "name": "Pink Pearl",
+      "category": "Pastel Dream",
+      "subcategory": "Pink Pearl",
+      "pattern": "hex-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFE4E1",
+          0
+        ],
+        [
+          "#FFB6C1",
+          50
+        ],
+        [
+          "#FF69B4",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFE4E1 0, #FFB6C1 50, #FF69B4 100)",
+      "solid_color": "#FF69B4",
+      "tags": [
+        "pastel dream",
+        "pink pearl",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-119.svg",
+      "preview_png": "previews/pastel-dream-119.png"
+    },
+    {
+      "id": "pastel-dream-120",
+      "name": "Sweet Lavender",
+      "category": "Pastel Dream",
+      "subcategory": "Sweet Lavender",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#F3E5F5",
+          0
+        ],
+        [
+          "#E1BEE7",
+          50
+        ],
+        [
+          "#CE93D8",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #F3E5F5 0, #E1BEE7 50, #CE93D8 100)",
+      "solid_color": "#CE93D8",
+      "tags": [
+        "pastel dream",
+        "sweet lavender",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-120.svg",
+      "preview_png": "previews/pastel-dream-120.png"
+    },
+    {
+      "id": "pastel-dream-121",
+      "name": "Soft Coral",
+      "category": "Pastel Dream",
+      "subcategory": "Soft Coral",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFDDD2",
+          0
+        ],
+        [
+          "#FFA585",
+          50
+        ],
+        [
+          "#FF8A65",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFDDD2 0, #FFA585 50, #FF8A65 100)",
+      "solid_color": "#FF8A65",
+      "tags": [
+        "pastel dream",
+        "soft coral",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-121.svg",
+      "preview_png": "previews/pastel-dream-121.png"
+    },
+    {
+      "id": "pastel-dream-122",
+      "name": "Cotton Sky",
+      "category": "Pastel Dream",
+      "subcategory": "Cotton Sky",
+      "pattern": "wave-lines",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#E0C3FC",
+          0
+        ],
+        [
+          "#8EC5FC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #E0C3FC 0, #8EC5FC 100)",
+      "solid_color": "#8EC5FC",
+      "tags": [
+        "pastel dream",
+        "cotton sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-122.svg",
+      "preview_png": "previews/pastel-dream-122.png"
+    },
+    {
+      "id": "pastel-dream-123",
+      "name": "Dreamy Lilac",
+      "category": "Pastel Dream",
+      "subcategory": "Dreamy Lilac",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FDCBF1",
+          0
+        ],
+        [
+          "#E6DEE9",
+          50
+        ],
+        [
+          "#A6C1EE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FDCBF1 0, #E6DEE9 50, #A6C1EE 100)",
+      "solid_color": "#A6C1EE",
+      "tags": [
+        "pastel dream",
+        "dreamy lilac",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-123.svg",
+      "preview_png": "previews/pastel-dream-123.png"
+    },
+    {
+      "id": "pastel-dream-124",
+      "name": "Peach Blossom",
+      "category": "Pastel Dream",
+      "subcategory": "Peach Blossom",
+      "pattern": "bokeh",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#FFE4E1",
+          0
+        ],
+        [
+          "#FFB6C1",
+          33
+        ],
+        [
+          "#FFC0CB",
+          66
+        ],
+        [
+          "#FFDAB9",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #FFE4E1 0, #FFB6C1 33, #FFC0CB 66, #FFDAB9 100)",
+      "solid_color": "#FFDAB9",
+      "tags": [
+        "pastel dream",
+        "peach blossom",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-124.svg",
+      "preview_png": "previews/pastel-dream-124.png"
+    },
+    {
+      "id": "pastel-dream-125",
+      "name": "Mint Sky",
+      "category": "Pastel Dream",
+      "subcategory": "Mint Sky",
+      "pattern": "radial-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#A1FFCE",
+          0
+        ],
+        [
+          "#FAFFD1",
+          50
+        ],
+        [
+          "#BAE6FD",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #A1FFCE 0, #FAFFD1 50, #BAE6FD 100)",
+      "solid_color": "#BAE6FD",
+      "tags": [
+        "pastel dream",
+        "mint sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/pastel-dream-125.svg",
+      "preview_png": "previews/pastel-dream-125.png"
+    },
+    {
+      "id": "dark-lux-126",
+      "name": "Obsidian Black",
+      "category": "Dark Lux",
+      "subcategory": "Obsidian Black",
+      "pattern": "stars",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A1A1A",
+          0
+        ],
+        [
+          "#0A0A0A",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "obsidian black",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-126.svg",
+      "preview_png": "previews/dark-lux-126.png"
+    },
+    {
+      "id": "dark-lux-127",
+      "name": "Onyx Night",
+      "category": "Dark Lux",
+      "subcategory": "Onyx Night",
+      "pattern": "line-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#1F1F1F",
+          0
+        ],
+        [
+          "#0D0D0D",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #1F1F1F 0, #0D0D0D 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "onyx night",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-127.svg",
+      "preview_png": "previews/dark-lux-127.png"
+    },
+    {
+      "id": "dark-lux-128",
+      "name": "Carbon Weave",
+      "category": "Dark Lux",
+      "subcategory": "Carbon Weave",
+      "pattern": "halo-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#2A2A2A",
+          0
+        ],
+        [
+          "#1A1A1A",
+          35
+        ],
+        [
+          "#0A0A0A",
+          75
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #2A2A2A 0, #1A1A1A 35, #0A0A0A 75, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "carbon weave",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-128.svg",
+      "preview_png": "previews/dark-lux-128.png"
+    },
+    {
+      "id": "dark-lux-129",
+      "name": "Midnight Blue",
+      "category": "Dark Lux",
+      "subcategory": "Midnight Blue",
+      "pattern": "dot-grid",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0F172A",
+          0
+        ],
+        [
+          "#020617",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0F172A 0, #020617 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "midnight blue",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-129.svg",
+      "preview_png": "previews/dark-lux-129.png"
+    },
+    {
+      "id": "dark-lux-130",
+      "name": "Black Pearl",
+      "category": "Dark Lux",
+      "subcategory": "Black Pearl",
+      "pattern": "vignette",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0D1117",
+          0
+        ],
+        [
+          "#010409",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0D1117 0, #010409 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "black pearl",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-130.svg",
+      "preview_png": "previews/dark-lux-130.png"
+    },
+    {
+      "id": "dark-lux-131",
+      "name": "Vantablack",
+      "category": "Dark Lux",
+      "subcategory": "Vantablack",
+      "pattern": "grain",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0A0A0A",
+          0
+        ],
+        [
+          "#050505",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0A0A0A 0, #050505 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "vantablack",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-131.svg",
+      "preview_png": "previews/dark-lux-131.png"
+    },
+    {
+      "id": "dark-lux-132",
+      "name": "Charcoal Night",
+      "category": "Dark Lux",
+      "subcategory": "Charcoal Night",
+      "pattern": "topographic",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#36454F",
+          0
+        ],
+        [
+          "#1A1F26",
+          50
+        ],
+        [
+          "#0A0D10",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #36454F 0, #1A1F26 50, #0A0D10 100)",
+      "solid_color": "#0A0D10",
+      "tags": [
+        "dark lux",
+        "charcoal night",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-132.svg",
+      "preview_png": "previews/dark-lux-132.png"
+    },
+    {
+      "id": "dark-lux-133",
+      "name": "Espresso Dark",
+      "category": "Dark Lux",
+      "subcategory": "Espresso Dark",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#3C2A1E",
+          0
+        ],
+        [
+          "#1F140D",
+          50
+        ],
+        [
+          "#0A0706",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #3C2A1E 0, #1F140D 50, #0A0706 100)",
+      "solid_color": "#0A0706",
+      "tags": [
+        "dark lux",
+        "espresso dark",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-133.svg",
+      "preview_png": "previews/dark-lux-133.png"
+    },
+    {
+      "id": "dark-lux-134",
+      "name": "Deep Indigo",
+      "category": "Dark Lux",
+      "subcategory": "Deep Indigo",
+      "pattern": "hex-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1E1B4B",
+          0
+        ],
+        [
+          "#0D0A2E",
+          50
+        ],
+        [
+          "#000010",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1E1B4B 0, #0D0A2E 50, #000010 100)",
+      "solid_color": "#000010",
+      "tags": [
+        "dark lux",
+        "deep indigo",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-134.svg",
+      "preview_png": "previews/dark-lux-134.png"
+    },
+    {
+      "id": "dark-lux-135",
+      "name": "Nero Black",
+      "category": "Dark Lux",
+      "subcategory": "Nero Black",
+      "pattern": null,
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#222222",
+          0
+        ],
+        [
+          "#111111",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #222222 0, #111111 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "nero black",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-135.svg",
+      "preview_png": "previews/dark-lux-135.png"
+    },
+    {
+      "id": "dark-lux-136",
+      "name": "Raven Night",
+      "category": "Dark Lux",
+      "subcategory": "Raven Night",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A1A2E",
+          0
+        ],
+        [
+          "#0A0A14",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A1A2E 0, #0A0A14 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "raven night",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-136.svg",
+      "preview_png": "previews/dark-lux-136.png"
+    },
+    {
+      "id": "dark-lux-137",
+      "name": "Eclipse",
+      "category": "Dark Lux",
+      "subcategory": "Eclipse",
+      "pattern": "wave-lines",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#2D1B3D",
+          0
+        ],
+        [
+          "#0D0518",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #2D1B3D 0, #0D0518 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "eclipse",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-137.svg",
+      "preview_png": "previews/dark-lux-137.png"
+    },
+    {
+      "id": "dark-lux-138",
+      "name": "Dark Velvet",
+      "category": "Dark Lux",
+      "subcategory": "Dark Velvet",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A0A1F",
+          0
+        ],
+        [
+          "#0A0410",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A0A1F 0, #0A0410 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "dark velvet",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-138.svg",
+      "preview_png": "previews/dark-lux-138.png"
+    },
+    {
+      "id": "dark-lux-139",
+      "name": "Pure Dark",
+      "category": "Dark Lux",
+      "subcategory": "Pure Dark",
+      "pattern": "bokeh",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0F0F0F",
+          0
+        ],
+        [
+          "#050505",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0F0F0F 0, #050505 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "pure dark",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-139.svg",
+      "preview_png": "previews/dark-lux-139.png"
+    },
+    {
+      "id": "dark-lux-140",
+      "name": "Night Sky",
+      "category": "Dark Lux",
+      "subcategory": "Night Sky",
+      "pattern": "radial-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0F172A",
+          0
+        ],
+        [
+          "#020617",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0F172A 0, #020617 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "night sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-140.svg",
+      "preview_png": "previews/dark-lux-140.png"
+    },
+    {
+      "id": "dark-lux-141",
+      "name": "Carbon Night",
+      "category": "Dark Lux",
+      "subcategory": "Carbon Night",
+      "pattern": "stars",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0A0A0A",
+          0
+        ],
+        [
+          "#0F0F0F",
+          50
+        ],
+        [
+          "#0A0A0A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0A0A0A 0, #0F0F0F 50, #0A0A0A 100)",
+      "solid_color": "#0A0A0A",
+      "tags": [
+        "dark lux",
+        "carbon night",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-141.svg",
+      "preview_png": "previews/dark-lux-141.png"
+    },
+    {
+      "id": "dark-lux-142",
+      "name": "Obsidian Glow",
+      "category": "Dark Lux",
+      "subcategory": "Obsidian Glow",
+      "pattern": "line-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A1A1A",
+          0
+        ],
+        [
+          "#000000",
+          50
+        ],
+        [
+          "#1A1A1A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A1A1A 0, #000000 50, #1A1A1A 100)",
+      "solid_color": "#1A1A1A",
+      "tags": [
+        "dark lux",
+        "obsidian glow",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-142.svg",
+      "preview_png": "previews/dark-lux-142.png"
+    },
+    {
+      "id": "dark-lux-143",
+      "name": "Dark Forest",
+      "category": "Dark Lux",
+      "subcategory": "Dark Forest",
+      "pattern": "halo-glow",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#1A2F0D",
+          0
+        ],
+        [
+          "#0A1A04",
+          50
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #1A2F0D 0, #0A1A04 50, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "dark lux",
+        "dark forest",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-143.svg",
+      "preview_png": "previews/dark-lux-143.png"
+    },
+    {
+      "id": "dark-lux-144",
+      "name": "Storm Cloud",
+      "category": "Dark Lux",
+      "subcategory": "Storm Cloud",
+      "pattern": "dot-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0A0A0F",
+          0
+        ],
+        [
+          "#1A1A2E",
+          50
+        ],
+        [
+          "#0A0A0F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0A0A0F 0, #1A1A2E 50, #0A0A0F 100)",
+      "solid_color": "#0A0A0F",
+      "tags": [
+        "dark lux",
+        "storm cloud",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-144.svg",
+      "preview_png": "previews/dark-lux-144.png"
+    },
+    {
+      "id": "dark-lux-145",
+      "name": "Volcanic Black",
+      "category": "Dark Lux",
+      "subcategory": "Volcanic Black",
+      "pattern": "vignette",
+      "gradient_angle": 165,
+      "gradient_stops": [
+        [
+          "#0A0000",
+          0
+        ],
+        [
+          "#1A0505",
+          50
+        ],
+        [
+          "#0A0000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(165deg, #0A0000 0, #1A0505 50, #0A0000 100)",
+      "solid_color": "#0A0000",
+      "tags": [
+        "dark lux",
+        "volcanic black",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/dark-lux-145.svg",
+      "preview_png": "previews/dark-lux-145.png"
+    },
+    {
+      "id": "glassmorphism-146",
+      "name": "Frosted Crystal",
+      "category": "Glassmorphism",
+      "subcategory": "Frosted Crystal",
+      "pattern": "grain",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#E0F2FE",
+          0
+        ],
+        [
+          "#7DD3FC",
+          40
+        ],
+        [
+          "#0EA5E9",
+          80
+        ],
+        [
+          "#075985",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "solid_color": "#075985",
+      "tags": [
+        "glassmorphism",
+        "frosted crystal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-146.svg",
+      "preview_png": "previews/glassmorphism-146.png"
+    },
+    {
+      "id": "glassmorphism-147",
+      "name": "Ice Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Ice Glass",
+      "pattern": "topographic",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F0F9FF",
+          0
+        ],
+        [
+          "#BAE6FD",
+          35
+        ],
+        [
+          "#38BDF8",
+          70
+        ],
+        [
+          "#0C4A6E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F0F9FF 0, #BAE6FD 35, #38BDF8 70, #0C4A6E 100)",
+      "solid_color": "#0C4A6E",
+      "tags": [
+        "glassmorphism",
+        "ice glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-147.svg",
+      "preview_png": "previews/glassmorphism-147.png"
+    },
+    {
+      "id": "glassmorphism-148",
+      "name": "Aurora Mist",
+      "category": "Glassmorphism",
+      "subcategory": "Aurora Mist",
+      "pattern": null,
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#A5F3FC",
+          0
+        ],
+        [
+          "#67E8F9",
+          30
+        ],
+        [
+          "#818CF8",
+          70
+        ],
+        [
+          "#4338CA",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #A5F3FC 0, #67E8F9 30, #818CF8 70, #4338CA 100)",
+      "solid_color": "#4338CA",
+      "tags": [
+        "glassmorphism",
+        "aurora mist",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-148.svg",
+      "preview_png": "previews/glassmorphism-148.png"
+    },
+    {
+      "id": "glassmorphism-149",
+      "name": "Diamond Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Diamond Glass",
+      "pattern": "hex-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFFFFF",
+          0
+        ],
+        [
+          "#FCE7F3",
+          35
+        ],
+        [
+          "#F9A8D4",
+          70
+        ],
+        [
+          "#BE185D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFFFFF 0, #FCE7F3 35, #F9A8D4 70, #BE185D 100)",
+      "solid_color": "#BE185D",
+      "tags": [
+        "glassmorphism",
+        "diamond glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-149.svg",
+      "preview_png": "previews/glassmorphism-149.png"
+    },
+    {
+      "id": "glassmorphism-150",
+      "name": "Pearl Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Pearl Glass",
+      "pattern": null,
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FDF4FF",
+          0
+        ],
+        [
+          "#F5D0FE",
+          40
+        ],
+        [
+          "#C084FC",
+          75
+        ],
+        [
+          "#6B21A8",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FDF4FF 0, #F5D0FE 40, #C084FC 75, #6B21A8 100)",
+      "solid_color": "#6B21A8",
+      "tags": [
+        "glassmorphism",
+        "pearl glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-150.svg",
+      "preview_png": "previews/glassmorphism-150.png"
+    },
+    {
+      "id": "glassmorphism-151",
+      "name": "Smoke Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Smoke Glass",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F1F5F9",
+          0
+        ],
+        [
+          "#94A3B8",
+          35
+        ],
+        [
+          "#475569",
+          75
+        ],
+        [
+          "#0F172A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F1F5F9 0, #94A3B8 35, #475569 75, #0F172A 100)",
+      "solid_color": "#0F172A",
+      "tags": [
+        "glassmorphism",
+        "smoke glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-151.svg",
+      "preview_png": "previews/glassmorphism-151.png"
+    },
+    {
+      "id": "glassmorphism-152",
+      "name": "Sapphire Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Sapphire Glass",
+      "pattern": "wave-lines",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#EFF6FF",
+          0
+        ],
+        [
+          "#93C5FD",
+          35
+        ],
+        [
+          "#3B82F6",
+          75
+        ],
+        [
+          "#1E3A8A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #EFF6FF 0, #93C5FD 35, #3B82F6 75, #1E3A8A 100)",
+      "solid_color": "#1E3A8A",
+      "tags": [
+        "glassmorphism",
+        "sapphire glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-152.svg",
+      "preview_png": "previews/glassmorphism-152.png"
+    },
+    {
+      "id": "glassmorphism-153",
+      "name": "Emerald Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Emerald Glass",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#ECFDF5",
+          0
+        ],
+        [
+          "#6EE7B7",
+          35
+        ],
+        [
+          "#10B981",
+          75
+        ],
+        [
+          "#064E3B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #ECFDF5 0, #6EE7B7 35, #10B981 75, #064E3B 100)",
+      "solid_color": "#064E3B",
+      "tags": [
+        "glassmorphism",
+        "emerald glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-153.svg",
+      "preview_png": "previews/glassmorphism-153.png"
+    },
+    {
+      "id": "glassmorphism-154",
+      "name": "Topaz Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Topaz Glass",
+      "pattern": "bokeh",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFFBEB",
+          0
+        ],
+        [
+          "#FCD34D",
+          35
+        ],
+        [
+          "#F59E0B",
+          75
+        ],
+        [
+          "#78350F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFFBEB 0, #FCD34D 35, #F59E0B 75, #78350F 100)",
+      "solid_color": "#78350F",
+      "tags": [
+        "glassmorphism",
+        "topaz glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-154.svg",
+      "preview_png": "previews/glassmorphism-154.png"
+    },
+    {
+      "id": "glassmorphism-155",
+      "name": "Amethyst Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Amethyst Glass",
+      "pattern": "radial-glow",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FAF5FF",
+          0
+        ],
+        [
+          "#D8B4FE",
+          35
+        ],
+        [
+          "#9333EA",
+          75
+        ],
+        [
+          "#581C87",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FAF5FF 0, #D8B4FE 35, #9333EA 75, #581C87 100)",
+      "solid_color": "#581C87",
+      "tags": [
+        "glassmorphism",
+        "amethyst glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-155.svg",
+      "preview_png": "previews/glassmorphism-155.png"
+    },
+    {
+      "id": "glassmorphism-156",
+      "name": "Ruby Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Ruby Glass",
+      "pattern": "stars",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FEF2F2",
+          0
+        ],
+        [
+          "#FCA5A5",
+          35
+        ],
+        [
+          "#DC2626",
+          75
+        ],
+        [
+          "#7F1D1D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FEF2F2 0, #FCA5A5 35, #DC2626 75, #7F1D1D 100)",
+      "solid_color": "#7F1D1D",
+      "tags": [
+        "glassmorphism",
+        "ruby glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-156.svg",
+      "preview_png": "previews/glassmorphism-156.png"
+    },
+    {
+      "id": "glassmorphism-157",
+      "name": "Tinted Frost",
+      "category": "Glassmorphism",
+      "subcategory": "Tinted Frost",
+      "pattern": "line-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F8FAFC",
+          0
+        ],
+        [
+          "#CBD5E1",
+          40
+        ],
+        [
+          "#64748B",
+          80
+        ],
+        [
+          "#1E293B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F8FAFC 0, #CBD5E1 40, #64748B 80, #1E293B 100)",
+      "solid_color": "#1E293B",
+      "tags": [
+        "glassmorphism",
+        "tinted frost",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-157.svg",
+      "preview_png": "previews/glassmorphism-157.png"
+    },
+    {
+      "id": "glassmorphism-158",
+      "name": "Frosted Berry",
+      "category": "Glassmorphism",
+      "subcategory": "Frosted Berry",
+      "pattern": "halo-glow",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FCE7F3",
+          0
+        ],
+        [
+          "#F9A8D4",
+          40
+        ],
+        [
+          "#EC4899",
+          80
+        ],
+        [
+          "#9D174D",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FCE7F3 0, #F9A8D4 40, #EC4899 80, #9D174D 100)",
+      "solid_color": "#9D174D",
+      "tags": [
+        "glassmorphism",
+        "frosted berry",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-158.svg",
+      "preview_png": "previews/glassmorphism-158.png"
+    },
+    {
+      "id": "glassmorphism-159",
+      "name": "Ice Teal",
+      "category": "Glassmorphism",
+      "subcategory": "Ice Teal",
+      "pattern": "dot-grid",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#CCFBF1",
+          0
+        ],
+        [
+          "#5EEAD4",
+          40
+        ],
+        [
+          "#14B8A6",
+          80
+        ],
+        [
+          "#0F766E",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #CCFBF1 0, #5EEAD4 40, #14B8A6 80, #0F766E 100)",
+      "solid_color": "#0F766E",
+      "tags": [
+        "glassmorphism",
+        "ice teal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-159.svg",
+      "preview_png": "previews/glassmorphism-159.png"
+    },
+    {
+      "id": "glassmorphism-160",
+      "name": "Indigo Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Indigo Glass",
+      "pattern": "vignette",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#E0E7FF",
+          0
+        ],
+        [
+          "#A5B4FC",
+          40
+        ],
+        [
+          "#6366F1",
+          80
+        ],
+        [
+          "#3730A3",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #E0E7FF 0, #A5B4FC 40, #6366F1 80, #3730A3 100)",
+      "solid_color": "#3730A3",
+      "tags": [
+        "glassmorphism",
+        "indigo glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-160.svg",
+      "preview_png": "previews/glassmorphism-160.png"
+    },
+    {
+      "id": "glassmorphism-161",
+      "name": "Lime Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Lime Glass",
+      "pattern": "grain",
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#ECFCCB",
+          0
+        ],
+        [
+          "#BEF264",
+          40
+        ],
+        [
+          "#65A30D",
+          80
+        ],
+        [
+          "#365314",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #ECFCCB 0, #BEF264 40, #65A30D 80, #365314 100)",
+      "solid_color": "#365314",
+      "tags": [
+        "glassmorphism",
+        "lime glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-161.svg",
+      "preview_png": "previews/glassmorphism-161.png"
+    },
+    {
+      "id": "glassmorphism-162",
+      "name": "Cyan Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Cyan Glass",
+      "pattern": "topographic",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#ECFEFF",
+          0
+        ],
+        [
+          "#A5F3FC",
+          40
+        ],
+        [
+          "#06B6D4",
+          80
+        ],
+        [
+          "#155E75",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #ECFEFF 0, #A5F3FC 40, #06B6D4 80, #155E75 100)",
+      "solid_color": "#155E75",
+      "tags": [
+        "glassmorphism",
+        "cyan glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-162.svg",
+      "preview_png": "previews/glassmorphism-162.png"
+    },
+    {
+      "id": "glassmorphism-163",
+      "name": "Rose Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Rose Glass",
+      "pattern": null,
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#FFF1F2",
+          0
+        ],
+        [
+          "#FECDD3",
+          40
+        ],
+        [
+          "#F43F5E",
+          80
+        ],
+        [
+          "#9F1239",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #FFF1F2 0, #FECDD3 40, #F43F5E 80, #9F1239 100)",
+      "solid_color": "#9F1239",
+      "tags": [
+        "glassmorphism",
+        "rose glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-163.svg",
+      "preview_png": "previews/glassmorphism-163.png"
+    },
+    {
+      "id": "glassmorphism-164",
+      "name": "Amber Frost",
+      "category": "Glassmorphism",
+      "subcategory": "Amber Frost",
+      "pattern": "hex-pattern",
+      "gradient_angle": 145,
+      "gradient_stops": [
+        [
+          "#FFFBEB",
+          0
+        ],
+        [
+          "#FDE68A",
+          40
+        ],
+        [
+          "#D97706",
+          80
+        ],
+        [
+          "#78350F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(145deg, #FFFBEB 0, #FDE68A 40, #D97706 80, #78350F 100)",
+      "solid_color": "#78350F",
+      "tags": [
+        "glassmorphism",
+        "amber frost",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-164.svg",
+      "preview_png": "previews/glassmorphism-164.png"
+    },
+    {
+      "id": "glassmorphism-165",
+      "name": "Violet Glass",
+      "category": "Glassmorphism",
+      "subcategory": "Violet Glass",
+      "pattern": null,
+      "gradient_angle": 160,
+      "gradient_stops": [
+        [
+          "#F5F3FF",
+          0
+        ],
+        [
+          "#DDD6FE",
+          40
+        ],
+        [
+          "#7C3AED",
+          80
+        ],
+        [
+          "#4C1D95",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(160deg, #F5F3FF 0, #DDD6FE 40, #7C3AED 80, #4C1D95 100)",
+      "solid_color": "#4C1D95",
+      "tags": [
+        "glassmorphism",
+        "violet glass",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/glassmorphism-165.svg",
+      "preview_png": "previews/glassmorphism-165.png"
+    },
+    {
+      "id": "holographic-166",
+      "name": "Rainbow Prism",
+      "category": "Holographic",
+      "subcategory": "Rainbow Prism",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 90,
+      "gradient_stops": [
+        [
+          "#FF0080",
+          0
+        ],
+        [
+          "#FF8C00",
+          20
+        ],
+        [
+          "#FFD700",
+          40
+        ],
+        [
+          "#00CED1",
+          60
+        ],
+        [
+          "#7B68EE",
+          80
+        ],
+        [
+          "#FF1493",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(90deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "solid_color": "#FF1493",
+      "tags": [
+        "holographic",
+        "rainbow prism",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-166.svg",
+      "preview_png": "previews/holographic-166.png"
+    },
+    {
+      "id": "holographic-167",
+      "name": "Oil Slick",
+      "category": "Holographic",
+      "subcategory": "Oil Slick",
+      "pattern": "wave-lines",
+      "gradient_angle": 108,
+      "gradient_stops": [
+        [
+          "#1A1A2E",
+          0
+        ],
+        [
+          "#16213E",
+          20
+        ],
+        [
+          "#9C27B0",
+          50
+        ],
+        [
+          "#00BCD4",
+          80
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(108deg, #1A1A2E 0, #16213E 20, #9C27B0 50, #00BCD4 80, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "holographic",
+        "oil slick",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-167.svg",
+      "preview_png": "previews/holographic-167.png"
+    },
+    {
+      "id": "holographic-168",
+      "name": "Iridescent Pearl",
+      "category": "Holographic",
+      "subcategory": "Iridescent Pearl",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 126,
+      "gradient_stops": [
+        [
+          "#FFFFFF",
+          0
+        ],
+        [
+          "#F5E1FD",
+          25
+        ],
+        [
+          "#E0F7FA",
+          50
+        ],
+        [
+          "#FFF3E0",
+          75
+        ],
+        [
+          "#F8BBD0",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(126deg, #FFFFFF 0, #F5E1FD 25, #E0F7FA 50, #FFF3E0 75, #F8BBD0 100)",
+      "solid_color": "#F8BBD0",
+      "tags": [
+        "holographic",
+        "iridescent pearl",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-168.svg",
+      "preview_png": "previews/holographic-168.png"
+    },
+    {
+      "id": "holographic-169",
+      "name": "Opal",
+      "category": "Holographic",
+      "subcategory": "Opal",
+      "pattern": "bokeh",
+      "gradient_angle": 144,
+      "gradient_stops": [
+        [
+          "#F8F4FF",
+          0
+        ],
+        [
+          "#E1BEE7",
+          25
+        ],
+        [
+          "#B2EBF2",
+          50
+        ],
+        [
+          "#FFE0B2",
+          75
+        ],
+        [
+          "#FFCDD2",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(144deg, #F8F4FF 0, #E1BEE7 25, #B2EBF2 50, #FFE0B2 75, #FFCDD2 100)",
+      "solid_color": "#FFCDD2",
+      "tags": [
+        "holographic",
+        "opal",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-169.svg",
+      "preview_png": "previews/holographic-169.png"
+    },
+    {
+      "id": "holographic-170",
+      "name": "Aurora Holographic",
+      "category": "Holographic",
+      "subcategory": "Aurora Holographic",
+      "pattern": "radial-glow",
+      "gradient_angle": 162,
+      "gradient_stops": [
+        [
+          "#00F5D4",
+          0
+        ],
+        [
+          "#00BBF9",
+          25
+        ],
+        [
+          "#9B5DE5",
+          50
+        ],
+        [
+          "#F15BB5",
+          75
+        ],
+        [
+          "#FEE440",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(162deg, #00F5D4 0, #00BBF9 25, #9B5DE5 50, #F15BB5 75, #FEE440 100)",
+      "solid_color": "#FEE440",
+      "tags": [
+        "holographic",
+        "aurora holographic",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-170.svg",
+      "preview_png": "previews/holographic-170.png"
+    },
+    {
+      "id": "holographic-171",
+      "name": "Pearl Iridescent",
+      "category": "Holographic",
+      "subcategory": "Pearl Iridescent",
+      "pattern": "stars",
+      "gradient_angle": 180,
+      "gradient_stops": [
+        [
+          "#FAFAFA",
+          0
+        ],
+        [
+          "#E3F2FD",
+          25
+        ],
+        [
+          "#F3E5F5",
+          50
+        ],
+        [
+          "#FFF3E0",
+          75
+        ],
+        [
+          "#FCE4EC",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(180deg, #FAFAFA 0, #E3F2FD 25, #F3E5F5 50, #FFF3E0 75, #FCE4EC 100)",
+      "solid_color": "#FCE4EC",
+      "tags": [
+        "holographic",
+        "pearl iridescent",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-171.svg",
+      "preview_png": "previews/holographic-171.png"
+    },
+    {
+      "id": "holographic-172",
+      "name": "Spectrum",
+      "category": "Holographic",
+      "subcategory": "Spectrum",
+      "pattern": "line-grid",
+      "gradient_angle": 198,
+      "gradient_stops": [
+        [
+          "#FF0000",
+          0
+        ],
+        [
+          "#FF7F00",
+          20
+        ],
+        [
+          "#FFFF00",
+          40
+        ],
+        [
+          "#00FF00",
+          60
+        ],
+        [
+          "#0000FF",
+          80
+        ],
+        [
+          "#8B00FF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(198deg, #FF0000 0, #FF7F00 20, #FFFF00 40, #00FF00 60, #0000FF 80, #8B00FF 100)",
+      "solid_color": "#8B00FF",
+      "tags": [
+        "holographic",
+        "spectrum",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-172.svg",
+      "preview_png": "previews/holographic-172.png"
+    },
+    {
+      "id": "holographic-173",
+      "name": "Cosmic Iridescent",
+      "category": "Holographic",
+      "subcategory": "Cosmic Iridescent",
+      "pattern": "halo-glow",
+      "gradient_angle": 216,
+      "gradient_stops": [
+        [
+          "#10002B",
+          0
+        ],
+        [
+          "#5A189A",
+          25
+        ],
+        [
+          "#9D4EDD",
+          50
+        ],
+        [
+          "#E0AAFF",
+          75
+        ],
+        [
+          "#FFFFFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(216deg, #10002B 0, #5A189A 25, #9D4EDD 50, #E0AAFF 75, #FFFFFF 100)",
+      "solid_color": "#FFFFFF",
+      "tags": [
+        "holographic",
+        "cosmic iridescent",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-173.svg",
+      "preview_png": "previews/holographic-173.png"
+    },
+    {
+      "id": "holographic-174",
+      "name": "Pearl Spectrum",
+      "category": "Holographic",
+      "subcategory": "Pearl Spectrum",
+      "pattern": "dot-grid",
+      "gradient_angle": 234,
+      "gradient_stops": [
+        [
+          "#FFFFFF",
+          0
+        ],
+        [
+          "#FFD1DC",
+          20
+        ],
+        [
+          "#D4F1F4",
+          40
+        ],
+        [
+          "#FFF8DC",
+          60
+        ],
+        [
+          "#FFD1DC",
+          80
+        ],
+        [
+          "#D4F1F4",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(234deg, #FFFFFF 0, #FFD1DC 20, #D4F1F4 40, #FFF8DC 60, #FFD1DC 80, #D4F1F4 100)",
+      "solid_color": "#D4F1F4",
+      "tags": [
+        "holographic",
+        "pearl spectrum",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-174.svg",
+      "preview_png": "previews/holographic-174.png"
+    },
+    {
+      "id": "holographic-175",
+      "name": "Mermaid",
+      "category": "Holographic",
+      "subcategory": "Mermaid",
+      "pattern": "vignette",
+      "gradient_angle": 252,
+      "gradient_stops": [
+        [
+          "#003049",
+          0
+        ],
+        [
+          "#0077B6",
+          25
+        ],
+        [
+          "#48CAE4",
+          50
+        ],
+        [
+          "#90E0EF",
+          75
+        ],
+        [
+          "#CAF0F8",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(252deg, #003049 0, #0077B6 25, #48CAE4 50, #90E0EF 75, #CAF0F8 100)",
+      "solid_color": "#CAF0F8",
+      "tags": [
+        "holographic",
+        "mermaid",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-175.svg",
+      "preview_png": "previews/holographic-175.png"
+    },
+    {
+      "id": "holographic-176",
+      "name": "Unicorn",
+      "category": "Holographic",
+      "subcategory": "Unicorn",
+      "pattern": "grain",
+      "gradient_angle": 270,
+      "gradient_stops": [
+        [
+          "#FCE4EC",
+          0
+        ],
+        [
+          "#E1BEE7",
+          25
+        ],
+        [
+          "#B39DDB",
+          50
+        ],
+        [
+          "#9FA8DA",
+          75
+        ],
+        [
+          "#90CAF9",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(270deg, #FCE4EC 0, #E1BEE7 25, #B39DDB 50, #9FA8DA 75, #90CAF9 100)",
+      "solid_color": "#90CAF9",
+      "tags": [
+        "holographic",
+        "unicorn",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-176.svg",
+      "preview_png": "previews/holographic-176.png"
+    },
+    {
+      "id": "holographic-177",
+      "name": "Nacre",
+      "category": "Holographic",
+      "subcategory": "Nacre",
+      "pattern": "topographic",
+      "gradient_angle": 288,
+      "gradient_stops": [
+        [
+          "#FAFAFA",
+          0
+        ],
+        [
+          "#FFE0B2",
+          25
+        ],
+        [
+          "#B2DFDB",
+          50
+        ],
+        [
+          "#F8BBD0",
+          75
+        ],
+        [
+          "#D1C4E9",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(288deg, #FAFAFA 0, #FFE0B2 25, #B2DFDB 50, #F8BBD0 75, #D1C4E9 100)",
+      "solid_color": "#D1C4E9",
+      "tags": [
+        "holographic",
+        "nacre",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-177.svg",
+      "preview_png": "previews/holographic-177.png"
+    },
+    {
+      "id": "holographic-178",
+      "name": "Prism Light",
+      "category": "Holographic",
+      "subcategory": "Prism Light",
+      "pattern": null,
+      "gradient_angle": 306,
+      "gradient_stops": [
+        [
+          "#FFFFFF",
+          0
+        ],
+        [
+          "#F3E5F5",
+          25
+        ],
+        [
+          "#E1BEE7",
+          50
+        ],
+        [
+          "#CE93D8",
+          75
+        ],
+        [
+          "#BA68C8",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(306deg, #FFFFFF 0, #F3E5F5 25, #E1BEE7 50, #CE93D8 75, #BA68C8 100)",
+      "solid_color": "#BA68C8",
+      "tags": [
+        "holographic",
+        "prism light",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-178.svg",
+      "preview_png": "previews/holographic-178.png"
+    },
+    {
+      "id": "holographic-179",
+      "name": "Cosmic Rainbow",
+      "category": "Holographic",
+      "subcategory": "Cosmic Rainbow",
+      "pattern": "hex-pattern",
+      "gradient_angle": 324,
+      "gradient_stops": [
+        [
+          "#10002B",
+          0
+        ],
+        [
+          "#5A189A",
+          25
+        ],
+        [
+          "#9D4EDD",
+          50
+        ],
+        [
+          "#FF61DC",
+          75
+        ],
+        [
+          "#FFD60A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(324deg, #10002B 0, #5A189A 25, #9D4EDD 50, #FF61DC 75, #FFD60A 100)",
+      "solid_color": "#FFD60A",
+      "tags": [
+        "holographic",
+        "cosmic rainbow",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-179.svg",
+      "preview_png": "previews/holographic-179.png"
+    },
+    {
+      "id": "holographic-180",
+      "name": "Holo Aurora",
+      "category": "Holographic",
+      "subcategory": "Holo Aurora",
+      "pattern": null,
+      "gradient_angle": 342,
+      "gradient_stops": [
+        [
+          "#240046",
+          0
+        ],
+        [
+          "#3C096C",
+          25
+        ],
+        [
+          "#5A189A",
+          50
+        ],
+        [
+          "#7B2CBF",
+          75
+        ],
+        [
+          "#C77DFF",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(342deg, #240046 0, #3C096C 25, #5A189A 50, #7B2CBF 75, #C77DFF 100)",
+      "solid_color": "#C77DFF",
+      "tags": [
+        "holographic",
+        "holo aurora",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-180.svg",
+      "preview_png": "previews/holographic-180.png"
+    },
+    {
+      "id": "holographic-181",
+      "name": "Iridescent Sky",
+      "category": "Holographic",
+      "subcategory": "Iridescent Sky",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 90,
+      "gradient_stops": [
+        [
+          "#E0E7FF",
+          0
+        ],
+        [
+          "#C7D2FE",
+          20
+        ],
+        [
+          "#A5B4FC",
+          40
+        ],
+        [
+          "#818CF8",
+          60
+        ],
+        [
+          "#6366F1",
+          80
+        ],
+        [
+          "#4338CA",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(90deg, #E0E7FF 0, #C7D2FE 20, #A5B4FC 40, #818CF8 60, #6366F1 80, #4338CA 100)",
+      "solid_color": "#4338CA",
+      "tags": [
+        "holographic",
+        "iridescent sky",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-181.svg",
+      "preview_png": "previews/holographic-181.png"
+    },
+    {
+      "id": "holographic-182",
+      "name": "Prismatic",
+      "category": "Holographic",
+      "subcategory": "Prismatic",
+      "pattern": "wave-lines",
+      "gradient_angle": 108,
+      "gradient_stops": [
+        [
+          "#FCE7F3",
+          0
+        ],
+        [
+          "#FBCFE8",
+          20
+        ],
+        [
+          "#F9A8D4",
+          40
+        ],
+        [
+          "#F472B6",
+          60
+        ],
+        [
+          "#EC4899",
+          80
+        ],
+        [
+          "#DB2777",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(108deg, #FCE7F3 0, #FBCFE8 20, #F9A8D4 40, #F472B6 60, #EC4899 80, #DB2777 100)",
+      "solid_color": "#DB2777",
+      "tags": [
+        "holographic",
+        "prismatic",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-182.svg",
+      "preview_png": "previews/holographic-182.png"
+    },
+    {
+      "id": "holographic-183",
+      "name": "Mermaid Tail",
+      "category": "Holographic",
+      "subcategory": "Mermaid Tail",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 126,
+      "gradient_stops": [
+        [
+          "#0D9488",
+          0
+        ],
+        [
+          "#14B8A6",
+          25
+        ],
+        [
+          "#06B6D4",
+          50
+        ],
+        [
+          "#0891B2",
+          75
+        ],
+        [
+          "#0E7490",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(126deg, #0D9488 0, #14B8A6 25, #06B6D4 50, #0891B2 75, #0E7490 100)",
+      "solid_color": "#0E7490",
+      "tags": [
+        "holographic",
+        "mermaid tail",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-183.svg",
+      "preview_png": "previews/holographic-183.png"
+    },
+    {
+      "id": "holographic-184",
+      "name": "Pearl Sheen",
+      "category": "Holographic",
+      "subcategory": "Pearl Sheen",
+      "pattern": "bokeh",
+      "gradient_angle": 144,
+      "gradient_stops": [
+        [
+          "#FFFBF0",
+          0
+        ],
+        [
+          "#FEF3C7",
+          25
+        ],
+        [
+          "#FDE68A",
+          50
+        ],
+        [
+          "#FCD34D",
+          75
+        ],
+        [
+          "#FBBF24",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(144deg, #FFFBF0 0, #FEF3C7 25, #FDE68A 50, #FCD34D 75, #FBBF24 100)",
+      "solid_color": "#FBBF24",
+      "tags": [
+        "holographic",
+        "pearl sheen",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-184.svg",
+      "preview_png": "previews/holographic-184.png"
+    },
+    {
+      "id": "holographic-185",
+      "name": "Iridescent Haze",
+      "category": "Holographic",
+      "subcategory": "Iridescent Haze",
+      "pattern": "radial-glow",
+      "gradient_angle": 162,
+      "gradient_stops": [
+        [
+          "#F0ABFC",
+          0
+        ],
+        [
+          "#C084FC",
+          20
+        ],
+        [
+          "#A78BFA",
+          40
+        ],
+        [
+          "#818CF8",
+          60
+        ],
+        [
+          "#60A5FA",
+          80
+        ],
+        [
+          "#22D3EE",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(162deg, #F0ABFC 0, #C084FC 20, #A78BFA 40, #818CF8 60, #60A5FA 80, #22D3EE 100)",
+      "solid_color": "#22D3EE",
+      "tags": [
+        "holographic",
+        "iridescent haze",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/holographic-185.svg",
+      "preview_png": "previews/holographic-185.png"
+    },
+    {
+      "id": "geometric-mesh-186",
+      "name": "Hex Tech",
+      "category": "Geometric Mesh",
+      "subcategory": "Hex Tech",
+      "pattern": "stars",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0F4C75",
+          0
+        ],
+        [
+          "#3282B8",
+          40
+        ],
+        [
+          "#BBE1FA",
+          80
+        ],
+        [
+          "#1B262C",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "solid_color": "#1B262C",
+      "tags": [
+        "geometric mesh",
+        "hex tech",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-186.svg",
+      "preview_png": "previews/geometric-mesh-186.png"
+    },
+    {
+      "id": "geometric-mesh-187",
+      "name": "Mesh Grid",
+      "category": "Geometric Mesh",
+      "subcategory": "Mesh Grid",
+      "pattern": "line-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A1A2E",
+          0
+        ],
+        [
+          "#16213E",
+          40
+        ],
+        [
+          "#0F3460",
+          80
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A1A2E 0, #16213E 40, #0F3460 80, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "geometric mesh",
+        "mesh grid",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-187.svg",
+      "preview_png": "previews/geometric-mesh-187.png"
+    },
+    {
+      "id": "geometric-mesh-188",
+      "name": "Topographic",
+      "category": "Geometric Mesh",
+      "subcategory": "Topographic",
+      "pattern": "halo-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#264653",
+          0
+        ],
+        [
+          "#2A9D8F",
+          40
+        ],
+        [
+          "#E9C46A",
+          80
+        ],
+        [
+          "#1A1A1A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #264653 0, #2A9D8F 40, #E9C46A 80, #1A1A1A 100)",
+      "solid_color": "#1A1A1A",
+      "tags": [
+        "geometric mesh",
+        "topographic",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-188.svg",
+      "preview_png": "previews/geometric-mesh-188.png"
+    },
+    {
+      "id": "geometric-mesh-189",
+      "name": "Wave Form",
+      "category": "Geometric Mesh",
+      "subcategory": "Wave Form",
+      "pattern": "dot-grid",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#003049",
+          0
+        ],
+        [
+          "#0077B6",
+          40
+        ],
+        [
+          "#90E0EF",
+          80
+        ],
+        [
+          "#0A0E14",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #003049 0, #0077B6 40, #90E0EF 80, #0A0E14 100)",
+      "solid_color": "#0A0E14",
+      "tags": [
+        "geometric mesh",
+        "wave form",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-189.svg",
+      "preview_png": "previews/geometric-mesh-189.png"
+    },
+    {
+      "id": "geometric-mesh-190",
+      "name": "Triangle Force",
+      "category": "Geometric Mesh",
+      "subcategory": "Triangle Force",
+      "pattern": "vignette",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#22223B",
+          0
+        ],
+        [
+          "#4A4E69",
+          40
+        ],
+        [
+          "#9A8C98",
+          80
+        ],
+        [
+          "#1A1A1A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #22223B 0, #4A4E69 40, #9A8C98 80, #1A1A1A 100)",
+      "solid_color": "#1A1A1A",
+      "tags": [
+        "geometric mesh",
+        "triangle force",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-190.svg",
+      "preview_png": "previews/geometric-mesh-190.png"
+    },
+    {
+      "id": "geometric-mesh-191",
+      "name": "Diamond Cut",
+      "category": "Geometric Mesh",
+      "subcategory": "Diamond Cut",
+      "pattern": "grain",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1B1B3A",
+          0
+        ],
+        [
+          "#693668",
+          40
+        ],
+        [
+          "#A74482",
+          80
+        ],
+        [
+          "#0D0D1F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1B1B3A 0, #693668 40, #A74482 80, #0D0D1F 100)",
+      "solid_color": "#0D0D1F",
+      "tags": [
+        "geometric mesh",
+        "diamond cut",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-191.svg",
+      "preview_png": "previews/geometric-mesh-191.png"
+    },
+    {
+      "id": "geometric-mesh-192",
+      "name": "Circuit Board",
+      "category": "Geometric Mesh",
+      "subcategory": "Circuit Board",
+      "pattern": "topographic",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0A0E27",
+          0
+        ],
+        [
+          "#1E3A5F",
+          40
+        ],
+        [
+          "#06A77D",
+          80
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0A0E27 0, #1E3A5F 40, #06A77D 80, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "geometric mesh",
+        "circuit board",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-192.svg",
+      "preview_png": "previews/geometric-mesh-192.png"
+    },
+    {
+      "id": "geometric-mesh-193",
+      "name": "Prism Angle",
+      "category": "Geometric Mesh",
+      "subcategory": "Prism Angle",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A1A40",
+          0
+        ],
+        [
+          "#3A1A5C",
+          40
+        ],
+        [
+          "#5C1A7A",
+          80
+        ],
+        [
+          "#00001A",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A1A40 0, #3A1A5C 40, #5C1A7A 80, #00001A 100)",
+      "solid_color": "#00001A",
+      "tags": [
+        "geometric mesh",
+        "prism angle",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-193.svg",
+      "preview_png": "previews/geometric-mesh-193.png"
+    },
+    {
+      "id": "geometric-mesh-194",
+      "name": "Gradient Mesh",
+      "category": "Geometric Mesh",
+      "subcategory": "Gradient Mesh",
+      "pattern": "hex-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0F0E17",
+          0
+        ],
+        [
+          "#2E2A4A",
+          40
+        ],
+        [
+          "#7F5AF0",
+          80
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0F0E17 0, #2E2A4A 40, #7F5AF0 80, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "geometric mesh",
+        "gradient mesh",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-194.svg",
+      "preview_png": "previews/geometric-mesh-194.png"
+    },
+    {
+      "id": "geometric-mesh-195",
+      "name": "Grid Lines",
+      "category": "Geometric Mesh",
+      "subcategory": "Grid Lines",
+      "pattern": null,
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0A0A0A",
+          0
+        ],
+        [
+          "#1A1A1A",
+          40
+        ],
+        [
+          "#3A3A3A",
+          80
+        ],
+        [
+          "#000000",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0A0A0A 0, #1A1A1A 40, #3A3A3A 80, #000000 100)",
+      "solid_color": "#000000",
+      "tags": [
+        "geometric mesh",
+        "grid lines",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-195.svg",
+      "preview_png": "previews/geometric-mesh-195.png"
+    },
+    {
+      "id": "geometric-mesh-196",
+      "name": "Polygon Mesh",
+      "category": "Geometric Mesh",
+      "subcategory": "Polygon Mesh",
+      "pattern": "circuit-pattern",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1F3A5F",
+          0
+        ],
+        [
+          "#3F5A7F",
+          40
+        ],
+        [
+          "#5F7A9F",
+          80
+        ],
+        [
+          "#0A1A2F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1F3A5F 0, #3F5A7F 40, #5F7A9F 80, #0A1A2F 100)",
+      "solid_color": "#0A1A2F",
+      "tags": [
+        "geometric mesh",
+        "polygon mesh",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-196.svg",
+      "preview_png": "previews/geometric-mesh-196.png"
+    },
+    {
+      "id": "geometric-mesh-197",
+      "name": "Crystalline",
+      "category": "Geometric Mesh",
+      "subcategory": "Crystalline",
+      "pattern": "wave-lines",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0D1B2A",
+          0
+        ],
+        [
+          "#1B263B",
+          40
+        ],
+        [
+          "#415A77",
+          80
+        ],
+        [
+          "#000814",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0D1B2A 0, #1B263B 40, #415A77 80, #000814 100)",
+      "solid_color": "#000814",
+      "tags": [
+        "geometric mesh",
+        "crystalline",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-197.svg",
+      "preview_png": "previews/geometric-mesh-197.png"
+    },
+    {
+      "id": "geometric-mesh-198",
+      "name": "Geometric Mesh",
+      "category": "Geometric Mesh",
+      "subcategory": "Geometric Mesh",
+      "pattern": "diagonal-stripes",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#1A0A2E",
+          0
+        ],
+        [
+          "#3D1E5C",
+          40
+        ],
+        [
+          "#7B2D8B",
+          80
+        ],
+        [
+          "#0A0414",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #1A0A2E 0, #3D1E5C 40, #7B2D8B 80, #0A0414 100)",
+      "solid_color": "#0A0414",
+      "tags": [
+        "geometric mesh",
+        "geometric mesh",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-198.svg",
+      "preview_png": "previews/geometric-mesh-198.png"
+    },
+    {
+      "id": "geometric-mesh-199",
+      "name": "Triangulate",
+      "category": "Geometric Mesh",
+      "subcategory": "Triangulate",
+      "pattern": "bokeh",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#2D1B3D",
+          0
+        ],
+        [
+          "#5C1A7A",
+          40
+        ],
+        [
+          "#9D4EDD",
+          80
+        ],
+        [
+          "#10002B",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #2D1B3D 0, #5C1A7A 40, #9D4EDD 80, #10002B 100)",
+      "solid_color": "#10002B",
+      "tags": [
+        "geometric mesh",
+        "triangulate",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-199.svg",
+      "preview_png": "previews/geometric-mesh-199.png"
+    },
+    {
+      "id": "geometric-mesh-200",
+      "name": "Polyform",
+      "category": "Geometric Mesh",
+      "subcategory": "Polyform",
+      "pattern": "radial-glow",
+      "gradient_angle": 135,
+      "gradient_stops": [
+        [
+          "#0F3460",
+          0
+        ],
+        [
+          "#16537E",
+          40
+        ],
+        [
+          "#1E5C8A",
+          80
+        ],
+        [
+          "#0A1A2F",
+          100
+        ]
+      ],
+      "gradient_css": "linear-gradient(135deg, #0F3460 0, #16537E 40, #1E5C8A 80, #0A1A2F 100)",
+      "solid_color": "#0A1A2F",
+      "tags": [
+        "geometric mesh",
+        "polyform",
+        "premium",
+        "bg"
+      ],
+      "preview_svg": "previews/geometric-mesh-200.svg",
+      "preview_png": "previews/geometric-mesh-200.png"
+    }
+  ]
+}

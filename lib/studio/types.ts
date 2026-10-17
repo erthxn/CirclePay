@@ -66,19 +66,40 @@ export interface Customization {
   strokeOverride: string | null;  // when user picks a custom stroke color
 }
 
+export interface BgCard {
+  id: string;
+  name: string;
+  category: string;
+  subcategory: string;
+  pattern: string | null;  // null | "grain" | "dot-grid" | etc.
+  gradient_angle: number;
+  gradient_stops: GradientStop[];
+  gradient_css: string;
+  solid_color: string;
+  tags: string[];
+  preview_svg: string;
+  preview_png: string;
+}
+
 export interface StudioState {
   selectedCardId: string | null;
   selectedConnectorId: string | null;
+  selectedBgCardId: string | null;
   customization: Customization;
   galleryFilter: string;
   activeCategory: string | null;
+  activeTab: 'libraries' | 'templates' | 'custom' | 'preview';
+  activeLibrary: 'cards' | 'bg' | 'connectors';
+  editorView: 'edit' | 'preview';
   cards: Card[];
   connectors: Connector[];
+  bgCards: BgCard[];
 }
 
 export type StudioAction =
   | { type: 'SELECT_CARD'; cardId: string }
   | { type: 'SELECT_CONNECTOR'; connectorId: string }
+  | { type: 'SELECT_BG_CARD'; bgCardId: string }
   | { type: 'SET_GRADIENT_STOP'; index: number; color: string }
   | { type: 'ADD_GRADIENT_STOP' }
   | { type: 'REMOVE_GRADIENT_STOP'; index: number }
@@ -92,8 +113,12 @@ export type StudioAction =
   | { type: 'SET_STROKE_OVERRIDE'; color: string | null }
   | { type: 'SET_GALLERY_FILTER'; query: string }
   | { type: 'SET_ACTIVE_CATEGORY'; category: string | null }
+  | { type: 'SET_ACTIVE_TAB'; tab: 'libraries' | 'templates' | 'custom' | 'preview' }
+  | { type: 'SET_ACTIVE_LIBRARY'; library: 'cards' | 'bg' | 'connectors' }
+  | { type: 'SET_EDITOR_VIEW'; view: 'edit' | 'preview' }
   | { type: 'RESET_CUSTOMIZATION' }
   | { type: 'LOAD_FROM_CARD'; card: Card }
+  | { type: 'LOAD_FROM_BG_CARD'; bgCard: BgCard }
   | { type: 'LOAD_FROM_CONNECTOR'; connector: Connector }
   | { type: 'HYDRATE'; state: Partial<StudioState> };
 

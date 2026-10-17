@@ -610,6 +610,125 @@ export function renderMark(mark: CardMark, mid: string): string {
 
 // ---- SVG filter defs used by glow/neon connectors ----
 
+// ---- BG card pattern overlay renderer ----
+// Renders the SVG overlay for a bg card pattern (dots, grid, grain, etc.)
+export function renderBgPattern(pattern: string | null, mid: string): string {
+  if (!pattern) return '';
+  // All overlays render in 100x100 viewBox
+  if (pattern === 'dot-grid') {
+    let out = '<g fill="#ffffff" opacity="0.08">';
+    for (let x = 5; x < 100; x += 7.5) {
+      for (let y = 5; y < 100; y += 7.5) {
+        out += `<circle cx="${x}" cy="${y}" r="0.3"/>`;
+      }
+    }
+    return out + '</g>';
+  }
+  if (pattern === 'line-grid') {
+    let out = '<g stroke="#ffffff" stroke-width="0.12" opacity="0.06">';
+    for (let x = 0; x <= 100; x += 6.25) out += `<line x1="${x}" y1="0" x2="${x}" y2="100"/>`;
+    for (let y = 0; y <= 100; y += 6.25) out += `<line x1="0" y1="${y}" x2="100" y2="${y}"/>`;
+    return out + '</g>';
+  }
+  if (pattern === 'radial-glow' || pattern === 'halo-glow') {
+    return `<circle cx="50" cy="50" r="50" fill="url(#rg-${mid})"/>`;
+  }
+  if (pattern === 'diagonal-stripes') {
+    let out = '<g stroke="#ffffff" stroke-width="0.4" opacity="0.05">';
+    for (let i = -100; i < 200; i += 10) out += `<line x1="${i}" y1="0" x2="${i+100}" y2="100"/>`;
+    return out + '</g>';
+  }
+  if (pattern === 'circuit-pattern') {
+    let out = '<g stroke="#ffffff" stroke-width="0.15" fill="none" opacity="0.15">';
+    const paths = [
+      "M 12.5 20 L 30 20 L 37.5 27.5 L 55 27.5",
+      "M 20 50 L 20 62.5 L 32.5 75 L 50 75",
+      "M 80 12.5 L 80 32.5 L 67.5 45 L 67.5 62.5",
+      "M 87.5 62.5 L 75 62.5 L 70 67.5",
+      "M 25 87.5 L 50 87.5 L 57.5 80",
+    ];
+    for (const p of paths) out += `<path d="${p}"/>`;
+    const dots = [[30,20],[55,27.5],[20,62.5],[50,75],[80,32.5],[67.5,45],[75,62.5],[50,87.5]];
+    for (const [x, y] of dots) out += `<circle cx="${x}" cy="${y}" r="0.6" fill="#ffffff" opacity="0.5"/>`;
+    return out + '</g>';
+  }
+  if (pattern === 'hex-pattern') {
+    let out = '<g fill="none" stroke="#ffffff" stroke-width="0.12" opacity="0.1">';
+    for (let y = 0; y < 110; y += 8.75) {
+      const offset = (Math.floor(y / 8.75) % 2) ? 5 : 0;
+      for (let x = -5 + offset; x < 110; x += 10) {
+        let pts = '';
+        for (let i = 0; i < 6; i++) {
+          const a = i * Math.PI / 3;
+          pts += `${(x + 4.5 * Math.cos(a)).toFixed(2)} ${(y + 4.5 * Math.sin(a)).toFixed(2)} `;
+        }
+        out += `<polygon points="${pts.trim()}"/>`;
+      }
+    }
+    return out + '</g>';
+  }
+  if (pattern === 'topographic') {
+    let out = '<g fill="none" stroke="#ffffff" stroke-width="0.1" opacity="0.12">';
+    for (let r = 5; r < 70; r += 6.25) {
+      out += `<ellipse cx="50" cy="50" rx="${r}" ry="${r * 0.7}" transform="rotate(15 50 50)"/>`;
+    }
+    return out + '</g>';
+  }
+  if (pattern === 'vignette') {
+    return `<circle cx="50" cy="50" r="65" fill="url(#rg-${mid})"/>`;
+  }
+  if (pattern === 'stars') {
+    let out = '<g fill="#ffffff">';
+    const pts = [
+      [10,15,0.5,0.6],[25,8,0.8,0.5],[40,20,0.4,0.7],[55,12,0.6,0.8],[70,18,0.5,0.6],
+      [85,5,0.7,0.5],[15,35,0.4,0.6],[35,45,0.5,0.7],[60,40,0.6,0.8],[80,55,0.4,0.6],
+      [5,55,0.5,0.5],[20,65,0.7,0.6],[45,75,0.4,0.7],[65,80,0.6,0.8],[85,75,0.5,0.6],
+      [12,90,0.4,0.5],[30,95,0.6,0.7],[50,88,0.5,0.6],[70,92,0.7,0.5],[90,95,0.4,0.8]
+    ];
+    for (const [x, y, r, o] of pts) out += `<circle cx="${x}" cy="${y}" r="${r}" opacity="${o}"/>`;
+    return out + '</g>';
+  }
+  if (pattern === 'bokeh') {
+    let out = '<g>';
+    const circles = [
+      [10,10,15,0.12],[30,50,12,0.15],[55,25,18,0.08],[80,60,14,0.13],
+      [70,85,16,0.1],[25,75,13,0.14],[45,90,11,0.16],[90,15,17,0.09]
+    ];
+    for (const [x, y, r, o] of circles) out += `<circle cx="${x}" cy="${y}" r="${r}" fill="#ffffff" opacity="${o}"/>`;
+    return out + '</g>';
+  }
+  if (pattern === 'wave-lines') {
+    let out = '<g fill="none" stroke="#ffffff" stroke-width="0.18" opacity="0.15">';
+    for (let y = 0; y < 105; y += 4.5) {
+      let d = `M 0 ${y}`;
+      for (let x = 0; x < 101; x += 5) {
+        d += ` Q ${x+2.5} ${y - 1.5 * (Math.floor(x/5) % 2 === 0 ? 1 : -1)} ${x+5} ${y}`;
+      }
+      out += `<path d="${d}"/>`;
+    }
+    return out + '</g>';
+  }
+  if (pattern === 'grain') {
+    return `<rect x="0" y="0" width="100" height="100" filter="url(#grain-${mid})" opacity="0.5"/>`;
+  }
+  return '';
+}
+
+export function renderBgPatternDefs(pattern: string | null, mid: string): string {
+  if (!pattern) return '';
+  if (pattern === 'radial-glow' || pattern === 'halo-glow') {
+    return `<radialGradient id="rg-${mid}" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff" stop-opacity="0.25"/><stop offset="100" stop-color="#ffffff" stop-opacity="0"/></radialGradient>`;
+  }
+  if (pattern === 'vignette') {
+    return `<radialGradient id="rg-${mid}" cx="50%" cy="50%" r="65%"><stop offset="60" stop-color="#000000" stop-opacity="0"/><stop offset="100" stop-color="#000000" stop-opacity="0.4"/></radialGradient>`;
+  }
+  if (pattern === 'grain') {
+    return `<filter id="grain-${mid}"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/></filter>`;
+  }
+  return '';
+}
+
+// ---- SVG filter/gradient defs used by connectors and marks ----
 export function renderSvgDefs(): string {
   return `<defs>
     <linearGradient id="grad-sheen" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0" stop-color="#888"/><stop offset="0.5" stop-color="#fff"/><stop offset="1" stop-color="#888"/></linearGradient>

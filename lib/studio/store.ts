@@ -2,19 +2,28 @@
 // No React imports here — keeps the store testable & framework-agnostic.
 // React integration is via useSyncExternalStore in useStudioState.ts.
 
-import { DEFAULT_CUSTOMIZATION, type StudioState, type StudioAction } from './types';
+import { DEFAULT_CUSTOMIZATION, type StudioState, type StudioAction, type BgCard } from './types';
 
 type Listener = () => void;
 
-export function createStore(initialCards: any[] = [], initialConnectors: any[] = []) {
+export function createStore(
+  initialCards: any[] = [],
+  initialConnectors: any[] = [],
+  initialBgCards: any[] = [],
+) {
   const state: StudioState = {
     selectedCardId: initialCards[0]?.id ?? null,
     selectedConnectorId: initialConnectors[0]?.id ?? null,
+    selectedBgCardId: initialBgCards[0]?.id ?? null,
     customization: { ...DEFAULT_CUSTOMIZATION },
     galleryFilter: '',
     activeCategory: null,
+    activeTab: 'libraries',
+    activeLibrary: 'cards',
+    editorView: 'edit',
     cards: initialCards,
     connectors: initialConnectors,
+    bgCards: initialBgCards,
   };
 
   // When we have a selected card, sync the customization defaults from it
@@ -110,6 +119,28 @@ function reducer(state: StudioState, action: StudioAction): void {
       }
       break;
     }
+    case 'SELECT_BG_CARD': {
+      state.selectedBgCardId = action.bgCardId;
+      const bg = state.bgCards.find((c: BgCard) => c.id === action.bgCardId);
+      if (bg) {
+        // Override customization gradient with the bg card's stops
+        state.customization.gradientStops = bg.gradient_stops;
+        state.customization.gradientAngle = bg.gradient_angle;
+      }
+      break;
+    }
+    case 'SET_ACTIVE_TAB': {
+      state.activeTab = action.tab;
+      break;
+    }
+    case 'SET_ACTIVE_LIBRARY': {
+      state.activeLibrary = action.library;
+      break;
+    }
+    case 'SET_EDITOR_VIEW': {
+      state.editorView = action.view;
+      break;
+    }
     case 'SET_GRADIENT_STOP': {
       const stops = state.customization.gradientStops.slice();
       if (stops[action.index]) {
@@ -201,6 +232,7 @@ export function encodeStateToQuery(state: StudioState): string {
   const params = new URLSearchParams();
   if (state.selectedCardId) params.set('c', state.selectedCardId);
   if (state.selectedConnectorId) params.set('n', state.selectedConnectorId);
+  if (state.selectedBgCardId) params.set('b', state.selectedBgCardId);
   const stops = state.customization.gradientStops
     .map((s) => `${s.color.replace('#', '')}.${s.offset}`)
     .join(',');

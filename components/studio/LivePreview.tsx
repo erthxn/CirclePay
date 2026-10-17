@@ -1,20 +1,25 @@
 'use client';
 
 import { forwardRef, useMemo, memo } from 'react';
-import type { Card, Connector, Customization } from '@/lib/studio/types';
+import type { Card, Connector, Customization, BgCard } from '@/lib/studio/types';
 import {
   makeMembers,
   buildConnectorStroke,
   renderMark,
   renderSvgDefs,
   buildGradientCss,
+  renderBgPattern,
+  renderBgPatternDefs,
 } from '@/lib/studio/builders';
 
 interface Props {
   card: Card | null;
   connector: Connector | null;
   customization: Customization;
+  bgCard?: BgCard | null;
   reducedMotion?: boolean;
+  /** When true, render only the background (no member tiles / connectors / marks) */
+  backgroundOnly?: boolean;
 }
 
 /**
@@ -23,7 +28,7 @@ interface Props {
  * and to honor html2canvas export at scale:3.
  */
 const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
-  { card, connector, customization, reducedMotion },
+  { card, connector, customization, bgCard, reducedMotion, backgroundOnly },
   ref,
 ) {
   // members depend on memberCount
@@ -33,22 +38,33 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
   const gradientCss = useMemo(
     () => buildGradientCss(customization.gradientStops, customization.gradientAngle),
     [customization.gradientStops, customization.gradientAngle],
-  );
+  )
+
+  // BG card pattern overlay (if a bg card is selected)
+  const bgPatternSvg = useMemo(() => {
+    if (!bgCard?.pattern) return '';
+    return renderBgPattern(bgCard.pattern, 'live-bg');
+  }, [bgCard]);
+
+  const bgPatternDefs = useMemo(() => {
+    if (!bgCard?.pattern) return '';
+    return renderBgPatternDefs(bgCard.pattern, 'live-bg');
+  }, [bgCard]);
 
   // Build the SVG snippet for the connector overlay
   const connectorSvg = useMemo(() => {
-    if (!connector) return '';
+    if (!connector || backgroundOnly) return '';
     const filterId = connector.filter ?? null;
     const cx = 50, cy = 50;  // viewBox 0-100, center at 50,50
     return members
       .map((m) => buildConnectorStroke(connector, customization, cx, cy, m, filterId))
       .join('');
-  }, [connector, members, customization]);
+  }, [connector, members, customization, backgroundOnly]);
 
   // SVG for the member tiles (positioned in viewBox coordinates)
   const tilesSvg = useMemo(() => {
+    if (backgroundOnly) return '';
     const tileSize = customization.memberCount <= 5 ? 9.5 : customization.memberCount <= 7 ? 8.5 : 7.5;
-    const centerSize = customization.memberCount <= 5 ? 12 : 10.5;
     return members
       .map((m, i) => {
         const gid = `m${i}`;
@@ -71,9 +87,10 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
           </g>`;
       })
       .join('');
-  }, [members, customization.memberCount]);
+  }, [members, customization.memberCount, backgroundOnly]);
 
   const centerSvg = useMemo(() => {
+    if (backgroundOnly) return '';
     const centerSize = customization.memberCount <= 5 ? 12 : 10.5;
     return `
       <g transform="translate(50 50)">
@@ -86,16 +103,16 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
               font-family="DejaVu Sans, Arial, sans-serif" font-size="${(centerSize * 0.42).toFixed(2)}"
               font-weight="700" fill="#fff">@</text>
       </g>`;
-  }, [customization.memberCount]);
+  }, [customization.memberCount, backgroundOnly]);
 
   const markSvg = useMemo(
-    () => renderMark(customization.mark, 'live'),
-    [customization.mark],
+    () => (backgroundOnly ? '' : renderMark(customization.mark, 'live')),
+    [customization.mark, backgroundOnly],
   );
 
   const defsSvg = useMemo(() => renderSvgDefs(), []);
 
-  if (!card) {
+  if (!card && !bgCard) {
     return (
       <div ref={ref} className="w-full aspect-square rounded-2xl bg-[var(--bg)] flex items-center justify-center text-[var(--text-muted)] text-sm neu-pressed">
         Pick a card to preview
@@ -125,6 +142,8 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
         dangerouslySetInnerHTML={{
           __html: `
             ${defsSvg}
+            ${bgPatternDefs}
+            ${bgPatternSvg}
             ${connectorSvg}
             ${centerSvg}
             ${tilesSvg}

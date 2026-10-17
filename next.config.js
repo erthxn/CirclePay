@@ -4,7 +4,9 @@ const nextConfig = {
   async redirects() {
     return [
       // The old /test/card page is replaced by the new premium /studio route.
-      { source: '/test/card', destination: '/studio', permanent: false },
+      { source: '/test/card', destination: '/studio/libraries', permanent: false },
+      // /studio itself redirects to /studio/libraries (the default tab)
+      { source: '/studio', destination: '/studio/libraries', permanent: false },
     ];
   },
 };

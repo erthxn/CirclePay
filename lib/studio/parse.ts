@@ -1,8 +1,8 @@
-// Runtime-safe parsers for the cards/connectors JSON.
+// Runtime-safe parsers for the cards/connectors/bg_cards JSON.
 // Provide defaults and strip unknown fields so the rest of the
 // app can trust the shape.
 
-import type { Card, Connector, GradientStop, CardStyle, CardMark, MemberCount } from './types';
+import type { Card, Connector, BgCard, GradientStop, CardStyle, CardMark, MemberCount } from './types';
 
 const VALID_STYLES: CardStyle[] = [
   'orbit', 'spokes', 'constellation', 'halo', 'bold', 'radar',
@@ -95,6 +95,32 @@ export function parseCards(raw: unknown): Card[] {
   const obj = raw as { cards?: unknown };
   if (!Array.isArray(obj.cards)) return [];
   return obj.cards.map(parseCard);
+}
+
+export function parseBgCard(raw: unknown): BgCard {
+  const r = (raw ?? {}) as Record<string, unknown>;
+  const stops = asStops(r.gradient_stops);
+  return {
+    id: typeof r.id === 'string' ? r.id : 'unknown',
+    name: typeof r.name === 'string' ? r.name : 'Untitled',
+    category: typeof r.category === 'string' ? r.category : 'Uncategorized',
+    subcategory: typeof r.subcategory === 'string' ? r.subcategory : '',
+    pattern: r.pattern === null || typeof r.pattern === 'string' ? (r.pattern as string | null) : null,
+    gradient_angle: typeof r.gradient_angle === 'number' ? r.gradient_angle : 145,
+    gradient_stops: stops,
+    gradient_css: typeof r.gradient_css === 'string' ? r.gradient_css : '',
+    solid_color: typeof r.solid_color === 'string' ? r.solid_color : '#1a1d24',
+    tags: Array.isArray(r.tags) ? (r.tags as string[]) : [],
+    preview_svg: typeof r.preview_svg === 'string' ? r.preview_svg : '',
+    preview_png: typeof r.preview_png === 'string' ? r.preview_png : '',
+  };
+}
+
+export function parseBgCards(raw: unknown): BgCard[] {
+  if (!raw || typeof raw !== 'object') return [];
+  const obj = raw as { cards?: unknown };
+  if (!Array.isArray(obj.cards)) return [];
+  return obj.cards.map(parseBgCard);
 }
 
 export function parseConnectors(raw: unknown): Connector[] {

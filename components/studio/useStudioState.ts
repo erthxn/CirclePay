@@ -2,14 +2,14 @@
 
 import { useSyncExternalStore, useRef, useEffect, useState, useCallback } from 'react';
 import { createStore, customizationFromCard } from '@/lib/studio/store';
-import type { Card, Connector, StudioState, StudioAction } from '@/lib/studio/types';
+import type { Card, Connector, BgCard, StudioState, StudioAction } from '@/lib/studio/types';
 
 // Singleton store — created lazily on the client
 let storeInstance: ReturnType<typeof createStore> | null = null;
 
-export function initStore(cards: Card[], connectors: Connector[]): void {
+export function initStore(cards: Card[], connectors: Connector[], bgCards: BgCard[] = []): void {
   if (!storeInstance) {
-    storeInstance = createStore(cards as any, connectors as any);
+    storeInstance = createStore(cards as any, connectors as any, bgCards as any);
   }
 }
 

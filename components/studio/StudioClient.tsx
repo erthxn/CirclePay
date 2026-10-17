@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect, useDeferredValue } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import type { Card, Connector } from '@/lib/studio/types';
+import type { Card, Connector, BgCard } from '@/lib/studio/types';
 import { initStore, useStudioSelector, useDispatch, useReducedMotion } from './useStudioState';
 import { buildSolidColor } from '@/lib/studio/builders';
 import { encodeStateToQuery } from '@/lib/studio/store';
@@ -10,19 +10,24 @@ import { encodeStateToQuery } from '@/lib/studio/store';
 import LivePreview from './LivePreview';
 import CustomizationPanel from './CustomizationPanel';
 import CardGallery from './CardGallery';
+import BgCardGallery from './BgCardGallery';
 import ConnectorPicker from './ConnectorPicker';
 import DownloadButton from './DownloadButton';
 
 interface Props {
   cards: Card[];
   connectors: Connector[];
+  bgCards: BgCard[];
+  /** Which library tab is active. Drives which gallery is shown. */
+  activeLibrary: 'cards' | 'bg' | 'connectors';
+  /** Whether to show the editor (customization panel) alongside the preview. */
+  showEditor?: boolean;
 }
 
-export default function StudioClient({ cards, connectors }: Props) {
-  // Initialize the store exactly once on the client.
+export default function StudioClient({ cards, connectors, bgCards, activeLibrary, showEditor = false }: Props) {
   const initialized = useRef(false);
   if (!initialized.current) {
-    initStore(cards, connectors);
+    initStore(cards, connectors, bgCards);
     initialized.current = true;
   }
 
@@ -32,98 +37,95 @@ export default function StudioClient({ cards, connectors }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Hydrate from URL once on mount (before paint)
+  // Hydrate from URL once on mount
   const hydrated = useRef(false);
   useEffect(() => {
     if (hydrated.current) return;
     hydrated.current = true;
     const c = searchParams.get('c');
     const n = searchParams.get('n');
+    const b = searchParams.get('b');
     if (c) dispatch({ type: 'SELECT_CARD', cardId: c });
     if (n) dispatch({ type: 'SELECT_CONNECTOR', connectorId: n });
-    // customization is harder to hydrate since SELECT_CARD resets it;
-    // for v1 we accept the URL hydration for card+connector only.
+    if (b) dispatch({ type: 'SELECT_BG_CARD', bgCardId: b });
   }, [searchParams, dispatch]);
 
-  // Subscribe to store for re-render
   const selectedCardId = useStudioSelector((s) => s.selectedCardId);
   const selectedConnectorId = useStudioSelector((s) => s.selectedConnectorId);
+  const selectedBgCardId = useStudioSelector((s) => s.selectedBgCardId);
   const customization = useStudioSelector((s) => s.customization);
 
   const selectedCard = cards.find((c) => c.id === selectedCardId) ?? null;
   const selectedConnector = connectors.find((c) => c.id === selectedConnectorId) ?? null;
-  const solidColor = selectedCard?.solid_color ?? buildSolidColor(customization.gradientStops);
+  const selectedBgCard = bgCards.find((c) => c.id === selectedBgCardId) ?? null;
+  const solidColor = selectedBgCard?.solid_color ?? selectedCard?.solid_color ?? buildSolidColor(customization.gradientStops);
 
-  // Defer URL updates on customization changes (debounced via useDeferredValue)
+  // Debounced URL sync
   const deferredCustom = useDeferredValue(customization);
-  const [copied, setCopied] = useState(false);
   useEffect(() => {
     if (!hydrated.current) return;
     const qs = encodeStateToQuery({
       selectedCardId,
       selectedConnectorId,
+      selectedBgCardId,
       customization: deferredCustom,
       galleryFilter: '',
       activeCategory: null,
+      activeTab: 'libraries',
+      activeLibrary: 'cards',
+      editorView: 'edit',
       cards,
       connectors,
+      bgCards,
     });
     const url = qs ? `${pathname}?${qs}` : pathname;
     router.replace(url, { scroll: false });
-  }, [deferredCustom, selectedCardId, selectedConnectorId, router, pathname, cards, connectors]);
+  }, [deferredCustom, selectedCardId, selectedConnectorId, selectedBgCardId, router, pathname, cards, connectors, bgCards]);
 
-  // Filter input state for the gallery
   const filter = useStudioSelector((s) => s.galleryFilter);
   const setFilter = useCallback((q: string) => dispatch({ type: 'SET_GALLERY_FILTER', query: q }), [dispatch]);
 
   const previewRef = useRef<HTMLDivElement>(null);
-
+  const [copied, setCopied] = useState(false);
   const share = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch {
-      // ignore
-    }
+    } catch {}
   }, []);
 
-  // Scroll positioning of the live preview — sticky on desktop, normal on mobile
   return (
     <div className="px-4 sm:px-5 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="flex items-baseline justify-between mb-4">
-        <h1 className="text-xl sm:text-2xl font-bold text-[var(--text)]">Studio</h1>
-        <span className="text-[11px] text-[var(--text-muted)]">
-          {cards.length} cards · {connectors.length} connectors
-        </span>
-      </div>
-
       {/* Filter */}
       <div className="mb-5">
         <input
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Search designs, categories, tags…"
+          placeholder={
+            activeLibrary === 'cards'
+              ? 'Search card designs…'
+              : activeLibrary === 'bg'
+              ? 'Search backgrounds…'
+              : 'Search connectors…'
+          }
           className="neu-input w-full px-4 py-3 text-sm"
-          aria-label="Search designs"
+          aria-label="Search"
         />
       </div>
 
-      {/* 3-column on xl: gallery | preview+panel | connectors */}
+      {/* Two-pane layout: gallery | preview+panel */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-5">
         {/* Gallery - left column */}
-        <div className="xl:col-span-7 order-1">
-          <div className="mb-3">
-            <h2 className="text-sm font-semibold text-[var(--text)] mb-1">Cards</h2>
-            <p className="text-[11px] text-[var(--text-muted)]">Tap to select. Scroll to load more.</p>
-          </div>
-          <CardGallery />
+        <div className="xl:col-span-7 order-2 xl:order-1">
+          {activeLibrary === 'cards' && <CardGallery />}
+          {activeLibrary === 'bg' && <BgCardGallery />}
+          {activeLibrary === 'connectors' && <ConnectorPicker />}
         </div>
 
-        {/* Live preview + customization - middle column */}
-        <div className="xl:col-span-5 order-2 xl:sticky xl:top-24 xl:self-start">
+        {/* Live preview + (optional) customization - right column */}
+        <div className="xl:col-span-5 order-1 xl:order-2 xl:sticky xl:top-24 xl:self-start">
           <div className="flex flex-col gap-4">
             <div className="p-4 neu-raised rounded-2xl">
               <LivePreview
@@ -131,10 +133,17 @@ export default function StudioClient({ cards, connectors }: Props) {
                 card={selectedCard}
                 connector={selectedConnector}
                 customization={customization}
+                bgCard={selectedBgCard}
                 reducedMotion={reducedMotion}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <DownloadButton targetRef={previewRef} solidColor={solidColor} filename={selectedCard?.id ?? 'circlepay'} />
+                <DownloadButton
+                  targetRef={previewRef}
+                  solidColor={solidColor}
+                  filename={
+                    selectedBgCard?.id ?? selectedCard?.id ?? 'circlepay'
+                  }
+                />
                 <button
                   onClick={share}
                   className="studio-tap py-3.5 text-sm font-medium rounded-full neu-btn text-[var(--text)]"
@@ -142,19 +151,15 @@ export default function StudioClient({ cards, connectors }: Props) {
                   {copied ? 'Copied!' : 'Share link'}
                 </button>
               </div>
-              {selectedCard && (
+              {(selectedCard || selectedBgCard) && (
                 <p className="mt-2 text-[11px] text-[var(--text-muted)] text-center">
-                  {selectedCard.name} · {selectedCard.category}
+                  {selectedBgCard?.name ?? selectedCard?.name}
+                  {selectedCard && selectedBgCard ? ` · ${selectedCard.category}` : ''}
                 </p>
               )}
             </div>
 
-            <CustomizationPanel />
-
-            <div className="p-4 neu-raised rounded-2xl">
-              <h2 className="text-sm font-semibold text-[var(--text)] mb-3">Connectors</h2>
-              <ConnectorPicker />
-            </div>
+            {showEditor && <CustomizationPanel />}
           </div>
         </div>
       </div>

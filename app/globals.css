@@ -268,3 +268,162 @@ input[type="color"]::-moz-color-swatch {
     transition: transform 0.15s ease;
   }
 }
+
+/* ----------------- STUDIO PREMIUM ANIMATIONS ----------------- */
+
+/* Fade-up entrance for headers and content */
+@keyframes studio-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide-in-right for side sheet modals */
+@keyframes studio-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger entrance for gallery tiles */
+@keyframes studio-stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Light leak for premium VFX feel */
+@keyframes studio-light-leak {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* Glass shimmer for nav active indicator */
+@keyframes studio-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Spring-like scale entrance */
+@keyframes studio-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Premium glow for active accent */
+.studio-glow-accent {
+  box-shadow: 0 0 0 1px rgba(13, 92, 255, 0.25),
+              0 4px 16px rgba(13, 92, 255, 0.18),
+              0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Glassmorphism panel (premium 2025 style: 24px blur + saturation) */
+.studio-glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+              0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* Premium floating button (magnetic-feel) */
+.studio-fab {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.studio-fab:active {
+  transform: scale(0.96);
+}
+
+/* Tab pill morph (cross-element spring) */
+.studio-tab-pill {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Magnetic hover for nav items (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .studio-magnetic {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .studio-magnetic:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Page-level entrance — applied to main wrappers */
+.studio-enter {
+  animation: studio-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Premium scrollbar (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--bg-dark);
+    border-radius: 10px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+}
+
+/* Reduce motion override */
+@media (prefers-reduced-motion: reduce) {
+  .studio-enter,
+  [style*='animation: studio-fade-up'],
+  [style*='animation: studio-stagger-in'],
+  [style*='animation: studio-pop'] {
+    animation: none !important;
+  }
+  .studio-fab,
+  .studio-tab-pill,
+  .studio-magnetic {
+    transition: none !important;
+  }
+  .studio-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
