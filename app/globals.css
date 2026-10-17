@@ -158,3 +158,113 @@ button, a {
     font-size: 18px;
   }
 }
+
+/* ----------------- STUDIO ----------------- */
+
+/* Touch-friendly tap target (WCAG 2.5.5) */
+.studio-tap {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Range input styling - subtle neumorphic track */
+.studio-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--bg-dark);
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+
+.studio-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-light);
+  box-shadow: var(--shadow-raised);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.studio-range::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+
+.studio-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-light);
+  box-shadow: var(--shadow-raised);
+  cursor: pointer;
+}
+
+/* Color input - flatten default browser chrome */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: 2px solid var(--bg-dark);
+  border-radius: 6px;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: 2px solid var(--bg-dark);
+  border-radius: 6px;
+}
+
+/* Reduced motion - disable animations, transitions, will-change */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    will-change: auto !important;
+  }
+  .tile {
+    animation: none !important;
+  }
+  .studio-range::-webkit-slider-thumb:active {
+    transform: none;
+  }
+}
+
+/* Hide scrollbars but keep scrolling on touch surfaces for the gallery */
+@media (pointer: coarse) {
+  .studio-scroll-x {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .studio-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Gallery tile hover - desktop only */
+@media (hover: hover) and (pointer: fine) {
+  [data-card-tile]:hover {
+    transform: translateZ(0) scale(1.02);
+    transition: transform 0.15s ease;
+  }
+}

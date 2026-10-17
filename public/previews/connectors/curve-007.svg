@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400"><defs>
+        <linearGradient id="grad-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#888"/>
+            <stop offset="0.5" stop-color="#fff"/>
+            <stop offset="1" stop-color="#888"/>
+        </linearGradient>
+        <linearGradient id="grad-copper" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A3F1D"/>
+            <stop offset="0.5" stop-color="#FFD8B5"/>
+            <stop offset="1" stop-color="#7A3F1D"/>
+        </linearGradient>
+        <linearGradient id="grad-gold-wire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A5800"/>
+            <stop offset="0.5" stop-color="#FFF6B0"/>
+            <stop offset="1" stop-color="#7A5800"/>
+        </linearGradient>
+        <linearGradient id="grad-sunset" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF6B35"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-ocean" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0077B6"/><stop offset="1" stop-color="#90E0EF"/>
+        </linearGradient>
+        <linearGradient id="grad-fire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-forest" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0F5132"/><stop offset="1" stop-color="#6EE7B7"/>
+        </linearGradient>
+        <linearGradient id="grad-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF1493"/><stop offset="1" stop-color="#7C3AED"/>
+        </linearGradient>
+        <linearGradient id="grad-rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="0.33" stop-color="#FFFF00"/><stop offset="0.66" stop-color="#00FF00"/><stop offset="1" stop-color="#9D4EDD"/>
+        </linearGradient>
+        <linearGradient id="grad-synthwave" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF006E"/><stop offset="0.5" stop-color="#8338EC"/><stop offset="1" stop-color="#3A86FF"/>
+        </linearGradient>
+        <linearGradient id="grad-aurora" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#00F5D4"/><stop offset="0.5" stop-color="#00BBF9"/><stop offset="1" stop-color="#9B5DE5"/>
+        </linearGradient>
+        <linearGradient id="grad-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FFF6B0"/><stop offset="0.5" stop-color="#E8C66B"/><stop offset="1" stop-color="#B8860B"/>
+        </linearGradient>
+        <linearGradient id="grad-cosmic" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#10002B"/><stop offset="0.5" stop-color="#9D4EDD"/><stop offset="1" stop-color="#FF61DC"/>
+        </linearGradient>
+        <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-magenta" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-orange" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-pink" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-lime" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-inner" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs><rect x="0" y="0" width="400" height="400" rx="28" fill="#1A1A2E"/><path d="M 200.00 200.00 L 198.46 195.02 L 194.10 191.39 L 187.72 190.29 L 180.53 192.48 L 173.97 198.22 L 169.54 207.20 L 168.54 218.55 L 171.93 230.89 L 180.12 242.54 L 192.90 251.69 L 209.36 256.62 L 228.04 255.98 L 246.97 248.93 L 263.91 235.36 L 276.62 215.92 L 283.10 192.03 L 281.83 165.78 L 272.03 139.74 L 253.80 116.74 L 228.15 99.52 L 197.01 90.48 L 163.04 91.33 L 129.47 102.92" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.75"/><path d="M 200.00 200.00 L 204.26 196.99 L 206.36 191.73 L 205.44 185.32 L 201.14 179.16 L 193.65 174.70 L 183.73 173.25 L 172.64 175.81 L 161.95 182.85 L 153.40 194.24 L 148.65 209.22 L 149.04 226.40 L 155.43 243.97 L 167.98 259.79 L 186.12 271.71 L 208.53 277.79 L 233.26 276.57 L 257.83 267.25 L 279.57 249.89 L 295.81 225.44 L 304.26 195.73 L 303.24 163.31 L 291.93 131.27 L 270.53 102.92" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.75"/><path d="M 200.00 200.00 L 204.18 203.12 L 209.83 203.49 L 215.64 200.64 L 220.17 194.64 L 222.10 186.14 L 220.41 176.27 L 214.55 166.50 L 204.55 158.51 L 191.08 153.90 L 175.37 154.01 L 159.14 159.70 L 144.41 171.20 L 133.24 188.02 L 127.51 208.96 L 128.65 232.16 L 137.46 255.29 L 153.92 275.78 L 177.14 291.09 L 205.41 298.98 L 236.28 297.84 L 266.80 286.85 L 293.77 266.19 L 314.13 237.08" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.75"/><path d="M 200.00 200.00 L 198.32 204.94 L 199.71 210.43 L 204.22 215.07 L 211.33 217.53 L 220.01 216.74 L 228.88 212.08 L 236.35 203.49 L 240.87 191.51 L 241.09 177.27 L 236.13 162.36 L 225.71 148.69 L 210.22 138.23 L 190.76 132.81 L 169.08 133.82 L 147.37 142.08 L 128.09 157.60 L 113.68 179.59 L 106.31 206.41 L 107.53 235.74 L 118.16 264.74 L 138.04 290.37 L 166.02 309.64 L 200.00 320.00" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.75"/><path d="M 200.00 200.00 L 194.78 199.93 L 189.99 202.95 L 186.97 208.67 L 186.83 216.19 L 190.26 224.20 L 197.44 231.20 L 207.92 235.65 L 220.70 236.24 L 234.32 232.05 L 246.96 222.73 L 256.74 208.59 L 261.90 190.63 L 261.05 170.45 L 253.38 150.14 L 238.82 132.05 L 218.10 118.51 L 192.74 111.60 L 164.95 112.87 L 137.44 123.10 L 113.14 142.18 L 94.91 169.00 L 85.23 201.57 L 85.87 237.08" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.75"/><g transform="translate(200.00 200.00)">
+        <defs><linearGradient id="ctile999" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(210,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(210,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="28.0" fill="url(#ctile999)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="6.72" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="22" font-weight="700" fill="#fff">@</text>
+    </g><g transform="translate(200.00 80.00)">
+        <defs><linearGradient id="ctile0" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(0,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(0,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile0)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">A</text>
+    </g><g transform="translate(200.00 102.00)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$20.00</text>
+    </g><g transform="translate(314.13 162.92)">
+        <defs><linearGradient id="ctile1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(72,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(72,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile1)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">B</text>
+    </g><g transform="translate(314.13 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$17.00</text>
+    </g><g transform="translate(270.53 297.08)">
+        <defs><linearGradient id="ctile2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(144,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(144,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile2)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">C</text>
+    </g><g transform="translate(270.53 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$14.00</text>
+    </g><g transform="translate(129.47 297.08)">
+        <defs><linearGradient id="ctile3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(216,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(216,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile3)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">D</text>
+    </g><g transform="translate(129.47 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$11.00</text>
+    </g><g transform="translate(85.87 162.92)">
+        <defs><linearGradient id="ctile4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(288,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(288,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile4)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">E</text>
+    </g><g transform="translate(85.87 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$8.00</text>
+    </g></svg>

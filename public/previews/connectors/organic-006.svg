@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400"><defs>
+        <linearGradient id="grad-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#888"/>
+            <stop offset="0.5" stop-color="#fff"/>
+            <stop offset="1" stop-color="#888"/>
+        </linearGradient>
+        <linearGradient id="grad-copper" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A3F1D"/>
+            <stop offset="0.5" stop-color="#FFD8B5"/>
+            <stop offset="1" stop-color="#7A3F1D"/>
+        </linearGradient>
+        <linearGradient id="grad-gold-wire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#7A5800"/>
+            <stop offset="0.5" stop-color="#FFF6B0"/>
+            <stop offset="1" stop-color="#7A5800"/>
+        </linearGradient>
+        <linearGradient id="grad-sunset" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF6B35"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-ocean" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0077B6"/><stop offset="1" stop-color="#90E0EF"/>
+        </linearGradient>
+        <linearGradient id="grad-fire" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="1" stop-color="#FFD700"/>
+        </linearGradient>
+        <linearGradient id="grad-forest" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#0F5132"/><stop offset="1" stop-color="#6EE7B7"/>
+        </linearGradient>
+        <linearGradient id="grad-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF1493"/><stop offset="1" stop-color="#7C3AED"/>
+        </linearGradient>
+        <linearGradient id="grad-rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF0000"/><stop offset="0.33" stop-color="#FFFF00"/><stop offset="0.66" stop-color="#00FF00"/><stop offset="1" stop-color="#9D4EDD"/>
+        </linearGradient>
+        <linearGradient id="grad-synthwave" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FF006E"/><stop offset="0.5" stop-color="#8338EC"/><stop offset="1" stop-color="#3A86FF"/>
+        </linearGradient>
+        <linearGradient id="grad-aurora" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#00F5D4"/><stop offset="0.5" stop-color="#00BBF9"/><stop offset="1" stop-color="#9B5DE5"/>
+        </linearGradient>
+        <linearGradient id="grad-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#FFF6B0"/><stop offset="0.5" stop-color="#E8C66B"/><stop offset="1" stop-color="#B8860B"/>
+        </linearGradient>
+        <linearGradient id="grad-cosmic" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0" stop-color="#10002B"/><stop offset="0.5" stop-color="#9D4EDD"/><stop offset="1" stop-color="#FF61DC"/>
+        </linearGradient>
+        <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-magenta" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-orange" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-pink" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-lime" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-inner" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs><rect x="0" y="0" width="400" height="400" rx="28" fill="#1A1A2E"/><path d="M 200.00 200.00 L 202.34 194.00 L 203.76 188.00 L 203.84 182.00 L 202.85 176.00 L 201.59 170.00 L 200.85 164.00 L 201.01 158.00 L 201.76 152.00 L 202.34 146.00 L 202.00 140.00 L 200.49 134.00 L 198.24 128.00 L 196.16 122.00 L 195.15 116.00 L 195.59 110.00 L 197.15 104.00 L 198.99 98.00 L 200.24 92.00 L 200.49 86.00 L 200.00 80.00" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.85"/><path d="M 200.00 200.00 L 206.43 200.37 L 212.58 199.87 L 218.31 198.09 L 223.71 195.30 L 229.02 192.24 L 234.50 189.69 L 240.26 187.98 L 246.20 186.84 L 252.08 185.54 L 257.68 183.36 L 262.92 180.07 L 267.93 176.07 L 273.00 172.24 L 278.39 169.43 L 284.23 167.99 L 290.42 167.62 L 296.69 167.52 L 302.79 166.85 L 308.57 165.24 L 314.13 162.92" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.85"/><path d="M 200.00 200.00 L 201.63 206.23 L 204.01 211.92 L 207.47 216.82 L 211.80 221.09 L 216.35 225.20 L 220.47 229.63 L 223.87 234.57 L 226.79 239.87 L 229.85 245.06 L 233.65 249.72 L 238.40 253.68 L 243.75 257.21 L 248.95 260.85 L 253.30 265.10 L 256.47 270.22 L 258.74 275.99 L 260.77 281.92 L 263.29 287.51 L 266.61 292.51 L 270.53 297.08" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.85"/><path d="M 200.00 200.00 L 194.58 203.48 L 189.90 207.50 L 186.31 212.30 L 183.58 217.74 L 181.08 223.34 L 178.15 228.62 L 174.49 233.38 L 170.36 237.80 L 166.37 242.31 L 163.11 247.37 L 160.81 253.11 L 159.11 259.29 L 157.26 265.36 L 154.55 270.81 L 150.67 275.41 L 145.88 279.34 L 140.87 283.12 L 136.33 287.23 L 132.60 291.94 L 129.47 297.08" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.85"/><path d="M 200.00 200.00 L 195.02 195.92 L 189.75 192.71 L 184.07 190.78 L 178.06 189.87 L 171.96 189.22 L 166.03 188.06 L 160.37 186.06 L 154.89 183.49 L 149.37 181.09 L 143.55 179.56 L 137.38 179.14 L 130.98 179.43 L 124.63 179.55 L 118.61 178.66 L 113.04 176.39 L 107.82 173.05 L 102.68 169.44 L 97.36 166.40 L 91.73 164.31 L 85.87 162.92" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.85"/><g transform="translate(200.00 200.00)">
+        <defs><linearGradient id="ctile999" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(210,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(210,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="28.0" fill="url(#ctile999)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="6.72" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="22" font-weight="700" fill="#fff">@</text>
+    </g><g transform="translate(200.00 80.00)">
+        <defs><linearGradient id="ctile0" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(0,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(0,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile0)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">A</text>
+    </g><g transform="translate(200.00 102.00)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$20.00</text>
+    </g><g transform="translate(314.13 162.92)">
+        <defs><linearGradient id="ctile1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(72,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(72,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile1)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">B</text>
+    </g><g transform="translate(314.13 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$17.00</text>
+    </g><g transform="translate(270.53 297.08)">
+        <defs><linearGradient id="ctile2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(144,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(144,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile2)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">C</text>
+    </g><g transform="translate(270.53 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$14.00</text>
+    </g><g transform="translate(129.47 297.08)">
+        <defs><linearGradient id="ctile3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(216,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(216,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile3)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">D</text>
+    </g><g transform="translate(129.47 319.08)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$11.00</text>
+    </g><g transform="translate(85.87 162.92)">
+        <defs><linearGradient id="ctile4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="hsl(288,72%,58%)"/>
+            <stop offset="1" stop-color="hsl(288,62%,38%)"/>
+        </linearGradient></defs>
+        <circle r="18.0" fill="url(#ctile4)" stroke="#fff" stroke-width="2"/>
+        <text x="0" y="4.32" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+              font-size="14" font-weight="700" fill="#fff">E</text>
+    </g><g transform="translate(85.87 184.92)">
+        <rect x="-18" y="0" width="36" height="11" rx="5.5" fill="#fff"/>
+        <text x="0" y="8" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="7" font-weight="700" fill="#111">$8.00</text>
+    </g></svg>
