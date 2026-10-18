@@ -67,7 +67,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -105,7 +105,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -143,7 +143,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -181,7 +181,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -219,7 +219,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -257,7 +257,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -295,7 +295,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -333,7 +333,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -371,7 +371,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -409,7 +409,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -447,7 +447,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -485,7 +485,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -523,7 +523,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -561,7 +561,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -599,7 +599,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -637,7 +637,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -675,7 +675,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -713,7 +713,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -751,7 +751,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -789,7 +789,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -827,7 +827,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -865,7 +865,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -903,7 +903,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -941,7 +941,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -979,7 +979,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -1017,7 +1017,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -1055,7 +1055,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -1093,7 +1093,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFF6B0 0, #E8C66B 35, #B8860B 75, #6B4F0A 100)",
+      "gradient_css": "linear-gradient(145deg, #FFF6B0 0%, #E8C66B 35%, #B8860B 75%, #6B4F0A 100%)",
       "solid_color": "#6B4F0A",
       "tags": [
         "metallic lux",
@@ -1131,7 +1131,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1169,7 +1169,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1207,7 +1207,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1245,7 +1245,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1283,7 +1283,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1321,7 +1321,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1359,7 +1359,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1397,7 +1397,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1435,7 +1435,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1473,7 +1473,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1511,7 +1511,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1549,7 +1549,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1587,7 +1587,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1625,7 +1625,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1663,7 +1663,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1701,7 +1701,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1739,7 +1739,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1777,7 +1777,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1815,7 +1815,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1853,7 +1853,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1891,7 +1891,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1929,7 +1929,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -1967,7 +1967,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -2005,7 +2005,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #E0F2FE 0, #7DD3FC 40, #0EA5E9 80, #075985 100)",
+      "gradient_css": "linear-gradient(145deg, #E0F2FE 0%, #7DD3FC 40%, #0EA5E9 80%, #075985 100%)",
       "solid_color": "#075985",
       "tags": [
         "glassmorphism",
@@ -2043,7 +2043,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2081,7 +2081,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2119,7 +2119,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2157,7 +2157,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2195,7 +2195,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2233,7 +2233,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2271,7 +2271,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2309,7 +2309,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2347,7 +2347,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2385,7 +2385,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2423,7 +2423,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2461,7 +2461,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2499,7 +2499,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2537,7 +2537,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2575,7 +2575,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2613,7 +2613,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2651,7 +2651,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2689,7 +2689,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2727,7 +2727,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2765,7 +2765,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2803,7 +2803,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2841,7 +2841,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2879,7 +2879,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2917,7 +2917,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF006E 0, #C4006E 40, #7A0044 80, #1A0010 100)",
+      "gradient_css": "linear-gradient(145deg, #FF006E 0%, #C4006E 40%, #7A0044 80%, #1A0010 100%)",
       "solid_color": "#1A0010",
       "tags": [
         "neon cyber",
@@ -2951,7 +2951,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -2985,7 +2985,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3019,7 +3019,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3053,7 +3053,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3087,7 +3087,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3121,7 +3121,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3155,7 +3155,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3189,7 +3189,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3223,7 +3223,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3257,7 +3257,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3291,7 +3291,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3325,7 +3325,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3359,7 +3359,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3393,7 +3393,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3427,7 +3427,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3461,7 +3461,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3495,7 +3495,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3529,7 +3529,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3563,7 +3563,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3597,7 +3597,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3631,7 +3631,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3665,7 +3665,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #1A1A1A 0, #0A0A0A 50, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 50%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "dark premium",
@@ -3703,7 +3703,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3741,7 +3741,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3779,7 +3779,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3817,7 +3817,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3855,7 +3855,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3893,7 +3893,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3931,7 +3931,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -3969,7 +3969,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4007,7 +4007,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4045,7 +4045,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4083,7 +4083,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4121,7 +4121,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4159,7 +4159,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4197,7 +4197,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4235,7 +4235,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4273,7 +4273,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4311,7 +4311,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4349,7 +4349,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4387,7 +4387,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4425,7 +4425,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4463,7 +4463,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4501,7 +4501,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF61DC 0, #9D4EDD 30, #5A189A 65, #10002B 100)",
+      "gradient_css": "linear-gradient(145deg, #FF61DC 0%, #9D4EDD 30%, #5A189A 65%, #10002B 100%)",
       "solid_color": "#10002B",
       "tags": [
         "cosmic galaxy",
@@ -4539,7 +4539,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4577,7 +4577,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4615,7 +4615,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4653,7 +4653,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4691,7 +4691,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4729,7 +4729,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4767,7 +4767,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4805,7 +4805,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4843,7 +4843,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4881,7 +4881,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4919,7 +4919,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4957,7 +4957,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -4995,7 +4995,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5033,7 +5033,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5071,7 +5071,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5109,7 +5109,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5147,7 +5147,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5185,7 +5185,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5223,7 +5223,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5261,7 +5261,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5299,7 +5299,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5337,7 +5337,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #2D5016 0, #1A3009 40, #0A1F04 80, #000000 100)",
+      "gradient_css": "linear-gradient(145deg, #2D5016 0%, #1A3009 40%, #0A1F04 80%, #000000 100%)",
       "solid_color": "#000000",
       "tags": [
         "nature organic",
@@ -5375,7 +5375,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5413,7 +5413,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5451,7 +5451,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5489,7 +5489,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5527,7 +5527,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5565,7 +5565,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5603,7 +5603,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5641,7 +5641,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5679,7 +5679,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5717,7 +5717,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5755,7 +5755,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5793,7 +5793,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5831,7 +5831,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5869,7 +5869,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5907,7 +5907,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5945,7 +5945,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -5983,7 +5983,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6021,7 +6021,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6059,7 +6059,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6097,7 +6097,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6135,7 +6135,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6173,7 +6173,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #0F4C75 0, #3282B8 40, #BBE1FA 80, #1B262C 100)",
+      "gradient_css": "linear-gradient(145deg, #0F4C75 0%, #3282B8 40%, #BBE1FA 80%, #1B262C 100%)",
       "solid_color": "#1B262C",
       "tags": [
         "geometric pattern",
@@ -6211,7 +6211,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6249,7 +6249,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6287,7 +6287,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6325,7 +6325,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6363,7 +6363,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6401,7 +6401,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6439,7 +6439,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6477,7 +6477,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6515,7 +6515,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6553,7 +6553,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6591,7 +6591,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6629,7 +6629,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6667,7 +6667,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6705,7 +6705,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6743,7 +6743,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6781,7 +6781,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6819,7 +6819,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6857,7 +6857,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6895,7 +6895,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6933,7 +6933,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -6971,7 +6971,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -7009,7 +7009,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #F8F4E3 0, #D4C5A0 30, #7A6A4F 70, #1F1A10 100)",
+      "gradient_css": "linear-gradient(145deg, #F8F4E3 0%, #D4C5A0 30%, #7A6A4F 70%, #1F1A10 100%)",
       "solid_color": "#1F1A10",
       "tags": [
         "luxury royal",
@@ -7047,7 +7047,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7085,7 +7085,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7123,7 +7123,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7161,7 +7161,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7199,7 +7199,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7237,7 +7237,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7275,7 +7275,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7313,7 +7313,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7351,7 +7351,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7389,7 +7389,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7427,7 +7427,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7465,7 +7465,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7503,7 +7503,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7541,7 +7541,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7579,7 +7579,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7617,7 +7617,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7655,7 +7655,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7693,7 +7693,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7731,7 +7731,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7769,7 +7769,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFFFFF 0, #F5F5F5 40, #E0E0E0 80, #C0C0C0 100)",
+      "gradient_css": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 40%, #E0E0E0 80%, #C0C0C0 100%)",
       "solid_color": "#C0C0C0",
       "tags": [
         "minimal modern",
@@ -7807,7 +7807,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -7845,7 +7845,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -7883,7 +7883,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -7921,7 +7921,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -7959,7 +7959,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -7997,7 +7997,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8035,7 +8035,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8073,7 +8073,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8111,7 +8111,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8149,7 +8149,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8187,7 +8187,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8225,7 +8225,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8263,7 +8263,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8301,7 +8301,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8339,7 +8339,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8377,7 +8377,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8415,7 +8415,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8453,7 +8453,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8491,7 +8491,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8529,7 +8529,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4E6 0, #FECDD3 40, #FDA4AF 80, #E11D48 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4E6 0%, #FECDD3 40%, #FDA4AF 80%, #E11D48 100%)",
       "solid_color": "#E11D48",
       "tags": [
         "pastel dream",
@@ -8575,7 +8575,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8621,7 +8621,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8667,7 +8667,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8713,7 +8713,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8759,7 +8759,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8805,7 +8805,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8851,7 +8851,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8897,7 +8897,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8943,7 +8943,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -8989,7 +8989,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -9035,7 +9035,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -9081,7 +9081,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FF0080 0, #FF8C00 20, #FFD700 40, #00CED1 60, #7B68EE 80, #FF1493 100)",
+      "gradient_css": "linear-gradient(145deg, #FF0080 0%, #FF8C00 20%, #FFD700 40%, #00CED1 60%, #7B68EE 80%, #FF1493 100%)",
       "solid_color": "#FF1493",
       "tags": [
         "holographic",
@@ -9119,7 +9119,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9157,7 +9157,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9195,7 +9195,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9233,7 +9233,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9271,7 +9271,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9309,7 +9309,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9347,7 +9347,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9385,7 +9385,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9423,7 +9423,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9461,7 +9461,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9499,7 +9499,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",
@@ -9537,7 +9537,7 @@
           100
         ]
       ],
-      "gradient_css": "linear-gradient(145deg, #FFE4B5 0, #DEB887 30, #A0522D 70, #3E2723 100)",
+      "gradient_css": "linear-gradient(145deg, #FFE4B5 0%, #DEB887 30%, #A0522D 70%, #3E2723 100%)",
       "solid_color": "#3E2723",
       "tags": [
         "vintage classic",

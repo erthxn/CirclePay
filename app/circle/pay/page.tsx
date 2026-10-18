@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 import type { BgCard } from '@/lib/studio/types';
 import { parseBgCards } from '@/lib/studio/parse';
 import bgCardsJson from '@/public/data/bg_cards.json';
+import BgPickerModal from '@/components/studio/BgPickerModal';
 
 type Member = { handle: string; score: number; amount: number; pfp?: string };
 type Style = 'orbit' | 'spokes' | 'constellation' | 'halo' | 'bold' | 'radar';
@@ -120,7 +121,75 @@ function PayPageInner() {
   }, [deferredSearch]);
 
   if (!data) {
-    return <div className="p-8 text-center text-sm text-[var(--text-muted)]">No result. Analyze again.</div>;
+    // No analyze result in session — but the user may have arrived here via
+    // Studio's "Use in your circle" link. Show a friendly CTA instead of the
+    // terse "No result" message, AND let them preview the picked background.
+    return (
+      <div className="max-w-md mx-auto px-5 py-8 text-center">
+        <h1 className="text-2xl font-bold mb-1 text-[var(--text)]">Preview your card</h1>
+        <p className="text-sm text-[var(--text-muted)] mb-5">
+          You haven&apos;t analyzed a circle yet — but here&apos;s your picked background.
+          Analyze your circle to drop real members onto this card.
+        </p>
+
+        {/* Show the bg preview with demo members so user sees what the bg looks like */}
+        <div
+          className="relative mx-auto w-full max-w-sm aspect-square overflow-hidden mb-5"
+          style={{ background: selectedBg?.gradient_css ?? '#1a1d24', borderRadius: 28 }}
+        >
+          {selectedBg?.pattern === 'radial-glow' || selectedBg?.pattern === 'halo-glow' ? (
+            <div className="absolute inset-0" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.22), transparent 68%)' }} />
+          ) : null}
+          {selectedBg?.pattern === 'vignette' ? (
+            <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,0.4))' }} />
+          ) : null}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ background: 'linear-gradient(145deg, rgba(0,0,0,0.0), rgba(0,0,0,0.15))' }}
+          >
+            <span className="text-white/40 text-5xl font-bold tracking-tighter">PREVIEW</span>
+          </div>
+          <div className="absolute bottom-3 left-3 right-3 text-left">
+            <div className="text-[11px] text-white/70 font-medium">background</div>
+            <div className="text-sm text-white font-semibold">{selectedBg?.name}</div>
+            <div className="text-[10px] text-white/60">{selectedBg?.category}{selectedBg?.pattern ? ` · ${selectedBg.pattern}` : ''}</div>
+          </div>
+        </div>
+
+        {/* Browse button — same as the post-analyze view */}
+        <button
+          onClick={() => setBgPickerOpen(true)}
+          className="studio-tap w-full flex items-center gap-3 px-3 py-2.5 text-[12px] rounded-full neu-btn text-[var(--text)] studio-magnetic mb-3"
+        >
+          <div
+            className="w-7 h-7 rounded-full flex-shrink-0"
+            style={{ background: selectedBg?.gradient_css ?? '#1a1d24', boxShadow: '0 0 0 2px #fff inset, 0 2px 6px rgba(0,0,0,0.15)' }}
+          />
+          <div className="flex-1 text-left">
+            <div className="font-medium text-[var(--text)] text-[11px]">{selectedBg?.name}</div>
+            <div className="text-[10px] text-[var(--text-muted)]">{selectedBg?.category}</div>
+          </div>
+          <span className="text-[var(--accent)] text-[11px] font-medium">Browse ↓</span>
+        </button>
+
+        <a
+          href="/circle"
+          className="studio-tap block w-full py-3.5 text-sm font-medium rounded-full text-white text-center studio-fab"
+          style={{ background: 'var(--accent)', boxShadow: '0 8px 20px rgba(13,92,255,0.3)' }}
+        >
+          Analyze your X circle →
+        </a>
+
+        {bgPickerOpen && <BgPickerModal
+          cards={filteredBgCards}
+          selectedId={selectedBgId}
+          onPick={pickBg}
+          onClose={() => setBgPickerOpen(false)}
+          search={bgSearch}
+          onSearch={setBgSearch}
+        />}
+      </div>
+    );
   }
 
   const { members = [], prompt = '', handle = '', pool = 0, centerPfp, emptyReason, message } = data;
@@ -393,78 +462,14 @@ function PayPageInner() {
 
       {/* BG card picker modal — full-screen on mobile, side sheet on desktop */}
       {bgPickerOpen && (
-        <div className="fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/40"
-            style={{ animation: 'studio-fade-up 0.2s ease-out' }}
-            onClick={() => setBgPickerOpen(false)}
-          />
-          <div
-            className="absolute right-0 top-0 h-full w-full sm:w-[480px] max-w-[92vw] p-6 flex flex-col"
-            style={{
-              background: 'var(--bg)',
-              boxShadow: '-12px 0 32px rgba(0,0,0,0.12)',
-              animation: 'studio-slide-in-right 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
-            }}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-[var(--text)]">Pick a background</h3>
-              <button
-                onClick={() => setBgPickerOpen(false)}
-                className="studio-tap neu-btn w-9 h-9 flex items-center justify-center text-lg text-[var(--text-muted)]"
-                aria-label="Close"
-              >×</button>
-            </div>
-            <input
-              type="text"
-              value={bgSearch}
-              onChange={(e) => setBgSearch(e.target.value)}
-              placeholder="Search 200 backgrounds…"
-              className="neu-input w-full px-3 py-2.5 text-sm mb-3"
-            />
-            <div className="flex-1 overflow-y-auto -mr-2 pr-2">
-              {Object.entries(
-                filteredBgCards.reduce((acc, c) => {
-                  if (!acc[c.category]) acc[c.category] = [];
-                  acc[c.category].push(c);
-                  return acc;
-                }, {} as Record<string, BgCard[]>),
-              ).map(([cat, list]) => (
-                <div key={cat} className="mb-5">
-                  <p className="text-[11px] text-[var(--text-muted)] mb-2 sticky top-0 bg-[var(--bg)] py-1">{cat}</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {list.map((c) => (
-                      <button
-                        key={c.id}
-                        onClick={() => pickBg(c.id)}
-                        className="studio-tap relative aspect-square rounded-lg overflow-hidden transition-transform active:scale-95"
-                        style={{
-                          background: c.gradient_css,
-                          boxShadow: selectedBgId === c.id ? '0 0 0 2px var(--accent)' : '0 1px 4px rgba(0,0,0,0.1)',
-                        }}
-                        aria-label={`Pick ${c.name}`}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 px-1.5 py-0.5 bg-gradient-to-t from-black/60 to-transparent">
-                          <div className="text-[9px] text-white font-medium leading-tight truncate">{c.name}</div>
-                        </div>
-                        {selectedBgId === c.id && (
-                          <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[var(--accent)] flex items-center justify-center">
-                            <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
-                              <path d="M2 5L4 7L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              {filteredBgCards.length === 0 && (
-                <p className="text-center text-sm text-[var(--text-muted)] py-12">No backgrounds match “{bgSearch}”.</p>
-              )}
-            </div>
-          </div>
-        </div>
+        <BgPickerModal
+          cards={filteredBgCards}
+          selectedId={selectedBgId}
+          onPick={pickBg}
+          onClose={() => setBgPickerOpen(false)}
+          search={bgSearch}
+          onSearch={setBgSearch}
+        />
       )}
     </div>
   );

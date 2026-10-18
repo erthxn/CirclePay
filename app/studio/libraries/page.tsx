@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   description: 'Browse 250 card designs, 200 background designs, and 100 connector wires.',
 };
 
-export const dynamic = 'force-static';
+// CRITICAL: this page MUST be dynamic — it reads `searchParams.type` at runtime
+// to switch between the cards/bg/connectors library. With force-static, the
+// searchParams are captured at build time and the bg tab never renders.
+// (Bug found via agent-browser testing against the deployed site.)
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   searchParams: { type?: string };

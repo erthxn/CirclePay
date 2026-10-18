@@ -8,7 +8,7 @@ export function buildGradientCss(stops: GradientStop[], angle: number): string {
   const parts = stops
     .slice()
     .sort((a, b) => a.offset - b.offset)
-    .map((s) => `${s.color} ${Math.round(s.offset)}`)
+    .map((s) => `${s.color} ${Math.round(s.offset)}%`)
     .join(', ');
   return `linear-gradient(${Math.round(angle)}deg, ${parts})`;
 }

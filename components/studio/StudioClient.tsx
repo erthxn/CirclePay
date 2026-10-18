@@ -60,7 +60,10 @@ export default function StudioClient({ cards, connectors, bgCards, activeLibrary
   const selectedBgCard = bgCards.find((c) => c.id === selectedBgCardId) ?? null;
   const solidColor = selectedBgCard?.solid_color ?? selectedCard?.solid_color ?? buildSolidColor(customization.gradientStops);
 
-  // Debounced URL sync
+  // Debounced URL sync — PRESERVES the `type` query param so the
+  // active library tab (cards | bg | connectors) survives state changes.
+  // Without this, switching to bg library was immediately undone because
+  // the URL sync overwrote `?type=bg` with the encoded state (bug found via agent-browser).
   const deferredCustom = useDeferredValue(customization);
   useEffect(() => {
     if (!hydrated.current) return;
@@ -78,9 +81,14 @@ export default function StudioClient({ cards, connectors, bgCards, activeLibrary
       connectors,
       bgCards,
     });
-    const url = qs ? `${pathname}?${qs}` : pathname;
+    // Preserve the `type` param (used by /studio/libraries to pick which gallery).
+    const typeParam = searchParams.get('type');
+    const finalQs = typeParam
+      ? `${qs}${qs ? '&' : ''}type=${typeParam}`
+      : qs;
+    const url = finalQs ? `${pathname}?${finalQs}` : pathname;
     router.replace(url, { scroll: false });
-  }, [deferredCustom, selectedCardId, selectedConnectorId, selectedBgCardId, router, pathname, cards, connectors, bgCards]);
+  }, [deferredCustom, selectedCardId, selectedConnectorId, selectedBgCardId, router, pathname, searchParams, cards, connectors, bgCards]);
 
   const filter = useStudioSelector((s) => s.galleryFilter);
   const setFilter = useCallback((q: string) => dispatch({ type: 'SET_GALLERY_FILTER', query: q }), [dispatch]);
