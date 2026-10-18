@@ -1,0 +1,1823 @@
+{
+  "schema_version": "3.0",
+  "total": 100,
+  "categories": [
+    "Curved Flowing",
+    "Dashed Patterns",
+    "Decorative",
+    "Energy Flow",
+    "Glowing Neon",
+    "Gradient Strokes",
+    "Organic Natural",
+    "Solid Lines",
+    "Textured Metallic",
+    "Twin & Braided"
+  ],
+  "connectors": [
+    {
+      "id": "solid-001",
+      "name": "Thin Solid",
+      "category": "Solid Lines",
+      "subcategory": "Thin",
+      "stroke": "#ffffff",
+      "stroke_width": 0.6,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Ultra-thin solid line, minimal presence",
+      "tags": [
+        "solid",
+        "thin",
+        "minimal"
+      ],
+      "preview_svg": "previews/connectors/solid-001.svg"
+    },
+    {
+      "id": "solid-002",
+      "name": "Medium Solid",
+      "category": "Solid Lines",
+      "subcategory": "Medium",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Standard medium-weight solid line",
+      "tags": [
+        "solid",
+        "medium",
+        "default"
+      ],
+      "preview_svg": "previews/connectors/solid-002.svg"
+    },
+    {
+      "id": "solid-003",
+      "name": "Thick Solid",
+      "category": "Solid Lines",
+      "subcategory": "Thick",
+      "stroke": "#ffffff",
+      "stroke_width": 2.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Bold thick line for emphasis",
+      "tags": [
+        "solid",
+        "thick",
+        "bold"
+      ],
+      "preview_svg": "previews/connectors/solid-003.svg"
+    },
+    {
+      "id": "solid-004",
+      "name": "Tapered Solid",
+      "category": "Solid Lines",
+      "subcategory": "Tapered",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.4,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Layered lines simulating a tapered stroke",
+      "tags": [
+        "solid",
+        "tapered",
+        "elegant"
+      ],
+      "preview_svg": "previews/connectors/solid-004.svg"
+    },
+    {
+      "id": "solid-005",
+      "name": "Round Caps",
+      "category": "Solid Lines",
+      "subcategory": "Round",
+      "stroke": "#ffffff",
+      "stroke_width": 1.3,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Soft round endpoints",
+      "tags": [
+        "solid",
+        "round",
+        "soft"
+      ],
+      "preview_svg": "previews/connectors/solid-005.svg"
+    },
+    {
+      "id": "solid-006",
+      "name": "Square Caps",
+      "category": "Solid Lines",
+      "subcategory": "Square",
+      "stroke": "#ffffff",
+      "stroke_width": 1.5,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Sharp square-cap line for geometric look",
+      "tags": [
+        "solid",
+        "square",
+        "sharp"
+      ],
+      "preview_svg": "previews/connectors/solid-006.svg"
+    },
+    {
+      "id": "solid-007",
+      "name": "Double Parallel",
+      "category": "Solid Lines",
+      "subcategory": "Double",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Twin parallel lines, railway style",
+      "tags": [
+        "solid",
+        "double",
+        "parallel"
+      ],
+      "preview_svg": "previews/connectors/solid-007.svg"
+    },
+    {
+      "id": "solid-008",
+      "name": "Triple Parallel",
+      "category": "Solid Lines",
+      "subcategory": "Triple",
+      "stroke": "#ffffff",
+      "stroke_width": 0.6,
+      "stroke_opacity": 0.6,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Triple parallel lines, heavy rail",
+      "tags": [
+        "solid",
+        "triple",
+        "parallel"
+      ],
+      "preview_svg": "previews/connectors/solid-008.svg"
+    },
+    {
+      "id": "solid-009",
+      "name": "Drop Shadow",
+      "category": "Solid Lines",
+      "subcategory": "Shadow",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Solid line with offset shadow for depth",
+      "tags": [
+        "solid",
+        "shadow",
+        "depth"
+      ],
+      "preview_svg": "previews/connectors/solid-009.svg"
+    },
+    {
+      "id": "solid-010",
+      "name": "Outline Edge",
+      "category": "Solid Lines",
+      "subcategory": "Outline",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Thick line with thin inner edge highlight",
+      "tags": [
+        "solid",
+        "outline",
+        "edge"
+      ],
+      "preview_svg": "previews/connectors/solid-010.svg"
+    },
+    {
+      "id": "dashed-001",
+      "name": "Dotted",
+      "category": "Dashed Patterns",
+      "subcategory": "Dotted",
+      "stroke": "#ffffff",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "0.1 5",
+      "filter": null,
+      "description": "Soft dotted pattern with round caps",
+      "tags": [
+        "dashed",
+        "dotted",
+        "soft"
+      ],
+      "preview_svg": "previews/connectors/dashed-001.svg"
+    },
+    {
+      "id": "dashed-002",
+      "name": "Short Dash",
+      "category": "Dashed Patterns",
+      "subcategory": "Short",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "3 3",
+      "filter": null,
+      "description": "Even short dashes",
+      "tags": [
+        "dashed",
+        "short",
+        "even"
+      ],
+      "preview_svg": "previews/connectors/dashed-002.svg"
+    },
+    {
+      "id": "dashed-003",
+      "name": "Long Dash",
+      "category": "Dashed Patterns",
+      "subcategory": "Long",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "8 4",
+      "filter": null,
+      "description": "Long clean dashes",
+      "tags": [
+        "dashed",
+        "long",
+        "clean"
+      ],
+      "preview_svg": "previews/connectors/dashed-003.svg"
+    },
+    {
+      "id": "dashed-004",
+      "name": "Dash-Dot",
+      "category": "Dashed Patterns",
+      "subcategory": "DashDot",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "6 3 0.1 3",
+      "filter": null,
+      "description": "Dash-dot-dash pattern",
+      "tags": [
+        "dashed",
+        "dot",
+        "pattern"
+      ],
+      "preview_svg": "previews/connectors/dashed-004.svg"
+    },
+    {
+      "id": "dashed-005",
+      "name": "Morse Code",
+      "category": "Dashed Patterns",
+      "subcategory": "Morse",
+      "stroke": "#ffffff",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "6 2 0.1 2 0.1 2 0.1 2 6 4",
+      "filter": null,
+      "description": "Morse-code like dash-dot pattern",
+      "tags": [
+        "dashed",
+        "morse",
+        "signal"
+      ],
+      "preview_svg": "previews/connectors/dashed-005.svg"
+    },
+    {
+      "id": "dashed-006",
+      "name": "Railway",
+      "category": "Dashed Patterns",
+      "subcategory": "Railway",
+      "stroke": "#ffffff",
+      "stroke_width": 2.4,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "0.1 8",
+      "filter": null,
+      "description": "Railway track style with cross ties",
+      "tags": [
+        "dashed",
+        "railway",
+        "tie"
+      ],
+      "preview_svg": "previews/connectors/dashed-006.svg"
+    },
+    {
+      "id": "dashed-007",
+      "name": "Round Dotted",
+      "category": "Dashed Patterns",
+      "subcategory": "RoundDot",
+      "stroke": "#ffffff",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "0.1 4",
+      "filter": null,
+      "description": "Round-cap dotted line",
+      "tags": [
+        "dashed",
+        "dotted",
+        "round"
+      ],
+      "preview_svg": "previews/connectors/dashed-007.svg"
+    },
+    {
+      "id": "dashed-008",
+      "name": "Dash Gap Dot",
+      "category": "Dashed Patterns",
+      "subcategory": "GapDot",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "8 3 0.1 3 0.1 3",
+      "filter": null,
+      "description": "Dash-dot-dot pattern",
+      "tags": [
+        "dashed",
+        "dot",
+        "double"
+      ],
+      "preview_svg": "previews/connectors/dashed-008.svg"
+    },
+    {
+      "id": "dashed-009",
+      "name": "Long Short",
+      "category": "Dashed Patterns",
+      "subcategory": "LongShort",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "8 2 3 2",
+      "filter": null,
+      "description": "Mixed long-short dashes",
+      "tags": [
+        "dashed",
+        "mixed",
+        "varying"
+      ],
+      "preview_svg": "previews/connectors/dashed-009.svg"
+    },
+    {
+      "id": "dashed-010",
+      "name": "Double Dash",
+      "category": "Dashed Patterns",
+      "subcategory": "Double",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "2 2 6 2",
+      "filter": null,
+      "description": "Double-dash grouped pattern",
+      "tags": [
+        "dashed",
+        "double",
+        "grouped"
+      ],
+      "preview_svg": "previews/connectors/dashed-010.svg"
+    },
+    {
+      "id": "curve-001",
+      "name": "Arc",
+      "category": "Curved Flowing",
+      "subcategory": "Arc",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Quadratic bezier arc",
+      "tags": [
+        "curve",
+        "arc",
+        "smooth"
+      ],
+      "preview_svg": "previews/connectors/curve-001.svg"
+    },
+    {
+      "id": "curve-002",
+      "name": "S-Curve",
+      "category": "Curved Flowing",
+      "subcategory": "S",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Cubic bezier S-curve",
+      "tags": [
+        "curve",
+        "bezier",
+        "organic"
+      ],
+      "preview_svg": "previews/connectors/curve-002.svg"
+    },
+    {
+      "id": "curve-003",
+      "name": "Spiral",
+      "category": "Curved Flowing",
+      "subcategory": "Spiral",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Spiraling curve from center outward",
+      "tags": [
+        "curve",
+        "spiral",
+        "twist"
+      ],
+      "preview_svg": "previews/connectors/curve-003.svg"
+    },
+    {
+      "id": "curve-004",
+      "name": "Wave",
+      "category": "Curved Flowing",
+      "subcategory": "Wave",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Sine wave between points",
+      "tags": [
+        "curve",
+        "wave",
+        "sine"
+      ],
+      "preview_svg": "previews/connectors/curve-004.svg"
+    },
+    {
+      "id": "curve-005",
+      "name": "Ribbon",
+      "category": "Curved Flowing",
+      "subcategory": "Ribbon",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Twin wavy ribbons",
+      "tags": [
+        "curve",
+        "ribbon",
+        "twin"
+      ],
+      "preview_svg": "previews/connectors/curve-005.svg"
+    },
+    {
+      "id": "curve-006",
+      "name": "Loop",
+      "category": "Curved Flowing",
+      "subcategory": "Loop",
+      "stroke": "#ffffff",
+      "stroke_width": 0.9,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Loop-de-loop path",
+      "tags": [
+        "curve",
+        "loop",
+        "twist"
+      ],
+      "preview_svg": "previews/connectors/curve-006.svg"
+    },
+    {
+      "id": "curve-007",
+      "name": "Swirl",
+      "category": "Curved Flowing",
+      "subcategory": "Swirl",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Tight swirl pattern",
+      "tags": [
+        "curve",
+        "swirl",
+        "helix"
+      ],
+      "preview_svg": "previews/connectors/curve-007.svg"
+    },
+    {
+      "id": "curve-008",
+      "name": "Zigzag",
+      "category": "Curved Flowing",
+      "subcategory": "Zigzag",
+      "stroke": "#ffffff",
+      "stroke_width": 0.9,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Angular zigzag pattern",
+      "tags": [
+        "curve",
+        "zigzag",
+        "angular"
+      ],
+      "preview_svg": "previews/connectors/curve-008.svg"
+    },
+    {
+      "id": "curve-009",
+      "name": "Drip",
+      "category": "Curved Flowing",
+      "subcategory": "Drip",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Arc with falling drip accents",
+      "tags": [
+        "curve",
+        "drip",
+        "organic"
+      ],
+      "preview_svg": "previews/connectors/curve-009.svg"
+    },
+    {
+      "id": "curve-010",
+      "name": "Parabola",
+      "category": "Curved Flowing",
+      "subcategory": "Parabola",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.75,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Smooth parabolic arc",
+      "tags": [
+        "curve",
+        "parabola",
+        "smooth"
+      ],
+      "preview_svg": "previews/connectors/curve-010.svg"
+    },
+    {
+      "id": "neon-001",
+      "name": "Cyan Neon",
+      "category": "Glowing Neon",
+      "subcategory": "Cyan",
+      "stroke": "#00FFFF",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-cyan",
+      "description": "Glowing cyan line",
+      "tags": [
+        "neon",
+        "glow",
+        "cyan",
+        "cyber"
+      ],
+      "preview_svg": "previews/connectors/neon-001.svg"
+    },
+    {
+      "id": "neon-002",
+      "name": "Magenta Neon",
+      "category": "Glowing Neon",
+      "subcategory": "Magenta",
+      "stroke": "#FF00FF",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-magenta",
+      "description": "Glowing magenta line",
+      "tags": [
+        "neon",
+        "glow",
+        "magenta",
+        "cyber"
+      ],
+      "preview_svg": "previews/connectors/neon-002.svg"
+    },
+    {
+      "id": "neon-003",
+      "name": "Matrix Green",
+      "category": "Glowing Neon",
+      "subcategory": "Green",
+      "stroke": "#00FF66",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-green",
+      "description": "Matrix green glow",
+      "tags": [
+        "neon",
+        "glow",
+        "green",
+        "matrix"
+      ],
+      "preview_svg": "previews/connectors/neon-003.svg"
+    },
+    {
+      "id": "neon-004",
+      "name": "Gold Glow",
+      "category": "Glowing Neon",
+      "subcategory": "Gold",
+      "stroke": "#FFD700",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-gold",
+      "description": "Gold neon glow",
+      "tags": [
+        "neon",
+        "glow",
+        "gold"
+      ],
+      "preview_svg": "previews/connectors/neon-004.svg"
+    },
+    {
+      "id": "neon-005",
+      "name": "Purple Pulse",
+      "category": "Glowing Neon",
+      "subcategory": "Purple",
+      "stroke": "#B026FF",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-purple",
+      "description": "Purple neon glow",
+      "tags": [
+        "neon",
+        "glow",
+        "purple"
+      ],
+      "preview_svg": "previews/connectors/neon-005.svg"
+    },
+    {
+      "id": "neon-006",
+      "name": "Orange Spark",
+      "category": "Glowing Neon",
+      "subcategory": "Orange",
+      "stroke": "#FF6B00",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-orange",
+      "description": "Orange neon glow",
+      "tags": [
+        "neon",
+        "glow",
+        "orange"
+      ],
+      "preview_svg": "previews/connectors/neon-006.svg"
+    },
+    {
+      "id": "neon-007",
+      "name": "Crimson Beam",
+      "category": "Glowing Neon",
+      "subcategory": "Red",
+      "stroke": "#FF1744",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-red",
+      "description": "Red neon glow",
+      "tags": [
+        "neon",
+        "glow",
+        "red"
+      ],
+      "preview_svg": "previews/connectors/neon-007.svg"
+    },
+    {
+      "id": "neon-008",
+      "name": "Electric Blue",
+      "category": "Glowing Neon",
+      "subcategory": "Blue",
+      "stroke": "#00B0FF",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-blue",
+      "description": "Electric blue neon",
+      "tags": [
+        "neon",
+        "glow",
+        "blue"
+      ],
+      "preview_svg": "previews/connectors/neon-008.svg"
+    },
+    {
+      "id": "neon-009",
+      "name": "Pink Flash",
+      "category": "Glowing Neon",
+      "subcategory": "Pink",
+      "stroke": "#FF1493",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-pink",
+      "description": "Pink neon glow",
+      "tags": [
+        "neon",
+        "glow",
+        "pink"
+      ],
+      "preview_svg": "previews/connectors/neon-009.svg"
+    },
+    {
+      "id": "neon-010",
+      "name": "Toxic Lime",
+      "category": "Glowing Neon",
+      "subcategory": "Lime",
+      "stroke": "#CCFF00",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-lime",
+      "description": "Toxic lime green",
+      "tags": [
+        "neon",
+        "glow",
+        "lime"
+      ],
+      "preview_svg": "previews/connectors/neon-010.svg"
+    },
+    {
+      "id": "gradient-001",
+      "name": "Sunset",
+      "category": "Gradient Strokes",
+      "subcategory": "Sunset",
+      "stroke": "url(#grad-sunset)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Warm sunset gradient stroke",
+      "tags": [
+        "gradient",
+        "sunset",
+        "warm"
+      ],
+      "preview_svg": "previews/connectors/gradient-001.svg"
+    },
+    {
+      "id": "gradient-002",
+      "name": "Ocean",
+      "category": "Gradient Strokes",
+      "subcategory": "Ocean",
+      "stroke": "url(#grad-ocean)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Cool ocean gradient",
+      "tags": [
+        "gradient",
+        "ocean",
+        "cool"
+      ],
+      "preview_svg": "previews/connectors/gradient-002.svg"
+    },
+    {
+      "id": "gradient-003",
+      "name": "Fire",
+      "category": "Gradient Strokes",
+      "subcategory": "Fire",
+      "stroke": "url(#grad-fire)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Fire red-to-gold gradient",
+      "tags": [
+        "gradient",
+        "fire",
+        "warm"
+      ],
+      "preview_svg": "previews/connectors/gradient-003.svg"
+    },
+    {
+      "id": "gradient-004",
+      "name": "Rainbow",
+      "category": "Gradient Strokes",
+      "subcategory": "Rainbow",
+      "stroke": "url(#grad-rainbow)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Full rainbow spectrum",
+      "tags": [
+        "gradient",
+        "rainbow",
+        "spectrum"
+      ],
+      "preview_svg": "previews/connectors/gradient-004.svg"
+    },
+    {
+      "id": "gradient-005",
+      "name": "Aurora",
+      "category": "Gradient Strokes",
+      "subcategory": "Aurora",
+      "stroke": "url(#grad-aurora)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Aurora cosmic gradient",
+      "tags": [
+        "gradient",
+        "aurora",
+        "cosmic"
+      ],
+      "preview_svg": "previews/connectors/gradient-005.svg"
+    },
+    {
+      "id": "gradient-006",
+      "name": "Cosmic",
+      "category": "Gradient Strokes",
+      "subcategory": "Cosmic",
+      "stroke": "url(#grad-cosmic)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Cosmic nebula gradient",
+      "tags": [
+        "gradient",
+        "cosmic",
+        "nebula"
+      ],
+      "preview_svg": "previews/connectors/gradient-006.svg"
+    },
+    {
+      "id": "gradient-007",
+      "name": "Forest",
+      "category": "Gradient Strokes",
+      "subcategory": "Forest",
+      "stroke": "url(#grad-forest)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Forest green gradient",
+      "tags": [
+        "gradient",
+        "forest",
+        "green"
+      ],
+      "preview_svg": "previews/connectors/gradient-007.svg"
+    },
+    {
+      "id": "gradient-008",
+      "name": "Desert",
+      "category": "Gradient Strokes",
+      "subcategory": "Desert",
+      "stroke": "url(#grad-desert)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Desert sand gradient",
+      "tags": [
+        "gradient",
+        "desert",
+        "warm"
+      ],
+      "preview_svg": "previews/connectors/gradient-008.svg"
+    },
+    {
+      "id": "gradient-009",
+      "name": "Candy",
+      "category": "Gradient Strokes",
+      "subcategory": "Candy",
+      "stroke": "url(#grad-candy)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Candy pink-violet gradient",
+      "tags": [
+        "gradient",
+        "candy",
+        "pink"
+      ],
+      "preview_svg": "previews/connectors/gradient-009.svg"
+    },
+    {
+      "id": "gradient-010",
+      "name": "Steel",
+      "category": "Gradient Strokes",
+      "subcategory": "Steel",
+      "stroke": "url(#grad-steel)",
+      "stroke_width": 1.6,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Brushed steel gradient",
+      "tags": [
+        "gradient",
+        "steel",
+        "metallic"
+      ],
+      "preview_svg": "previews/connectors/gradient-010.svg"
+    },
+    {
+      "id": "deco-001",
+      "name": "Beaded",
+      "category": "Decorative",
+      "subcategory": "Beaded",
+      "stroke": "#ffffff",
+      "stroke_width": 3.0,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "0.1 6",
+      "filter": null,
+      "description": "Round beads along the line",
+      "tags": [
+        "decorative",
+        "beaded",
+        "round"
+      ],
+      "preview_svg": "previews/connectors/deco-001.svg"
+    },
+    {
+      "id": "deco-002",
+      "name": "Pearl String",
+      "category": "Decorative",
+      "subcategory": "Pearl",
+      "stroke": "#ffffff",
+      "stroke_width": 4.0,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "0.1 7",
+      "filter": null,
+      "description": "Larger beads with soft shadow",
+      "tags": [
+        "decorative",
+        "pearl",
+        "lux"
+      ],
+      "preview_svg": "previews/connectors/deco-002.svg"
+    },
+    {
+      "id": "deco-003",
+      "name": "Diamond Markers",
+      "category": "Decorative",
+      "subcategory": "Diamond",
+      "stroke": "#ffffff",
+      "stroke_width": 0.5,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Diamond markers along path",
+      "tags": [
+        "decorative",
+        "diamond",
+        "marker"
+      ],
+      "preview_svg": "previews/connectors/deco-003.svg"
+    },
+    {
+      "id": "deco-004",
+      "name": "Star Markers",
+      "category": "Decorative",
+      "subcategory": "Star",
+      "stroke": "#ffffff",
+      "stroke_width": 0.5,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "5-point star markers",
+      "tags": [
+        "decorative",
+        "star",
+        "marker"
+      ],
+      "preview_svg": "previews/connectors/deco-004.svg"
+    },
+    {
+      "id": "deco-005",
+      "name": "Crystal Markers",
+      "category": "Decorative",
+      "subcategory": "Crystal",
+      "stroke": "#ffffff",
+      "stroke_width": 0.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Faceted crystal shapes",
+      "tags": [
+        "decorative",
+        "crystal",
+        "facet"
+      ],
+      "preview_svg": "previews/connectors/deco-005.svg"
+    },
+    {
+      "id": "deco-006",
+      "name": "Arrow Tips",
+      "category": "Decorative",
+      "subcategory": "Arrow",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Directional arrow at the end",
+      "tags": [
+        "decorative",
+        "arrow",
+        "direction"
+      ],
+      "preview_svg": "previews/connectors/deco-006.svg"
+    },
+    {
+      "id": "deco-007",
+      "name": "Dot Trail",
+      "category": "Decorative",
+      "subcategory": "DotTrail",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Growing dots along the line",
+      "tags": [
+        "decorative",
+        "dot",
+        "trail"
+      ],
+      "preview_svg": "previews/connectors/deco-007.svg"
+    },
+    {
+      "id": "deco-008",
+      "name": "Chevron",
+      "category": "Decorative",
+      "subcategory": "Chevron",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Chevron arrows showing flow",
+      "tags": [
+        "decorative",
+        "chevron",
+        "flow"
+      ],
+      "preview_svg": "previews/connectors/deco-008.svg"
+    },
+    {
+      "id": "deco-009",
+      "name": "Gem Chain",
+      "category": "Decorative",
+      "subcategory": "Gem",
+      "stroke": "#ffffff",
+      "stroke_width": 0.5,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Alternating diamond and circle jewels",
+      "tags": [
+        "decorative",
+        "jewel",
+        "alternating"
+      ],
+      "preview_svg": "previews/connectors/deco-009.svg"
+    },
+    {
+      "id": "deco-010",
+      "name": "Lotus",
+      "category": "Decorative",
+      "subcategory": "Lotus",
+      "stroke": "#ffffff",
+      "stroke_width": 0.3,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Lotus petal clusters",
+      "tags": [
+        "decorative",
+        "lotus",
+        "petal",
+        "organic"
+      ],
+      "preview_svg": "previews/connectors/deco-010.svg"
+    },
+    {
+      "id": "energy-001",
+      "name": "Lightning",
+      "category": "Energy Flow",
+      "subcategory": "Lightning",
+      "stroke": "#FFE066",
+      "stroke_width": 1.5,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-gold",
+      "description": "Jagged lightning bolt with glow",
+      "tags": [
+        "energy",
+        "lightning",
+        "electric"
+      ],
+      "preview_svg": "previews/connectors/energy-001.svg"
+    },
+    {
+      "id": "energy-002",
+      "name": "Pulse Dots",
+      "category": "Energy Flow",
+      "subcategory": "Pulse",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Growing pulse dots",
+      "tags": [
+        "energy",
+        "pulse",
+        "dots"
+      ],
+      "preview_svg": "previews/connectors/energy-002.svg"
+    },
+    {
+      "id": "energy-003",
+      "name": "Flow Arrows",
+      "category": "Energy Flow",
+      "subcategory": "Flow",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Chevron arrows showing flow direction",
+      "tags": [
+        "energy",
+        "flow",
+        "arrow"
+      ],
+      "preview_svg": "previews/connectors/energy-003.svg"
+    },
+    {
+      "id": "energy-004",
+      "name": "Laser Beam",
+      "category": "Energy Flow",
+      "subcategory": "Laser",
+      "stroke": "#FF0040",
+      "stroke_width": 0.75,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Laser beam with white core",
+      "tags": [
+        "energy",
+        "laser",
+        "red"
+      ],
+      "preview_svg": "previews/connectors/energy-004.svg"
+    },
+    {
+      "id": "energy-005",
+      "name": "Voltage",
+      "category": "Energy Flow",
+      "subcategory": "Voltage",
+      "stroke": "#FFD700",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "",
+      "filter": "glow-gold",
+      "description": "Voltage zigzag with gold glow",
+      "tags": [
+        "energy",
+        "voltage",
+        "zigzag"
+      ],
+      "preview_svg": "previews/connectors/energy-005.svg"
+    },
+    {
+      "id": "energy-006",
+      "name": "Data Stream",
+      "category": "Energy Flow",
+      "subcategory": "Data",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Matrix-like data stream",
+      "tags": [
+        "energy",
+        "data",
+        "matrix"
+      ],
+      "preview_svg": "previews/connectors/energy-006.svg"
+    },
+    {
+      "id": "energy-007",
+      "name": "Sine Wave",
+      "category": "Energy Flow",
+      "subcategory": "Sine",
+      "stroke": "#00FFFF",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": "glow-cyan",
+      "description": "Sine wave with cyan glow",
+      "tags": [
+        "energy",
+        "sine",
+        "wave"
+      ],
+      "preview_svg": "previews/connectors/energy-007.svg"
+    },
+    {
+      "id": "energy-008",
+      "name": "Sawtooth",
+      "category": "Energy Flow",
+      "subcategory": "Sawtooth",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Sawtooth wave pattern",
+      "tags": [
+        "energy",
+        "sawtooth",
+        "wave"
+      ],
+      "preview_svg": "previews/connectors/energy-008.svg"
+    },
+    {
+      "id": "energy-009",
+      "name": "Square Wave",
+      "category": "Energy Flow",
+      "subcategory": "Square",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Square wave pattern",
+      "tags": [
+        "energy",
+        "square",
+        "wave"
+      ],
+      "preview_svg": "previews/connectors/energy-009.svg"
+    },
+    {
+      "id": "energy-010",
+      "name": "Pulse Ring",
+      "category": "Energy Flow",
+      "subcategory": "PulseRing",
+      "stroke": "#ffffff",
+      "stroke_width": 0.4,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Expanding pulse rings",
+      "tags": [
+        "energy",
+        "pulse",
+        "ring"
+      ],
+      "preview_svg": "previews/connectors/energy-010.svg"
+    },
+    {
+      "id": "twin-001",
+      "name": "Braided",
+      "category": "Twin & Braided",
+      "subcategory": "Braid",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Two strands braided together",
+      "tags": [
+        "twin",
+        "braid",
+        "woven"
+      ],
+      "preview_svg": "previews/connectors/twin-001.svg"
+    },
+    {
+      "id": "twin-002",
+      "name": "Twisted Pair",
+      "category": "Twin & Braided",
+      "subcategory": "Twisted",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Twisted wire pair",
+      "tags": [
+        "twin",
+        "twisted",
+        "pair"
+      ],
+      "preview_svg": "previews/connectors/twin-002.svg"
+    },
+    {
+      "id": "twin-003",
+      "name": "Rope",
+      "category": "Twin & Braided",
+      "subcategory": "Rope",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Thick rope with diagonal hatching",
+      "tags": [
+        "twin",
+        "rope",
+        "thick"
+      ],
+      "preview_svg": "previews/connectors/twin-003.svg"
+    },
+    {
+      "id": "twin-004",
+      "name": "Double Helix",
+      "category": "Twin & Braided",
+      "subcategory": "Helix",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "DNA-style double helix",
+      "tags": [
+        "twin",
+        "helix",
+        "dna"
+      ],
+      "preview_svg": "previews/connectors/twin-004.svg"
+    },
+    {
+      "id": "twin-005",
+      "name": "Woven",
+      "category": "Twin & Braided",
+      "subcategory": "Woven",
+      "stroke": "#ffffff",
+      "stroke_width": 0.5,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Woven over-under pattern",
+      "tags": [
+        "twin",
+        "woven",
+        "basket"
+      ],
+      "preview_svg": "previews/connectors/twin-005.svg"
+    },
+    {
+      "id": "twin-006",
+      "name": "Cable",
+      "category": "Twin & Braided",
+      "subcategory": "Cable",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Thick cable with inner highlight",
+      "tags": [
+        "twin",
+        "cable",
+        "thick"
+      ],
+      "preview_svg": "previews/connectors/twin-006.svg"
+    },
+    {
+      "id": "twin-007",
+      "name": "Twisted Triple",
+      "category": "Twin & Braided",
+      "subcategory": "Triple",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Three twisted strands",
+      "tags": [
+        "twin",
+        "triple",
+        "twisted"
+      ],
+      "preview_svg": "previews/connectors/twin-007.svg"
+    },
+    {
+      "id": "twin-008",
+      "name": "Chain",
+      "category": "Twin & Braided",
+      "subcategory": "Chain",
+      "stroke": "#ffffff",
+      "stroke_width": 0.4,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Chain of open circles",
+      "tags": [
+        "twin",
+        "chain",
+        "links"
+      ],
+      "preview_svg": "previews/connectors/twin-008.svg"
+    },
+    {
+      "id": "twin-009",
+      "name": "Link",
+      "category": "Twin & Braided",
+      "subcategory": "Link",
+      "stroke": "#ffffff",
+      "stroke_width": 0.4,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Oval links in a chain",
+      "tags": [
+        "twin",
+        "link",
+        "oval"
+      ],
+      "preview_svg": "previews/connectors/twin-009.svg"
+    },
+    {
+      "id": "twin-010",
+      "name": "Cord",
+      "category": "Twin & Braided",
+      "subcategory": "Cord",
+      "stroke": "#ffffff",
+      "stroke_width": 3.0,
+      "stroke_opacity": 0.9,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Thick cord with white highlight",
+      "tags": [
+        "twin",
+        "cord",
+        "thick"
+      ],
+      "preview_svg": "previews/connectors/twin-010.svg"
+    },
+    {
+      "id": "texture-001",
+      "name": "Brushed",
+      "category": "Textured Metallic",
+      "subcategory": "Brushed",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.6,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Brushed metal with grain",
+      "tags": [
+        "metallic",
+        "brushed",
+        "texture"
+      ],
+      "preview_svg": "previews/connectors/texture-001.svg"
+    },
+    {
+      "id": "texture-002",
+      "name": "Carbon Fiber",
+      "category": "Textured Metallic",
+      "subcategory": "Carbon",
+      "stroke": "#1A1A1A",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Carbon fiber weave pattern",
+      "tags": [
+        "metallic",
+        "carbon",
+        "weave"
+      ],
+      "preview_svg": "previews/connectors/texture-002.svg"
+    },
+    {
+      "id": "texture-003",
+      "name": "Chrome",
+      "category": "Textured Metallic",
+      "subcategory": "Chrome",
+      "stroke": "#888888",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Chrome with bright highlight",
+      "tags": [
+        "metallic",
+        "chrome",
+        "reflective"
+      ],
+      "preview_svg": "previews/connectors/texture-003.svg"
+    },
+    {
+      "id": "texture-004",
+      "name": "Copper Wire",
+      "category": "Textured Metallic",
+      "subcategory": "Copper",
+      "stroke": "url(#grad-copper)",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Copper wire with metallic gradient",
+      "tags": [
+        "metallic",
+        "copper",
+        "warm"
+      ],
+      "preview_svg": "previews/connectors/texture-004.svg"
+    },
+    {
+      "id": "texture-005",
+      "name": "Gold Wire",
+      "category": "Textured Metallic",
+      "subcategory": "Gold",
+      "stroke": "url(#grad-gold-wire)",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Gold wire with metallic gradient",
+      "tags": [
+        "metallic",
+        "gold",
+        "lux"
+      ],
+      "preview_svg": "previews/connectors/texture-005.svg"
+    },
+    {
+      "id": "texture-006",
+      "name": "Steel Mesh",
+      "category": "Textured Metallic",
+      "subcategory": "Mesh",
+      "stroke": "#ffffff",
+      "stroke_width": 2.0,
+      "stroke_opacity": 0.6,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Steel mesh with diagonal hatching",
+      "tags": [
+        "metallic",
+        "steel",
+        "mesh"
+      ],
+      "preview_svg": "previews/connectors/texture-006.svg"
+    },
+    {
+      "id": "texture-007",
+      "name": "Titanium",
+      "category": "Textured Metallic",
+      "subcategory": "Titanium",
+      "stroke": "#C9CCD1",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.8,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Titanium with depth layers",
+      "tags": [
+        "metallic",
+        "titanium",
+        "strong"
+      ],
+      "preview_svg": "previews/connectors/texture-007.svg"
+    },
+    {
+      "id": "texture-008",
+      "name": "Gunmetal",
+      "category": "Textured Metallic",
+      "subcategory": "Gunmetal",
+      "stroke": "#4A4E59",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Gunmetal with multi-tone depth",
+      "tags": [
+        "metallic",
+        "gunmetal",
+        "dark"
+      ],
+      "preview_svg": "previews/connectors/texture-008.svg"
+    },
+    {
+      "id": "texture-009",
+      "name": "Patina",
+      "category": "Textured Metallic",
+      "subcategory": "Patina",
+      "stroke": "url(#grad-patina)",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.95,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Patina weathered copper",
+      "tags": [
+        "metallic",
+        "patina",
+        "weathered"
+      ],
+      "preview_svg": "previews/connectors/texture-009.svg"
+    },
+    {
+      "id": "texture-010",
+      "name": "Iron Ore",
+      "category": "Textured Metallic",
+      "subcategory": "Iron",
+      "stroke": "#3D3D3D",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Raw iron ore with red veins",
+      "tags": [
+        "metallic",
+        "iron",
+        "raw"
+      ],
+      "preview_svg": "previews/connectors/texture-010.svg"
+    },
+    {
+      "id": "organic-001",
+      "name": "Vine",
+      "category": "Organic Natural",
+      "subcategory": "Vine",
+      "stroke": "#ffffff",
+      "stroke_width": 1.2,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Vine with leaves along path",
+      "tags": [
+        "organic",
+        "vine",
+        "leaf",
+        "natural"
+      ],
+      "preview_svg": "previews/connectors/organic-001.svg"
+    },
+    {
+      "id": "organic-002",
+      "name": "Branching",
+      "category": "Organic Natural",
+      "subcategory": "Branch",
+      "stroke": "#ffffff",
+      "stroke_width": 1.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Tree branch with smaller twigs",
+      "tags": [
+        "organic",
+        "branch",
+        "tree"
+      ],
+      "preview_svg": "previews/connectors/organic-002.svg"
+    },
+    {
+      "id": "organic-003",
+      "name": "Root",
+      "category": "Organic Natural",
+      "subcategory": "Root",
+      "stroke": "#ffffff",
+      "stroke_width": 1.4,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Root system with sub-roots",
+      "tags": [
+        "organic",
+        "root",
+        "ground"
+      ],
+      "preview_svg": "previews/connectors/organic-003.svg"
+    },
+    {
+      "id": "organic-004",
+      "name": "Leaf Stem",
+      "category": "Organic Natural",
+      "subcategory": "Leaf",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Stem with leaf accent",
+      "tags": [
+        "organic",
+        "leaf",
+        "stem"
+      ],
+      "preview_svg": "previews/connectors/organic-004.svg"
+    },
+    {
+      "id": "organic-005",
+      "name": "Water Droplet",
+      "category": "Organic Natural",
+      "subcategory": "Droplet",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Curving line with droplet",
+      "tags": [
+        "organic",
+        "water",
+        "drop"
+      ],
+      "preview_svg": "previews/connectors/organic-005.svg"
+    },
+    {
+      "id": "organic-006",
+      "name": "Vein",
+      "category": "Organic Natural",
+      "subcategory": "Vein",
+      "stroke": "#ffffff",
+      "stroke_width": 1.0,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Leaf vein network",
+      "tags": [
+        "organic",
+        "vein",
+        "leaf"
+      ],
+      "preview_svg": "previews/connectors/organic-006.svg"
+    },
+    {
+      "id": "organic-007",
+      "name": "Bark",
+      "category": "Organic Natural",
+      "subcategory": "Bark",
+      "stroke": "#ffffff",
+      "stroke_width": 2.5,
+      "stroke_opacity": 0.6,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Tree bark with horizontal striations",
+      "tags": [
+        "organic",
+        "bark",
+        "tree"
+      ],
+      "preview_svg": "previews/connectors/organic-007.svg"
+    },
+    {
+      "id": "organic-008",
+      "name": "Moss",
+      "category": "Organic Natural",
+      "subcategory": "Moss",
+      "stroke": "#ffffff",
+      "stroke_width": 1.5,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Bumpy moss with bumps",
+      "tags": [
+        "organic",
+        "moss",
+        "bumpy"
+      ],
+      "preview_svg": "previews/connectors/organic-008.svg"
+    },
+    {
+      "id": "organic-009",
+      "name": "Fern",
+      "category": "Organic Natural",
+      "subcategory": "Fern",
+      "stroke": "#ffffff",
+      "stroke_width": 0.8,
+      "stroke_opacity": 0.85,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Fern with many small leaflets",
+      "tags": [
+        "organic",
+        "fern",
+        "plant"
+      ],
+      "preview_svg": "previews/connectors/organic-009.svg"
+    },
+    {
+      "id": "organic-010",
+      "name": "Petal Chain",
+      "category": "Organic Natural",
+      "subcategory": "Petal",
+      "stroke": "#ffffff",
+      "stroke_width": 0.3,
+      "stroke_opacity": 0.7,
+      "stroke_dasharray": "",
+      "filter": null,
+      "description": "Chain of small flowers",
+      "tags": [
+        "organic",
+        "petal",
+        "flower"
+      ],
+      "preview_svg": "previews/connectors/organic-010.svg"
+    }
+  ]
+}
