@@ -34,7 +34,7 @@ export default function Menu() {
 
             <nav className="flex flex-col gap-3 text-sm">
               <Link href="/" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--text)]">Home</Link>
-              <Link href="/studio/libraries" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--accent)] font-medium">Studio</Link>
+              <Link href="/studio" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--accent)] font-medium">Studio</Link>
               <Link href="/circle" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--text)]">Check your X circle</Link>
               <Link href="/how-it-works" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--text)]">How it works</Link>
               <Link href="/about" onClick={() => setOpen(false)} className="neu-btn px-4 py-3 text-[var(--text)]">About</Link>

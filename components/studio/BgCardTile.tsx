@@ -6,23 +6,15 @@ import { useDispatch, useLazyMount } from './useStudioState';
 
 interface Props {
   bgCard: BgCard;
-  /** Selected id passed from parent gallery — fixes the 200-tile re-render lag. */
   selectedId: string | null;
 }
 
-/**
- * BG card tile — pure background design (no member tiles, no connectors).
- * Lazy-mount via IntersectionObserver, lazy-load PNG.
- */
 const BgCardTile = memo(function BgCardTile({ bgCard, selectedId }: Props) {
   const dispatch = useDispatch();
   const { ref, mounted } = useLazyMount<HTMLButtonElement>('300px 0px');
   const [loaded, setLoaded] = useState(false);
-
   const selected = selectedId === bgCard.id;
-  const select = useCallback(() => {
-    dispatch({ type: 'SELECT_BG_CARD', bgCardId: bgCard.id });
-  }, [dispatch, bgCard.id]);
+  const select = useCallback(() => dispatch({ type: 'SELECT_BG', id: bgCard.id }), [dispatch, bgCard.id]);
 
   return (
     <button
@@ -32,18 +24,22 @@ const BgCardTile = memo(function BgCardTile({ bgCard, selectedId }: Props) {
       style={{
         willChange: mounted ? 'transform' : undefined,
         transform: mounted ? 'translateZ(0)' : undefined,
-        boxShadow: selected ? '0 0 0 3px var(--accent), 0 4px 12px rgba(13,92,255,0.25)' : '0 2px 8px rgba(0,0,0,0.08)',
+        boxShadow: selected
+          ? '0 0 0 3px var(--accent), 0 4px 12px rgba(13,92,255,0.25)'
+          : '0 0 0 1.5px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.1)',
+        background: '#0a0a0f',
+        border: 'none',
       }}
       aria-label={`Select ${bgCard.name} background`}
       aria-pressed={selected}
     >
       <img
-        src={`/previews/bg_cards/${bgCard.id}.png`}
+        src={`/previews/bg_cards/${bgCard.id}.svg`}
         alt={bgCard.name}
         loading="lazy"
         decoding="async"
-        width={400}
-        height={400}
+        width={100}
+        height={100}
         onLoad={() => setLoaded(true)}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       />

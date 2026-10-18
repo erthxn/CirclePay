@@ -9,9 +9,8 @@ interface Props {
   filename?: string;
 }
 
-export default function DownloadButton({ targetRef, solidColor, filename = 'circlepay-card' }: Props) {
+export default function DownloadButton({ targetRef, solidColor, filename = 'circlepay' }: Props) {
   const [busy, setBusy] = useState(false);
-
   const download = useCallback(async () => {
     if (!targetRef.current) return;
     setBusy(true);
@@ -21,8 +20,6 @@ export default function DownloadButton({ targetRef, solidColor, filename = 'circ
         scale: 3,
         useCORS: true,
         logging: false,
-        // The clone gets the gradient CSS re-applied to the [data-card] node,
-        // mirroring the pattern from the original /test/card page.
         onclone: (doc) => {
           const el = doc.querySelector('[data-card]') as HTMLElement | null;
           if (el) {
@@ -48,9 +45,8 @@ export default function DownloadButton({ targetRef, solidColor, filename = 'circ
     <button
       onClick={download}
       disabled={busy}
-      className="studio-tap w-full py-3.5 text-sm font-semibold text-white rounded-full transition-opacity disabled:opacity-60"
+      className="studio-tap w-full py-3 text-sm font-semibold text-white rounded-full transition-opacity disabled:opacity-60"
       style={{ background: 'var(--accent)' }}
-      aria-label="Download card as PNG"
     >
       {busy ? 'Rendering…' : 'Download PNG'}
     </button>

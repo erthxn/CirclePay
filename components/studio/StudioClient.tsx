@@ -2,32 +2,26 @@
 
 import { useRef, useState, useCallback, useEffect, useDeferredValue } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import type { Card, Connector, BgCard } from '@/lib/studio/types';
+import type { BgCard, Connector } from '@/lib/studio/types';
 import { initStore, useStudioSelector, useDispatch, useReducedMotion } from './useStudioState';
 import { buildSolidColor } from '@/lib/studio/builders';
 import { encodeStateToQuery } from '@/lib/studio/store';
 
 import LivePreview from './LivePreview';
 import CustomizationPanel from './CustomizationPanel';
-import CardGallery from './CardGallery';
 import BgCardGallery from './BgCardGallery';
-import ConnectorPicker from './ConnectorPicker';
+import ConnectorGallery from './ConnectorGallery';
 import DownloadButton from './DownloadButton';
 
 interface Props {
-  cards: Card[];
-  connectors: Connector[];
   bgCards: BgCard[];
-  /** Which library tab is active. Drives which gallery is shown. */
-  activeLibrary: 'cards' | 'bg' | 'connectors';
-  /** Whether to show the editor (customization panel) alongside the preview. */
-  showEditor?: boolean;
+  connectors: Connector[];
 }
 
-export default function StudioClient({ cards, connectors, bgCards, activeLibrary, showEditor = false }: Props) {
+export default function StudioClient({ bgCards, connectors }: Props) {
   const initialized = useRef(false);
   if (!initialized.current) {
-    initStore(cards, connectors, bgCards);
+    initStore(bgCards, connectors);
     initialized.current = true;
   }
 
@@ -42,59 +36,38 @@ export default function StudioClient({ cards, connectors, bgCards, activeLibrary
   useEffect(() => {
     if (hydrated.current) return;
     hydrated.current = true;
-    const c = searchParams.get('c');
-    const n = searchParams.get('n');
     const b = searchParams.get('b');
-    if (c) dispatch({ type: 'SELECT_CARD', cardId: c });
-    if (n) dispatch({ type: 'SELECT_CONNECTOR', connectorId: n });
-    if (b) dispatch({ type: 'SELECT_BG_CARD', bgCardId: b });
+    const n = searchParams.get('n');
+    if (b) dispatch({ type: 'SELECT_BG', id: b });
+    if (n) dispatch({ type: 'SELECT_CONNECTOR', id: n });
   }, [searchParams, dispatch]);
 
-  const selectedCardId = useStudioSelector((s) => s.selectedCardId);
-  const selectedConnectorId = useStudioSelector((s) => s.selectedConnectorId);
-  const selectedBgCardId = useStudioSelector((s) => s.selectedBgCardId);
+  const selectedBgId = useStudioSelector((s) => s.selectedBgId);
+  const selectedConnId = useStudioSelector((s) => s.selectedConnId);
   const customization = useStudioSelector((s) => s.customization);
+  const filter = useStudioSelector((s) => s.galleryFilter);
+  const setFilter = useCallback((q: string) => dispatch({ type: 'SET_GALLERY_FILTER', query: q }), [dispatch]);
 
-  const selectedCard = cards.find((c) => c.id === selectedCardId) ?? null;
-  const selectedConnector = connectors.find((c) => c.id === selectedConnectorId) ?? null;
-  const selectedBgCard = bgCards.find((c) => c.id === selectedBgCardId) ?? null;
-  const solidColor = selectedBgCard?.solid_color ?? selectedCard?.solid_color ?? buildSolidColor(customization.gradientStops);
+  const selectedBg = bgCards.find((c) => c.id === selectedBgId) ?? null;
+  const selectedConn = connectors.find((c) => c.id === selectedConnId) ?? null;
+  const solidColor = selectedBg?.solid_color ?? buildSolidColor(customization.gradientStops);
 
-  // Debounced URL sync — PRESERVES the `type` query param so the
-  // active library tab (cards | bg | connectors) survives state changes.
-  // Without this, switching to bg library was immediately undone because
-  // the URL sync overwrote `?type=bg` with the encoded state (bug found via agent-browser).
+  // Debounced URL sync
   const deferredCustom = useDeferredValue(customization);
   useEffect(() => {
     if (!hydrated.current) return;
     const qs = encodeStateToQuery({
-      selectedCardId,
-      selectedConnectorId,
-      selectedBgCardId,
-      customization: deferredCustom,
-      galleryFilter: '',
-      activeCategory: null,
-      activeTab: 'libraries',
-      activeLibrary: 'cards',
-      editorView: 'edit',
-      cards,
-      connectors,
-      bgCards,
+      selectedBgId, selectedConnId, customization: deferredCustom,
+      galleryFilter: '', activeBgCategory: null, activeConnCategory: null,
+      bgCards, connectors,
     });
-    // Preserve the `type` param (used by /studio/libraries to pick which gallery).
-    const typeParam = searchParams.get('type');
-    const finalQs = typeParam
-      ? `${qs}${qs ? '&' : ''}type=${typeParam}`
-      : qs;
-    const url = finalQs ? `${pathname}?${finalQs}` : pathname;
+    const url = qs ? `${pathname}?${qs}` : pathname;
     router.replace(url, { scroll: false });
-  }, [deferredCustom, selectedCardId, selectedConnectorId, selectedBgCardId, router, pathname, searchParams, cards, connectors, bgCards]);
-
-  const filter = useStudioSelector((s) => s.galleryFilter);
-  const setFilter = useCallback((q: string) => dispatch({ type: 'SET_GALLERY_FILTER', query: q }), [dispatch]);
+  }, [deferredCustom, selectedBgId, selectedConnId, router, pathname, bgCards, connectors]);
 
   const previewRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
+  const [mobileTab, setMobileTab] = useState<'bg' | 'preview' | 'conn'>('preview');
   const share = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -104,82 +77,123 @@ export default function StudioClient({ cards, connectors, bgCards, activeLibrary
   }, []);
 
   return (
-    <div className="px-4 sm:px-5 max-w-7xl mx-auto">
-      {/* Filter */}
-      <div className="mb-5">
+    <div className="px-4 sm:px-5 max-w-[1400px] mx-auto">
+      {/* Mobile tab switcher */}
+      <div className="sm:hidden grid grid-cols-3 gap-1 mb-3 p-1 neu-raised rounded-2xl">
+        {[
+          { id: 'bg' as const, label: 'Backgrounds' },
+          { id: 'preview' as const, label: 'Preview' },
+          { id: 'conn' as const, label: 'Connectors' },
+        ].map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setMobileTab(t.id)}
+            className="studio-tap py-2 text-[11px] font-medium rounded-xl transition-colors"
+            style={{
+              color: mobileTab === t.id ? '#fff' : 'var(--text-muted)',
+              background: mobileTab === t.id ? 'var(--accent)' : 'transparent',
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Mobile search (only on gallery panes) */}
+      <div className="mb-3 sm:hidden">
         <input
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder={
-            activeLibrary === 'cards'
-              ? 'Search card designs…'
-              : activeLibrary === 'bg'
-              ? 'Search backgrounds…'
-              : 'Search connectors…'
-          }
-          className="neu-input w-full px-4 py-3 text-sm"
+          placeholder={mobileTab === 'bg' ? 'Search backgrounds…' : mobileTab === 'conn' ? 'Search connectors…' : 'Search…'}
+          className="neu-input w-full px-3 py-2 text-sm"
           aria-label="Search"
         />
       </div>
 
-      {/* Two-pane layout: gallery | preview+panel */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-5">
-        {/* Gallery - left column */}
-        <div className="xl:col-span-7 order-2 xl:order-1">
-          {activeLibrary === 'cards' && <CardGallery />}
-          {activeLibrary === 'bg' && <BgCardGallery />}
-          {activeLibrary === 'connectors' && <ConnectorPicker />}
-        </div>
+      {/* 3-pane desktop layout */}
+      <div className="hidden sm:grid sm:grid-cols-12 sm:gap-4 lg:gap-5">
+        {/* LEFT pane: bg cards */}
+        <aside className="sm:col-span-4 lg:col-span-3 sm:sticky sm:top-24 sm:self-start sm:max-h-[calc(100vh-7rem)] sm:overflow-y-auto sm:pr-2">
+          <div className="mb-3">
+            <input
+              type="text"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Search backgrounds…"
+              className="neu-input w-full px-3 py-2 text-sm"
+            />
+          </div>
+          <BgCardGallery />
+        </aside>
 
-        {/* Live preview + (optional) customization - right column */}
-        <div className="xl:col-span-5 order-1 xl:order-2 xl:sticky xl:top-24 xl:self-start">
+        {/* MIDDLE pane: preview + customization */}
+        <main className="sm:col-span-5 lg:col-span-6 sm:sticky sm:top-24 sm:self-start">
           <div className="flex flex-col gap-4">
             <div className="p-4 neu-raised rounded-2xl">
               <LivePreview
                 ref={previewRef}
-                card={selectedCard}
-                connector={selectedConnector}
+                bgCard={selectedBg}
+                connector={selectedConn}
                 customization={customization}
-                bgCard={selectedBgCard}
                 reducedMotion={reducedMotion}
               />
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <DownloadButton
-                  targetRef={previewRef}
-                  solidColor={solidColor}
-                  filename={
-                    selectedBgCard?.id ?? selectedCard?.id ?? 'circlepay'
-                  }
-                />
-                <button
-                  onClick={share}
-                  className="studio-tap py-3.5 text-sm font-medium rounded-full neu-btn text-[var(--text)]"
-                >
-                  {copied ? 'Copied!' : 'Share link'}
-                </button>
+                <DownloadButton targetRef={previewRef} solidColor={solidColor} filename={selectedBg?.id ?? 'circlepay'} />
+                <button onClick={share} className="studio-tap py-3 text-sm font-medium rounded-full neu-btn text-[var(--text)]">{copied ? 'Copied!' : 'Share link'}</button>
               </div>
-
-              {/* Use in circle — apply this bg + connector to /circle/pay (bug #5 fix) */}
               <a
-                href={`/circle/pay?b=${selectedBgCard?.id ?? ''}${selectedCard ? `&c=${selectedCard.id}` : ''}${selectedConnector ? `&n=${selectedConnector.id}` : ''}`}
-                className="studio-tap mt-2 block w-full py-3 text-sm font-medium rounded-full text-white text-center studio-fab"
-                style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-hover, #0B4FE0))', boxShadow: '0 6px 16px rgba(13,92,255,0.25)' }}
+                href={`/circle/pay?b=${selectedBgId ?? ''}${selectedConnId ? `&n=${selectedConnId}` : ''}${customization.mark !== 'paybox' ? `&m=${customization.mark}` : ''}`}
+                className="studio-tap mt-2 block w-full py-2.5 text-xs font-medium rounded-full text-white text-center"
+                style={{ background: 'var(--accent)' }}
               >
                 Use in your circle →
               </a>
-
-              {(selectedCard || selectedBgCard) && (
-                <p className="mt-2 text-[11px] text-[var(--text-muted)] text-center">
-                  {selectedBgCard?.name ?? selectedCard?.name}
-                  {selectedCard && selectedBgCard ? ` · ${selectedCard.category}` : ''}
+              {(selectedBg || selectedConn) && (
+                <p className="mt-2 text-[10px] text-[var(--text-muted)] text-center">
+                  {selectedBg?.name}{selectedConn ? ` · ${selectedConn.name}` : ''}
                 </p>
               )}
             </div>
-
-            {showEditor && <CustomizationPanel />}
+            <CustomizationPanel />
           </div>
-        </div>
+        </main>
+
+        {/* RIGHT pane: connectors shelf nav */}
+        <aside className="sm:col-span-3 sm:sticky sm:top-24 sm:self-start sm:max-h-[calc(100vh-7rem)] sm:overflow-y-auto sm:pl-2">
+          <ConnectorGallery />
+        </aside>
+      </div>
+
+      {/* Mobile: single pane based on selected tab */}
+      <div className="sm:hidden">
+        {mobileTab === 'bg' && <BgCardGallery />}
+        {mobileTab === 'preview' && (
+          <div className="flex flex-col gap-3">
+            <div className="p-3 neu-raised rounded-2xl">
+              <LivePreview
+                ref={previewRef}
+                bgCard={selectedBg}
+                connector={selectedConn}
+                customization={customization}
+                reducedMotion={reducedMotion}
+              />
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <DownloadButton targetRef={previewRef} solidColor={solidColor} filename={selectedBg?.id ?? 'circlepay'} />
+                <button onClick={share} className="studio-tap py-2.5 text-xs font-medium rounded-full neu-btn text-[var(--text)]">{copied ? 'Copied!' : 'Share'}</button>
+              </div>
+              <a
+                href={`/circle/pay?b=${selectedBgId ?? ''}${selectedConnId ? `&n=${selectedConnId}` : ''}`}
+                className="studio-tap mt-2 block w-full py-2.5 text-xs font-medium rounded-full text-white text-center"
+                style={{ background: 'var(--accent)' }}
+              >
+                Use in your circle →
+              </a>
+            </div>
+            <CustomizationPanel />
+          </div>
+        )}
+        {mobileTab === 'conn' && <ConnectorGallery />}
       </div>
     </div>
   );
