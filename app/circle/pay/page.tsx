@@ -268,71 +268,18 @@ function PayPageInner() {
   async function download() {
     if (!visualRef.current || !selectedBg) return;
     try {
-      const source = visualRef.current;
-      const rect = source.getBoundingClientRect();
-      const cardW = Math.round(rect.width);
-      const cardH = Math.round(rect.height);
-
-      const canvas = await html2canvas(source, {
+      const canvas = await html2canvas(visualRef.current, {
         backgroundColor: selectedBg.solid_color,
         scale: 3,
         useCORS: true,
         logging: false,
-        width: cardW,
-        height: cardH,
-        windowWidth: cardW,
-        windowHeight: cardH,
-        onclone: (doc, cloned) => {
-          const el = cloned.querySelector('[data-card]') as HTMLElement | null;
-          if (!el) return;
-
-          // Force exact pixel size so % positioning becomes stable
-          el.style.width = `${cardW}px`;
-          el.style.height = `${cardH}px`;
-          el.style.background = selectedBg.gradient_css;
-          el.style.borderRadius = '28px';
-          el.style.overflow = 'hidden';
-          el.style.position = 'relative';
-          el.style.transform = 'none';
-          el.style.willChange = 'auto';
-
-          // Convert every member group from % + negative margin → absolute px.
-          // This eliminates the sub-pixel drift that makes amount pills look rough.
-          const memberEls = el.querySelectorAll('[data-member]');
-          memberEls.forEach((node) => {
-            const m = node as HTMLElement;
-            const xPct = parseFloat(m.dataset.x || '50');
-            const yPct = parseFloat(m.dataset.y || '50');
-            const tw = parseFloat(m.dataset.tile || String(tile));
-            const pw = parseFloat(m.dataset.pillw || String(pillW));
-
-            const leftPx = (xPct / 100) * cardW - pw / 2;
-            const topPx = (yPct / 100) * cardH - tw / 2;
-
-            m.style.left = `${leftPx}px`;
-            m.style.top = `${topPx}px`;
-            m.style.marginLeft = '0';
-            m.style.marginTop = '0';
-            m.style.width = `${pw}px`;
-            m.style.transform = 'none';
-          });
-
-          // Force crisp amount pills
-          const pills = el.querySelectorAll('[data-amount-pill]');
-          pills.forEach((node) => {
-            const p = node as HTMLElement;
-            p.style.fontFamily = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-            p.style.webkitFontSmoothing = 'antialiased';
-            (p.style as any).MozOsxFontSmoothing = 'grayscale';
-            p.style.textRendering = 'geometricPrecision';
-            p.style.letterSpacing = '0.01em';
-            p.style.display = 'flex';
-            p.style.alignItems = 'center';
-            p.style.justifyContent = 'center';
-            p.style.lineHeight = '1';
-            p.style.padding = '0';
-            p.style.boxSizing = 'border-box';
-          });
+        onclone: (doc) => {
+          const el = doc.querySelector('[data-card]') as HTMLElement | null;
+          if (el) {
+            el.style.background = selectedBg.gradient_css;
+            el.style.borderRadius = '28px';
+            el.style.overflow = 'hidden';
+          }
         },
       });
       const link = document.createElement('a');
@@ -456,11 +403,6 @@ function PayPageInner() {
                   return (
                     <div
                       key={m.handle}
-                      data-member
-                      data-x={pos.x}
-                      data-y={pos.y}
-                      data-tile={tile}
-                      data-pillw={pillW}
                       style={{
                         position: 'absolute',
                         left: `${pos.x}%`,
@@ -474,18 +416,17 @@ function PayPageInner() {
                         alignItems: 'center',
                       }}
                     >
-                      <div style={{ width: tile, height: tile, flexShrink: 0 }}>
+                      <div style={{ width: tile, height: tile }}>
                         <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
                       </div>
                       <div
-                        data-amount-pill
                         style={{
                           marginTop: gap,
                           width: pillW,
                           height: pillH,
                           fontSize: 10,
                           fontWeight: 600,
-                          lineHeight: 1,
+                          lineHeight: `${pillH}px`,
                           borderRadius: 999,
                           background: '#fff',
                           color: '#111',
@@ -493,14 +434,6 @@ function PayPageInner() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                          WebkitFontSmoothing: 'antialiased',
-                          MozOsxFontSmoothing: 'grayscale',
-                          textRendering: 'geometricPrecision',
-                          letterSpacing: '0.01em',
-                          boxSizing: 'border-box',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
                         }}
                       >
                         ${m.amount.toFixed(2)}

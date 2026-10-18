@@ -15,32 +15,17 @@ export default function DownloadButton({ targetRef, solidColor, filename = 'circ
     if (!targetRef.current) return;
     setBusy(true);
     try {
-      const source = targetRef.current;
-      const rect = source.getBoundingClientRect();
-      const cardW = Math.round(rect.width);
-      const cardH = Math.round(rect.height);
-
-      const canvas = await html2canvas(source, {
+      const canvas = await html2canvas(targetRef.current, {
         backgroundColor: solidColor,
         scale: 3,
         useCORS: true,
         logging: false,
-        width: cardW,
-        height: cardH,
-        windowWidth: cardW,
-        windowHeight: cardH,
-        onclone: (_doc, cloned) => {
-          const el = cloned.querySelector('[data-card]') as HTMLElement | null;
+        onclone: (doc) => {
+          const el = doc.querySelector('[data-card]') as HTMLElement | null;
           if (el) {
-            const bg = source.style.background;
-            el.style.width = `${cardW}px`;
-            el.style.height = `${cardH}px`;
+            const bg = (targetRef.current as HTMLElement).style.background;
             el.style.background = bg;
             el.style.borderRadius = '28px';
-            el.style.overflow = 'hidden';
-            el.style.position = 'relative';
-            el.style.transform = 'none';
-            el.style.willChange = 'auto';
           }
         },
       });

@@ -66,8 +66,8 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
           <circle r="${(tileSize / 2).toFixed(2)}" fill="url(#${gid})" stroke="#fff" stroke-width="0.5"/>
           <text x="0" y="${(tileSize * 0.12).toFixed(2)}" text-anchor="middle" font-family="Arial, sans-serif" font-size="${(tileSize * 0.4).toFixed(2)}" font-weight="700" fill="#fff">${m.letter}</text>
           <g transform="translate(0 ${(tileSize / 2 + 2.5).toFixed(2)})">
-            <rect x="-4.8" y="0" width="9.6" height="2.9" rx="1.45" fill="#fff"/>
-            <text x="0" y="2.05" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="1.7" font-weight="700" fill="#111" letter-spacing="0.02">${price}</text>
+            <rect x="-4.5" y="0" width="9" height="2.75" rx="1.375" fill="#fff"/>
+            <text x="0" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="1.75" font-weight="700" fill="#111">${price}</text>
           </g>
         </g>`;
     }).join('');
