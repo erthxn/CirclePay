@@ -15,18 +15,40 @@ export default function DownloadButton({ targetRef, solidColor, filename = 'circ
     if (!targetRef.current) return;
     setBusy(true);
     try {
+      // Lock exact pixel dimensions so html2canvas doesn't drift.
+      const liveRect = targetRef.current.getBoundingClientRect();
+      const cardW = Math.round(liveRect.width);
+      const cardH = Math.round(liveRect.height);
+
       const canvas = await html2canvas(targetRef.current, {
         backgroundColor: solidColor,
         scale: 3,
         useCORS: true,
         logging: false,
+        width: cardW,
+        height: cardH,
+        windowWidth: cardW,
+        windowHeight: cardH,
         onclone: (doc) => {
           const el = doc.querySelector('[data-card]') as HTMLElement | null;
-          if (el) {
-            const bg = (targetRef.current as HTMLElement).style.background;
-            el.style.background = bg;
-            el.style.borderRadius = '28px';
-          }
+          if (!el) return;
+
+          // Force exact pixel dimensions
+          el.style.width = `${cardW}px`;
+          el.style.height = `${cardH}px`;
+          el.style.borderRadius = '28px';
+          el.style.overflow = 'hidden';
+
+          // Re-apply the gradient background from the live element
+          const bg = (targetRef.current as HTMLElement).style.background;
+          if (bg) el.style.background = bg;
+
+          // Force crisp SVG text rendering
+          const svgs = el.querySelectorAll('svg');
+          svgs.forEach((svg) => {
+            svg.setAttribute('text-rendering', 'geometricPrecision');
+            svg.style.shapeRendering = 'geometricPrecision';
+          });
         },
       });
       const link = document.createElement('a');

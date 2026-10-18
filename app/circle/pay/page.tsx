@@ -268,18 +268,65 @@ function PayPageInner() {
   async function download() {
     if (!visualRef.current || !selectedBg) return;
     try {
+      // Lock exact pixel dimensions from the live element so html2canvas
+      // doesn't drift on sub-pixel rounding from % + negative-margin layout.
+      const liveRect = visualRef.current.getBoundingClientRect();
+      const cardW = Math.round(liveRect.width);
+      const cardH = Math.round(liveRect.height);
+
       const canvas = await html2canvas(visualRef.current, {
         backgroundColor: selectedBg.solid_color,
         scale: 3,
         useCORS: true,
         logging: false,
+        width: cardW,
+        height: cardH,
+        windowWidth: cardW,
+        windowHeight: cardH,
         onclone: (doc) => {
           const el = doc.querySelector('[data-card]') as HTMLElement | null;
-          if (el) {
-            el.style.background = selectedBg.gradient_css;
-            el.style.borderRadius = '28px';
-            el.style.overflow = 'hidden';
-          }
+          if (!el) return;
+
+          // Force exact pixel dimensions (removes aspect-ratio ambiguity)
+          el.style.width = `${cardW}px`;
+          el.style.height = `${cardH}px`;
+          el.style.background = selectedBg.gradient_css;
+          el.style.borderRadius = '28px';
+          el.style.overflow = 'hidden';
+
+          // Convert every member group from % + negative-margin to
+          // absolute pixel left/top. This eliminates sub-pixel drift
+          // when html2canvas rasterizes at scale 3.
+          const memberEls = el.querySelectorAll('[data-member]');
+          memberEls.forEach((node) => {
+            const mem = node as HTMLElement;
+            const x = parseFloat(mem.getAttribute('data-x') || '50');
+            const y = parseFloat(mem.getAttribute('data-y') || '50');
+            const tile = parseFloat(mem.getAttribute('data-tile') || '50');
+            const pillW = parseFloat(mem.getAttribute('data-pillw') || '58');
+
+            const leftPx = (x / 100) * cardW;
+            const topPx = (y / 100) * cardH;
+
+            mem.style.left = `${leftPx}px`;
+            mem.style.top = `${topPx}px`;
+            mem.style.marginLeft = `${-pillW / 2}px`;
+            mem.style.marginTop = `${-tile / 2}px`;
+            mem.style.width = `${pillW}px`;
+          });
+
+          // Force crisp text on amount pills: system font stack,
+          // tabular numbers, antialiased, geometric-precision rendering.
+          const pills = el.querySelectorAll('[data-pill]');
+          pills.forEach((node) => {
+            const pill = node as HTMLElement;
+            pill.style.fontFamily =
+              '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+            pill.style.fontFeatureSettings = '"tnum" 1';
+            pill.style.setProperty('-webkit-font-smoothing', 'antialiased');
+            pill.style.setProperty('-moz-osx-font-smoothing', 'grayscale');
+            pill.style.textRendering = 'geometricPrecision';
+          });
         },
       });
       const link = document.createElement('a');
@@ -403,6 +450,11 @@ function PayPageInner() {
                   return (
                     <div
                       key={m.handle}
+                      data-member={i}
+                      data-x={pos.x}
+                      data-y={pos.y}
+                      data-tile={tile}
+                      data-pillw={pillW}
                       style={{
                         position: 'absolute',
                         left: `${pos.x}%`,
@@ -420,6 +472,7 @@ function PayPageInner() {
                         <Avatar src={m.pfp} letter={m.handle.slice(0, 1).toUpperCase()} size={tile} />
                       </div>
                       <div
+                        data-pill
                         style={{
                           marginTop: gap,
                           width: pillW,

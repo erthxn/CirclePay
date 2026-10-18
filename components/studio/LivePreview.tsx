@@ -64,10 +64,10 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
             <stop offset="1" stop-color="hsl(${m.hue},62%,38%)"/>
           </linearGradient></defs>
           <circle r="${(tileSize / 2).toFixed(2)}" fill="url(#${gid})" stroke="#fff" stroke-width="0.5"/>
-          <text x="0" y="${(tileSize * 0.12).toFixed(2)}" text-anchor="middle" font-family="Arial, sans-serif" font-size="${(tileSize * 0.4).toFixed(2)}" font-weight="700" fill="#fff">${m.letter}</text>
+          <text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, Arial, sans-serif" font-size="${(tileSize * 0.4).toFixed(2)}" font-weight="700" fill="#fff" text-rendering="geometricPrecision">${m.letter}</text>
           <g transform="translate(0 ${(tileSize / 2 + 2.5).toFixed(2)})">
             <rect x="-4.5" y="0" width="9" height="2.75" rx="1.375" fill="#fff"/>
-            <text x="0" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="1.75" font-weight="700" fill="#111">${price}</text>
+            <text x="0" y="1.375" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, Arial, sans-serif" font-size="1.75" font-weight="700" fill="#111" text-rendering="geometricPrecision">${price}</text>
           </g>
         </g>`;
     }).join('');
@@ -82,7 +82,7 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
           <stop offset="1" stop-color="hsl(210,62%,38%)"/>
         </linearGradient></defs>
         <circle r="${(centerSize / 2).toFixed(2)}" fill="url(#center-grad)" stroke="#fff" stroke-width="0.5"/>
-        <text x="0" y="${(centerSize * 0.12).toFixed(2)}" text-anchor="middle" font-family="Arial, sans-serif" font-size="${(centerSize * 0.42).toFixed(2)}" font-weight="700" fill="#fff">@</text>
+        <text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, Arial, sans-serif" font-size="${(centerSize * 0.42).toFixed(2)}" font-weight="700" fill="#fff" text-rendering="geometricPrecision">@</text>
       </g>`;
   }, [customization.memberCount]);
 
@@ -129,6 +129,8 @@ const LivePreview = memo(forwardRef<HTMLDivElement, Props>(function LivePreview(
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
         className="absolute inset-0 w-full h-full"
+        style={{ shapeRendering: 'geometricPrecision' }}
+        textRendering="geometricPrecision"
         dangerouslySetInnerHTML={{
           __html: `
             ${defsSvg}
