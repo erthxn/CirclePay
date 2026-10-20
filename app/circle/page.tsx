@@ -66,7 +66,7 @@ export default function CirclePage() {
 
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 28000);
+      const timeout = setTimeout(() => controller.abort(), 45000);
 
       const body: any = { handle: h, count, pool: p };
       if (withProof) body.proof = pageLoad.current;
@@ -84,14 +84,12 @@ export default function CirclePage() {
       lockedRef.current = true;
       if (timerRef.current) clearInterval(timerRef.current);
 
-      // Medium risk — ask for confirmation, don't burn sources
       if (res.status === 428 && data.challenge) {
         setLoading(false);
         setChallenge(true);
         return;
       }
 
-      // Rate limited or blocked
       if (res.status === 429) {
         setLoading(false);
         setError(data.error || 'Too many requests. Try again later.');
@@ -157,7 +155,8 @@ export default function CirclePage() {
                 if (error) setError('');
               }}
               placeholder="erthxn"
-              className="neu-input w-full px-4 py-3.5 text-sm"
+              className="neu-input w-full px-4 py-3.5 text-base"
+              style={{ fontSize: 16 }}
             />
           </div>
 
@@ -167,7 +166,8 @@ export default function CirclePage() {
               <select
                 value={count}
                 onChange={(e) => setCount(Number(e.target.value))}
-                className="neu-input w-full px-4 py-3.5 text-sm appearance-none"
+                className="neu-input w-full px-4 py-3.5 text-base appearance-none"
+                style={{ fontSize: 16 }}
               >
                 {[5, 7, 10, 15].map((n) => (
                   <option key={n} value={n}>{n}</option>
@@ -182,7 +182,8 @@ export default function CirclePage() {
                 value={pool}
                 onChange={(e) => setPool(formatPool(e.target.value))}
                 placeholder="20"
-                className="neu-input w-full px-4 py-3.5 text-sm"
+                className="neu-input w-full px-4 py-3.5 text-base"
+                style={{ fontSize: 16 }}
               />
             </div>
           </div>
@@ -213,8 +214,8 @@ export default function CirclePage() {
           )}
         </div>
       ) : (
-        <div className="mt-16 flex flex-col items-center justify-center min-h-[40vh]">
-          <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="mt-16 flex flex-col items-center justify-center min-h-[40vh] px-4">
+          <div className="flex items-center justify-center gap-1.5 w-full max-w-[280px] overflow-hidden">
             {LETTERS.map((letter, i) => (
               <div
                 key={i}

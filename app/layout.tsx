@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Logo from '@/components/Logo';
 import Menu from '@/components/Menu';
@@ -30,7 +30,14 @@ export const metadata: Metadata = {
     description: 'Reward your X circle with crypto via PayBox',
     images: [OG_IMAGE],
   },
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({

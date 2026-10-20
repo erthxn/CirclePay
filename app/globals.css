@@ -20,12 +20,17 @@ html, body {
   -webkit-text-size-adjust: 100%;
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #e8eaed;
   min-height: 100vh;
+}
+
+input, select, textarea {
+  font-size: 16px !important;
 }
 
 .curve {
@@ -108,6 +113,7 @@ body {
   border-radius: 16px;
   outline: none;
   color: var(--text);
+  font-size: 16px;
 }
 
 .neu-input:focus {
@@ -124,11 +130,11 @@ button, a {
     opacity: 1;
   }
   25% {
-    transform: translateY(-18px) rotate(-12deg);
-    opacity: 0.85;
+    transform: translateY(-10px) rotate(-6deg);
+    opacity: 0.9;
   }
   35% {
-    transform: translateY(-8px) rotate(8deg);
+    transform: translateY(-4px) rotate(4deg);
   }
   45%, 100% {
     transform: translateY(0) rotate(0deg);
@@ -137,138 +143,25 @@ button, a {
 }
 
 .tile {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   background: linear-gradient(145deg, #3d7bff, #0D5CFF);
-  box-shadow: 0 6px 14px rgba(13, 92, 255, 0.28);
+  box-shadow: 0 4px 10px rgba(13, 92, 255, 0.25);
   animation: tileFlip 2.4s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @media (min-width: 640px) {
   .tile {
-    width: 52px;
-    height: 52px;
-    font-size: 18px;
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
   }
-}
-
-/* ----------------- STUDIO v3 ----------------- */
-
-.studio-tap {
-  min-width: 44px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.studio-range {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  background: var(--bg-dark);
-  border-radius: 9999px;
-  outline: none;
-  cursor: pointer;
-}
-
-.studio-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid var(--bg-light);
-  box-shadow: var(--shadow-raised);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
-.studio-range::-webkit-slider-thumb:active {
-  transform: scale(1.15);
-}
-
-.studio-range::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid var(--bg-light);
-  box-shadow: var(--shadow-raised);
-  cursor: pointer;
-}
-
-input[type="color"] {
-  -webkit-appearance: none;
-  appearance: none;
-  border: none;
-  padding: 0;
-  overflow: hidden;
-}
-
-input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-input[type="color"]::-webkit-color-swatch {
-  border: 2px solid var(--bg-dark);
-  border-radius: 6px;
-}
-input[type="color"]::-moz-color-swatch {
-  border: 2px solid var(--bg-dark);
-  border-radius: 6px;
-}
-
-@keyframes studio-fade-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes studio-slide-in-right {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes studio-preview-pulse {
-  0% { opacity: 0.9; transform: scale(1.0); }
-  100% { opacity: 0; transform: scale(1.04); }
-}
-
-.studio-magnetic {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .studio-magnetic:hover { transform: translateY(-1px); }
-}
-
-.studio-fab {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-.studio-fab:active { transform: scale(0.96); }
-
-.studio-scroll-x {
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.studio-scroll-x::-webkit-scrollbar { display: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    will-change: auto !important;
-  }
-  .tile { animation: none !important; }
-  .studio-range::-webkit-slider-thumb:active { transform: none; }
 }

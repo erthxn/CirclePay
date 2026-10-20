@@ -13,7 +13,6 @@ const SORSA_BASE = 'https://api.sorsa.io/v3';
 const cache = new Map<string, { at: number; data: any }>();
 const CACHE_MS = 8 * 60 * 1000;
 
-// Risk / rate limit state (warm lambda only — good enough for now)
 const ipHits = new Map<string, number[]>();
 const handleLast = new Map<string, number>();
 const IP_WINDOW = 10 * 60 * 1000;
@@ -66,7 +65,6 @@ function riskScore(req: NextRequest, handle: string) {
     reasons.push('no-origin');
   }
 
-  // Rapid burst from this IP
   const ip = getIp(req);
   const now = Date.now();
   const hits = (ipHits.get(ip) || []).filter((t) => now - t < 60 * 1000);
@@ -75,7 +73,6 @@ function riskScore(req: NextRequest, handle: string) {
     reasons.push('burst');
   }
 
-  // Same handle hammered recently (any IP)
   const last = handleLast.get(handle.toLowerCase()) || 0;
   if (now - last < 30 * 1000) {
     score += 20;
@@ -90,25 +87,21 @@ function checkLimits(req: NextRequest, handle: string) {
   const now = Date.now();
   const key = handle.toLowerCase();
 
-  // Per-IP window
   const hits = (ipHits.get(ip) || []).filter((t) => now - t < IP_WINDOW);
   if (hits.length >= IP_MAX) {
     return { ok: false, status: 429, error: 'Too many checks from this network. Try again in a few minutes.' };
   }
 
-  // Per-handle cooldown
   const last = handleLast.get(key) || 0;
   if (now - last < HANDLE_COOLDOWN) {
     const wait = Math.ceil((HANDLE_COOLDOWN - (now - last)) / 1000);
     return { ok: false, status: 429, error: `This handle was checked recently. Wait ${wait}s.` };
   }
 
-  // Record
   hits.push(now);
   ipHits.set(ip, hits);
   handleLast.set(key, now);
 
-  // Cleanup occasionally
   if (ipHits.size > 5000) {
     for (const [k, arr] of ipHits) {
       if (!arr.some((t) => now - t < IP_WINDOW)) ipHits.delete(k);
@@ -118,7 +111,7 @@ function checkLimits(req: NextRequest, handle: string) {
   return { ok: true };
 }
 
-async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 15000) {
+async function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 8000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {
@@ -159,7 +152,7 @@ function normalizeTweets(raw: any[]): any[] {
 
 async function pullPath(base: string, path: string) {
   try {
-    const res = await fetchWithTimeout(base + path, {}, 12000);
+    const res = await fetchWithTimeout(base + path, {}, 7000);
     if (!res.ok) return [];
     const data = await res.json();
     const tweets =
@@ -225,7 +218,7 @@ async function trySorsa(handle: string) {
         headers: { ApiKey: apiKey, 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: handle, order: 'latest', since_date: since }),
       },
-      15000
+      10000
     );
     if (!res.ok) return [];
     const d = await res.json();
@@ -246,7 +239,7 @@ async function tryRapid(handle: string) {
         'X-RapidAPI-Key': key,
         'X-RapidAPI-Host': 'twitter241.p.rapidapi.com',
       },
-    }, 12000);
+    }, 8000);
     if (!res.ok) return [];
     const data = await res.json();
     const items = data.result?.tweets || data.tweets || data.timeline || data.data || data.result || [];
@@ -270,7 +263,7 @@ async function tryApify(handle: string) {
         maxItems: 30,
         queryType: 'Latest',
       }),
-    }, 20000);
+    }, 12000);
     if (!res.ok) return [];
     const items = await res.json();
     return normalizeTweets(items || []);
@@ -285,7 +278,7 @@ async function tryX(handle: string) {
   try {
     const query = encodeURIComponent(`@${handle} -from:${handle}`);
     const url = `https://api.twitter.com/2/tweets/search/recent?query=${query}&max_results=50&tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=username,profile_image_url`;
-    const res = await fetchWithTimeout(url, { headers: { Authorization: `Bearer ${bearer}` } }, 12000);
+    const res = await fetchWithTimeout(url, { headers: { Authorization: `Bearer ${bearer}` } }, 8000);
     if (!res.ok) return [];
     const x = await res.json();
     const users = Object.fromEntries((x.includes?.users || []).map((u: any) => [u.id, u]));
@@ -318,22 +311,17 @@ async function fetchSelfPfp(handle: string): Promise<{ pfp?: string; exists: boo
     return null;
   };
 
-  try {
-    const res = await fetchWithTimeout(`${PLUS}/api/profile/${encodeURIComponent(handle)}`, {}, 8000);
-    if (res.ok) {
-      const got = tryExtract(await res.json());
-      if (got) return got;
-    } else if (res.status === 404) {
-      return { exists: false };
-    }
-  } catch {
-    // continue
-  }
+  // Skip broken plus profile; try nx and primary first
+  const order = [
+    { base: 'https://blitzyxsc-nx.vercel.app', path: `/api/profile/${encodeURIComponent(handle)}` },
+    { base: PRIMARY, path: `/profile/${encodeURIComponent(handle)}` },
+    { base: 'https://blitzyxsc-go.vercel.app', path: `/api/profile/${encodeURIComponent(handle)}` },
+    { base: 'https://blitzyxsc-nd.vercel.app', path: `/api/profile/${encodeURIComponent(handle)}` },
+  ];
 
-  for (const base of [PRIMARY, ...OTHERS]) {
+  for (const s of order) {
     try {
-      const path = base === PRIMARY ? `/profile/${encodeURIComponent(handle)}` : `/api/profile/${encodeURIComponent(handle)}`;
-      const res = await fetchWithTimeout(base + path, {}, 8000);
+      const res = await fetchWithTimeout(s.base + s.path, {}, 5000);
       if (res.status === 404) return { exists: false };
       if (!res.ok) continue;
       const got = tryExtract(await res.json());
@@ -432,10 +420,8 @@ export async function POST(req: NextRequest) {
     const h = String(handle || '').replace('@', '').trim();
     if (!h) return NextResponse.json({ error: 'Handle required' }, { status: 400 });
 
-    // --- Risk check before any expensive work ---
     const risk = riskScore(req, h);
 
-    // High risk: refuse without touching sources
     if (risk.score >= 70) {
       return NextResponse.json(
         { error: 'Request blocked', challenge: false },
@@ -443,8 +429,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Medium risk: require a simple proof (client confirms after a short delay)
-    // proof is a timestamp the page set when it loaded; must be 1.5–30s ago
     if (risk.score >= 35) {
       const now = Date.now();
       const ts = Number(proof);
@@ -467,7 +451,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ...hit.data, cached: true });
     }
 
-    const profile = await fetchSelfPfp(h);
+    // Run profile and first tweet source in parallel
+    const [profile, plusTweets] = await Promise.all([
+      fetchSelfPfp(h),
+      tryPlus(h),
+    ]);
 
     if (profile.exists === false) {
       return NextResponse.json({
@@ -482,29 +470,30 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    let tweets: any[] = [];
-    let source = 'none';
+    let tweets: any[] = plusTweets;
+    let source = plusTweets.length ? 'plus' : 'none';
 
-    const chain: { name: string; fn: () => Promise<any[]> }[] = [
-      { name: 'plus', fn: () => tryPlus(h) },
-      { name: 'primary', fn: () => tryPrimary(h) },
-      ...OTHERS.map((base, i) => ({ name: `other${i}`, fn: () => tryOther(base, h) })),
-      { name: 'sorsa', fn: () => trySorsa(h) },
-      { name: 'rapid', fn: () => tryRapid(h) },
-      { name: 'apify', fn: () => tryApify(h) },
-      { name: 'x', fn: () => tryX(h) },
-    ];
+    if (!tweets.length) {
+      const chain: { name: string; fn: () => Promise<any[]> }[] = [
+        { name: 'primary', fn: () => tryPrimary(h) },
+        ...OTHERS.map((base, i) => ({ name: `other${i}`, fn: () => tryOther(base, h) })),
+        { name: 'sorsa', fn: () => trySorsa(h) },
+        { name: 'rapid', fn: () => tryRapid(h) },
+        { name: 'apify', fn: () => tryApify(h) },
+        { name: 'x', fn: () => tryX(h) },
+      ];
 
-    for (const s of chain) {
-      try {
-        const got = await s.fn();
-        if (got && got.length) {
-          tweets = got;
-          source = s.name;
-          break;
+      for (const s of chain) {
+        try {
+          const got = await s.fn();
+          if (got && got.length) {
+            tweets = got;
+            source = s.name;
+            break;
+          }
+        } catch {
+          // continue
         }
-      } catch {
-        // continue
       }
     }
 
