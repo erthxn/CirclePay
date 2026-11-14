@@ -17,7 +17,7 @@ export const VARIANTS = [
   { key: 'b', name: 'Magic UI', line: 'Dot grid, blur-in, a shimmer button and a border beam.' },
   { key: 'c', name: 'Aceternity UI', line: 'Spotlight and background beams over a big centered hero.' },
   { key: 'd', name: 'React Bits', line: 'Animated gradient text, squares grid and star-border CTA.' },
-  { key: 'e', name: 'daisyUI', line: 'Plain component classes, a custom yellow-on-black theme.' },
+  { key: 'e', name: 'daisyUI', line: 'Plain component classes, a custom yellow theme.' },
 ] as const;
 
 export const LINKS = {
