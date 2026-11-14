@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+// The whole site is static HTML/CSS/JS in /public. This config only serves
+// public/index.html at "/" so the Vercel project (framework: Next.js) keeps working.
+module.exports = {
   reactStrictMode: true,
-  async redirects() {
-    return [
-      // Old /test/card page → new /studio route
-      { source: '/test/card', destination: '/studio', permanent: false },
-    ];
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: '/', destination: '/index.html' }],
+    };
   },
 };
-
-module.exports = nextConfig;

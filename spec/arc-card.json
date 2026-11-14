@@ -1,0 +1,931 @@
+{
+  "$schema": "CirclePay Arc card tokens",
+  "name": "CirclePay Arc card",
+  "version": "1.0.0",
+  "license": "MIT",
+  "canvas": {
+    "width": 384,
+    "height": 480,
+    "aspect": "4:5",
+    "stageHeight": 384,
+    "stageNote": "The top 384x384 square is the arc stage (same geometry as the production Arc card). The bottom 384x96 is the receipt strip.",
+    "cornerRadius": 28,
+    "exportScale": 2.8125,
+    "exportPx": [
+      1080,
+      1350
+    ],
+    "origin": "top-left, +x right, +y down, units are px of the 384x480 canvas"
+  },
+  "members": {
+    "min": 3,
+    "max": 15
+  },
+  "center": {
+    "x": 192,
+    "y": 192
+  },
+  "oneRing": {
+    "maxMembers": 10,
+    "angle": "a_i = (i / n) * 2*PI - PI/2, i = 0..n-1, clockwise from 12 o'clock",
+    "bands": [
+      {
+        "maxN": 5,
+        "radiusPct": 30,
+        "tile": 50,
+        "center": 58
+      },
+      {
+        "maxN": 7,
+        "radiusPct": 32,
+        "tile": 44,
+        "center": 52
+      },
+      {
+        "maxN": 10,
+        "radiusPct": 34,
+        "tile": 38,
+        "center": 52
+      }
+    ],
+    "radiusRule": "R = radiusPct * 384 / 100",
+    "position": "x_i = 192 + cos(a_i) * R, y_i = 192 + sin(a_i) * R"
+  },
+  "twoRing": {
+    "appliesFrom": 11,
+    "center": {
+      "x": 192,
+      "y": 182
+    },
+    "centerSize": 46,
+    "arcOffsetDefault": 15,
+    "innerCount": "k = ceil(n / 3)",
+    "outerCount": "m = n - k",
+    "outerRadius": 158,
+    "outerTile": 32,
+    "innerRadiusCandidates": [
+      84,
+      88,
+      92,
+      80,
+      76,
+      96
+    ],
+    "innerTileCandidates": [
+      34,
+      32,
+      30,
+      28,
+      26
+    ],
+    "arcOffsetCandidates": [
+      15,
+      9,
+      21
+    ],
+    "outerSpreadDegCandidates": [
+      24,
+      30,
+      18,
+      21,
+      27
+    ],
+    "phaseSteps": "ph = -0.5 .. +0.5 in steps of 1/30 (fraction of the inner step 2*PI/k)",
+    "scoreRule": "issues*100 + (34-innerTile)*2 + |arcOffset-15|*0.2 + |ph|*10 + |innerR-84|*0.05 + |spreadRad - 24deg|",
+    "frozen": "The search is deterministic. Its winning result for n = 11..15 is frozen in `layouts` below so any agent can reproduce the card without re-running it (scripts/gen-layouts.js regenerates it).",
+    "layouts": {
+      "11": {
+        "cy": 182,
+        "center": 46,
+        "arcOff": 15,
+        "items": [
+          {
+            "i": 0,
+            "a": -1.5708,
+            "x": 192,
+            "y": 90,
+            "tile": 34
+          },
+          {
+            "i": 1,
+            "a": 0,
+            "x": 284,
+            "y": 182,
+            "tile": 34
+          },
+          {
+            "i": 2,
+            "a": 1.5708,
+            "x": 192,
+            "y": 274,
+            "tile": 34
+          },
+          {
+            "i": 3,
+            "a": 3.14159,
+            "x": 100,
+            "y": 182,
+            "tile": 34
+          },
+          {
+            "i": 4,
+            "a": -1.1006,
+            "x": 263.58,
+            "y": 41.15,
+            "tile": 32
+          },
+          {
+            "i": 5,
+            "a": -0.62936,
+            "x": 319.73,
+            "y": 89,
+            "tile": 32
+          },
+          {
+            "i": 6,
+            "a": 0.70582,
+            "x": 312.25,
+            "y": 284.49,
+            "tile": 32
+          },
+          {
+            "i": 7,
+            "a": 2.041,
+            "x": 120.42,
+            "y": 322.85,
+            "tile": 32
+          },
+          {
+            "i": 8,
+            "a": 2.51224,
+            "x": 64.27,
+            "y": 275,
+            "tile": 32
+          },
+          {
+            "i": 9,
+            "a": 3.61179,
+            "x": 51.15,
+            "y": 110.42,
+            "tile": 32
+          },
+          {
+            "i": 10,
+            "a": 4.08303,
+            "x": 99,
+            "y": 54.27,
+            "tile": 32
+          }
+        ]
+      },
+      "12": {
+        "cy": 182,
+        "center": 46,
+        "arcOff": 15,
+        "items": [
+          {
+            "i": 0,
+            "a": -1.5708,
+            "x": 192,
+            "y": 90,
+            "tile": 34
+          },
+          {
+            "i": 1,
+            "a": 0,
+            "x": 284,
+            "y": 182,
+            "tile": 34
+          },
+          {
+            "i": 2,
+            "a": 1.5708,
+            "x": 192,
+            "y": 274,
+            "tile": 34
+          },
+          {
+            "i": 3,
+            "a": 3.14159,
+            "x": 100,
+            "y": 182,
+            "tile": 34
+          },
+          {
+            "i": 4,
+            "a": -1.1006,
+            "x": 263.58,
+            "y": 41.15,
+            "tile": 32
+          },
+          {
+            "i": 5,
+            "a": -0.62936,
+            "x": 319.73,
+            "y": 89,
+            "tile": 32
+          },
+          {
+            "i": 6,
+            "a": 0.4702,
+            "x": 332.85,
+            "y": 253.58,
+            "tile": 32
+          },
+          {
+            "i": 7,
+            "a": 0.94144,
+            "x": 285,
+            "y": 309.73,
+            "tile": 32
+          },
+          {
+            "i": 8,
+            "a": 2.041,
+            "x": 120.42,
+            "y": 322.85,
+            "tile": 32
+          },
+          {
+            "i": 9,
+            "a": 2.51224,
+            "x": 64.27,
+            "y": 275,
+            "tile": 32
+          },
+          {
+            "i": 10,
+            "a": 3.61179,
+            "x": 51.15,
+            "y": 110.42,
+            "tile": 32
+          },
+          {
+            "i": 11,
+            "a": 4.08303,
+            "x": 99,
+            "y": 54.27,
+            "tile": 32
+          }
+        ]
+      },
+      "13": {
+        "cy": 182,
+        "center": 46,
+        "arcOff": 15,
+        "items": [
+          {
+            "i": 0,
+            "a": -1.48702,
+            "x": 200.03,
+            "y": 86.34,
+            "tile": 34
+          },
+          {
+            "i": 1,
+            "a": -0.23038,
+            "x": 285.46,
+            "y": 160.08,
+            "tile": 34
+          },
+          {
+            "i": 2,
+            "a": 1.02625,
+            "x": 241.73,
+            "y": 264.11,
+            "tile": 34
+          },
+          {
+            "i": 3,
+            "a": 2.28289,
+            "x": 129.27,
+            "y": 254.67,
+            "tile": 34
+          },
+          {
+            "i": 4,
+            "a": 3.53953,
+            "x": 103.5,
+            "y": 144.8,
+            "tile": 34
+          },
+          {
+            "i": 5,
+            "a": -1.14206,
+            "x": 257.68,
+            "y": 38.3,
+            "tile": 32
+          },
+          {
+            "i": 6,
+            "a": -0.72318,
+            "x": 310.45,
+            "y": 77.44,
+            "tile": 32
+          },
+          {
+            "i": 7,
+            "a": 0.32402,
+            "x": 341.78,
+            "y": 232.3,
+            "tile": 32
+          },
+          {
+            "i": 8,
+            "a": 1.37122,
+            "x": 223.32,
+            "y": 336.86,
+            "tile": 32
+          },
+          {
+            "i": 9,
+            "a": 1.7901,
+            "x": 157.63,
+            "y": 336.22,
+            "tile": 32
+          },
+          {
+            "i": 10,
+            "a": 2.83729,
+            "x": 41.26,
+            "y": 229.34,
+            "tile": 32
+          },
+          {
+            "i": 11,
+            "a": 3.88449,
+            "x": 75.63,
+            "y": 75.12,
+            "tile": 32
+          },
+          {
+            "i": 12,
+            "a": 4.30337,
+            "x": 129.16,
+            "y": 37.03,
+            "tile": 32
+          }
+        ]
+      },
+      "14": {
+        "cy": 182,
+        "center": 46,
+        "arcOff": 15,
+        "items": [
+          {
+            "i": 0,
+            "a": -1.48702,
+            "x": 200.03,
+            "y": 86.34,
+            "tile": 26
+          },
+          {
+            "i": 1,
+            "a": -0.23038,
+            "x": 285.46,
+            "y": 160.08,
+            "tile": 26
+          },
+          {
+            "i": 2,
+            "a": 1.02625,
+            "x": 241.73,
+            "y": 264.11,
+            "tile": 26
+          },
+          {
+            "i": 3,
+            "a": 2.28289,
+            "x": 129.27,
+            "y": 254.67,
+            "tile": 26
+          },
+          {
+            "i": 4,
+            "a": 3.53953,
+            "x": 103.5,
+            "y": 144.8,
+            "tile": 26
+          },
+          {
+            "i": 5,
+            "a": -1.14206,
+            "x": 257.68,
+            "y": 38.3,
+            "tile": 32
+          },
+          {
+            "i": 6,
+            "a": -0.72318,
+            "x": 310.45,
+            "y": 77.44,
+            "tile": 32
+          },
+          {
+            "i": 7,
+            "a": 0.11458,
+            "x": 348.96,
+            "y": 200.06,
+            "tile": 32
+          },
+          {
+            "i": 8,
+            "a": 0.53346,
+            "x": 328.05,
+            "y": 262.35,
+            "tile": 32
+          },
+          {
+            "i": 9,
+            "a": 1.58066,
+            "x": 190.44,
+            "y": 339.99,
+            "tile": 32
+          },
+          {
+            "i": 10,
+            "a": 2.62785,
+            "x": 54.4,
+            "y": 259.65,
+            "tile": 32
+          },
+          {
+            "i": 11,
+            "a": 3.04673,
+            "x": 34.71,
+            "y": 196.97,
+            "tile": 32
+          },
+          {
+            "i": 12,
+            "a": 3.88449,
+            "x": 75.63,
+            "y": 75.12,
+            "tile": 32
+          },
+          {
+            "i": 13,
+            "a": 4.30337,
+            "x": 129.16,
+            "y": 37.03,
+            "tile": 32
+          }
+        ]
+      },
+      "15": {
+        "cy": 182,
+        "center": 46,
+        "arcOff": 15,
+        "items": [
+          {
+            "i": 0,
+            "a": -1.48702,
+            "x": 200.03,
+            "y": 86.34,
+            "tile": 26
+          },
+          {
+            "i": 1,
+            "a": -0.23038,
+            "x": 285.46,
+            "y": 160.08,
+            "tile": 26
+          },
+          {
+            "i": 2,
+            "a": 1.02625,
+            "x": 241.73,
+            "y": 264.11,
+            "tile": 26
+          },
+          {
+            "i": 3,
+            "a": 2.28289,
+            "x": 129.27,
+            "y": 254.67,
+            "tile": 26
+          },
+          {
+            "i": 4,
+            "a": 3.53953,
+            "x": 103.5,
+            "y": 144.8,
+            "tile": 26
+          },
+          {
+            "i": 5,
+            "a": -1.14206,
+            "x": 257.68,
+            "y": 38.3,
+            "tile": 32
+          },
+          {
+            "i": 6,
+            "a": -0.72318,
+            "x": 310.45,
+            "y": 77.44,
+            "tile": 32
+          },
+          {
+            "i": 7,
+            "a": 0.11458,
+            "x": 348.96,
+            "y": 200.06,
+            "tile": 32
+          },
+          {
+            "i": 8,
+            "a": 0.53346,
+            "x": 328.05,
+            "y": 262.35,
+            "tile": 32
+          },
+          {
+            "i": 9,
+            "a": 1.37122,
+            "x": 223.32,
+            "y": 336.86,
+            "tile": 32
+          },
+          {
+            "i": 10,
+            "a": 1.7901,
+            "x": 157.63,
+            "y": 336.22,
+            "tile": 32
+          },
+          {
+            "i": 11,
+            "a": 2.62785,
+            "x": 54.4,
+            "y": 259.65,
+            "tile": 32
+          },
+          {
+            "i": 12,
+            "a": 3.04673,
+            "x": 34.71,
+            "y": 196.97,
+            "tile": 32
+          },
+          {
+            "i": 13,
+            "a": 3.88449,
+            "x": 75.63,
+            "y": 75.12,
+            "tile": 32
+          },
+          {
+            "i": 14,
+            "a": 4.30337,
+            "x": 129.16,
+            "y": 37.03,
+            "tile": 32
+          }
+        ]
+      }
+    }
+  },
+  "pill": {
+    "height": 17,
+    "gapBelowTile": 5,
+    "widthRule": "max(tile + 8, 48)",
+    "radius": 8.5,
+    "coinRadius": {
+      "tileGte44": 6.5,
+      "tileGte36": 6,
+      "else": 5.5
+    },
+    "coinInset": 8.5,
+    "fontSize": {
+      "tileGte44": 10,
+      "tileGte36": 9.5,
+      "else": 8.5
+    },
+    "fontWeight": 700,
+    "textRule": "amount to 2 decimals without a dollar sign (the coin carries the $), centered in the space right of the coin: cx = pillLeft + 17 + (pillWidth - 21) / 2",
+    "preLandOpacity": 0.55
+  },
+  "avatar": {
+    "ringWidth": 2,
+    "ringRule": "ring circle radius = size/2 - 1, stroke 2, drawn over the image",
+    "fallback": "generic silhouette: head circle r = 0.17*size at (x, y - 0.10*size); shoulders ellipse rx = 0.30*size, ry = 0.26*size at (x, y + 0.42*size); both clipped to the avatar circle",
+    "imageFit": "xMidYMid slice"
+  },
+  "arc": {
+    "curve": "quadratic Bezier from the center point C to the member point P",
+    "control": "ctrl = ((C.x+P.x)/2 + cos(a + PI/2) * off, (C.y+P.y)/2 + sin(a + PI/2) * off), where a is the member's angle from the center and off is the arc offset",
+    "offsetOneRing": 28.8,
+    "strokeWidthOneRing": 3.84,
+    "strokeWidthTwoRing": 3.2,
+    "strokeOpacity": 0.55,
+    "lineCap": "butt",
+    "drawOrder": "arcs sit under the avatars so both ends are hidden"
+  },
+  "themes": {
+    "default": "arc-yellow-black",
+    "note": "Arc has ONE fixed palette. The studio's theme and line-style pickers never change it, and it never changes them.",
+    "arc-yellow-black": {
+      "background": "#0a0a0a",
+      "yellow": "#FFD400",
+      "yellowSoft": "#FFE14D",
+      "ink": "#0a0a0a",
+      "avatarBg": "#1a1a1a",
+      "particleCore": "#FFF6B8",
+      "glowStops": [
+        [
+          "0",
+          "#FFD400",
+          0.95
+        ],
+        [
+          "0.45",
+          "#FFD400",
+          0.35
+        ],
+        [
+          "1",
+          "#FFD400",
+          0
+        ]
+      ]
+    }
+  },
+  "fonts": {
+    "mono": "'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
+    "sans": "'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+    "note": "Mono is used for every number and for the handle and date. Sans is only used for the brand word in the top-left mark."
+  },
+  "mark": {
+    "x": 14,
+    "y": 12,
+    "width": 24,
+    "viewBox": "190 370 1560 1260",
+    "paths": [
+      "M1400 795 H1106 A355 355 0 1 0 1085 1230 H1390 A615 615 0 1 1 1400 795 Z",
+      "M997 855 h740 a76 76 0 0 1 0 152 h-740 a76 76 0 0 1 0 -152 Z",
+      "M1242 1057 h352 a60 60 0 0 1 0 120 h-352 a60 60 0 0 1 0 -120 Z"
+    ],
+    "word": {
+      "text": "circlepay",
+      "x": 44,
+      "y": 25,
+      "size": 9,
+      "opacity": 0.85
+    },
+    "layoutBox": {
+      "x0": 8,
+      "y0": 8,
+      "x1": 100,
+      "y1": 34
+    }
+  },
+  "guilloche": {
+    "center": {
+      "x": 192,
+      "y": 192
+    },
+    "formula": "hypotrochoid: x = (R-r)*cos(t) + d*cos((R-r)/r * t), y = (R-r)*sin(t) - d*sin((R-r)/r * t), t = 0 .. 2*PI*r in steps of PI/24; then scale",
+    "rosettes": [
+      {
+        "R": 96,
+        "r": 29,
+        "d": 70,
+        "scale": 1.5,
+        "strokeWidth": 0.5,
+        "opacity": 0.1
+      },
+      {
+        "R": 100,
+        "r": 43,
+        "d": 60,
+        "scale": 1.7,
+        "strokeWidth": 0.5,
+        "opacity": 0.07
+      }
+    ],
+    "border": {
+      "inset": 8,
+      "amplitude": 2.5,
+      "wavelength": 14,
+      "strokeWidth": 0.6,
+      "opacity": 0.22,
+      "phases": [
+        0,
+        3.14159265
+      ],
+      "run": "left edge bottom to top, top edge left to right, right edge top to bottom; stops at y = 470; no bottom edge"
+    }
+  },
+  "receipt": {
+    "panel": {
+      "x0": 12,
+      "x1": 372,
+      "y0": 396,
+      "yBottom": 472,
+      "toothWidth": 12,
+      "toothDepth": 6
+    },
+    "notch": {
+      "y": 428,
+      "radius": 6
+    },
+    "perforation": {
+      "y": 428,
+      "x0": 22,
+      "x1": 362,
+      "strokeWidth": 1,
+      "dash": "2 3"
+    },
+    "label": {
+      "text": "CIRCLE TOTAL",
+      "x": 24,
+      "y": 408,
+      "size": 7.5,
+      "weight": 600,
+      "letterSpacing": 1,
+      "opacity": 0.7
+    },
+    "total": {
+      "x": 24,
+      "y": 424,
+      "size": 16,
+      "weight": 700
+    },
+    "barcode": {
+      "x": 262,
+      "y": 404,
+      "height": 16,
+      "unit": 1.6,
+      "pattern": [
+        2,
+        1,
+        1,
+        3,
+        1,
+        2,
+        2,
+        1,
+        3,
+        1,
+        1,
+        2,
+        1,
+        3,
+        2,
+        1,
+        1,
+        2,
+        3,
+        1,
+        2,
+        1,
+        1,
+        3,
+        1,
+        2,
+        1,
+        1,
+        2,
+        3,
+        1,
+        1,
+        2,
+        1,
+        3,
+        2
+      ],
+      "note": "bars at even indexes, gaps at odd indexes, widths = pattern * unit"
+    },
+    "handle": {
+      "x": 24,
+      "y": 452,
+      "size": 15,
+      "weight": 700,
+      "format": "@ + lowercase handle"
+    },
+    "date": {
+      "x": 360,
+      "y": 452,
+      "size": 15,
+      "weight": 700,
+      "anchor": "end",
+      "format": "DD/MM/YY"
+    },
+    "tagline": {
+      "text": "reward your x circle · last 7 days",
+      "x": 24,
+      "y": 466,
+      "size": 7,
+      "opacity": 0.65
+    },
+    "paidStamp": {
+      "x": 190,
+      "y": 414,
+      "w": 56,
+      "h": 21,
+      "rotateDeg": -9,
+      "text": "PAID",
+      "size": 11,
+      "letterSpacing": 2,
+      "strokeWidth": 1.5,
+      "opacity": 0.85
+    }
+  },
+  "stamp": {
+    "radiusRule": "clamp(0.2 * tile, 5, 9)",
+    "offsetRule": "(+0.36 * tile, -0.36 * tile) from the member center",
+    "fill": "yellow",
+    "strokeInk": 1.5,
+    "check": "polyline in a unit box: (-0.45,0.02) (-0.12,0.35) (0.48,-0.32) times radius, stroke ink 1.6 round caps",
+    "pop": "scale 0 -> 1 with easeOutBack over 0.35 s"
+  },
+  "particles": {
+    "perArc": 3,
+    "spacing": 0.38,
+    "flight": 1,
+    "path": "the arc's quadratic Bezier, parameter s in [0,1], linear in time, looping",
+    "glow": {
+      "radius": 7
+    },
+    "core": {
+      "radius": 2.2
+    },
+    "trail": [
+      {
+        "dt": 0.03,
+        "r": 1.8,
+        "opacity": 0.6
+      },
+      {
+        "dt": 0.06,
+        "r": 1.4,
+        "opacity": 0.4
+      },
+      {
+        "dt": 0.09,
+        "r": 1,
+        "opacity": 0.2
+      }
+    ]
+  },
+  "timeline": {
+    "loop": 11,
+    "arcDraw": {
+      "start": 0.1,
+      "stagger": 0.04,
+      "duration": 0.7,
+      "easing": "easeOutCubic",
+      "technique": "pathLength=1, dashoffset 1 -> 0"
+    },
+    "firstLaunch": 0.9,
+    "launchStep": "min(0.34, 3.4 / n) seconds between members",
+    "flight": 1,
+    "tick": {
+      "duration": 0.8,
+      "easing": "easeOutCubic",
+      "rule": "shown = round(cents * ease) / 100"
+    },
+    "stamp": {
+      "delayAfterLand": 0.5,
+      "duration": 0.35,
+      "easing": "easeOutBack"
+    },
+    "landRipple": {
+      "duration": 0.6,
+      "radiusGrow": 10
+    },
+    "centerPulse": {
+      "period": 1.6,
+      "grow": 22,
+      "duration": 1.6
+    },
+    "paidReceipt": {
+      "delayAfterLastLand": 0.9,
+      "duration": 0.4,
+      "scaleFrom": 1.5,
+      "easing": "easeOutCubic"
+    },
+    "fadeOut": {
+      "start": 9.6,
+      "duration": 0.6
+    },
+    "finalFrame": 9,
+    "finalFrameNote": "Static PNG fallback = frame at t = 9.0 with particles and pulses hidden: all amounts landed, every stamp shown, PAID stamp shown, total complete.",
+    "easing": {
+      "easeOutCubic": "1 - (1-x)^3",
+      "easeOutBack": "1 + c3*(x-1)^3 + c1*(x-1)^2 with c1 = 1.70158, c3 = c1 + 1"
+    }
+  },
+  "sample": {
+    "handle": "yourhandle",
+    "date": "14/11/26",
+    "totalCents": 2000,
+    "amountRule": "weights w_i = n - i + 2; cents_i = floor(2000 * w_i / sum(w)); the leftover cents go one each to members 0,1,2.. in order",
+    "memberHandles": "friend1 .. friendN"
+  },
+  "picker": {
+    "arcIgnoresPickers": true,
+    "note": "Selecting Arc renders only this spec. Theme and every other line style render through the legacy studio code and never touch Arc's output; switching away from Arc and back gives an identical Arc."
+  }
+}
