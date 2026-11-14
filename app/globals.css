@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@plugin 'daisyui' {
+  themes: false;
+  logs: false;
+}
+
+@plugin 'daisyui/theme' {
+  name: 'circlepay';
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #0a0a0a;
+  --color-base-200: #141414;
+  --color-base-300: #232323;
+  --color-base-content: #f5f5f7;
+  --color-primary: #ffd400;
+  --color-primary-content: #0a0a0a;
+  --color-secondary: #ffe14d;
+  --color-secondary-content: #0a0a0a;
+  --color-accent: #ffd400;
+  --color-accent-content: #0a0a0a;
+  --color-neutral: #1c1c1e;
+  --color-neutral-content: #f5f5f7;
+  --color-info: #ffe14d;
+  --color-info-content: #0a0a0a;
+  --color-success: #ffd400;
+  --color-success-content: #0a0a0a;
+  --color-warning: #ffd400;
+  --color-warning-content: #0a0a0a;
+  --color-error: #ff5c5c;
+  --color-error-content: #0a0a0a;
+  --radius-selector: 1rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@theme inline {
+  --font-sans: 'Inter', -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, system-ui, Arial, sans-serif;
+  --color-cp: #ffd400;
+}
+
+html {
+  background: #000;
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  background: #000;
+  color: #f5f5f7;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.arc-preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Magic UI: shimmer button + border beam */
+@keyframes shimmer-slide { to { transform: translateX(calc(100cqw - 100%)); } }
+@keyframes spin-around { 0% { transform: translateZ(0) rotate(0); } 15%, 35% { transform: translateZ(0) rotate(90deg); } 65%, 85% { transform: translateZ(0) rotate(270deg); } 100% { transform: translateZ(0) rotate(360deg); } }
+@keyframes border-beam { 100% { offset-distance: 100%; } }
+/* React Bits: gradient text + star border */
+@keyframes gradient-x { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes star-top { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(-100%, 0); opacity: 0; } }
+@keyframes star-bottom { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(100%, 0); opacity: 0; } }
+/* Aceternity: spotlight */
+@keyframes spotlight { 0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); } 100% { opacity: 1; transform: translate(-50%, -40%) scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -34,16 +34,27 @@ arc.mount(document.querySelector('#card'), { members: arc.sampleMembers(7) });  
 
 ## The site
 
-`public/` is a static site (plain HTML, CSS and JS). A minimal Next.js shell serves it so the existing Vercel project keeps building: `next.config.js` rewrites `/` to `/index.html`, and small route handlers serve `spec/arc-card.json`, `spec/arc-card.md` and `src/arc-card.js` straight from the repo, so the site can't drift from the spec.
+A small Next.js app (Tailwind 4) with five clean variants of one minimal page, each styled after a different UI kit. All are yellow (`#FFD400`) on black.
+
+| Route | Style |
+| --- | --- |
+| `/` | Picker |
+| `/a` | shadcn/ui |
+| `/b` | Magic UI |
+| `/c` | Aceternity UI |
+| `/d` | React Bits |
+| `/e` | daisyUI |
+
+Every variant has the same content: a hero, one X-handle input with a CTA (opens a pre-filled prompt in Grok), the example Arc card (drawn by `src/arc-card.js`, the reference renderer), a 3-step "how it works", and a footer. Small route handlers serve `spec/arc-card.json`, `spec/arc-card.md` and `src/arc-card.js` straight from the repo, so the site can't drift from the spec.
 
 ```
 npm install
 npm run dev     # http://localhost:3000
 npm run build
+node scripts/check-spec.js
 ```
 
-* Deep links open a pre-filled CirclePay prompt: Grok (`https://grok.com/?q=`) sends it automatically; ChatGPT (`https://chatgpt.com/?q=`) and Claude (`https://claude.ai/new?q=`) fill it and you press send. Grok Bot has no public prompt link, so use the Copy prompt button. These URL formats are not official and can change.
-* The card studio keeps the theme picker and the line-style picker. **Arc** is the new payment card and ignores the theme; **Spiral**, **Solid** and the other line styles use the original studio code in `public/js/legacy/` unchanged.
+CirclePay rewards are never automatic. They run through the CirclePay template and always need your explicit yes.
 
 ## Disclaimers
 
