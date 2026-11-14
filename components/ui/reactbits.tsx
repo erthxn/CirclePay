@@ -4,7 +4,7 @@ import * as React from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
-export function Squares({ speed = 0.4, squareSize = 44, border = '#2a2400', hoverFill = '#2a2400' }: { speed?: number; squareSize?: number; border?: string; hoverFill?: string }) {
+export function Squares({ speed = 0.4, squareSize = 44, border = '#e6e0c8', hoverFill = '#fff3a3' }: { speed?: number; squareSize?: number; border?: string; hoverFill?: string }) {
   const ref = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
     const canvas = ref.current!;
@@ -27,7 +27,7 @@ export function Squares({ speed = 0.4, squareSize = 44, border = '#2a2400', hove
         }
       }
       const g = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, Math.hypot(canvas.width, canvas.height) / 2);
-      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, '#000');
+      g.addColorStop(0, 'rgba(250,250,250,0)'); g.addColorStop(1, '#fafafa');
       ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     const tick = () => { if (!reduce) { ox = (ox - speed + squareSize) % squareSize; oy = (oy - speed + squareSize) % squareSize; } draw(); raf = requestAnimationFrame(tick); };
@@ -43,7 +43,7 @@ export function GradientText({ children, className }: { children: React.ReactNod
   return (
     <span
       className={cn('inline-block bg-clip-text text-transparent [animation:gradient-x_5s_ease_infinite]', className)}
-      style={{ backgroundImage: 'linear-gradient(90deg,#FFD400,#fff3a3,#FFD400,#ffb800,#FFD400)', backgroundSize: '300% 100%' }}
+      style={{ backgroundImage: 'linear-gradient(90deg,#c99700,#e0b000,#a87c00,#d4a900,#c99700)', backgroundSize: '300% 100%' }}
     >
       {children}
     </span>
@@ -69,12 +69,12 @@ export function BlurText({ text, className, delay = 90 }: { text: string; classN
   );
 }
 
-export function StarBorder({ children, className, color = '#FFD400', ...props }: React.ComponentProps<'button'> & { color?: string }) {
+export function StarBorder({ children, className, color = '#ffffff', ...props }: React.ComponentProps<'button'> & { color?: string }) {
   return (
     <button className={cn('relative inline-block overflow-hidden rounded-[20px] py-px', className)} {...props}>
       <div className="absolute right-[-250%] bottom-[-11px] z-0 h-1/2 w-[300%] animate-[star-bottom_4s_linear_infinite_alternate] rounded-full opacity-70" style={{ background: `radial-gradient(circle, ${color}, transparent 10%)` }} />
       <div className="absolute top-[-10px] left-[-250%] z-0 h-1/2 w-[300%] animate-[star-top_4s_linear_infinite_alternate] rounded-full opacity-70" style={{ background: `radial-gradient(circle, ${color}, transparent 10%)` }} />
-      <div className="relative z-[1] rounded-[20px] border border-zinc-800 bg-gradient-to-b from-black to-zinc-900 px-6 py-3 text-center text-base font-semibold text-[#FFD400]">{children}</div>
+      <div className="relative z-[1] rounded-[20px] border border-[#d4a900] bg-gradient-to-b from-[#FFE14D] to-[#FFD400] px-6 py-3 text-center text-base font-semibold text-black">{children}</div>
     </button>
   );
 }
@@ -89,9 +89,9 @@ export function SpotlightCard({ children, className }: { children: React.ReactNo
       onMouseMove={(e) => { const r = ref.current!.getBoundingClientRect(); setPos({ x: e.clientX - r.left, y: e.clientY - r.top }); }}
       onMouseEnter={() => setO(0.6)}
       onMouseLeave={() => setO(0)}
-      className={cn('relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-950 p-7', className)}
+      className={cn('relative overflow-hidden rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm', className)}
     >
-      <div className="pointer-events-none absolute inset-0 transition-opacity duration-500" style={{ opacity: o, background: `radial-gradient(circle at ${pos.x}px ${pos.y}px, rgba(255,212,0,0.22), transparent 80%)` }} />
+      <div className="pointer-events-none absolute inset-0 transition-opacity duration-500" style={{ opacity: o, background: `radial-gradient(circle at ${pos.x}px ${pos.y}px, rgba(255,212,0,0.30), transparent 80%)` }} />
       <div className="relative">{children}</div>
     </div>
   );

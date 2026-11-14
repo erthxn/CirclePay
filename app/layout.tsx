@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Drop an X handle and see the people who showed up for you in the last 7 days, as a circle card.',
   icons: { icon: '/logo.svg' },
 };
-export const viewport: Viewport = { themeColor: '#000000' };
+export const viewport: Viewport = { themeColor: '#fafafa' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

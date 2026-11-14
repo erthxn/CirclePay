@@ -38,14 +38,23 @@ export function Mark({ className = '' }: { className?: string }) {
   );
 }
 
+/** Black tile with the yellow mark (same as logo.svg), readable on light backgrounds. */
+export function Logo({ className = 'size-8' }: { className?: string }) {
+  return (
+    <span className={'inline-flex shrink-0 items-center justify-center rounded-[28%] bg-[#0a0a0a] ' + className}>
+      <Mark className="size-[68%] text-[#FFD400]" />
+    </span>
+  );
+}
+
 /** Tiny fixed route switcher shown on every variant. */
 export function Switcher({ current }: { current: string }) {
   return (
     <nav
       aria-label="Styles"
-      className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-black/80 p-1 text-xs backdrop-blur"
+      className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/10 bg-white/90 p-1 text-xs shadow-sm backdrop-blur"
     >
-      <Link href="/" className="rounded-full px-3 py-1.5 text-white/60 hover:text-white">All</Link>
+      <Link href="/" className="rounded-full px-3 py-1.5 text-black/60 hover:text-black">All</Link>
       {VARIANTS.map((v) => (
         <Link
           key={v.key}
@@ -54,7 +63,7 @@ export function Switcher({ current }: { current: string }) {
           aria-current={v.key === current ? 'page' : undefined}
           className={
             'rounded-full px-3 py-1.5 font-medium uppercase ' +
-            (v.key === current ? 'bg-[#FFD400] text-black' : 'text-white/60 hover:text-white')
+            (v.key === current ? 'bg-[#FFD400] text-black' : 'text-black/60 hover:text-black')
           }
         >
           {v.key}

@@ -23,7 +23,7 @@ export function BlurFade({ children, className, delay = 0, duration = 0.5, blur 
 export function ShimmerButton({ children, className, ...props }: React.ComponentProps<'button'>) {
   return (
     <button
-      className={cn('group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden rounded-full border border-white/10 px-6 py-3 whitespace-nowrap text-black [background:#FFD400] transition-transform duration-300 ease-in-out active:translate-y-px', className)}
+      className={cn('group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden rounded-full border border-black/10 px-6 py-3 whitespace-nowrap text-black [background:#FFD400] transition-transform duration-300 ease-in-out active:translate-y-px', className)}
       style={{ ['--spread' as string]: '90deg', ['--shimmer-color' as string]: '#fff', ['--cut' as string]: '0.1em' }}
       {...props}
     >
@@ -57,7 +57,7 @@ export function DotPattern({ className }: { className?: string }) {
     <div
       aria-hidden
       className={cn('pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]', className)}
-      style={{ backgroundImage: 'radial-gradient(rgba(255,212,0,0.28) 1px, transparent 1.2px)', backgroundSize: '22px 22px' }}
+      style={{ backgroundImage: 'radial-gradient(rgba(160,120,0,0.30) 1px, transparent 1.2px)', backgroundSize: '22px 22px' }}
     />
   );
 }
