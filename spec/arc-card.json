@@ -1,15 +1,15 @@
 {
   "$schema": "CirclePay Arc card tokens",
   "name": "CirclePay Arc card",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "canvas": {
     "width": 384,
     "height": 480,
     "aspect": "4:5",
     "stageHeight": 384,
-    "stageNote": "The top 384x384 square is the arc stage (same geometry as the production Arc card). The bottom 384x96 is the receipt strip.",
-    "cornerRadius": 28,
+    "stageNote": "The top 384x384 square is the arc stage (same geometry as before). The bottom 384x96 holds the summary bubble.",
+    "cornerRadius": 32,
     "exportScale": 2.8125,
     "exportPx": [
       1080,
@@ -591,25 +591,23 @@
     "gapBelowTile": 5,
     "widthRule": "max(tile + 8, 48)",
     "radius": 8.5,
-    "coinRadius": {
-      "tileGte44": 6.5,
-      "tileGte36": 6,
-      "else": 5.5
-    },
-    "coinInset": 8.5,
+    "fill": "yellow",
     "fontSize": {
       "tileGte44": 10,
       "tileGte36": 9.5,
       "else": 8.5
     },
-    "fontWeight": 700,
-    "textRule": "amount to 2 decimals without a dollar sign (the coin carries the $), centered in the space right of the coin: cx = pillLeft + 17 + (pillWidth - 21) / 2",
-    "preLandOpacity": 0.55
+    "fontWeight": 650,
+    "textRule": "'$' + amount to 2 decimals, centered in the pill (x = pill center), ink on yellow, tabular figures",
+    "preLandOpacity": 0.45,
+    "preLandFill": "surfaceHigh",
+    "preLandText": "muted"
   },
   "avatar": {
     "ringWidth": 2,
     "ringRule": "ring circle radius = size/2 - 1, stroke 2, drawn over the image",
-    "fallback": "generic silhouette: head circle r = 0.17*size at (x, y - 0.10*size); shoulders ellipse rx = 0.30*size, ry = 0.26*size at (x, y + 0.42*size); both clipped to the avatar circle",
+    "fill": "surfaceHigh",
+    "fallback": "generic silhouette: head circle r = 0.17*size at (x, y - 0.10*size); shoulders ellipse rx = 0.30*size, ry = 0.26*size at (x, y + 0.42*size); both clipped to the avatar circle; yellow at 85% opacity",
     "imageFit": "xMidYMid slice"
   },
   "arc": {
@@ -618,30 +616,36 @@
     "offsetOneRing": 28.8,
     "strokeWidthOneRing": 3.84,
     "strokeWidthTwoRing": 3.2,
-    "strokeOpacity": 0.55,
-    "lineCap": "butt",
+    "strokeOpacity": 0.5,
+    "lineCap": "round",
     "drawOrder": "arcs sit under the avatars so both ends are hidden"
   },
   "themes": {
     "default": "arc-yellow-black",
     "note": "Arc has ONE fixed palette. The studio's theme and line-style pickers never change it, and it never changes them.",
     "arc-yellow-black": {
-      "background": "#0a0a0a",
+      "background": "#0c0c0d",
+      "backgroundGlow": "#161617",
+      "surface": "#1c1c1e",
+      "surfaceHigh": "#2c2c2e",
+      "line": "#2a2a2c",
+      "ringLine": "#1f1f21",
+      "text": "#F5F5F7",
+      "muted": "#A1A1A6",
       "yellow": "#FFD400",
       "yellowSoft": "#FFE14D",
-      "ink": "#0a0a0a",
-      "avatarBg": "#1a1a1a",
-      "particleCore": "#FFF6B8",
+      "ink": "#0A0A0A",
+      "particleCore": "#FFF3A3",
       "glowStops": [
         [
           "0",
           "#FFD400",
-          0.95
+          0.8
         ],
         [
-          "0.45",
+          "0.5",
           "#FFD400",
-          0.35
+          0.25
         ],
         [
           "1",
@@ -652,191 +656,52 @@
     }
   },
   "fonts": {
-    "mono": "'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
-    "sans": "'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
-    "note": "Mono is used for every number and for the handle and date. Sans is only used for the brand word in the top-left mark."
+    "sans": "Inter, -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, system-ui, Arial, sans-serif",
+    "numeric": "font-variant-numeric: tabular-nums",
+    "note": "One friendly sans for everything (Inter or SF Pro). Every number uses tabular figures so amounts do not jitter while they tick."
   },
   "mark": {
     "x": 14,
-    "y": 12,
-    "width": 24,
+    "y": 10,
+    "badgeRadius": 12,
+    "badgeCenter": [
+      26,
+      22
+    ],
     "viewBox": "190 370 1560 1260",
     "paths": [
       "M1400 795 H1106 A355 355 0 1 0 1085 1230 H1390 A615 615 0 1 1 1400 795 Z",
       "M997 855 h740 a76 76 0 0 1 0 152 h-740 a76 76 0 0 1 0 -152 Z",
       "M1242 1057 h352 a60 60 0 0 1 0 120 h-352 a60 60 0 0 1 0 -120 Z"
     ],
-    "word": {
-      "text": "circlepay",
+    "markWidth": 15,
+    "title": {
+      "text": "CirclePay",
       "x": 44,
-      "y": 25,
+      "y": 21,
+      "size": 13,
+      "weight": 650
+    },
+    "status": {
+      "text": "last 7 days",
+      "x": 44,
+      "y": 33,
       "size": 9,
-      "opacity": 0.85
+      "weight": 500
     },
     "layoutBox": {
       "x0": 8,
       "y0": 8,
-      "x1": 100,
-      "y1": 34
-    }
-  },
-  "guilloche": {
-    "center": {
-      "x": 192,
-      "y": 192
-    },
-    "formula": "hypotrochoid: x = (R-r)*cos(t) + d*cos((R-r)/r * t), y = (R-r)*sin(t) - d*sin((R-r)/r * t), t = 0 .. 2*PI*r in steps of PI/24; then scale",
-    "rosettes": [
-      {
-        "R": 96,
-        "r": 29,
-        "d": 70,
-        "scale": 1.5,
-        "strokeWidth": 0.5,
-        "opacity": 0.1
-      },
-      {
-        "R": 100,
-        "r": 43,
-        "d": 60,
-        "scale": 1.7,
-        "strokeWidth": 0.5,
-        "opacity": 0.07
-      }
-    ],
-    "border": {
-      "inset": 8,
-      "amplitude": 2.5,
-      "wavelength": 14,
-      "strokeWidth": 0.6,
-      "opacity": 0.22,
-      "phases": [
-        0,
-        3.14159265
-      ],
-      "run": "left edge bottom to top, top edge left to right, right edge top to bottom; stops at y = 470; no bottom edge"
-    }
-  },
-  "receipt": {
-    "panel": {
-      "x0": 12,
-      "x1": 372,
-      "y0": 396,
-      "yBottom": 472,
-      "toothWidth": 12,
-      "toothDepth": 6
-    },
-    "notch": {
-      "y": 428,
-      "radius": 6
-    },
-    "perforation": {
-      "y": 428,
-      "x0": 22,
-      "x1": 362,
-      "strokeWidth": 1,
-      "dash": "2 3"
-    },
-    "label": {
-      "text": "CIRCLE TOTAL",
-      "x": 24,
-      "y": 408,
-      "size": 7.5,
-      "weight": 600,
-      "letterSpacing": 1,
-      "opacity": 0.7
-    },
-    "total": {
-      "x": 24,
-      "y": 424,
-      "size": 16,
-      "weight": 700
-    },
-    "barcode": {
-      "x": 262,
-      "y": 404,
-      "height": 16,
-      "unit": 1.6,
-      "pattern": [
-        2,
-        1,
-        1,
-        3,
-        1,
-        2,
-        2,
-        1,
-        3,
-        1,
-        1,
-        2,
-        1,
-        3,
-        2,
-        1,
-        1,
-        2,
-        3,
-        1,
-        2,
-        1,
-        1,
-        3,
-        1,
-        2,
-        1,
-        1,
-        2,
-        3,
-        1,
-        1,
-        2,
-        1,
-        3,
-        2
-      ],
-      "note": "bars at even indexes, gaps at odd indexes, widths = pattern * unit"
-    },
-    "handle": {
-      "x": 24,
-      "y": 452,
-      "size": 15,
-      "weight": 700,
-      "format": "@ + lowercase handle"
-    },
-    "date": {
-      "x": 360,
-      "y": 452,
-      "size": 15,
-      "weight": 700,
-      "anchor": "end",
-      "format": "DD/MM/YY"
-    },
-    "tagline": {
-      "text": "reward your x circle · last 7 days",
-      "x": 24,
-      "y": 466,
-      "size": 7,
-      "opacity": 0.65
-    },
-    "paidStamp": {
-      "x": 190,
-      "y": 414,
-      "w": 56,
-      "h": 21,
-      "rotateDeg": -9,
-      "text": "PAID",
-      "size": 11,
-      "letterSpacing": 2,
-      "strokeWidth": 1.5,
-      "opacity": 0.85
+      "x1": 104,
+      "y1": 38
     }
   },
   "stamp": {
     "radiusRule": "clamp(0.2 * tile, 5, 9)",
     "offsetRule": "(+0.36 * tile, -0.36 * tile) from the member center",
     "fill": "yellow",
-    "strokeInk": 1.5,
+    "ringColor": "background",
+    "ringWidth": 2,
     "check": "polyline in a unit box: (-0.45,0.02) (-0.12,0.35) (0.48,-0.32) times radius, stroke ink 1.6 round caps",
     "pop": "scale 0 -> 1 with easeOutBack over 0.35 s"
   },
@@ -846,10 +711,10 @@
     "flight": 1,
     "path": "the arc's quadratic Bezier, parameter s in [0,1], linear in time, looping",
     "glow": {
-      "radius": 7
+      "radius": 6
     },
     "core": {
-      "radius": 2.2
+      "radius": 2
     },
     "trail": [
       {
@@ -900,21 +765,21 @@
       "grow": 22,
       "duration": 1.6
     },
-    "paidReceipt": {
-      "delayAfterLastLand": 0.9,
-      "duration": 0.4,
-      "scaleFrom": 1.5,
-      "easing": "easeOutCubic"
-    },
     "fadeOut": {
       "start": 9.6,
       "duration": 0.6
     },
     "finalFrame": 9,
-    "finalFrameNote": "Static PNG fallback = frame at t = 9.0 with particles and pulses hidden: all amounts landed, every stamp shown, PAID stamp shown, total complete.",
+    "finalFrameNote": "Static PNG fallback = frame at t = 9.0 with particles and pulses hidden: all amounts landed, every stamp shown, the total badge shown, total complete.",
     "easing": {
       "easeOutCubic": "1 - (1-x)^3",
       "easeOutBack": "1 + c3*(x-1)^3 + c1*(x-1)^2 with c1 = 1.70158, c3 = c1 + 1"
+    },
+    "paidBadge": {
+      "delayAfterLastLand": 0.9,
+      "duration": 0.35,
+      "scaleFrom": 0,
+      "easing": "easeOutBack"
     }
   },
   "sample": {
@@ -927,5 +792,66 @@
   "picker": {
     "arcIgnoresPickers": true,
     "note": "Selecting Arc renders only this spec. Theme and every other line style render through the legacy studio code and never touch Arc's output; switching away from Arc and back gives an identical Arc."
+  },
+  "rings": {
+    "center": "owner center C",
+    "radii": [
+      92,
+      160,
+      228
+    ],
+    "strokeWidth": 1,
+    "note": "Faint concentric rings behind the arcs, like ripples."
+  },
+  "footer": {
+    "bubble": {
+      "x": 16,
+      "y": 396,
+      "w": 352,
+      "h": 68,
+      "radius": 22,
+      "fill": "surface"
+    },
+    "avatar": {
+      "cx": 44,
+      "cy": 430,
+      "r": 16,
+      "fill": "yellow",
+      "markWidth": 15
+    },
+    "handle": {
+      "x": 68,
+      "y": 427,
+      "size": 15,
+      "weight": 650,
+      "format": "@ + lowercase handle"
+    },
+    "date": {
+      "x": 68,
+      "y": 445,
+      "size": 12,
+      "weight": 500,
+      "format": "DD/MM/YY",
+      "fill": "muted"
+    },
+    "total": {
+      "right": 352,
+      "y": 415,
+      "w": 124,
+      "h": 30,
+      "radius": 15,
+      "label": "Total",
+      "labelSize": 11,
+      "labelWeight": 500,
+      "labelOpacity": 0.65,
+      "amountSize": 15,
+      "amountWeight": 700,
+      "note": "yellow pill, right-aligned; label and amount centered together"
+    },
+    "paidBadge": {
+      "dx": 0,
+      "dy": 0,
+      "note": "circle badge (same design as the per-person stamp, radius 9) on the pill's top-left corner"
+    }
   }
 }

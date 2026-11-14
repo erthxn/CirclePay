@@ -7,20 +7,24 @@ const freezeParam = params.get('freeze');
 const freezeAt = freezeParam !== null && freezeParam !== '' ? Number(freezeParam) : null;
 
 /* ---------- deep links ---------- */
-const PROMPT =
-  'Use CirclePay to find who showed up for an X handle in the last 7 days (replies, quotes and reposts of their posts) and make a CirclePay circle card. ' +
-  'Ask me for the X handle first. Show the result first and keep the chat short. ' +
-  'Render the CirclePay Arc card exactly as described in https://github.com/erthxn/CirclePay/blob/main/spec/arc-card.md. ' +
+const SPEC_URL = 'https://github.com/erthxn/CirclePay/blob/main/spec/arc-card.md';
+const promptFor = (handle) =>
+  'Use CirclePay to find who showed up for ' + (handle ? '@' + handle : 'an X handle') + ' in the last 7 days (replies, quotes and reposts of their posts) and make a CirclePay circle card. ' +
+  (handle ? 'The X handle is @' + handle + '. ' : 'Ask me for the X handle first. ') +
+  'Show the result first and keep the chat short. ' +
+  'Render the CirclePay Arc card exactly as described in ' + SPEC_URL + '. ' +
   'Do not pay anyone. Only offer an optional PayBox payout afterwards, and wait for my clear yes before anything is sent.';
-const enc = encodeURIComponent(PROMPT);
-const LINKS = {
-  'link-grok': 'https://grok.com/?q=' + enc,
-  'link-chatgpt': 'https://chatgpt.com/?q=' + enc,
-  'link-claude': 'https://claude.ai/new?q=' + enc,
-};
-Object.entries(LINKS).forEach(([id, href]) => { const a = document.getElementById(id); if (a) a.href = href; });
-$('#prompt-text').textContent = PROMPT;
-window.__circlepay = { PROMPT, LINKS };
+const BASES = { 'link-grok': 'https://grok.com/?q=', 'link-chatgpt': 'https://chatgpt.com/?q=', 'link-claude': 'https://claude.ai/new?q=' };
+let PROMPT = promptFor('');
+const LINKS = {};
+function applyPrompt(handle) {
+  PROMPT = promptFor(handle);
+  const enc = encodeURIComponent(PROMPT);
+  Object.entries(BASES).forEach(([id, base]) => { LINKS[id] = base + enc; const a = document.getElementById(id); if (a) a.href = LINKS[id]; });
+  $('#prompt-text').textContent = PROMPT;
+  window.__circlepay = { PROMPT, LINKS };
+}
+applyPrompt('');
 
 const copyBtn = $('#copy-prompt');
 const status = $('#copy-status');
@@ -37,6 +41,15 @@ copyBtn.addEventListener('click', async () => {
   copyBtn.classList.toggle('copied', ok);
   if (ok) setTimeout(() => copyBtn.classList.remove('copied'), 2200);
 });
+
+/* options card: close X collapses it, the pill brings it back */
+const optsBody = $('#opts-body'), optsClose = $('#opts-close'), optsOpen = $('#opts-open');
+function setOpts(open) {
+  optsBody.hidden = !open; optsOpen.hidden = open; optsClose.hidden = !open;
+  optsClose.setAttribute('aria-expanded', String(open));
+}
+optsClose.addEventListener('click', () => setOpts(false));
+optsOpen.addEventListener('click', () => setOpts(true));
 
 /* ---------- counters ---------- */
 function ease(x) { return 1 - Math.pow(1 - x, 3); }
@@ -84,7 +97,19 @@ async function boot() {
   const arcOpts = (n, prefix) => ({ handle: 'yourhandle', date: '14/11/26', members: arc.sampleMembers(n), idPrefix: prefix, freezeAt: freezeAt !== null ? freezeAt : undefined });
 
   /* hero card: always Arc, never touched by the pickers */
-  window.__heroApi = arc.mount($('#hero-card'), arcOpts(5, 'hero'));
+  const heroOpts = (handle) => ({ handle: handle || 'yourhandle', date: '14/11/26', members: arc.sampleMembers(5), idPrefix: 'hero', freezeAt: freezeAt !== null ? freezeAt : undefined });
+  window.__heroApi = arc.mount($('#hero-card'), heroOpts(''));
+  $('#composer').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const h = $('#handle-input').value.trim().replace(/^@/, '').replace(/[^A-Za-z0-9_]/g, '').slice(0, 15).toLowerCase();
+    const note = $('#composer-note');
+    if (!h) { note.textContent = 'Type an X handle first. Preview only, nothing is sent from this page.'; return; }
+    if (window.__heroApi) window.__heroApi.destroy();
+    window.__heroApi = arc.mount($('#hero-card'), heroOpts(h));
+    $('#me-bubble').textContent = '@' + h;
+    applyPrompt(h);
+    note.textContent = 'Preview updated for @' + h + '. The links and the prompt now include your handle. Nothing is sent from this page.';
+  });
 
   const bgs = bgData.cards, conns = connData.connectors;
   const ARC_ID = 'curve-001';

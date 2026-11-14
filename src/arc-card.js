@@ -82,50 +82,42 @@
     }
 
     /* ---------- static pieces ---------- */
-    function guilloche() {
-      var G = T.guilloche, c = G.center, out = '';
-      G.rosettes.forEach(function (ro) {
-        var Rr = ro.R - ro.r, k = Rr / ro.r, steps = Math.round((2 * PI * ro.r) / (PI / 24)), d = '';
-        for (var s = 0; s <= steps; s++) {
-          var t = s * PI / 24;
-          var x = c.x + ro.scale * (Rr * Math.cos(t) + ro.d * Math.cos(k * t));
-          var y = c.y + ro.scale * (Rr * Math.sin(t) - ro.d * Math.sin(k * t));
-          d += (s ? 'L' : 'M') + r1(x) + ' ' + r1(y);
-        }
-        out += '<path d="' + d + '" fill="none" stroke="' + TH.yellow + '" stroke-width="' + ro.strokeWidth + '" stroke-opacity="' + ro.opacity + '"/>';
-      });
-      var B = G.border, inset = B.inset, x0 = inset, x1 = W - inset, y0 = inset, y1 = 470;
-      B.phases.forEach(function (ph) {
-        var d = '', s, N;
-        // left edge, bottom to top
-        N = Math.round((y1 - y0) / 2);
-        for (s = 0; s <= N; s++) { var y = y1 - (y1 - y0) * s / N; var x = x0 + B.amplitude * Math.sin((y1 - y) / B.wavelength * 2 * PI + ph); d += (s ? 'L' : 'M') + r1(x) + ' ' + r1(y); }
-        // top edge, left to right
-        N = Math.round((x1 - x0) / 2);
-        for (s = 1; s <= N; s++) { var xx = x0 + (x1 - x0) * s / N; var yy = y0 + B.amplitude * Math.sin((xx - x0) / B.wavelength * 2 * PI + ph); d += 'L' + r1(xx) + ' ' + r1(yy); }
-        // right edge, top to bottom
-        N = Math.round((y1 - y0) / 2);
-        for (s = 1; s <= N; s++) { var y2 = y0 + (y1 - y0) * s / N; var x2 = x1 + B.amplitude * Math.sin((y2 - y0) / B.wavelength * 2 * PI + ph); d += 'L' + r1(x2) + ' ' + r1(y2); }
-        out += '<path d="' + d + '" fill="none" stroke="' + TH.yellow + '" stroke-width="' + B.strokeWidth + '" stroke-opacity="' + B.opacity + '"/>';
-      });
-      return out;
+    function fontAttr(size, weight, fill, extra) {
+      return ' font-family="' + F.sans + '" font-size="' + size + '" font-weight="' + weight + '" fill="' + fill + '" style="font-variant-numeric:tabular-nums"' + (extra || '');
     }
 
-    function markSvg() {
-      var M = T.mark, vb = M.viewBox.split(' ').map(Number), h = M.width * vb[3] / vb[2];
+    function backdrop(L) {
+      var s = '<rect width="' + W + '" height="' + H + '" fill="' + TH.background + '"/>';
+      s += '<circle cx="' + L.center.x + '" cy="' + L.center.y + '" r="260" fill="url(#__P__-bg)"/>';
+      T.rings.radii.forEach(function (r) {
+        s += '<circle cx="' + L.center.x + '" cy="' + L.center.y + '" r="' + r + '" fill="none" stroke="' + TH.ringLine + '" stroke-width="' + T.rings.strokeWidth + '"/>';
+      });
+      s += '<rect x="0.5" y="0.5" width="' + (W - 1) + '" height="' + (H - 1) + '" rx="' + (T.canvas.cornerRadius - 0.5) + '" fill="none" stroke="' + TH.line + '"/>';
+      return s;
+    }
+
+    function markGlyph(cx, cy, width, fill) {
+      var M = T.mark, vb = M.viewBox.split(' ').map(Number), h = width * vb[3] / vb[2];
       var paths = M.paths.map(function (d) { return '<path d="' + d + '"/>'; }).join('');
-      return '<svg x="' + M.x + '" y="' + M.y + '" width="' + M.width + '" height="' + r2(h) + '" viewBox="' + M.viewBox + '" fill="' + TH.yellow + '">' + paths + '</svg>' +
-        '<text x="' + M.word.x + '" y="' + M.word.y + '" font-family="' + F.mono + '" font-size="' + M.word.size + '" font-weight="600" fill="' + TH.yellow + '" fill-opacity="' + M.word.opacity + '" letter-spacing="0.5">' + M.word.text + '</text>';
+      return '<svg x="' + r2(cx - width / 2) + '" y="' + r2(cy - h / 2) + '" width="' + width + '" height="' + r2(h) + '" viewBox="' + M.viewBox + '" fill="' + fill + '">' + paths + '</svg>';
+    }
+
+    function headerSvg() {
+      var M = T.mark;
+      return '<circle cx="' + M.badgeCenter[0] + '" cy="' + M.badgeCenter[1] + '" r="' + M.badgeRadius + '" fill="' + TH.yellow + '"/>' +
+        markGlyph(M.badgeCenter[0], M.badgeCenter[1], M.markWidth, TH.ink) +
+        '<text x="' + M.title.x + '" y="' + M.title.y + '"' + fontAttr(M.title.size, M.title.weight, TH.text) + '>' + M.title.text + '</text>' +
+        '<text x="' + M.status.x + '" y="' + M.status.y + '"' + fontAttr(M.status.size, M.status.weight, TH.muted) + '>' + M.status.text + '</text>';
     }
 
     function avatarSvg(id, x, y, size, img) {
       var A = T.avatar, r = size / 2, s = '';
       s += '<clipPath id="' + id + '"><circle cx="' + r2(x) + '" cy="' + r2(y) + '" r="' + r2(r) + '"/></clipPath>';
-      s += '<circle cx="' + r2(x) + '" cy="' + r2(y) + '" r="' + r2(r) + '" fill="' + TH.avatarBg + '"/>';
+      s += '<circle cx="' + r2(x) + '" cy="' + r2(y) + '" r="' + r2(r) + '" fill="' + TH[A.fill] + '"/>';
       if (img) {
         s += '<image href="' + esc(img) + '" x="' + r2(x - r) + '" y="' + r2(y - r) + '" width="' + r2(size) + '" height="' + r2(size) + '" preserveAspectRatio="' + A.imageFit + '" clip-path="url(#' + id + ')"/>';
       } else {
-        s += '<g clip-path="url(#' + id + ')" fill="' + TH.yellow + '" fill-opacity="0.9">' +
+        s += '<g clip-path="url(#' + id + ')" fill="' + TH.yellow + '" fill-opacity="0.85">' +
           '<circle cx="' + r2(x) + '" cy="' + r2(y - 0.10 * size) + '" r="' + r2(0.17 * size) + '"/>' +
           '<ellipse cx="' + r2(x) + '" cy="' + r2(y + 0.42 * size) + '" rx="' + r2(0.30 * size) + '" ry="' + r2(0.26 * size) + '"/></g>';
       }
@@ -133,34 +125,14 @@
       return s;
     }
 
-    function pillFrame(it) {
-      var P = T.pill, x0 = it.x - it.pw / 2, y0 = it.y + it.tile / 2 + P.gapBelowTile, cr = byTile(it.tile, P.coinRadius, 'tileGte44', 'tileGte36', 'else');
-      return '<rect x="' + r2(x0) + '" y="' + r2(y0) + '" width="' + it.pw + '" height="' + P.height + '" rx="' + P.radius + '" fill="' + TH.yellow + '"/>' +
-        '<circle cx="' + r2(x0 + P.coinInset) + '" cy="' + r2(y0 + P.height / 2) + '" r="' + cr + '" fill="' + TH.ink + '"/>' +
-        '<circle cx="' + r2(x0 + P.coinInset) + '" cy="' + r2(y0 + P.height / 2) + '" r="' + r2(cr - 1.5) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="0.4" stroke-opacity="0.6" stroke-dasharray="1.2 1"/>' +
-        '<text x="' + r2(x0 + P.coinInset) + '" y="' + r2(y0 + P.height / 2) + '" text-anchor="middle" dominant-baseline="central" font-family="' + F.mono + '" font-size="' + r2(cr * 1.15) + '" font-weight="700" fill="' + TH.yellow + '">$</text>';
-    }
-
-    function receiptFrame(handle, date) {
-      var R = T.receipt, p = R.panel, d = 'M' + p.x0 + ' ' + p.y0 + ' H' + p.x1 + ' V' + p.yBottom, k, N = Math.round((p.x1 - p.x0) / p.toothWidth);
-      for (k = 0; k < N; k++) {
-        d += ' L' + r2(p.x1 - p.toothWidth * (k + 0.5)) + ' ' + (p.yBottom + p.toothDepth) + ' L' + r2(p.x1 - p.toothWidth * (k + 1)) + ' ' + p.yBottom;
-      }
-      d += ' Z';
-      var s = '<path d="' + d + '" fill="' + TH.yellow + '"/>';
-      s += '<circle cx="' + p.x0 + '" cy="' + R.notch.y + '" r="' + R.notch.radius + '" fill="' + TH.background + '"/>';
-      s += '<circle cx="' + p.x1 + '" cy="' + R.notch.y + '" r="' + R.notch.radius + '" fill="' + TH.background + '"/>';
-      var pf = R.perforation;
-      s += '<line x1="' + pf.x0 + '" y1="' + pf.y + '" x2="' + pf.x1 + '" y2="' + pf.y + '" stroke="' + TH.ink + '" stroke-width="' + pf.strokeWidth + '" stroke-dasharray="' + pf.dash + '"/>';
-      var l = R.label;
-      s += '<text x="' + l.x + '" y="' + l.y + '" font-family="' + F.mono + '" font-size="' + l.size + '" font-weight="' + l.weight + '" letter-spacing="' + l.letterSpacing + '" fill="' + TH.ink + '" fill-opacity="' + l.opacity + '">' + l.text + '</text>';
-      var b = R.barcode, bx = b.x, bars = '';
-      b.pattern.forEach(function (w, i) { if (i % 2 === 0) bars += '<rect x="' + r2(bx) + '" y="' + b.y + '" width="' + r2(w * b.unit) + '" height="' + b.height + '"/>'; bx += w * b.unit; });
-      s += '<g fill="' + TH.ink + '">' + bars + '</g>';
-      var h = R.handle, dt = R.date, tg = R.tagline;
-      s += '<text x="' + h.x + '" y="' + h.y + '" font-family="' + F.mono + '" font-size="' + h.size + '" font-weight="' + h.weight + '" fill="' + TH.ink + '">' + esc('@' + handle) + '</text>';
-      s += '<text x="' + dt.x + '" y="' + dt.y + '" text-anchor="' + dt.anchor + '" font-family="' + F.mono + '" font-size="' + dt.size + '" font-weight="' + dt.weight + '" fill="' + TH.ink + '">' + esc(date) + '</text>';
-      s += '<text x="' + tg.x + '" y="' + tg.y + '" font-family="' + F.mono + '" font-size="' + tg.size + '" fill="' + TH.ink + '" fill-opacity="' + tg.opacity + '">' + tg.text + '</text>';
+    function footerFrame(handle, date) {
+      var Fo = T.footer, b = Fo.bubble, a = Fo.avatar, h = Fo.handle, d = Fo.date;
+      var s = '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" rx="' + b.radius + '" fill="' + TH[b.fill] + '"/>';
+      s += '<circle cx="' + a.cx + '" cy="' + a.cy + '" r="' + a.r + '" fill="' + TH[a.fill] + '"/>' + markGlyph(a.cx, a.cy, a.markWidth, TH.ink);
+      s += '<text x="' + h.x + '" y="' + h.y + '"' + fontAttr(h.size, h.weight, TH.text) + '>' + esc('@' + handle) + '</text>';
+      s += '<text x="' + d.x + '" y="' + d.y + '"' + fontAttr(d.size, d.weight, TH[d.fill]) + '>' + esc(date) + '</text>';
+      var t = Fo.total, x0 = t.right - t.w;
+      s += '<rect x="' + x0 + '" y="' + t.y + '" width="' + t.w + '" height="' + t.h + '" rx="' + t.radius + '" fill="' + TH.yellow + '"/>';
       return s;
     }
 
@@ -174,39 +146,45 @@
 
     /* ---------- static layer ---------- */
     function staticLayer(o, L) {
-      var s = '';
-      s += guilloche();
+      var s = backdrop(L).replace('__P__', o.p);
       s += '<g data-arc="dyn-a"></g>';
       s += avatarSvg(o.p + '-cav', L.center.x, L.center.y, L.centerSize, o.avatar);
       L.items.forEach(function (it) {
         var m = o.members[it.i];
-        s += avatarSvg(o.p + '-av' + it.i, it.x, it.y, it.tile, m.avatar) + pillFrame(it);
+        s += avatarSvg(o.p + '-av' + it.i, it.x, it.y, it.tile, m.avatar);
       });
-      s += markSvg();
-      s += receiptFrame(o.handle, o.date);
+      s += '<g data-arc="dyn-p"></g>';
+      s += headerSvg();
+      s += footerFrame(o.handle, o.date);
       s += '<g data-arc="dyn-b"></g>';
       return s;
     }
 
     /* ---------- dynamic layers ---------- */
+    function badge(x, y, rad, scale, opacity) {
+      var S = T.stamp;
+      return '<g transform="translate(' + r2(x) + ' ' + r2(y) + ') scale(' + r2(scale) + ')" opacity="' + r2(opacity) + '"><circle r="' + r2(rad) + '" fill="' + TH.yellow + '" stroke="' + TH[S.ringColor] + '" stroke-width="' + S.ringWidth + '"/>' +
+        '<polyline points="' + r2(-0.45 * rad) + ',' + r2(0.02 * rad) + ' ' + r2(-0.12 * rad) + ',' + r2(0.35 * rad) + ' ' + r2(0.48 * rad) + ',' + r2(-0.32 * rad) + '" fill="none" stroke="' + TH.ink + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>';
+    }
+
     function frame(o, L, t, isStatic) {
       var tl = T.timeline, TM = times(L.n), n = L.n, C = L.center;
       var fade = t >= tl.fadeOut.start ? clamp(1 - (t - tl.fadeOut.start) / tl.fadeOut.duration, 0, 1) : 1;
       if (t >= tl.fadeOut.start + tl.fadeOut.duration) fade = 0;
-      var a = '', b = '', i, j;
+      var a = '', p = '', b = '', j;
       var streamOn = !isStatic;
       // dyn-a: arcs, center pulses, particles
       L.items.forEach(function (it) {
         var P = { x: it.x, y: it.y }, k = ctrlFor(C, P, it.a, L.arcOff);
         var draw = easeOutCubic((t - tl.arcDraw.start - it.i * tl.arcDraw.stagger) / tl.arcDraw.duration);
         if (isStatic) draw = 1;
-        a += '<path d="M' + r2(C.x) + ' ' + r2(C.y) + ' Q' + r2(k.x) + ' ' + r2(k.y) + ' ' + r2(P.x) + ' ' + r2(P.y) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="' + L.strokeW + '" stroke-opacity="' + T.arc.strokeOpacity + '" pathLength="1" stroke-dasharray="1" stroke-dashoffset="' + r2(1 - draw) + '"/>';
+        a += '<path d="M' + r2(C.x) + ' ' + r2(C.y) + ' Q' + r2(k.x) + ' ' + r2(k.y) + ' ' + r2(P.x) + ' ' + r2(P.y) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="' + L.strokeW + '" stroke-opacity="' + T.arc.strokeOpacity + '" stroke-linecap="' + T.arc.lineCap + '" pathLength="1" stroke-dasharray="1" stroke-dashoffset="' + r2(1 - draw) + '"/>';
       });
       if (streamOn && t >= tl.firstLaunch && fade > 0) {
         var cp = tl.centerPulse;
         for (j = 0; j < 2; j++) {
           var ph = ((t - tl.firstLaunch) / cp.period + j * 0.5) % 1;
-          a += '<circle cx="' + r2(C.x) + '" cy="' + r2(C.y) + '" r="' + r2(L.centerSize / 2 + cp.grow * ph) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="1" stroke-opacity="' + r2((1 - ph) * 0.45 * fade) + '"/>';
+          a += '<circle cx="' + r2(C.x) + '" cy="' + r2(C.y) + '" r="' + r2(L.centerSize / 2 + cp.grow * ph) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="1" stroke-opacity="' + r2((1 - ph) * 0.4 * fade) + '"/>';
         }
         var pc = T.particles;
         L.items.forEach(function (it) {
@@ -225,7 +203,7 @@
           }
         });
       }
-      // dyn-b: amounts, land ripples, stamps, total, receipt stamp
+      // dyn-p: pills (under the person avatars), dyn-b: ripples, stamps, footer total
       var totalCents = 0, allLanded = TM[n - 1].land;
       L.items.forEach(function (it) {
         var m = o.members[it.i], cents = Math.round(m.amount * 100), e = easeOutCubic((t - TM[it.i].land) / tl.tick.duration);
@@ -235,39 +213,33 @@
         var P = T.pill, x0 = it.x - it.pw / 2, y0 = it.y + it.tile / 2 + P.gapBelowTile;
         var landed = t >= TM[it.i].land || isStatic;
         var fs = byTile(it.tile, P.fontSize, 'tileGte44', 'tileGte36', 'else');
-        b += '<text x="' + r2(x0 + 17 + (it.pw - 21) / 2) + '" y="' + r2(y0 + P.height / 2) + '" text-anchor="middle" dominant-baseline="central" font-family="' + F.mono + '" font-size="' + fs + '" font-weight="' + P.fontWeight + '" fill="' + TH.ink + '" fill-opacity="' + (landed ? 1 : P.preLandOpacity) + '">' + (shown / 100).toFixed(2) + '</text>';
+        p += '<rect x="' + r2(x0) + '" y="' + r2(y0) + '" width="' + it.pw + '" height="' + P.height + '" rx="' + P.radius + '" fill="' + (landed ? TH.yellow : TH[P.preLandFill]) + '"/>';
+        p += '<text x="' + r2(it.x) + '" y="' + r2(y0 + P.height / 2) + '" text-anchor="middle" dominant-baseline="central"' + fontAttr(fs, P.fontWeight, landed ? TH.ink : TH[P.preLandText]) + '>$' + (shown / 100).toFixed(2) + '</text>';
         if (!isStatic) {
           var rp = (t - TM[it.i].land) / tl.landRipple.duration;
-          if (rp >= 0 && rp <= 1 && fade > 0) b += '<circle cx="' + r2(it.x) + '" cy="' + r2(it.y) + '" r="' + r2(it.tile / 2 + tl.landRipple.radiusGrow * rp) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="1.5" stroke-opacity="' + r2((1 - rp) * 0.9 * fade) + '"/>';
+          if (rp >= 0 && rp <= 1 && fade > 0) b += '<circle cx="' + r2(it.x) + '" cy="' + r2(it.y) + '" r="' + r2(it.tile / 2 + tl.landRipple.radiusGrow * rp) + '" fill="none" stroke="' + TH.yellow + '" stroke-width="1.5" stroke-opacity="' + r2((1 - rp) * 0.8 * fade) + '"/>';
         }
         var sp = isStatic ? 1 : easeOutBack((t - TM[it.i].land - tl.stamp.delayAfterLand) / tl.stamp.duration);
-        if (sp > 0.001) {
-          var S = T.stamp, rad = clamp(0.2 * it.tile, 5, 9), sx = it.x + 0.36 * it.tile, sy = it.y - 0.36 * it.tile;
-          b += '<g transform="translate(' + r2(sx) + ' ' + r2(sy) + ') scale(' + r2(sp) + ')" opacity="' + r2(fade) + '"><circle r="' + r2(rad) + '" fill="' + TH.yellow + '" stroke="' + TH.ink + '" stroke-width="' + S.strokeInk + '"/>' +
-            '<polyline points="' + r2(-0.45 * rad) + ',' + r2(0.02 * rad) + ' ' + r2(-0.12 * rad) + ',' + r2(0.35 * rad) + ' ' + r2(0.48 * rad) + ',' + r2(-0.32 * rad) + '" fill="none" stroke="' + TH.ink + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>';
-        }
+        if (sp > 0.001) b += badge(it.x + 0.36 * it.tile, it.y - 0.36 * it.tile, clamp(0.2 * it.tile, 5, 9), sp, fade);
       });
-      var R = T.receipt, tt = R.total;
-      b += '<text x="' + tt.x + '" y="' + tt.y + '" font-family="' + F.mono + '" font-size="' + tt.size + '" font-weight="' + tt.weight + '" fill="' + TH.ink + '">$' + (totalCents / 100).toFixed(2) + '</text>';
-      var pp = isStatic ? 1 : easeOutCubic((t - allLanded - tl.paidReceipt.delayAfterLastLand) / tl.paidReceipt.duration);
-      if (pp > 0.001) {
-        var ps = R.paidStamp, sc = tl.paidReceipt.scaleFrom + (1 - tl.paidReceipt.scaleFrom) * pp;
-        b += '<g transform="translate(' + ps.x + ' ' + ps.y + ') rotate(' + ps.rotateDeg + ') scale(' + r2(sc) + ')" opacity="' + r2(pp * ps.opacity * fade) + '">' +
-          '<rect x="' + (-ps.w / 2) + '" y="' + (-ps.h / 2) + '" width="' + ps.w + '" height="' + ps.h + '" rx="3" fill="none" stroke="' + TH.ink + '" stroke-width="' + ps.strokeWidth + '"/>' +
-          '<text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-family="' + F.mono + '" font-size="' + ps.size + '" font-weight="700" letter-spacing="' + ps.letterSpacing + '" fill="' + TH.ink + '">' + ps.text + '</text></g>';
-      }
-      return { a: a, b: b };
+      var Fo = T.footer, tt = Fo.total, x0t = tt.right - tt.w, cxT = x0t + tt.w / 2, cyT = tt.y + tt.h / 2;
+      b += '<text x="' + r2(cxT) + '" y="' + r2(cyT) + '" text-anchor="middle" dominant-baseline="central"' + fontAttr(tt.amountSize, tt.amountWeight, TH.ink) + '><tspan fill-opacity="' + tt.labelOpacity + '" font-size="' + tt.labelSize + '" font-weight="' + tt.labelWeight + '">' + tt.label + '  </tspan>$' + (totalCents / 100).toFixed(2) + '</text>';
+      var pp = isStatic ? 1 : easeOutBack((t - allLanded - tl.paidBadge.delayAfterLastLand) / tl.paidBadge.duration);
+      if (pp > 0.001) b += badge(x0t + 4, tt.y + 2, 9, pp, fade);
+      return { a: a, p: p, b: b };
     }
 
     function defs(p) {
       var stops = TH.glowStops.map(function (g) { return '<stop offset="' + g[0] + '" stop-color="' + g[1] + '" stop-opacity="' + g[2] + '"/>'; }).join('');
-      return '<defs><radialGradient id="' + p + '-glow">' + stops + '</radialGradient><clipPath id="' + p + '-card"><rect width="' + W + '" height="' + H + '" rx="' + T.canvas.cornerRadius + '"/></clipPath></defs>';
+      return '<defs><radialGradient id="' + p + '-glow">' + stops + '</radialGradient>' +
+        '<radialGradient id="' + p + '-bg"><stop offset="0" stop-color="' + TH.backgroundGlow + '"/><stop offset="1" stop-color="' + TH.background + '" stop-opacity="0"/></radialGradient>' +
+        '<clipPath id="' + p + '-card"><rect width="' + W + '" height="' + H + '" rx="' + T.canvas.cornerRadius + '"/></clipPath></defs>';
     }
 
     function wrap(o, inner) {
-      var aria = 'CirclePay Arc card for @' + o.handle + ': ' + o.members.length + ' people connected by arcs with their amounts, and a receipt with the circle total.';
+      var aria = 'CirclePay Arc card for @' + o.handle + ': ' + o.members.length + ' people connected by arcs with their amounts, and a summary with the circle total.';
       return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(aria) + '" data-arc-card="1" style="shape-rendering:geometricPrecision">' +
-        defs(o.p) + '<g clip-path="url(#' + o.p + '-card)"><rect width="' + W + '" height="' + H + '" fill="' + TH.background + '"/>' + inner + '</g></svg>';
+        defs(o.p) + '<g clip-path="url(#' + o.p + '-card)">' + inner + '</g></svg>';
     }
 
     /** Full SVG string. t === undefined -> static final frame (PNG fallback). */
@@ -277,7 +249,7 @@
       var isStatic = (t === undefined || t === null);
       var tt = isStatic ? T.timeline.finalFrame : t;
       var fr = frame(o, L, tt, isStatic);
-      var inner = staticLayer(o, L).replace('<g data-arc="dyn-a"></g>', '<g data-arc="dyn-a">' + fr.a + '</g>').replace('<g data-arc="dyn-b"></g>', '<g data-arc="dyn-b">' + fr.b + '</g>');
+      var inner = staticLayer(o, L).replace('<g data-arc="dyn-a"></g>', '<g data-arc="dyn-a">' + fr.a + '</g>').replace('<g data-arc="dyn-p"></g>', '<g data-arc="dyn-p">' + fr.p + '</g>').replace('<g data-arc="dyn-b"></g>', '<g data-arc="dyn-b">' + fr.b + '</g>');
       return wrap(o, inner);
     }
 
@@ -288,9 +260,9 @@
       var reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
       var staticOnly = reduce || opts.static === true;
       el.innerHTML = svg(opts, staticOnly ? undefined : (opts.freezeAt != null ? opts.freezeAt : 0));
-      var gA = el.querySelector('[data-arc="dyn-a"]'), gB = el.querySelector('[data-arc="dyn-b"]');
+      var gA = el.querySelector('[data-arc="dyn-a"]'), gP = el.querySelector('[data-arc="dyn-p"]'), gB = el.querySelector('[data-arc="dyn-b"]');
       var raf = 0, playing = false, t0 = 0, offset = 0, destroyed = false;
-      function draw(t) { var fr = frame(o, L, t, false); gA.innerHTML = fr.a; gB.innerHTML = fr.b; }
+      function draw(t) { var fr = frame(o, L, t, false); gA.innerHTML = fr.a; gP.innerHTML = fr.p; gB.innerHTML = fr.b; }
       function loopT(ms) { return ((ms - t0) / 1000 + offset) % T.timeline.loop; }
       function tick(ms) { if (!playing || destroyed) return; draw(loopT(ms)); raf = requestAnimationFrame(tick); }
       var api = {

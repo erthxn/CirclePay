@@ -10,7 +10,7 @@ Any agent can draw the exact same CirclePay Arc card from these files:
 
 | File | What it is |
 | --- | --- |
-| [`spec/arc-card.md`](spec/arc-card.md) | Human- and LLM-readable spec: canvas, angle formula for 3 to 15 people, arc math, colors, fonts, pills, receipt strip, stamps, animation timeline, static PNG fallback, picker behavior |
+| [`spec/arc-card.md`](spec/arc-card.md) | Human- and LLM-readable spec: canvas, angle formula for 3 to 15 people, arc math, colors, fonts, pills, summary bubble, stamps, animation timeline, static PNG fallback, picker behavior |
 | [`spec/arc-card.json`](spec/arc-card.json) | The same numbers as machine-readable tokens |
 | [`src/arc-card.js`](src/arc-card.js) | Reference renderer, built from the tokens. The website uses this exact file |
 

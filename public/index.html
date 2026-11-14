@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CirclePay — Reward your X circle</title>
-<meta name="description" content="Drop your X handle. CirclePay reads who replied, quoted and reposted you in the last 7 days and builds a circle card. Optionally reward the circle through PayBox, only after your clear yes.">
+<meta name="description" content="Drop your X handle. CirclePay reads who replied, quoted and reposted you in the last 7 days and builds a circle card. Optionally reward that circle through PayBox, only after your clear yes.">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
-<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
@@ -24,8 +24,8 @@
 
 <header class="nav">
   <a class="brand" href="#top" aria-label="CirclePay home">
-    <svg class="brand-mark" aria-hidden="true"><use href="#cp-mark"/></svg>
-    <span class="brand-word">Circle<b>Pay</b></span>
+    <span class="av"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span>
+    <span class="brand-text"><b>CirclePay</b><small><i class="live"></i>online · reads public X activity</small></span>
   </a>
   <nav aria-label="Sections">
     <a href="#studio">Studio</a>
@@ -37,52 +37,81 @@
 
 <main id="top">
   <section class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot"></span> For X creators · last 7 days</p>
+    <div class="hero-left">
       <h1 class="kinetic" aria-label="Reward your X circle.">
         <span class="line"><span style="--i:0">Reward</span></span>
         <span class="line"><span style="--i:1">your X</span></span>
         <span class="line"><span style="--i:2" class="hl">circle.</span></span>
       </h1>
-      <p class="lede">Drop your X handle. CirclePay finds who showed up for you this week and turns them into a branded circle card. Want to say thanks with crypto? That's optional, and it only happens after your clear yes.</p>
+      <p class="lede">Drop your X handle. CirclePay finds who showed up for you this week and turns them into a circle card. Want to say thanks with crypto? That's optional, and it only happens after your clear yes.</p>
 
-      <div class="open" id="open">
-        <h2 class="open-title">Open in your agent</h2>
-        <div class="open-grid">
-          <a class="agent" id="link-grok" target="_blank" rel="noopener noreferrer" href="#">
-            <span class="agent-name">Grok</span>
-            <span class="agent-tag auto">Sends automatically</span>
-            <span class="agent-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="agent" id="link-chatgpt" target="_blank" rel="noopener noreferrer" href="#">
-            <span class="agent-name">ChatGPT</span>
-            <span class="agent-tag">Fills the prompt, you press send</span>
-            <span class="agent-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="agent" id="link-claude" target="_blank" rel="noopener noreferrer" href="#">
-            <span class="agent-name">Claude</span>
-            <span class="agent-tag">Fills the prompt, you press send</span>
-            <span class="agent-arrow" aria-hidden="true">↗</span>
-          </a>
-          <button class="agent" id="copy-prompt" type="button">
-            <span class="agent-name">Grok Bot</span>
-            <span class="agent-tag">Copy prompt</span>
-            <span class="agent-arrow copy-lbl" aria-hidden="true">Copy</span>
+      <div class="opts" id="open">
+        <div class="opts-head">
+          <h2>Open in your agent</h2>
+          <button class="x" id="opts-close" type="button" aria-label="Collapse the options" aria-expanded="true" aria-controls="opts-body">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
           </button>
         </div>
-        <p class="note" id="grokbot-note">Grok Bot has no public prompt link. Copy the prompt and paste it into the CirclePay Grok Bot template.</p>
-        <p class="note sub" id="copy-status" role="status" aria-live="polite"></p>
-        <details class="prompt-peek">
-          <summary>See the prompt</summary>
-          <pre id="prompt-text"></pre>
-          <p class="note sub">These link formats aren't official. They work today but any service can change them. If you're logged out, the prompt may be lost at sign-in. Paste it manually if that happens.</p>
-        </details>
+        <div id="opts-body">
+          <p class="opts-sub">Pick where to run it. Each one opens a pre-filled CirclePay prompt.</p>
+          <a class="opt" id="link-grok" target="_blank" rel="noopener noreferrer" href="#">
+            <span class="badge">A</span>
+            <span class="opt-t"><b>Grok</b><small class="auto">Sends automatically</small></span>
+            <span class="go" aria-hidden="true">↗</span>
+          </a>
+          <a class="opt" id="link-chatgpt" target="_blank" rel="noopener noreferrer" href="#">
+            <span class="badge">B</span>
+            <span class="opt-t"><b>ChatGPT</b><small>Fills the prompt, you press send</small></span>
+            <span class="go" aria-hidden="true">↗</span>
+          </a>
+          <a class="opt" id="link-claude" target="_blank" rel="noopener noreferrer" href="#">
+            <span class="badge">C</span>
+            <span class="opt-t"><b>Claude</b><small>Fills the prompt, you press send</small></span>
+            <span class="go" aria-hidden="true">↗</span>
+          </a>
+          <button class="opt" id="copy-prompt" type="button">
+            <span class="badge">D</span>
+            <span class="opt-t"><b>Grok Bot</b><small>Copy prompt</small></span>
+            <span class="go go-copy" aria-hidden="true">Copy</span>
+          </button>
+          <p class="note" id="grokbot-note">Grok Bot has no public prompt link. Copy the prompt and paste it into the CirclePay Grok Bot template.</p>
+          <p class="note sub" id="copy-status" role="status" aria-live="polite"></p>
+          <details class="prompt-peek">
+            <summary>See the prompt</summary>
+            <pre id="prompt-text"></pre>
+            <p class="note sub">These link formats aren't official. They work today but any service can change them. If you're logged out, the prompt may be lost at sign-in. Paste it manually if that happens.</p>
+          </details>
+        </div>
+        <button class="pill-y reopen" id="opts-open" type="button" hidden>Show the options</button>
       </div>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <span class="c-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <label class="sr" for="handle-input">Your X handle</label>
+        <input id="handle-input" name="handle" type="text" inputmode="text" maxlength="16" autocapitalize="none" spellcheck="false" placeholder="Type your X handle">
+        <span class="c-mic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+        <button class="c-send" type="submit" aria-label="Preview with this handle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+      </form>
+      <p class="note sub composer-note" id="composer-note">Preview only. Typing a handle updates the example card and the prompt below. Nothing is sent from this page.</p>
     </div>
 
-    <div class="hero-card">
-      <div class="card-wrap" id="hero-card" aria-live="off"></div>
-      <p class="card-caption">Example card with placeholder handles. Nothing here is real or paid.</p>
+    <div class="thread" aria-label="Example conversation">
+      <div class="divider"><span>Today</span></div>
+      <div class="row me"><div class="bubble y" id="me-bubble">@yourhandle</div></div>
+      <div class="row ai"><span class="av sm"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span>
+        <div class="bubble">I found <b>5 people</b> who showed up for you in the last 7 days. Here's your circle card.</div></div>
+      <div class="row ai"><span class="av sm ghost" aria-hidden="true"></span>
+        <div class="bubble card-bubble">
+          <div class="card-wrap" id="hero-card" aria-live="off"></div>
+          <div class="qchips" aria-label="Signals read">
+            <span class="qchip">Replies</span><span class="qchip">Quotes</span><span class="qchip">Reposts</span>
+          </div>
+        </div></div>
+      <div class="row ai"><span class="av sm ghost" aria-hidden="true"></span>
+        <div class="bubble">Want to reward your circle? Nothing goes out without your clear yes.
+          <div class="reply-pills" aria-hidden="true"><span class="pill-y">Yes, pay</span><span class="pill-o">Not now</span></div>
+        </div></div>
+      <p class="card-caption">Example conversation with placeholder handles. Nothing here is real or paid.</p>
     </div>
   </section>
 
@@ -94,9 +123,9 @@
   </section>
 
   <section class="section" id="studio">
-    <p class="eyebrow"><span class="dot"></span> Card studio</p>
+    <div class="divider"><span>Card studio</span></div>
     <h2 class="h2">Pick your line style and theme.</h2>
-    <p class="sect-lede">Arc is the CirclePay payment card: money flows along the arcs, coin chips tick up as each payment lands, and a receipt strip holds your handle, the date and the circle total. Arc is always yellow on black. Spiral, Solid and the other line styles take the theme you pick. Every agent can draw the same Arc card from the open <a href="https://github.com/erthxn/CirclePay/blob/main/spec/arc-card.md" rel="noopener">Arc card spec</a> (MIT).</p>
+    <p class="sect-lede">Arc is the CirclePay payment card: money flows along the arcs, each amount ticks up as its payment lands, and a summary bubble holds your handle, the date and the circle total. Arc is always yellow on black. Spiral, Solid and the other line styles take the theme you pick. Every agent can draw the same Arc card from the open <a href="https://github.com/erthxn/CirclePay/blob/main/spec/arc-card.md" rel="noopener">Arc card spec</a> (MIT).</p>
     <div class="studio">
       <div class="studio-preview">
         <div class="studio-stage" id="studio-stage"></div>
@@ -140,76 +169,81 @@
   </section>
 
   <section class="section" id="how">
-    <p class="eyebrow"><span class="dot"></span> How CirclePay works</p>
+    <div class="divider"><span>How CirclePay works</span></div>
     <h2 class="h2">From handle to circle card in four moves.</h2>
     <div class="bento">
       <article class="tile t-wide">
-        <span class="num">01</span>
+        <span class="qchip">1 · Handle</span>
         <h3>Drop your X handle</h3>
         <p>Just type it, and CirclePay takes it from there.</p>
         <div class="typer" aria-hidden="true"><span id="typer-text"></span><i class="caret"></i></div>
       </article>
       <article class="tile">
-        <span class="num">02</span>
+        <span class="qchip">2 · Read</span>
         <h3>It reads the last 7 days</h3>
         <p>Who replied, quoted and reposted you. Public activity only.</p>
         <div class="bars" aria-hidden="true"><i style="--h:42%"></i><i style="--h:70%"></i><i style="--h:56%"></i><i style="--h:92%"></i><i style="--h:64%"></i><i style="--h:80%"></i><i style="--h:100%"></i></div>
       </article>
       <article class="tile">
-        <span class="num">03</span>
+        <span class="qchip">3 · Card</span>
         <h3>It builds your circle card</h3>
         <p>Curved arcs out to the people who showed up, an amount pill under each, your lowercase handle and the date.</p>
         <div class="mini-arc" aria-hidden="true">
           <svg viewBox="0 0 200 90"><path d="M100 78 Q40 70 28 22" /><path d="M100 78 Q100 40 100 14" /><path d="M100 78 Q160 70 172 22" /><circle cx="100" cy="78" r="9"/><circle cx="28" cy="22" r="6"/><circle cx="100" cy="14" r="6"/><circle cx="172" cy="22" r="6"/></svg>
         </div>
       </article>
-      <article class="tile t-full t-yes">
-        <span class="num">04</span>
+      <article class="tile t-full">
+        <span class="qchip">4 · Reward</span>
         <h3>Optionally reward the circle through PayBox</h3>
         <p>Only after your clear yes. Nothing goes out on its own, and you confirm every payout.</p>
-        <div class="yesno" aria-hidden="true"><span class="btn-no">No</span><span class="btn-yes">Yes, pay</span></div>
+        <div class="reply-pills" aria-hidden="true"><span class="pill-o">No</span><span class="pill-y nudge">Yes, pay</span></div>
       </article>
     </div>
   </section>
 
   <section class="section" id="connect">
-    <p class="eyebrow"><span class="dot"></span> Connect your agent</p>
+    <div class="divider"><span>Connect your agent</span></div>
     <h2 class="h2">Pick a path. Pay only when you want to.</h2>
-    <ol class="steps">
-      <li>
-        <span class="step-n">1</span>
-        <div><h3>Install the CirclePay Grok Bot template, or use a link</h3>
-        <p>Use the template in Grok Bot, or tap one of the <a href="#open">Open in your agent</a> buttons for Grok, ChatGPT or Claude. Grok Bot has no public prompt link, so copy the prompt and paste it into the template.</p></div>
-      </li>
-      <li>
-        <span class="step-n">2</span>
-        <div><h3>Connect PayBox only when you want to pay out</h3>
-        <p>Building the card needs no wallet. Connect PayBox later, and only if you decide to reward your circle.</p></div>
-      </li>
-      <li>
-        <span class="step-n">3</span>
-        <div><h3>Confirm each payout</h3>
-        <p>You see who gets what first. Every payout needs your explicit yes, with no exceptions and nothing automatic.</p></div>
-      </li>
-    </ol>
+    <div class="steps">
+      <div class="row ai">
+        <span class="av sm"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span>
+        <div class="bubble"><span class="qchip">Step 1</span>
+          <h3>Install the CirclePay Grok Bot template, or use a link</h3>
+          <p>Use the template in Grok Bot, or tap one of the <a href="#open">Open in your agent</a> options for Grok, ChatGPT or Claude. Grok Bot has no public prompt link, so copy the prompt and paste it into the template.</p></div>
+      </div>
+      <div class="row ai">
+        <span class="av sm"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span>
+        <div class="bubble"><span class="qchip">Step 2</span>
+          <h3>Connect PayBox only when you want to pay out</h3>
+          <p>Building the card needs no wallet. Connect PayBox later, and only if you decide to reward your circle.</p></div>
+      </div>
+      <div class="row ai">
+        <span class="av sm"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span>
+        <div class="bubble"><span class="qchip">Step 3</span>
+          <h3>Confirm each payout</h3>
+          <p>You see who gets what first. Every payout needs your explicit yes, with no exceptions and nothing automatic.</p></div>
+      </div>
+    </div>
   </section>
 
   <section class="section" id="disclaimers">
-    <p class="eyebrow"><span class="dot"></span> Disclaimers</p>
+    <div class="divider"><span>Disclaimers</span></div>
     <h2 class="h2">The fine print, in plain words.</h2>
-    <ul class="disc">
-      <li><b>Not financial advice.</b> CirclePay is a tool for building cards and preparing optional payouts. It doesn't tell you what to buy, send or hold.</li>
-      <li><b>Payouts are never automatic.</b> Each one needs your explicit approval.</li>
-      <li><b>Public X activity only.</b> CirclePay only reads public X activity.</li>
-      <li><b>Not affiliated.</b> CirclePay isn't affiliated with X, xAI, OpenAI, Anthropic or PayBox.</li>
-      <li><b>You are responsible for what you send.</b> Check every name, amount and address before you say yes.</li>
-      <li><b>Crypto transfers can't be reversed.</b> Once a payout is sent, it can't be undone.</li>
-    </ul>
+    <div class="disc-card">
+      <ul class="disc">
+        <li><b>Not financial advice.</b> CirclePay is a tool for building cards and preparing optional payouts. It doesn't tell you what to buy, send or hold.</li>
+        <li><b>Payouts are never automatic.</b> Each one needs your explicit approval.</li>
+        <li><b>Public X activity only.</b> CirclePay only reads public X activity.</li>
+        <li><b>Not affiliated.</b> CirclePay isn't affiliated with X, xAI, OpenAI, Anthropic or PayBox.</li>
+        <li><b>You are responsible for what you send.</b> Check every name, amount and address before you say yes.</li>
+        <li><b>Crypto transfers can't be reversed.</b> Once a payout is sent, it can't be undone.</li>
+      </ul>
+    </div>
   </section>
 </main>
 
 <footer class="foot">
-  <a class="brand" href="#top" aria-label="Back to top"><svg class="brand-mark" aria-hidden="true"><use href="#cp-mark"/></svg><span class="brand-word">Circle<b>Pay</b></span></a>
+  <a class="brand" href="#top" aria-label="Back to top"><span class="av"><svg aria-hidden="true"><use href="#cp-mark"/></svg></span><span class="brand-text"><b>CirclePay</b></span></a>
   <p>Reward your X circle. Example handles and amounts on this page are placeholders.<br>Open source under the MIT license: <a href="https://github.com/erthxn/CirclePay/blob/main/spec/arc-card.md" rel="noopener">Arc card spec</a> · <a href="https://github.com/erthxn/CirclePay" rel="noopener">GitHub</a></p>
 </footer>
 
